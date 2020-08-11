@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Configuracao;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_banco_de_dados;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 public class Bancos_de_DadosController implements Initializable {
 
     private MainApp mainApp;
-    private model_banco_de_dados banco_de_dados;
+    private DataBaseModel banco_de_dados;
     @FXML
     private Button btnPesquisar;
 
@@ -43,7 +43,7 @@ public class Bancos_de_DadosController implements Initializable {
     private Button btnCancelar;
 
     @FXML
-    private ListView<model_banco_de_dados> BancosView;
+    private ListView<DataBaseModel> BancosView;
     private Stage dialogStage;
 
     @FXML
@@ -79,12 +79,12 @@ public class Bancos_de_DadosController implements Initializable {
 
     }
 
-    public model_banco_de_dados getBanco_de_Dados() {
+    public DataBaseModel getBanco_de_Dados() {
         return banco_de_dados;
     }
 
-    private ObservableList<model_banco_de_dados> findItems() {
-        ObservableList<model_banco_de_dados> itensEncontrados = FXCollections.observableArrayList();
+    private ObservableList<DataBaseModel> findItems() {
+        ObservableList<DataBaseModel> itensEncontrados = FXCollections.observableArrayList();
         Integer ID;
         try {
             ID = Integer.parseInt(PesquisarField.getText());
@@ -93,7 +93,7 @@ public class Bancos_de_DadosController implements Initializable {
             ID = null;
 
         }
-        for (model_banco_de_dados itens : mainApp.getDadosData().getBancos_de_DadosData()) {
+        for (DataBaseModel itens : mainApp.getDadosData().getBancos_de_DadosData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {

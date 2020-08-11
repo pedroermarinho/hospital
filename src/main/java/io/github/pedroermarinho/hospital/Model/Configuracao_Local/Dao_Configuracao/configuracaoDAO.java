@@ -7,7 +7,7 @@ package io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configura
 
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_configuracao;
-import io.github.pedroermarinho.hospital.Util.BD.Banco_de_Dados_Cliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
 import java.sql.Connection;
@@ -23,30 +23,13 @@ import java.util.List;
 public class configuracaoDAO {
 
     protected Connection conexao = null;
-    private MainApp mainapp = null;
-    private Banco_de_Dados_Cliente db = null;
+    private DataBaseCliente db = DataBaseCliente.instance();
     private PreparedStatement stmt;
 
-    public configuracaoDAO(MainApp mainapp) {
-        if (mainapp != null) {
-            try {
-                this.mainapp = mainapp;
-                this.db = mainapp.getBanco_de_dados();
-                conexao = this.db.open();
-            } catch (Exception ex) {
-                db = new Banco_de_Dados_Cliente();
-                conexao = this.db.open();
-            }
-        } else {
-            db = new Banco_de_Dados_Cliente();
-            conexao = this.db.open();
-        }
 
-    }
+    public model_configuracao getConfiguracaoID(int ID) {
 
-    public model_configuracao getConfiguracaoID(int ID, MainApp mainapp) {
-        db.open();
-        model_configuracao obj = new model_configuracao(mainapp);
+        model_configuracao obj = new model_configuracao();
 
         try {
 
@@ -72,15 +55,10 @@ public class configuracaoDAO {
             db.close();
             MsgErro.MessagemErroBD(ex, "getConfiguracaoID");
             return null;
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "getConfiguracaoID");
-            return null;
         }
     }
 
-    public List<model_configuracao> getConfiguracaoList(MainApp mainapp) {
-        db.open();
+    public List<model_configuracao> getConfiguracaoList() {
         ArrayList<model_configuracao> result = new ArrayList<>();
         try {
 
@@ -88,7 +66,7 @@ public class configuracaoDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                model_configuracao obj = new model_configuracao(mainapp);
+                model_configuracao obj = new model_configuracao();
 
 //                obj.setID_cliente(rs.getInt("ID_cliente"));//1
 //                obj.setCPF(rs.getString("cpf"));//2
@@ -117,7 +95,6 @@ public class configuracaoDAO {
     }
 
     public void creatConfiguracao(model_configuracao obj) {
-        db.open();
         try {
             stmt = conexao.prepareStatement("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?,?);");
 
@@ -136,15 +113,10 @@ public class configuracaoDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "creatConfiguracao");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "creatConfiguracao");
-
         }
     }
 
     public void updateConfiguracao(model_configuracao obj) {
-        db.open();
         try {
             stmt = conexao.prepareStatement("UPDATE clientes SET"
                     + " cpf = ?,"//1
@@ -173,16 +145,11 @@ public class configuracaoDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "updateConfiguracao");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "updateConfiguracao");
-
         }
     }
 
     public void deleteConfiguracao(model_configuracao obj) {
-        db.open();
-        try {
+     try {
             stmt = conexao.prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
 
             stmt.setInt(1, obj.getID_configuracao());
@@ -192,10 +159,6 @@ public class configuracaoDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "deleteConfiguracao");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "deleteConfiguracao");
-
         }
     }
 }

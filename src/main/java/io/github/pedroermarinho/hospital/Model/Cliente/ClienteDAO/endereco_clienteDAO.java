@@ -7,10 +7,9 @@ package io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO;
 
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Cliente.model_endereco_cliente;
-import io.github.pedroermarinho.hospital.Util.BD.Banco_de_Dados_Cliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,35 +21,17 @@ import java.util.List;
  */
 public class endereco_clienteDAO {
 
-    protected Connection conexao = null;
-    private MainApp mainapp = null;
-    private Banco_de_Dados_Cliente db = null;
+    private final DataBaseCliente db = DataBaseCliente.instance();
     private PreparedStatement stmt;
 
-    public endereco_clienteDAO(MainApp mainapp) {
-        if (mainapp != null) {
-            try {
-                this.mainapp = mainapp;
-                this.db = mainapp.getBanco_de_dados();
-                conexao = this.db.open();
-            } catch (Exception ex) {
-                db = new Banco_de_Dados_Cliente();
-                conexao = this.db.open();
-            }
-        } else {
-            db = new Banco_de_Dados_Cliente();
-            conexao = this.db.open();
-        }
 
-    }
 
-    public model_endereco_cliente getEnderecoClienteID(int ID, MainApp mainapp) {
-        db.open();
-        model_endereco_cliente obj = new model_endereco_cliente(mainapp);
+    public model_endereco_cliente getEnderecoClienteID(int ID) {
+        model_endereco_cliente obj = new model_endereco_cliente();
 
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `endereco_cliente` WHERE ID_endereco_cliente = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `endereco_cliente` WHERE ID_endereco_cliente = '" + ID + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -70,23 +51,18 @@ public class endereco_clienteDAO {
             db.close();
             MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
             return null;
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
-            return null;
         }
     }
 
-    public List<model_endereco_cliente> getEnderecoClienteList(MainApp mainapp) {
-        db.open();
+    public List<model_endereco_cliente> getEnderecoClienteList() {
         ArrayList<model_endereco_cliente> result = new ArrayList<>();
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `endereco_cliente` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `endereco_cliente` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                model_endereco_cliente obj = new model_endereco_cliente(mainapp);
+                model_endereco_cliente obj = new model_endereco_cliente();
 
                 obj.setID_Endereco_Cliente(rs.getInt("ID_endereco_cliente"));
                 obj.setID_cliente(rs.getInt("ID_cliente"));
@@ -106,17 +82,12 @@ public class endereco_clienteDAO {
             MsgErro.MessagemErroBD(ex, "getEnderecoClienteList");
             return null;
 
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteList");
-            return null;
         }
     }
 
     public void creatEnderecoCliente(model_endereco_cliente obj) {
-        db.open();
         try {
-            stmt = conexao.prepareStatement("INSERT INTO endereco_cliente ( `ID_cliente`, `telefone`, `telefone_fixo`, `ID_cidade`, `ID_rua`, `ID_bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO endereco_cliente ( `ID_cliente`, `telefone`, `telefone_fixo`, `ID_cidade`, `ID_rua`, `ID_bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);");
 
 
             stmt.setInt(1, obj.getID_cliente());
@@ -133,17 +104,12 @@ public class endereco_clienteDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
-
         }
     }
 
     public void updateEnderecoCliente(model_endereco_cliente obj) {
-        db.open();
         try {
-            stmt = conexao.prepareStatement("UPDATE endereco_cliente SET"
+            stmt = db.getConnection().prepareStatement("UPDATE endereco_cliente SET"
                     + " ID_cliente = ?,"
                     + " telefone = ?,"
                     + " telefone_fixo = ?,"
@@ -169,18 +135,13 @@ public class endereco_clienteDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
-
         }
     }
 
     public void deleteEnderecoCliente(model_endereco_cliente obj) {
-        db.open();
 
         try {
-            stmt = conexao.prepareStatement("DELETE FROM endereco_cliente WHERE ID_endereco_cliente = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM endereco_cliente WHERE ID_endereco_cliente = ?;");
 
             stmt.setInt(1, obj.getID_Endereco_Cliente());
 
@@ -189,10 +150,6 @@ public class endereco_clienteDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
-
         }
     }
 

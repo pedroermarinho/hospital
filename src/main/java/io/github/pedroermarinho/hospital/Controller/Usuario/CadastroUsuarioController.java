@@ -76,7 +76,7 @@ public class CadastroUsuarioController implements Initializable {
     @FXML
     void OnSalvar(ActionEvent event) {
         if (modificao_usuario == null) {
-            modificao_usuario = new model_usuario(mainapp);
+            modificao_usuario = new model_usuario();
         }
         if (isInputValid()) {
             modificao_usuario.setDataNascimento(java.sql.Date.valueOf(dpData.getValue()));

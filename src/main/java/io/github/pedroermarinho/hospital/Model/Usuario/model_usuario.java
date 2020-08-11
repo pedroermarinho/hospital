@@ -25,21 +25,17 @@ public class model_usuario {
     private final StringProperty Senha = new SimpleStringProperty();
     private final IntegerProperty ID_sexo = new SimpleIntegerProperty();
     private final ObjectProperty<java.sql.Date> DataNascimento = new SimpleObjectProperty<>();
-    private final MainApp mainapp;
 
-    public model_usuario(MainApp mainApp) {
-        dao = new usuarioDAO(mainApp);
-        this.mainapp = mainApp;
+    public model_usuario() {
+        dao = new usuarioDAO();
     }
 
     public static List<model_usuario> all(MainApp mainApp) {
-        dao = new usuarioDAO(mainApp);
-        return dao.getUsuarioList(mainApp);
+        return new usuarioDAO().getUsuarioList();
     }
 
-    public static model_usuario find(int pk, MainApp mainApp) {
-        dao = new usuarioDAO(mainApp);
-        return dao.getUsuarioID(pk, mainApp);
+    public static model_usuario find(int pk) {
+        return new usuarioDAO().getUsuarioID(pk);
     }
 
     public int getID_usuario() {
@@ -142,7 +138,7 @@ public class model_usuario {
         //  System.out.println("Verificação para save: Registro ->" + id + " Resultado do DAO.find ->" + dao.find(id));
 
         if (ID_usuario.getValue() != null && ID_usuario.get() != 0) {
-            if (find(ID_usuario.get(), mainapp) != null) {
+            if (find(ID_usuario.get()) != null) {
                 dao.updateUsuario(this);
             } else {
                 dao.creatUsuario(this);
@@ -153,7 +149,7 @@ public class model_usuario {
     }
 
     public void delete() {
-        if (find(ID_usuario.get(), mainapp) != null) {
+        if (find(ID_usuario.get()) != null) {
             dao.deleteUsuario(this);
         }
     }

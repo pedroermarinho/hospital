@@ -5,12 +5,10 @@
  */
 package io.github.pedroermarinho.hospital.Model.Usuario.UsuarioDAO;
 
-import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
-import io.github.pedroermarinho.hospital.Util.BD.Banco_de_Dados_Cliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,35 +20,15 @@ import java.util.List;
  */
 public class usuarioDAO {
 
-    protected Connection conexao = null;
-    private MainApp mainapp = null;
-    private Banco_de_Dados_Cliente db = null;
+    private final DataBaseCliente db = DataBaseCliente.instance();
     private PreparedStatement stmt;
 
-    public usuarioDAO(MainApp mainapp) {
-        if (mainapp != null) {
-            try {
-                this.mainapp = mainapp;
-                this.db = mainapp.getBanco_de_dados();
-                conexao = this.db.open();
-            } catch (Exception ex) {
-                db = new Banco_de_Dados_Cliente();
-                conexao = this.db.open();
-            }
-        } else {
-            db = new Banco_de_Dados_Cliente();
-            conexao = this.db.open();
-        }
-//         CriarTable();           
-    }
-
-    public model_usuario getUsuarioID(int ID, MainApp mainapp) {
-        db.open();
-        model_usuario obj = new model_usuario(mainapp);
+    public model_usuario getUsuarioID(int ID) {
+        model_usuario obj = new model_usuario();
 
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `usuario` WHERE ID_usuario = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `usuario` WHERE ID_usuario = '" + ID + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -69,23 +47,18 @@ public class usuarioDAO {
             db.close();
             MsgErro.MessagemErroBD(ex, "getUsuarioID");
             return null;
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "getUsuarioID");
-            return null;
         }
     }
 
-    public List<model_usuario> getUsuarioList(MainApp mainapp) {
-        db.open();
+    public List<model_usuario> getUsuarioList() {
         ArrayList<model_usuario> result = new ArrayList<>();
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `usuario` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `usuario` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                model_usuario obj = new model_usuario(mainapp);
+                model_usuario obj = new model_usuario();
 
                 obj.setID_usuario(rs.getInt("ID_usuario"));//1
                 obj.setNome(rs.getString("Nome"));//2
@@ -104,17 +77,12 @@ public class usuarioDAO {
             MsgErro.MessagemErroBD(ex, "getUsuarioList");
             return null;
 
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "getUsuarioList");
-            return null;
         }
     }
 
     public void creatUsuario(model_usuario obj) {
-        db.open();
         try {
-            stmt = conexao.prepareStatement("INSERT INTO usuario (`Nome`, `Sobrenome`, `Senha`, `ID_sexo`, `DataNascimento`, `Usuario`, `Email`) VALUES(?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO usuario (`Nome`, `Sobrenome`, `Senha`, `ID_sexo`, `DataNascimento`, `Usuario`, `Email`) VALUES(?,?,?,?,?,?,?);");
 
 
             stmt.setString(1, obj.getNome());
@@ -130,17 +98,12 @@ public class usuarioDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "creatUsuario");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "creatUsuario");
-
         }
     }
 
     public void updateUsuario(model_usuario obj) {
-        db.open();
         try {
-            stmt = conexao.prepareStatement("UPDATE usuario SET"
+            stmt = db.getConnection().prepareStatement("UPDATE usuario SET"
                     + " Nome = ?,"//1
                     + " Sobrenome = ?,"//2
                     + " Senha = ?,"//3
@@ -163,17 +126,12 @@ public class usuarioDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "updateUsuario");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "updateUsuario");
-
         }
     }
 
     public void deleteUsuario(model_usuario obj) {
-        db.open();
         try {
-            stmt = conexao.prepareStatement("DELETE FROM usuario WHERE ID_usuario = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM usuario WHERE ID_usuario = ?;");
 
             stmt.setInt(1, obj.getID_usuario());
 
@@ -182,10 +140,6 @@ public class usuarioDAO {
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "deleteUsuario");
-        } catch (Exception ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "deleteUsuario");
-
         }
     }
 }

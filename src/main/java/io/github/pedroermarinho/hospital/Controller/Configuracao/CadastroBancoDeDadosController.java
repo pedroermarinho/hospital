@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Configuracao;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_banco_de_dados;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,7 +29,7 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroFormula
 public class CadastroBancoDeDadosController implements Initializable {
 
     private MainApp mainApp;
-    private model_banco_de_dados banco_de_dados = null;
+    private DataBaseModel banco_de_dados;
     @FXML
     private TextField HostField;
 
@@ -91,7 +91,7 @@ public class CadastroBancoDeDadosController implements Initializable {
     @FXML
     void OnSalvar(ActionEvent event) {
         if (isInputValid()) {
-            banco_de_dados = new model_banco_de_dados();
+            banco_de_dados = new DataBaseModel();
             banco_de_dados.setDataBase(DataBaseField.getText());
             banco_de_dados.setHost(HostField.getText());
             banco_de_dados.setPassword(PasswordField.getText());

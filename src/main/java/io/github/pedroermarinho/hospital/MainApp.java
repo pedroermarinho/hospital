@@ -1,13 +1,11 @@
 package io.github.pedroermarinho.hospital;
 
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_banco_de_dados;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
-import io.github.pedroermarinho.hospital.Util.BD.Banco_de_Dados_Cliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
 
 import static io.github.pedroermarinho.hospital.Util.BD.Tabelas.CriarTabela;
 
@@ -18,9 +16,9 @@ public class MainApp extends Application {
 
     private final Dados DadosData = new Dados(this);
     private final ChamadasDeTela telas = new ChamadasDeTela();
-    private final Banco_de_Dados_Cliente banco_de_dados = new Banco_de_Dados_Cliente();
+    private final DataBaseCliente banco_de_dados = DataBaseCliente.instance();
     private model_usuario usuario = null;
-    private model_banco_de_dados dados_db = new model_banco_de_dados();
+    private DataBaseModel dados_db = new DataBaseModel();
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -50,20 +48,20 @@ public class MainApp extends Application {
         this.usuario = usuario;
     }
 
-    public model_banco_de_dados getDados_db() {
+    public DataBaseModel getDados_db() {
         return dados_db;
     }
 
-    public void setDados_db(model_banco_de_dados dados_db) {
+    public void setDados_db(DataBaseModel dados_db) {
         this.dados_db = dados_db;
     }
 
-    public Banco_de_Dados_Cliente getBanco_de_dados() {
+    public DataBaseCliente getBanco_de_dados() {
         return banco_de_dados;
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         System.out.println("start");
 
 
@@ -74,11 +72,9 @@ public class MainApp extends Application {
         telas.setMainApp(this);
 
         setDados_db(telas.SelectBanco_de_Dados());
-        banco_de_dados.setBanco_de_dados(dados_db);
-
-        banco_de_dados.open();
-        if (banco_de_dados.conexao != null) {
-            CriarTabela(banco_de_dados.conexao, dados_db);
+        banco_de_dados.open(dados_db);
+        if (banco_de_dados.getConnection() != null) {
+            CriarTabela(banco_de_dados.getConnection(), dados_db);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
 
@@ -103,12 +99,7 @@ public class MainApp extends Application {
 
             }
         }
-//        else {
-//            MsgErro.MessagemErroBD(null, "Sem Conexão");
-//
-//        }
 
-//
     }
 
 }

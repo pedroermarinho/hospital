@@ -8,7 +8,6 @@ package io.github.pedroermarinho.hospital.Controller;
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
 import io.github.pedroermarinho.hospital.Model.Cliente.model_endereco_cliente;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_ficha;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -135,7 +134,7 @@ public class InformacaoController implements Initializable {
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getID_cliente(), mainApp);
+            endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getID_cliente());
             System.out.println(endereco_cliente);
             if (endereco_cliente != null && endereco_cliente.getID_Endereco_Cliente() != 0) {
                 System.out.println("ok");

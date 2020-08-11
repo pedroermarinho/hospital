@@ -2,6 +2,7 @@ package io.github.pedroermarinho.hospital.Model.Cliente;
 
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO.clienteDAO;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO.endereco_clienteDAO;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class model_cliente {
 
-    private static clienteDAO dao;
+    private static final clienteDAO dao=new clienteDAO();
     private final IntegerProperty ID_cliente = new SimpleIntegerProperty(0);
     private final StringProperty Nome = new SimpleStringProperty("teste");
     private final StringProperty CPF = new SimpleStringProperty("1212331");
@@ -25,21 +26,16 @@ public class model_cliente {
     private final IntegerProperty ID_Sexo = new SimpleIntegerProperty();
     private final StringProperty Foto = new SimpleStringProperty("/e");
     private final StringProperty Email = new SimpleStringProperty("teste");
-    private final MainApp mainapp;
 
-    public model_cliente(MainApp mainApp) {
-        dao = new clienteDAO(mainApp);
-        this.mainapp = mainApp;
+
+
+    public static List<model_cliente> all() {
+
+        return new clienteDAO().getClienteList();
     }
 
-    public static List<model_cliente> all(MainApp mainApp) {
-        dao = new clienteDAO(mainApp);
-        return dao.getClienteList(mainApp);
-    }
-
-    public static model_cliente find(int pk, MainApp mainApp) {
-        dao = new clienteDAO(mainApp);
-        return dao.getClienteID(pk, mainApp);
+    public static model_cliente find(int pk) {
+        return new clienteDAO().getClienteID(pk);
     }
 
     public int getID_cliente() {
@@ -171,7 +167,7 @@ public class model_cliente {
         //  System.out.println("Verificação para save: Registro ->" + id + " Resultado do DAO.find ->" + dao.find(id));
 
         if (ID_cliente.getValue() != null && ID_cliente.get() != 0) {
-            if (find(ID_cliente.get(), mainapp) != null) {
+            if (find(ID_cliente.get()) != null) {
                 dao.updateCliente(this);
             } else {
                 dao.creatCliente(this);
@@ -182,7 +178,7 @@ public class model_cliente {
     }
 
     public void delete() {
-        if (find(ID_cliente.get(), mainapp) != null) {
+        if (find(ID_cliente.get()) != null) {
             dao.deleteCliente(this);
         }
     }

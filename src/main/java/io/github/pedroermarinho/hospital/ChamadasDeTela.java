@@ -16,7 +16,7 @@ import io.github.pedroermarinho.hospital.Controller.Usuario.UsuarioController;
 import io.github.pedroermarinho.hospital.Controller.Usuario.UsuariosController;
 import io.github.pedroermarinho.hospital.Controller.Util.ErroController;
 import io.github.pedroermarinho.hospital.Controller.Util.SenhaController;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_banco_de_dados;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.fxml.FXMLLoader;
@@ -492,7 +492,7 @@ public class ChamadasDeTela {
 
         }
     }
-    public model_banco_de_dados SelectBanco_de_Dados() {
+    public DataBaseModel SelectBanco_de_Dados() {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
             System.out.println("SelectBanco_de_Dados");

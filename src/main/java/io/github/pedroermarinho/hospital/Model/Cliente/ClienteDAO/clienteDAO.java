@@ -7,7 +7,7 @@ package io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO;
 
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
-import io.github.pedroermarinho.hospital.Util.BD.Banco_de_Dados_Cliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
 import java.sql.Connection;
@@ -22,33 +22,16 @@ import java.util.List;
  */
 public class clienteDAO {
 
-    protected Connection conexao ;
-    private Banco_de_Dados_Cliente db;
+    private final DataBaseCliente db= DataBaseCliente.instance();
     private PreparedStatement stmt;
 
-    public clienteDAO(MainApp mainapp) {
-        if (mainapp != null) {
-            try {
-                this.db = mainapp.getBanco_de_dados();
-                conexao = this.db.open();
-            } catch (Exception ex) {
-                db = new Banco_de_Dados_Cliente();
-                conexao = this.db.open();
-            }
-        } else {
-            db = new Banco_de_Dados_Cliente();
-            conexao = this.db.open();
-        }
 
-    }
-
-    public model_cliente getClienteID(int ID, MainApp mainapp) {
-        db.open();
-        model_cliente obj = new model_cliente(mainapp);
+    public model_cliente getClienteID(int ID) {
+        model_cliente obj = new model_cliente();
 
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `clientes` WHERE ID_cliente = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `clientes` WHERE ID_cliente = '" + ID + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -73,16 +56,15 @@ public class clienteDAO {
         }
     }
 
-    public List<model_cliente> getClienteList(MainApp mainapp) {
-        db.open();
+    public List<model_cliente> getClienteList() {
         ArrayList<model_cliente> result = new ArrayList<>();
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `clientes` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `clientes` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                model_cliente obj = new model_cliente(mainapp);
+                model_cliente obj = new model_cliente();
 
                 obj.setID_cliente(rs.getInt("ID_cliente"));//1
                 obj.setCPF(rs.getString("cpf"));//2
@@ -107,9 +89,9 @@ public class clienteDAO {
     }
 
     public void creatCliente(model_cliente obj) {
-        db.open();
+
         try {
-            stmt = conexao.prepareStatement("INSERT INTO clientes (`cpf`, `nome`, `mae`, `pai`, `data_nascimento`, `cartao_sus`, `ID_sexo`, `email`, `foto`) VALUES(?,?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO clientes (`cpf`, `nome`, `mae`, `pai`, `data_nascimento`, `cartao_sus`, `ID_sexo`, `email`, `foto`) VALUES(?,?,?,?,?,?,?,?,?);");
 
             stmt.setString(1, obj.getCPF());
             stmt.setString(2, obj.getNome());
@@ -130,9 +112,9 @@ public class clienteDAO {
     }
 
     public void updateCliente(model_cliente obj) {
-        db.open();
+
         try {
-            stmt = conexao.prepareStatement("UPDATE clientes SET"
+            stmt = db.getConnection().prepareStatement("UPDATE clientes SET"
                     + " cpf = ?,"//1
                     + " nome = ?,"//2
                     + " mae = ?,"//3
@@ -164,9 +146,8 @@ public class clienteDAO {
     }
 
     public void deleteCliente(model_cliente obj) {
-        db.open();
         try {
-            stmt = conexao.prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
 
             stmt.setInt(1, obj.getID_cliente());
 

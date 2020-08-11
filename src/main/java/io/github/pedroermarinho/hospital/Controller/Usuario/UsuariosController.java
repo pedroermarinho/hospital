@@ -79,7 +79,7 @@ public class UsuariosController implements Initializable {
     @FXML
     void OnSalvar(ActionEvent event) {
         if (modificao_usuario == null) {
-            modificao_usuario = new model_usuario(mainapp);
+            modificao_usuario = new model_usuario();
         }
         if (isInputValid()) {
             modificao_usuario.setDataNascimento(java.sql.Date.valueOf(dpData.getValue()));
@@ -101,7 +101,7 @@ public class UsuariosController implements Initializable {
         model_usuario selected = PessoaTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
             selected.delete();
-            mainapp.getDadosData().getAgendaData();
+//            mainapp.getDadosData().getAgendaData();
         } else {
 
         }

@@ -5,7 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Util.BD;
 
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_banco_de_dados;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
 import java.sql.Connection;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
  */
 public class Tabelas {
 
-    public static void CriarTabela(Connection conexao, model_banco_de_dados db) {
+    public static void CriarTabela(Connection conexao, DataBaseModel db) {
 
         String AUTO_INCREMENT = "AUTO_INCREMENT";
         if (db.getPrefix().equals("jdbc:sqlite:")) {

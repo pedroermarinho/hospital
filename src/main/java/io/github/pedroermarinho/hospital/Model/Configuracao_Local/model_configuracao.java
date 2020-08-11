@@ -17,24 +17,19 @@ import java.util.List;
  */
 public class model_configuracao {
 
-    private static configuracaoDAO dao;
+    private static configuracaoDAO dao = new configuracaoDAO();
     private final IntegerProperty ID_configuracao = new SimpleIntegerProperty();
     private final IntegerProperty ID_db = new SimpleIntegerProperty();
-    private final MainApp mainapp;
 
-    public model_configuracao(MainApp mainApp) {
-        dao = new configuracaoDAO(mainApp);
-        this.mainapp = mainApp;
+
+
+
+    public static List<model_configuracao> all() {
+        return new configuracaoDAO().getConfiguracaoList();
     }
 
-    public static List<model_configuracao> all(MainApp mainApp) {
-        dao = new configuracaoDAO(mainApp);
-        return dao.getConfiguracaoList(mainApp);
-    }
-
-    public static model_configuracao find(int pk, MainApp mainApp) {
-        dao = new configuracaoDAO(mainApp);
-        return dao.getConfiguracaoID(pk, mainApp);
+    public static model_configuracao find(int pk) {
+        return new configuracaoDAO().getConfiguracaoID(pk);
     }
 
     public int getID_db() {
@@ -65,7 +60,7 @@ public class model_configuracao {
         //  System.out.println("Verificação para save: Registro ->" + id + " Resultado do DAO.find ->" + dao.find(id));
 
         if (ID_configuracao.getValue() != null && ID_configuracao.get() != 0) {
-            if (find(ID_configuracao.get(), mainapp) != null) {
+            if (find(ID_configuracao.get()) != null) {
                 dao.updateConfiguracao(this);
             } else {
                 dao.creatConfiguracao(this);
@@ -76,7 +71,7 @@ public class model_configuracao {
     }
 
     public void delete() {
-        if (find(ID_configuracao.get(), mainapp) != null) {
+        if (find(ID_configuracao.get()) != null) {
             dao.deleteConfiguracao(this);
         }
     }

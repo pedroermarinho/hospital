@@ -185,7 +185,7 @@ public class PacienteController implements Initializable {
     @FXML
     void OnSalvar(ActionEvent event) {
         if (modifição_cliente == null) {
-            modifição_cliente = new model_cliente(mainApp);
+            modifição_cliente = new model_cliente();
         }
         if (isInputValid()) {
 //            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy");

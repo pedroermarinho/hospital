@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class model_endereco_cliente {
 
-    private static endereco_clienteDAO dao;
+    private static final endereco_clienteDAO dao= new endereco_clienteDAO();
     private final IntegerProperty ID_Endereco_Cliente = new SimpleIntegerProperty();
     private final IntegerProperty ID_cidade = new SimpleIntegerProperty();
     private final IntegerProperty ID_Rua = new SimpleIntegerProperty();
@@ -29,21 +29,15 @@ public class model_endereco_cliente {
     private final StringProperty Telefone_Fixo = new SimpleStringProperty();
     private final StringProperty Complemento = new SimpleStringProperty();
     private final IntegerProperty ID_cliente = new SimpleIntegerProperty();
-    private final MainApp mainapp;
 
-    public model_endereco_cliente(MainApp mainApp) {
-        dao = new endereco_clienteDAO(mainApp);
-        this.mainapp = mainApp;
+
+
+    public static List<model_endereco_cliente> all() {
+        return new endereco_clienteDAO().getEnderecoClienteList();
     }
 
-    public static List<model_endereco_cliente> all(MainApp mainApp) {
-        dao = new endereco_clienteDAO(mainApp);
-        return dao.getEnderecoClienteList(mainApp);
-    }
-
-    public static model_endereco_cliente find(int pk, MainApp mainApp) {
-        dao = new endereco_clienteDAO(mainApp);
-        return dao.getEnderecoClienteID(pk, mainApp);
+    public static model_endereco_cliente find(int pk) {
+        return new endereco_clienteDAO().getEnderecoClienteID(pk);
     }
 
     public int getID_cliente() {
@@ -157,8 +151,8 @@ public class model_endereco_cliente {
     public void save() {
         //  System.out.println("Verificação para save: Registro ->" + id + " Resultado do DAO.find ->" + dao.find(id));
 
-        if (ID_Endereco_Cliente != null && ID_Endereco_Cliente.get() != 0) {
-            if (find(ID_Endereco_Cliente.get(), mainapp) != null) {
+        if (ID_Endereco_Cliente.get() != 0) {
+            if (find(ID_Endereco_Cliente.get()) != null) {
                 dao.updateEnderecoCliente(this);
             } else {
                 dao.creatEnderecoCliente(this);
@@ -169,7 +163,7 @@ public class model_endereco_cliente {
     }
 
     public void delete() {
-        if (find(ID_Endereco_Cliente.get(), mainapp) != null) {
+        if (find(ID_Endereco_Cliente.get()) != null) {
             dao.deleteEnderecoCliente(this);
         }
     }

@@ -6,10 +6,9 @@
 package io.github.pedroermarinho.hospital;
 
 import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_corpo_cliente;
 import io.github.pedroermarinho.hospital.Model.Cliente.model_endereco_cliente;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_banco_de_dados;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_agenda;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
+
 import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
@@ -24,11 +23,9 @@ import java.util.List;
 public class Dados {
 
     private final ObservableList<model_cliente> ClientesData = FXCollections.observableArrayList();
-    private final ObservableList<model_corpo_cliente> CorpoClienteData = FXCollections.observableArrayList();
     private final ObservableList<model_endereco_cliente> EnderecoClienteData = FXCollections.observableArrayList();
 
-    private final ObservableList<model_banco_de_dados> Bancos_de_DadosData = FXCollections.observableArrayList();
-    private final ObservableList<model_agenda> AgendaData = FXCollections.observableArrayList();
+    private final ObservableList<DataBaseModel> Bancos_de_DadosData = FXCollections.observableArrayList();
     private final ObservableList<model_usuario> UsuariosData = FXCollections.observableArrayList();
     public Thread SincronizarBD_Thread;
     private final MainApp MainApp;
@@ -37,8 +34,8 @@ public class Dados {
         this.MainApp = MainApp;
     }
 
-    public ObservableList<model_banco_de_dados> getBancos_de_DadosData() {
-        List<model_banco_de_dados> ObjData = model_banco_de_dados.all();
+    public ObservableList<DataBaseModel> getBancos_de_DadosData() {
+        List<DataBaseModel> ObjData = DataBaseModel.all();
         if (ObjData != null) {
             Bancos_de_DadosData.clear();
             Bancos_de_DadosData.setAll(ObjData);
@@ -57,17 +54,7 @@ public class Dados {
         return UsuariosData;
     }
 
-    public ObservableList<model_agenda> getAgendaData() {
-        if (MainApp.getDados_db().getPrefix().equals("jdbc:sqlite:")) {
-            AgendaDataNotThread();
-        } else {
-            new Thread(() -> {
-                AgendaDataNotThread();
-            }).start();
 
-        }
-        return AgendaData;
-    }
 
     public ObservableList<model_cliente> getClientesData() {
         if (MainApp.getDados_db().getPrefix().equals("jdbc:sqlite:")) {
@@ -80,16 +67,6 @@ public class Dados {
         return ClientesData;
     }
 
-    public ObservableList<model_corpo_cliente> getCorpoClienteData() {
-        if (MainApp.getDados_db().getPrefix().equals("jdbc:sqlite:")) {
-            CorpoClienteDataNotThread();
-        } else {
-            new Thread(() -> {
-                CorpoClienteDataNotThread();
-            }).start();
-        }
-        return CorpoClienteData;
-    }
 
     public ObservableList<model_endereco_cliente> getEnderecoClienteData() {
         if (MainApp.getDados_db().getPrefix().equals("jdbc:sqlite:")) {
@@ -117,22 +94,13 @@ public class Dados {
         return UsuariosData;
     }
 
-    public ObservableList<model_agenda> AgendaDataNotThread() {
 
-        List<model_agenda> ObjData = model_agenda.all(MainApp);
-        if (ObjData != null) {
-            AgendaData.clear();
-            AgendaData.setAll(ObjData);
-        }
-
-        return AgendaData;
-    }
 
 
 
     public ObservableList<model_cliente> ClientesDataNotThread() {
 
-        List<model_cliente> ObjData = model_cliente.all(MainApp);
+        List<model_cliente> ObjData = model_cliente.all();
         if (ObjData != null) {
             ClientesData.clear();
             ClientesData.setAll(ObjData);
@@ -141,20 +109,10 @@ public class Dados {
         return ClientesData;
     }
 
-    public ObservableList<model_corpo_cliente> CorpoClienteDataNotThread() {
-
-        List<model_corpo_cliente> ObjData = model_corpo_cliente.all(MainApp);
-        if (ObjData != null) {
-            CorpoClienteData.clear();
-            CorpoClienteData.setAll(ObjData);
-        }
-
-        return CorpoClienteData;
-    }
 
     public ObservableList<model_endereco_cliente> EnderecoClienteDataNotThread() {
 
-        List<model_endereco_cliente> ObjData = model_endereco_cliente.all(MainApp);
+        List<model_endereco_cliente> ObjData = model_endereco_cliente.all();
         if (ObjData != null) {
             EnderecoClienteData.clear();
             EnderecoClienteData.setAll(ObjData);
@@ -172,10 +130,8 @@ public class Dados {
                         System.out.println("SincronizarBD");
 
                         getClientesData();
-                        getCorpoClienteData();
                         getEnderecoClienteData();
                         getUsuariosData();
-                        getAgendaData();
 
                         if (!MainApp.getTelas().primeriaCena.isShowing()) {
                             SincronizarBD_Thread.stop();

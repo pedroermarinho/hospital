@@ -8,7 +8,6 @@ package io.github.pedroermarinho.hospital.Controller;
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
 import io.github.pedroermarinho.hospital.Model.Cliente.model_endereco_cliente;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_agenda;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -24,7 +23,6 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import static io.github.pedroermarinho.hospital.Util.Filtro.Agenda_Data_Atual;
 
 //import io.github.pedroermarinho.hospital.Model.model_bairros;
 //import io.github.pedroermarinho.hospital.Model.model_cidades;
@@ -42,7 +40,6 @@ public class CentralTextoController implements Initializable {
 
     private model_endereco_cliente endereco_cliente;
     private model_cliente cliente;
-    private model_agenda agenda;
 
     @FXML
     private AnchorPane TextoMenuAnchor;
@@ -80,10 +77,10 @@ public class CentralTextoController implements Initializable {
     private Label UsuarioŁistCenterLabel;
 
     @FXML
-    private TableView<model_agenda> AgendaView;
+    private TableView<model_cliente> AgendaView;
 
     @FXML
-    private TableColumn<model_agenda, Time> HoraAgendaColumn;
+    private TableColumn<model_cliente, Time> HoraAgendaColumn;
 
     @FXML
     private MenuItem btnDetalhesViewHoje;
@@ -136,7 +133,7 @@ public class CentralTextoController implements Initializable {
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getID_cliente(), mainApp);
+            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getID_cliente());
             System.out.println(endereco_cliente);
             if (endereco_cliente != null && endereco_cliente.getID_Endereco_Cliente() != 0) {
 
@@ -155,7 +152,7 @@ public class CentralTextoController implements Initializable {
     @FXML
     void OnDetalhesViewHoje(ActionEvent event) {
 
-        cliente = model_cliente.find(AgendaView.getSelectionModel().getSelectedItem().getID_cliente(), mainApp);
+        cliente = AgendaView.getSelectionModel().getSelectedItem();
         try {
 
             CPFLabel.textProperty().bind(cliente.CPFProperty());
@@ -175,7 +172,7 @@ public class CentralTextoController implements Initializable {
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getID_cliente(), mainApp);
+            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getID_cliente());
             System.out.println(endereco_cliente);
             if (endereco_cliente != null && endereco_cliente.getID_Endereco_Cliente() != 0) {
 
@@ -224,7 +221,7 @@ public class CentralTextoController implements Initializable {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        AgendaView.setItems(Agenda_Data_Atual(this.mainApp));
+//        AgendaView.setItems(Agenda_Data_Atual(this.mainApp));
     }
 
     private void InforListCenter() {

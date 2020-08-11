@@ -5,7 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Configuracao_Local;
 
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao.banco_de_dadosDAO;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao.DataBaseDAO;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,9 +16,9 @@ import java.util.List;
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class model_banco_de_dados {
+public class DataBaseModel {
 
-    private static banco_de_dadosDAO dao;
+    private static DataBaseDAO dao;
     private final IntegerProperty ID_banco_de_dados = new SimpleIntegerProperty();
     private final StringProperty Hosts = new SimpleStringProperty("localhost");
     private final StringProperty Users = new SimpleStringProperty("root");
@@ -27,16 +27,16 @@ public class model_banco_de_dados {
     private final StringProperty Prefixs = new SimpleStringProperty("jdbc:mysql:");
     private final IntegerProperty Ports = new SimpleIntegerProperty(3306);
 
-    public model_banco_de_dados() {
-        dao = new banco_de_dadosDAO();
+    public DataBaseModel() {
+        dao = new DataBaseDAO();
     }
 
-    public static List<model_banco_de_dados> all() {
+    public static List<DataBaseModel> all() {
 
         return dao.getDados_dbList();
     }
 
-    public static model_banco_de_dados find(int pk) {
+    public static DataBaseModel find(int pk) {
 
         return dao.getDados_dbID(pk);
     }

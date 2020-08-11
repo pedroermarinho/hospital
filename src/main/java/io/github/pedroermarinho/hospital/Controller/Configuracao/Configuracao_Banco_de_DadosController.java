@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Configuracao;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_banco_de_dados;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,9 +28,9 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroFormula
 public class Configuracao_Banco_de_DadosController implements Initializable {
 
     private MainApp mainApp;
-    private model_banco_de_dados modificao_banco_dados;
+    private DataBaseModel modificao_banco_dados;
     @FXML
-    private ListView<model_banco_de_dados> BancosView;
+    private ListView<DataBaseModel> BancosView;
     @FXML
     private MenuItem bntDetalhes;
     @FXML
@@ -70,7 +70,7 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
 
     @FXML
     void OnDeletar(ActionEvent event) {
-        model_banco_de_dados selected = BancosView.getSelectionModel().getSelectedItem();
+        DataBaseModel selected = BancosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
             selected.delete();
             mainApp.getDadosData().getBancos_de_DadosData();
@@ -82,10 +82,10 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
     @FXML
     void OnSalvar(ActionEvent event) {
         if (modificao_banco_dados == null) {
-            modificao_banco_dados = new model_banco_de_dados();
+            modificao_banco_dados = new DataBaseModel();
         }
         if (isInputValid()) {
-            modificao_banco_dados = new model_banco_de_dados();
+            modificao_banco_dados = new DataBaseModel();
             modificao_banco_dados.setDataBase(DataBaseField.getText());
             modificao_banco_dados.setHost(HostField.getText());
             modificao_banco_dados.setPassword(PasswordField.getText());

@@ -1,0 +1,8 @@
+package io.github.pedroermarinho.hospital;
+
+public class Launcher {
+
+    public static void main(String[] args) {
+        MainApp.main(args);
+    }
+}

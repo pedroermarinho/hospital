@@ -81,6 +81,5 @@
     </children>
     <stylesheets>
         <URL value="@../Styles/Styles.css"/>
-        <URL value="@../Styles/DarkTheme.css"/>
     </stylesheets>
 </AnchorPane>

@@ -12,13 +12,10 @@ import io.github.pedroermarinho.hospital.Controller.Configuracao.CadastroBancoDe
 import io.github.pedroermarinho.hospital.Controller.Configuracao.Configuracao_Banco_de_DadosController;
 import io.github.pedroermarinho.hospital.Controller.Configuracao.Menu_ConfiguracaoController;
 import io.github.pedroermarinho.hospital.Controller.Usuario.CadastroUsuarioController;
-import io.github.pedroermarinho.hospital.Controller.Usuario.SelectUsuarioController;
 import io.github.pedroermarinho.hospital.Controller.Usuario.UsuarioController;
 import io.github.pedroermarinho.hospital.Controller.Usuario.UsuariosController;
 import io.github.pedroermarinho.hospital.Controller.Util.ErroController;
 import io.github.pedroermarinho.hospital.Controller.Util.SenhaController;
-import io.github.pedroermarinho.hospital.Controller.Util.SobreController;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_banco_de_dados;
 import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
@@ -29,6 +26,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 
@@ -76,7 +75,7 @@ public class ChamadasDeTela {
     public void PalcoPrincipal() {
         System.out.println("PalcoPrincipal");
         try {
-
+            JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o root layout do arquivo fxml.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/PalcoPrincipal.fxml"));
@@ -84,6 +83,7 @@ public class ChamadasDeTela {
 
             // Mostra a scene (cena) contendo o root layout.
             Scene scene = new Scene(PalcoPrincipal);
+            jMetro.setScene(scene);
             primeriaCena.setScene(scene);
 
             // Dá ao controller o acesso ao main app.
@@ -128,6 +128,7 @@ public class ChamadasDeTela {
     public void CentralTexto() {
         System.out.println("CentralTexto");
         try {
+
 
             // Carrega a TabelaDeJogos.
             FXMLLoader loader = new FXMLLoader();
@@ -225,29 +226,6 @@ public class ChamadasDeTela {
             MsgErro.MessagemErroTela(e, "Informacao");
         }
     }
-
-    public void Perfil() {
-        System.out.println("perfil");
-        try {
-
-            // Carrega a TabelaDeJogos.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Profiles.fxml"));
-            AnchorPane personOverview = loader.load();
-
-            // Define a person overview no centro do PalcoPrincipal.
-            //PalcoPrincipal.setCenter(personOverview);
-            PalcoPrincipal.setCenter(personOverview);
-
-            // Dá ao controlador acesso à the main app.
-            ProfilesController controller = loader.getController();
-            controller.setMainApp(mainapp);
-
-        } catch (IOException e) {
-            MsgErro.MessagemErroTela(e, "Perfil");
-        }
-    }
-
     public void Menu_Configuracao() {
         System.out.println("Menu_Configuracao");
         try {
@@ -270,33 +248,8 @@ public class ChamadasDeTela {
         }
     }
 
-    public void Alertas() {
-        System.out.println("Alertas");
-        try {
-
-            // Carrega a TabelaDeJogos.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Alertas.fxml"));
-            AnchorPane personOverview = loader.load();
-
-            // Define a person overview no centro do PalcoPrincipal.
-            //PalcoPrincipal.setCenter(personOverview);
-            PalcoPrincipal.setCenter(personOverview);
-
-            // Dá ao controlador acesso à the main app.
-            AlertasController controller = loader.getController();
-            controller.setMainApp(mainapp);
-
-        } catch (IOException e) {
-            MsgErro.MessagemErroTela(e, "Alertas");
-        }
-    }
-
-
-
-
     /**
-     * @return
+     * @return AnchorPane
      */
     public AnchorPane CadastroCliente() {
         System.out.println("CadastroCliente");
@@ -318,7 +271,7 @@ public class ChamadasDeTela {
     }
 
     /**
-     * @return
+     * @return AnchorPane
      */
     public AnchorPane Configuracao_Banco_de_Dados() {
         System.out.println("Configuracao_Banco_de_Dados");
@@ -339,9 +292,10 @@ public class ChamadasDeTela {
         }
     }
 
-    public boolean Erro(Exception ex) {
+    public void Erro(Exception ex) {
         System.out.println("Erro");
         try {
+            JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Util/Erro.fxml"));
@@ -353,6 +307,7 @@ public class ChamadasDeTela {
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primeriaCena);
             Scene scene = new Scene(page);
+            jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
@@ -364,16 +319,15 @@ public class ChamadasDeTela {
             // Mostra a janela e espera até o usuário fechar.
             dialogStage.showAndWait();
 
-            return true;
         } catch (IOException e) {
             MsgErro.MessagemErroTela(e, "erro");
-            return false;
         }
 
     }
 
     public void sobre() {
         try {
+            JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Util/Sobre.fxml"));
@@ -385,13 +339,14 @@ public class ChamadasDeTela {
             dialogStage.initModality(Modality.WINDOW_MODAL);
             //dialogStage.initOwner(primeiraCena);
             Scene scene = new Scene(page);
+            jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
             dialogStage.getIcons().add(image);
 
             // Define a pessoa no controller.
-            SobreController controller = loader.getController();
+//            SobreController controller = loader.getController();
             //controller.setMainApp(this);
 
             // Mostra a janela e espera até o usuário fechar.
@@ -406,7 +361,7 @@ public class ChamadasDeTela {
 
     public boolean senha(model_usuario pessoa) {
         try {
-
+            JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Util/Senha.fxml"));
@@ -418,6 +373,7 @@ public class ChamadasDeTela {
             dialogStage.initModality(Modality.WINDOW_MODAL);
             //dialogStage.initOwner(primeiraCena);
             Scene scene = new Scene(page);
+            jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
@@ -464,7 +420,7 @@ public class ChamadasDeTela {
 
     public model_usuario usuario() {
         try {
-
+            JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Usuario/Usuario.fxml"));
@@ -476,6 +432,7 @@ public class ChamadasDeTela {
             dialogStage.initModality(Modality.WINDOW_MODAL);
             //dialogStage.initOwner(primeiraCena);
             Scene scene = new Scene(page);
+            jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
@@ -500,6 +457,7 @@ public class ChamadasDeTela {
 
     public model_usuario CadastroUsuario() {
         try {
+            JMetro jMetro = new JMetro(Style.LIGHT);
             System.out.println("CadastroUsuario");
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
@@ -512,6 +470,7 @@ public class ChamadasDeTela {
             dialogStage.initModality(Modality.WINDOW_MODAL);
             //dialogStage.initOwner(primeiraCena);
             Scene scene = new Scene(page);
+            jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
@@ -533,85 +492,9 @@ public class ChamadasDeTela {
 
         }
     }
-
-    public model_cliente Clientes() {
-        try {
-            System.out.println("Clientes");
-            // Carrega o arquivo fxml e cria um novo stage para a janela popup.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Clientes.fxml"));
-            AnchorPane page = loader.load();
-
-            // Cria o palco dialogStage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Clientes");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-//            dialogStage.initOwner(primeriaCena);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
-            dialogStage.getIcons().add(image);
-
-            // Define a pessoa no controller.
-            ClientesController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setMainApp(mainapp);
-
-            // Mostra a janela e espera até o usuário fechar.
-            dialogStage.showAndWait();
-
-            return controller.getclinte();
-        } catch (IOException e) {
-            MessagemErroTela(e, "Clientes");
-
-            return null;
-
-        }
-
-    }
-
-
-    public model_usuario SelectUsuario() {
-        try {
-            System.out.println("Usuarios");
-            // Carrega o arquivo fxml e cria um novo stage para a janela popup.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Usuario/SelectUsuario.fxml"));
-            AnchorPane page = loader.load();
-
-            // Cria o palco dialogStage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Usuarios");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-//            dialogStage.initOwner(primeriaCena);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
-            dialogStage.getIcons().add(image);
-
-            // Define a pessoa no controller.
-            SelectUsuarioController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setMainApp(mainapp);
-
-            // Mostra a janela e espera até o usuário fechar.
-            dialogStage.showAndWait();
-
-            return controller.getUsuario();
-        } catch (IOException e) {
-            MessagemErroTela(e, "Usuarios");
-
-            return null;
-
-        }
-
-    }
-
-
     public model_banco_de_dados SelectBanco_de_Dados() {
         try {
+            JMetro jMetro = new JMetro(Style.LIGHT);
             System.out.println("SelectBanco_de_Dados");
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
@@ -624,6 +507,7 @@ public class ChamadasDeTela {
             dialogStage.initModality(Modality.WINDOW_MODAL);
 //            dialogStage.initOwner(primeriaCena);
             Scene scene = new Scene(page);
+            jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
@@ -639,7 +523,6 @@ public class ChamadasDeTela {
             dialogStage.showAndWait();
             return controller.getBanco_de_Dados();
         } catch (Exception e) {
-
             MessagemErroTela(e, "SelectBanco_de_Dados");
             return null;
         }
@@ -647,6 +530,7 @@ public class ChamadasDeTela {
 
     public void CadastroBancoDeDados() {
         try {
+            JMetro jMetro = new JMetro(Style.LIGHT);
             System.out.println("CadastroBancoDeDados");
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
@@ -659,6 +543,7 @@ public class ChamadasDeTela {
             dialogStage.initModality(Modality.WINDOW_MODAL);
 //            dialogStage.initOwner(primeriaCena);
             Scene scene = new Scene(page);
+            jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");

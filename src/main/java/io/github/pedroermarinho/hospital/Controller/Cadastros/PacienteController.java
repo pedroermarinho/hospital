@@ -51,9 +51,6 @@ public class PacienteController implements Initializable {
     private ComboBox<String> SexoBox;
 
     @FXML
-    private Button btnFoto;
-
-    @FXML
     private TextField EmailText;
 
     @FXML
@@ -233,7 +230,6 @@ public class PacienteController implements Initializable {
         EmailText.setDisable(es);
         bntSalva.setDisable(es);
         BtnCancelar.setDisable(es);
-        btnFoto.setDisable(es);
     }
 
     @FXML

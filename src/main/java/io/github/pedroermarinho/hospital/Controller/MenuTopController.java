@@ -52,11 +52,7 @@ public class MenuTopController implements Initializable {
     @FXML
     private Button btnAgenda;
 
-    @FXML
-    private Button btnExames;
 
-    @FXML
-    private Button btnDados;
 
     @FXML
     void OnCadastros(ActionEvent event) {
@@ -111,8 +107,6 @@ public class MenuTopController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        btnExames.setDisable(true);
-        btnDados.setDisable(true);
     }
 
 }

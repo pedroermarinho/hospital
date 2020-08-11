@@ -27,10 +27,7 @@ public class MenuDiretoController implements Initializable {
     private Button btnUsuarios;
     @FXML
     private Button btnCadastros;
-    @FXML
-    private Button btnPerfil;
-    @FXML
-    private Button btnAlertas;
+
     @FXML
     private Button btnConfiguracao;
     @FXML
@@ -43,8 +40,6 @@ public class MenuDiretoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {//dados a ser inicializado em conjunto com a interface
         System.out.println("Interface de cadastrdos inicializada ");
         //tablePessoa.refresh();
-        btnPerfil.setDisable(true);
-        btnAlertas.setDisable(true);
 
     }
 

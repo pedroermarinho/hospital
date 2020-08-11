@@ -89,17 +89,7 @@ public class InformacaoController implements Initializable {
     @FXML
     private Label TelefoneFixoLabel;
 
-    @FXML
-    private TableView<model_ficha> RegistrosFichaView;
 
-    @FXML
-    private TableColumn<model_ficha, String> IDFichaColumn;
-
-    @FXML
-    private TableColumn<model_ficha, String> DataFichaColumn;
-
-    @FXML
-    private Label ObservacaoFichaLabel;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -118,10 +108,7 @@ public class InformacaoController implements Initializable {
 
         IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("ID_cliente"));
         NomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("Nome"));
-        IDFichaColumn.setCellValueFactory(new PropertyValueFactory<>("ID_Ficha"));
-        DataFichaColumn.setCellValueFactory(new PropertyValueFactory<>("data_ficha"));
         RegistroClientesView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> Informacoes(newValue));
-        RegistrosFichaView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> ObservacaoFicha(newValue));
     }
 
     private void Informacoes(model_cliente newValue) {
@@ -134,11 +121,7 @@ public class InformacaoController implements Initializable {
             EmailLabel.textProperty().bind(newValue.EmailProperty());
             NomeLabel.textProperty().bind(newValue.NomeProperty());
             PaiLabel.textProperty().bind(newValue.PaiProperty());
-            try {
-                RegistrosFichaView.setItems(Filtro.Cliente_para_Ficha(newValue.getID_cliente(), mainApp));
-            } catch (Exception a) {
-                RegistrosFichaView.setItems(null);
-            }
+
         } catch (Exception ex) {
             CPFLabel.textProperty().bind(new SimpleStringProperty(""));
             CartaoSUSLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -186,9 +169,6 @@ public class InformacaoController implements Initializable {
 
     }
 
-    private void ObservacaoFicha(model_ficha newValue) {
-        ObservacaoFichaLabel.setText(RegistrosFichaView.getSelectionModel().getSelectedItem().getObservacao());
 
-    }
 
 }

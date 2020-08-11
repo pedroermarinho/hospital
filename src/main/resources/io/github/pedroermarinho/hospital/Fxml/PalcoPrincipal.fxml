@@ -3,6 +3,6 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
-            prefWidth="1040.0" stylesheets="@../Styles/custom.css"
+            prefWidth="1040.0"
             xmlns="http://javafx.com/javafx/8.0.141"
             fx:controller="io.github.pedroermarinho.hospital.Controller.PalcoPrincipalController"/>

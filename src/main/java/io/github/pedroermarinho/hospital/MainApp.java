@@ -6,6 +6,8 @@ import io.github.pedroermarinho.hospital.Util.BD.Banco_de_Dados_Cliente;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 import static io.github.pedroermarinho.hospital.Util.BD.Tabelas.CriarTabela;
 
@@ -29,8 +31,6 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        Banco_de_Dados db = new Banco_de_Dados();
-
         launch(args);
     }
 
@@ -51,7 +51,6 @@ public class MainApp extends Application {
     }
 
     public model_banco_de_dados getDados_db() {
-
         return dados_db;
     }
 
@@ -66,6 +65,10 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         System.out.println("start");
+
+
+
+
         this.telas.primeriaCena = stage;
         this.telas.primeriaCena.setTitle("Clinica");
         telas.setMainApp(this);

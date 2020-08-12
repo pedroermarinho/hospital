@@ -42,7 +42,7 @@ public class SenhaController implements Initializable {
         System.out.println("setMainApp");
         this.mainapp = mainapp;
         this.pessoa = pessoa;
-        lbUsuario.setText(pessoa.getUsuario());
+        lbUsuario.setText(pessoa.getUserName());
     }
 
     @FXML

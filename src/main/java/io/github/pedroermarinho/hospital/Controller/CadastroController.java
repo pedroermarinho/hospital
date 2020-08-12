@@ -21,12 +21,13 @@ public class CadastroController {
     private BorderPane TelaCadastrosBorderPane;
     @FXML
     private VBox menuVBox;
+    @FXML
+    private Button btnEndereco;
 
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-
 
 
     @FXML
@@ -52,4 +53,12 @@ public class CadastroController {
         }
     }
 
+    @FXML
+    void OnEndereco(ActionEvent event) {
+        try {
+            TelaCadastrosBorderPane.setCenter(mainApp.getTelas().CadastroEnderecoCliente());
+        } catch (Exception e) {
+            MsgErro.MessagemErroTela(e, "OnEndereco");
+        }
+    }
 }

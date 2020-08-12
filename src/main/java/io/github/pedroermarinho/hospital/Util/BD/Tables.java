@@ -28,50 +28,45 @@ public class Tables {
         }
         System.out.println(AUTO_INCREMENT);
 
-        final String CLIENTES_STRING = "CREATE TABLE IF NOT EXISTS clientes ("
-                + "  ID_cliente INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
+        final String CLIENTES_STRING = "CREATE TABLE IF NOT EXISTS client ("
+                + "  id_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
                 + "  cpf varchar(16) not null,"
                 + "  nome varchar(220) not null,"
                 + "  mae varchar(220),"
                 + "  pai varchar(220),"
-                + "  data_nascimento date not null,"
+                + "  data_nascimento date,"
                 + "  cartao_sus varchar(50) UNIQUE,"
-                + "  ID_sexo INTEGER not null,"
+                + "  sexo varchar(50),"
                 + "  email VARCHAR (250) ,"
-                + "  foto TEXT,"
-                + "  FOREIGN KEY (ID_sexo) REFERENCES sexos(ID_sexo)"
-                + ""
+                + "  foto TEXT"
                 + ");";
 
-//        final String ENDERECO_CLIENTE_STRING = "CREATE TABLE IF NOT EXISTS endereco_cliente ("
-//                + "  ID_endereco_cliente INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
-//                + "  ID_cliente INTEGER not null UNIQUE, "
-//                + "  telefone varchar(21),"
-//                + "  telefone_fixo varchar(21),"
-//                + "  ID_cidade INTEGER not null,"
-//                + "  ID_rua INTEGER,"
-//                + "  ID_bairro INTEGER,"
-//                + "  numero_casa INTEGER,"
-//                + "  complemento TEXT,"
-//                + "  FOREIGN KEY (ID_cidade) REFERENCES cidades ( ID_cidade ),"
-//                + "  FOREIGN KEY (ID_rua) REFERENCES ruas ( ID_rua ),"
-//                + "  FOREIGN KEY (ID_bairro) REFERENCES bairros ( ID_bairro ),"
-//                + "  FOREIGN KEY (ID_cliente) REFERENCES clientes ( ID_cliente )"
-//                //            + "  PRIMARY KEY(ID_endereco_cliente)"
-//                + ");";
+        final String ADDRESS_CLIENT_STRING = "CREATE TABLE IF NOT EXISTS address_client ("
+                + "  id_address_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
+                + "  id_client INTEGER not null UNIQUE, "
+                + "  telefone varchar(21),"
+                + "  telefone_fixo varchar(21),"
+                + "  pais varchar(30),"
+                + "  estado varchar(30),"
+                + "  cidade varchar(30),"
+                + "  rua varchar(200),"
+                + "  bairro varchar(200),"
+                + "  numero_casa INTEGER,"
+                + "  complemento TEXT,"
+                + "  FOREIGN KEY (id_client) REFERENCES client ( id_client )"
+                + ");";
 
 
 
-        final String USUARIO_STRING = "CREATE TABLE IF NOT EXISTS usuario("
-                + "    ID_usuario INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
-                + "    Nome varchar(220) not null,"
-                + "    Sobrenome varchar(220) not null,"
-                + "    Senha varchar(50) not null,"
-                + "    ID_sexo INTEGER not null,"
-                + "    DataNascimento date,"
-                + "    Usuario varchar(100) not null UNIQUE,"
-                + "    Email varchar(220) not null UNIQUE,"
-                + "    FOREIGN KEY (ID_sexo) REFERENCES sexos(ID_sexo) "
+        final String USER_STRING = "CREATE TABLE IF NOT EXISTS user("
+                + "    id_user INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
+                + "    nome varchar(220) not null,"
+                + "    sobrenome varchar(220) not null,"
+                + "    senha varchar(50) not null,"
+                + "    sexo varchar(50),"
+                + "    data_nascimento date,"
+                + "    user_name varchar(100) not null UNIQUE,"
+                + "    email varchar(220) not null UNIQUE"
                 + ");";
 
 
@@ -86,7 +81,14 @@ public class Tables {
         }
 
         try {
-            stmt = connection.prepareStatement(USUARIO_STRING);
+            stmt = connection.prepareStatement(USER_STRING);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            MsgErro.MessagemErroBD(ex, "CriarTable.USUARIO_STRING");
+        }
+
+        try {
+            stmt = connection.prepareStatement(ADDRESS_CLIENT_STRING);
             stmt.executeUpdate();
         } catch (SQLException ex) {
             MsgErro.MessagemErroBD(ex, "CriarTable.USUARIO_STRING");

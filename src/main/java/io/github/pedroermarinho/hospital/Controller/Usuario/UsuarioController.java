@@ -84,7 +84,7 @@ public class UsuarioController implements Initializable {
     public void setMainApp(MainApp mainapp) {
         this.mainapp = mainapp;
         if (this.mainapp.getUsuario() != null) {
-            usuarioText.setText(this.mainapp.getUsuario().getUsuario());
+            usuarioText.setText(this.mainapp.getUsuario().getUserName());
         }
     }
 

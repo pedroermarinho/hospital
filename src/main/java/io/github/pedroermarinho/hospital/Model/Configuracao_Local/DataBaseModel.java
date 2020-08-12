@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class DataBaseModel {
 
-    private static DataBaseDAO dao;
+    private final DataBaseDAO dao = new DataBaseDAO();
     private final IntegerProperty ID_banco_de_dados = new SimpleIntegerProperty();
     private final StringProperty Hosts = new SimpleStringProperty("localhost");
     private final StringProperty Users = new SimpleStringProperty("root");
@@ -27,18 +27,15 @@ public class DataBaseModel {
     private final StringProperty Prefixs = new SimpleStringProperty("jdbc:mysql:");
     private final IntegerProperty Ports = new SimpleIntegerProperty(3306);
 
-    public DataBaseModel() {
-        dao = new DataBaseDAO();
-    }
 
     public static List<DataBaseModel> all() {
 
-        return dao.getDados_dbList();
+        return new DataBaseDAO().getDados_dbList();
     }
 
     public static DataBaseModel find(int pk) {
 
-        return dao.getDados_dbID(pk);
+        return new DataBaseDAO().getDados_dbID(pk);
     }
 
     public int getPorts() {

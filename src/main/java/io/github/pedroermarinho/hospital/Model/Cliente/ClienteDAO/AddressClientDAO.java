@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO;
 
 import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
-import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
 import java.sql.PreparedStatement;
@@ -20,28 +20,28 @@ import java.util.List;
  */
 public class AddressClientDAO {
 
-    private final DataBaseCliente db = DataBaseCliente.instance();
+    private final DataBaseClient db = DataBaseClient.instance();
     private PreparedStatement stmt;
 
 
 
-    public AddressClientModel getEnderecoClienteID(int ID) {
+    public AddressClientModel getAddressClientID(int ID) {
         AddressClientModel obj = new AddressClientModel();
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `endereco_cliente` WHERE ID_endereco_cliente = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `address_client` WHERE id_address_client = '" + ID + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                obj.setID_Endereco_Cliente(rs.getInt("ID_endereco_cliente"));
-                obj.setID_cliente(rs.getInt("ID_cliente"));
+                obj.setIdAddressClient(rs.getInt("id_address_client"));
+                obj.setIdClient(rs.getInt("id_client"));
                 obj.setTelefone(rs.getString("telefone"));
-                obj.setTelefone_Fixo(rs.getString("telefone_fixo"));
-                obj.setID_cidade(rs.getInt("ID_cidade"));
-                obj.setID_Rua(rs.getInt("ID_rua"));
-                obj.setID_Bairro(rs.getInt("ID_bairro"));
-                obj.setNumero_Casa(rs.getInt("numero_casa"));
+                obj.setTelefoneFixo(rs.getString("telefone_fixo"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setRua(rs.getString("rua"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setNumeroCasa(rs.getInt("numero_casa"));
                 obj.setComplemento(rs.getString("complemento"));
             }
 
@@ -53,24 +53,26 @@ public class AddressClientDAO {
         }
     }
 
-    public List<AddressClientModel> getEnderecoClienteList() {
+    public List<AddressClientModel> getAddressClientList() {
         ArrayList<AddressClientModel> result = new ArrayList<>();
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `endereco_cliente` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `address_client` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 AddressClientModel obj = new AddressClientModel();
 
-                obj.setID_Endereco_Cliente(rs.getInt("ID_endereco_cliente"));
-                obj.setID_cliente(rs.getInt("ID_cliente"));
+                obj.setIdAddressClient(rs.getInt("id_address_client"));
+                obj.setIdClient(rs.getInt("id_client"));
                 obj.setTelefone(rs.getString("telefone"));
-                obj.setTelefone_Fixo(rs.getString("telefone_fixo"));
-                obj.setID_cidade(rs.getInt("ID_cidade"));
-                obj.setID_Rua(rs.getInt("ID_rua"));
-                obj.setID_Bairro(rs.getInt("ID_bairro"));
-                obj.setNumero_Casa(rs.getInt("numero_casa"));
+                obj.setTelefoneFixo(rs.getString("telefone_fixo"));
+                obj.setPais(rs.getString("pais"));
+                obj.setEstado(rs.getString("estado"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setRua(rs.getString("rua"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setNumeroCasa(rs.getInt("numero_casa"));
                 obj.setComplemento(rs.getString("complemento"));
                 result.add(obj);
             }
@@ -84,19 +86,21 @@ public class AddressClientDAO {
         }
     }
 
-    public void creatEnderecoCliente(AddressClientModel obj) {
+    public void creatAddressClient(AddressClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO endereco_cliente ( `ID_cliente`, `telefone`, `telefone_fixo`, `ID_cidade`, `ID_rua`, `ID_bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `telefone`, `telefone_fixo`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?,?,?);");
 
 
-            stmt.setInt(1, obj.getID_cliente());
+            stmt.setInt(1, obj.getIdClient());
             stmt.setString(2, obj.getTelefone());
-            stmt.setString(3, obj.getTelefone_Fixo());
-            stmt.setInt(4, obj.getID_cidade());
-            stmt.setInt(5, obj.getID_Rua());
-            stmt.setInt(6, obj.getID_Bairro());
-            stmt.setInt(7, obj.getNumero_Casa());
-            stmt.setString(8, obj.getComplemento());
+            stmt.setString(3, obj.getTelefoneFixo());
+            stmt.setString(4, obj.getPais());
+            stmt.setString(5, obj.getEstado());
+            stmt.setString(6, obj.getCidade());
+            stmt.setString(7, obj.getRua());
+            stmt.setString(8, obj.getBairro());
+            stmt.setInt(9, obj.getNumeroCasa());
+            stmt.setString(10, obj.getComplemento());
 
             stmt.executeUpdate();
 
@@ -106,28 +110,32 @@ public class AddressClientDAO {
         }
     }
 
-    public void updateEnderecoCliente(AddressClientModel obj) {
+    public void updateAddressClient(AddressClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("UPDATE endereco_cliente SET"
-                    + " ID_cliente = ?,"
+            stmt = db.getConnection().prepareStatement("UPDATE address_client SET"
+                    + " id_client = ?,"
                     + " telefone = ?,"
                     + " telefone_fixo = ?,"
-                    + " ID_cidade = ?,"
-                    + " ID_rua = ?,"
-                    + " ID_bairro = ?,"
+                    + " pais = ?,"
+                    + " estado = ?,"
+                    + " cidade = ?,"
+                    + " rua = ?,"
+                    + " bairro = ?,"
                     + " numero_casa = ?,"
                     + " complemento = ?"
-                    + " WHERE ID_endereco_cliente = ?;");
+                    + " WHERE id_address_client = ?;");
 
-            stmt.setInt(1, obj.getID_cliente());
+            stmt.setInt(1, obj.getIdClient());
             stmt.setString(2, obj.getTelefone());
-            stmt.setString(3, obj.getTelefone_Fixo());
-            stmt.setInt(4, obj.getID_cidade());
-            stmt.setInt(5, obj.getID_Rua());
-            stmt.setInt(6, obj.getID_Bairro());
-            stmt.setInt(7, obj.getNumero_Casa());
-            stmt.setString(8, obj.getComplemento());
-            stmt.setInt(9, obj.getID_Endereco_Cliente());
+            stmt.setString(3, obj.getTelefoneFixo());
+            stmt.setString(4, obj.getPais());
+            stmt.setString(5, obj.getEstado());
+            stmt.setString(6, obj.getCidade());
+            stmt.setString(7, obj.getRua());
+            stmt.setString(8, obj.getBairro());
+            stmt.setInt(9, obj.getNumeroCasa());
+            stmt.setString(10, obj.getComplemento());
+            stmt.setInt(11, obj.getIdAddressClient());
 
             stmt.executeUpdate();
 
@@ -137,12 +145,12 @@ public class AddressClientDAO {
         }
     }
 
-    public void deleteEnderecoCliente(AddressClientModel obj) {
+    public void deleteAddressClient(AddressClientModel obj) {
 
         try {
-            stmt = db.getConnection().prepareStatement("DELETE FROM endereco_cliente WHERE ID_endereco_cliente = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM address_client WHERE id_address_client = ?;");
 
-            stmt.setInt(1, obj.getID_Endereco_Cliente());
+            stmt.setInt(1, obj.getIdAddressClient());
 
             stmt.executeUpdate();
 

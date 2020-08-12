@@ -2,7 +2,8 @@ package io.github.pedroermarinho.hospital;
 
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
-import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseSettings;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -14,9 +15,10 @@ import static io.github.pedroermarinho.hospital.Util.BD.Tables.createTable;
  */
 public class MainApp extends Application {
 
+    private final DataBaseClient banco_de_dados = DataBaseClient.instance();
     private final Dados DadosData = new Dados(this);
     private final ChamadasDeTela telas = new ChamadasDeTela();
-    private final DataBaseCliente banco_de_dados = DataBaseCliente.instance();
+    DataBaseSettings dataBaseSettings = DataBaseSettings.instance();
     private UserModel usuario = null;
     private DataBaseModel dados_db = new DataBaseModel();
 

@@ -21,14 +21,14 @@ public class MsgErro {
             StackTraceElement[] erros = ex.getStackTrace();
 //            JFrame frame = new JFrame("Erro Tela");
 
-            String mensagem_erro = msg + "\n";
+            StringBuilder mensagem_erro = new StringBuilder(msg + "\n");
             for (StackTraceElement erro : erros) {
-                mensagem_erro += erro.toString() + "\n";
+                mensagem_erro.append(erro.toString()).append("\n");
             }
 
             // Cria o JOptionPane por showMessageDialog
             JOptionPane.showMessageDialog(null,
-                    "Houve um problema no carregamento da tela:\n\n '" + mensagem_erro + "'.", //mensagem
+                    "Houve um problema no carregamento da tela:\n\n '" + mensagem_erro.toString() + "'.", //mensagem
                     "Erro 404", // titulo da janela 
                     JOptionPane.INFORMATION_MESSAGE);
 
@@ -43,11 +43,11 @@ public class MsgErro {
 
 
 //            JFrame frame = new JFrame("Erro Tela");
-        String mensagem_erro = msg + "\n";
+        StringBuilder mensagem_erro = new StringBuilder(msg + "\n");
         try {
             StackTraceElement[] erros = ex.getStackTrace();
             for (StackTraceElement erro : erros) {
-                mensagem_erro += erro.toString() + "\n";
+                mensagem_erro.append(erro.toString()).append("\n");
             }
         } catch (HeadlessException e) {
             System.err.println(Arrays.toString(e.getStackTrace()));

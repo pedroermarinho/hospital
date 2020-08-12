@@ -6,7 +6,8 @@
 package io.github.pedroermarinho.hospital;
 
 import io.github.pedroermarinho.hospital.Controller.*;
-import io.github.pedroermarinho.hospital.Controller.Cadastros.*;
+import io.github.pedroermarinho.hospital.Controller.Cadastros.AddressClientController;
+import io.github.pedroermarinho.hospital.Controller.Cadastros.ClientController;
 import io.github.pedroermarinho.hospital.Controller.Configuracao.Bancos_de_DadosController;
 import io.github.pedroermarinho.hospital.Controller.Configuracao.CadastroBancoDeDadosController;
 import io.github.pedroermarinho.hospital.Controller.Configuracao.Configuracao_Banco_de_DadosController;
@@ -257,11 +258,11 @@ public class ChamadasDeTela {
 
             // Carrega a TabelaDeJogos.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Cadastros/paciente.fxml"));
+            loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Cadastros/Client.fxml"));
             AnchorPane personOverview = loader.load();
 
             // Dá ao controlador acesso à the main app.
-            PacienteController controller = loader.getController();
+            ClientController controller = loader.getController();
             controller.setMainApp(mainapp);
             return personOverview;
         } catch (IOException e) {
@@ -288,6 +289,28 @@ public class ChamadasDeTela {
             return personOverview;
         } catch (IOException e) {
             MsgErro.MessagemErroTela(e, "Configuracao_Banco_de_Dados");
+            return null;
+        }
+    }
+
+    /**
+     * @return AnchorPane
+     */
+    public AnchorPane CadastroEnderecoCliente() {
+        System.out.println("CadastroEnderecoCliente");
+        try {
+
+            // Carrega a TabelaDeJogos.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Cadastros/AddressClient.fxml"));
+            AnchorPane personOverview = loader.load();
+
+            // Dá ao controlador acesso à the main app.
+            AddressClientController controller = loader.getController();
+            controller.setMainApp(mainapp);
+            return personOverview;
+        } catch (IOException e) {
+            MsgErro.MessagemErroTela(e, "CadastroEnderecoCliente");
             return null;
         }
     }

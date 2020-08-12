@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO;
 
 import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
-import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ClientDAO {
 
-    private final DataBaseCliente db= DataBaseCliente.instance();
+    private final DataBaseClient db = DataBaseClient.instance();
     private PreparedStatement stmt;
 
 
@@ -29,18 +29,18 @@ public class ClientDAO {
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `clientes` WHERE ID_cliente = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `client` WHERE id_client = '" + ID + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                obj.setID_cliente(rs.getInt("ID_cliente"));//1
-                obj.setCPF(rs.getString("cpf"));//2
+                obj.setIdClient(rs.getInt("id_client"));//1
+                obj.setCpf(rs.getString("cpf"));//2
                 obj.setNome(rs.getString("nome"));//3
                 obj.setMae(rs.getString("mae"));//4
                 obj.setPai(rs.getString("pai"));//5
-                obj.setData_Nascimento(rs.getString("data_nascimento"));//6
-                obj.setCartao_SUS(rs.getString("cartao_sus"));//7
-                obj.setID_Sexo(rs.getInt("ID_sexo"));//8
+                obj.setDataNascimento(rs.getString("data_nascimento"));//6
+                obj.setCartaoSUS(rs.getString("cartao_sus"));//7
+                obj.setSexo(rs.getString("sexo"));//8
                 obj.setEmail(rs.getString("email"));//9
                 obj.setFoto(rs.getString("foto"));//10
 
@@ -58,20 +58,20 @@ public class ClientDAO {
         ArrayList<ClientModel> result = new ArrayList<>();
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `clientes` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `client` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 ClientModel obj = new ClientModel();
 
-                obj.setID_cliente(rs.getInt("ID_cliente"));//1
-                obj.setCPF(rs.getString("cpf"));//2
+                obj.setIdClient(rs.getInt("id_client"));//1
+                obj.setCpf(rs.getString("cpf"));//2
                 obj.setNome(rs.getString("nome"));//3
                 obj.setMae(rs.getString("mae"));//4
                 obj.setPai(rs.getString("pai"));//5
-                obj.setData_Nascimento(rs.getString("data_nascimento"));//6
-                obj.setCartao_SUS(rs.getString("cartao_sus"));//7
-                obj.setID_Sexo(rs.getInt("ID_sexo"));//8
+                obj.setDataNascimento(rs.getString("data_nascimento"));//6
+                obj.setCartaoSUS(rs.getString("cartao_sus"));//7
+                obj.setSexo(rs.getString("sexo"));//8
                 obj.setEmail(rs.getString("email"));//9
                 obj.setFoto(rs.getString("foto"));//10
                 result.add(obj);
@@ -89,15 +89,15 @@ public class ClientDAO {
     public void creatCliente(ClientModel obj) {
 
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO clientes (`cpf`, `nome`, `mae`, `pai`, `data_nascimento`, `cartao_sus`, `ID_sexo`, `email`, `foto`) VALUES(?,?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO client (`cpf`, `nome`, `mae`, `pai`, `data_nascimento`, `cartao_sus`, `sexo`, `email`, `foto`) VALUES(?,?,?,?,?,?,?,?,?);");
 
-            stmt.setString(1, obj.getCPF());
+            stmt.setString(1, obj.getCpf());
             stmt.setString(2, obj.getNome());
             stmt.setString(3, obj.getMae());
             stmt.setString(4, obj.getPai());
-            stmt.setString(5, obj.getData_Nascimento());
-            stmt.setString(6, obj.getCartao_SUS());
-            stmt.setInt(7, obj.getID_Sexo());
+            stmt.setString(5, obj.getDataNascimento());
+            stmt.setString(6, obj.getCartaoSUS());
+            stmt.setString(7, obj.getSexo());
             stmt.setString(8, obj.getEmail());
             stmt.setString(9, obj.getFoto());
 
@@ -112,28 +112,28 @@ public class ClientDAO {
     public void updateCliente(ClientModel obj) {
 
         try {
-            stmt = db.getConnection().prepareStatement("UPDATE clientes SET"
+            stmt = db.getConnection().prepareStatement("UPDATE client SET"
                     + " cpf = ?,"//1
                     + " nome = ?,"//2
                     + " mae = ?,"//3
                     + " pai = ?,"//4
                     + " data_nascimento = ?,"//5
                     + " cartao_sus = ?,"//6
-                    + " ID_sexo = ?,"//7
+                    + " sexo = ?,"//7
                     + " email = ?,"//8
                     + " foto = ?"//9
-                    + " WHERE ID_cliente = ?;");//10
+                    + " WHERE id_client = ?;");//10
 
-            stmt.setString(1, obj.getCPF());
+            stmt.setString(1, obj.getCpf());
             stmt.setString(2, obj.getNome());
             stmt.setString(3, obj.getMae());
             stmt.setString(4, obj.getPai());
-            stmt.setString(5, obj.getData_Nascimento());
-            stmt.setString(6, obj.getCartao_SUS());
-            stmt.setInt(7, obj.getID_Sexo());
+            stmt.setString(5, obj.getDataNascimento());
+            stmt.setString(6, obj.getCartaoSUS());
+            stmt.setString(7, obj.getSexo());
             stmt.setString(8, obj.getEmail());
             stmt.setString(9, obj.getFoto());
-            stmt.setInt(10, obj.getID_cliente());
+            stmt.setInt(10, obj.getIdClient());
 
             stmt.executeUpdate();
 
@@ -145,9 +145,9 @@ public class ClientDAO {
 
     public void deleteCliente(ClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM client WHERE id_client = ?;");
 
-            stmt.setInt(1, obj.getID_cliente());
+            stmt.setInt(1, obj.getIdClient());
 
             stmt.executeUpdate();
 

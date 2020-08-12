@@ -84,7 +84,7 @@ public class UsuariosController implements Initializable {
         if (isInputValid()) {
             modificao_usuario.setDataNascimento(java.sql.Date.valueOf(dpData.getValue()));
             modificao_usuario.setEmail(EmailField.getText());
-            modificao_usuario.setUsuario(usuarioField.getText());
+            modificao_usuario.setUserName(usuarioField.getText());
             modificao_usuario.setNome(PrimeiroNomeField.getText());
             modificao_usuario.setSenha(senhaField.getText());
             modificao_usuario.setSobrenome(SobrenomeField.getText());
@@ -114,7 +114,7 @@ public class UsuariosController implements Initializable {
         modificao_usuario = PessoaTable.getSelectionModel().getSelectedItem();
         PrimeiroNomeField.setText(modificao_usuario.getNome());
         SobrenomeField.setText(modificao_usuario.getSobrenome());
-        usuarioField.setText(modificao_usuario.getUsuario());
+        usuarioField.setText(modificao_usuario.getUserName());
         senhaField.setText(modificao_usuario.getSenha());
         dpData.setValue(modificao_usuario.getDataNascimento().toLocalDate());
         EmailField.setText(modificao_usuario.getEmail());
@@ -133,7 +133,7 @@ public class UsuariosController implements Initializable {
         modificao_usuario = PessoaTable.getSelectionModel().getSelectedItem();
         PrimeiroNomeField.setText(modificao_usuario.getNome());
         SobrenomeField.setText(modificao_usuario.getSobrenome());
-        usuarioField.setText(modificao_usuario.getUsuario());
+        usuarioField.setText(modificao_usuario.getUserName());
         senhaField.setText(modificao_usuario.getSenha());
         dpData.setValue(modificao_usuario.getDataNascimento().toLocalDate());
         EmailField.setText(modificao_usuario.getEmail());

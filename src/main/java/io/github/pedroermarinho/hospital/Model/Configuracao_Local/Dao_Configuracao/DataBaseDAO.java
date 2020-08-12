@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao;
 
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
-import io.github.pedroermarinho.hospital.Util.BD.Banco_de_Dados_Configuracao;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseSettings;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,13 +21,15 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroBD;
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class DataBaseDAO extends Banco_de_Dados_Configuracao {
+public class DataBaseDAO {
 
     private PreparedStatement stmt;
+    private final DataBaseSettings db = DataBaseSettings.instance();
 
     public DataBaseDAO() {
         try {
-            stmt = conexao.prepareStatement("CREATE TABLE IF NOT EXISTS dados_db ("
+            db.open();
+            stmt = db.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS dados_db ("
                     + " ID_banco_de_dados INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + " Hosts VARCHAR(100) NOT NULL,"
                     + " Users VARCHAR(100) NOT NULL,"
@@ -45,12 +47,11 @@ public class DataBaseDAO extends Banco_de_Dados_Configuracao {
     }
 
     public DataBaseModel getDados_dbID(int ID) {
-        open();
         DataBaseModel obj = new DataBaseModel();
 
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `dados_db` WHERE ID_banco_de_dados = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `dados_db` WHERE ID_banco_de_dados = '" + ID + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -67,18 +68,16 @@ public class DataBaseDAO extends Banco_de_Dados_Configuracao {
 
             return obj;
         } catch (SQLException ex) {
-            close();
             MessagemErroBD(ex, "getDados_dbID");
             return null;
         }
     }
 
     public List<DataBaseModel> getDados_dbList() {
-        open();
         ArrayList<DataBaseModel> result = new ArrayList<>();
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `dados_db` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `dados_db` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -97,7 +96,6 @@ public class DataBaseDAO extends Banco_de_Dados_Configuracao {
             return result;
 
         } catch (SQLException ex) {
-            close();
             MessagemErroBD(ex, "getDados_dbList");
             return null;
 
@@ -105,9 +103,8 @@ public class DataBaseDAO extends Banco_de_Dados_Configuracao {
     }
 
     public void creatDados_db(DataBaseModel obj) {
-        open();
         try {
-            stmt = conexao.prepareStatement("INSERT INTO `dados_db` ( Hosts, Users, Passwords, DataBases, Prefixs, Ports )VALUES(?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO `dados_db` ( Hosts, Users, Passwords, DataBases, Prefixs, Ports )VALUES(?,?,?,?,?,?);");
 
 //            stmt.setInt(1,2);
             stmt.setString(1, obj.getHost());
@@ -121,15 +118,15 @@ public class DataBaseDAO extends Banco_de_Dados_Configuracao {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            close();
+
             MessagemErroBD(ex, "creatDados_db");
         }
     }
 
     public void updateDados_db(DataBaseModel obj) {
-        open();
+
         try {
-            stmt = conexao.prepareStatement("UPDATE `dados_db` SET"
+            stmt = db.getConnection().prepareStatement("UPDATE `dados_db` SET"
                     + " Hosts = ?,"//1
                     + " Users = ?,"//2
                     + " Passwords = ?,"//3
@@ -149,22 +146,19 @@ public class DataBaseDAO extends Banco_de_Dados_Configuracao {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            close();
             MessagemErroBD(ex, "updateDados_db");
         }
     }
 
     public void deleteDados_db(DataBaseModel obj) {
-        open();
         try {
-            stmt = conexao.prepareStatement("DELETE FROM dados_db WHERE ID_banco_de_dados = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM dados_db WHERE ID_banco_de_dados = ?;");
 
             stmt.setInt(1, obj.getID_banco_de_dados());
 
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            close();
             MessagemErroBD(ex, "deleteDados_db");
         }
     }

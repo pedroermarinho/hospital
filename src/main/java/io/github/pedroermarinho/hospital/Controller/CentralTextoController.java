@@ -116,11 +116,11 @@ public class CentralTextoController implements Initializable {
         cliente = ClientesDataListView.getSelectionModel().getSelectedItem();
         try {
 
-            CPFLabel.textProperty().bind(cliente.CPFProperty());
-            CartaoSUSLabel.textProperty().bind(cliente.Cartao_SUSProperty());
-            NascimentoLabel.textProperty().bind(cliente.Data_NascimentoProperty());
-            EmailLabel.textProperty().bind(cliente.EmailProperty());
-            NomeLabel.textProperty().bind(cliente.NomeProperty());
+            CPFLabel.textProperty().bind(cliente.cpfProperty());
+            CartaoSUSLabel.textProperty().bind(cliente.cartaoSUSProperty());
+            NascimentoLabel.textProperty().bind(cliente.dataNascimentoProperty());
+            EmailLabel.textProperty().bind(cliente.emailProperty());
+            NomeLabel.textProperty().bind(cliente.nomeProperty());
 
         } catch (Exception ex) {
             CPFLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -133,12 +133,12 @@ public class CentralTextoController implements Initializable {
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getID_cliente());
+            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getIdClient());
             System.out.println(endereco_cliente);
-            if (endereco_cliente != null && endereco_cliente.getID_Endereco_Cliente() != 0) {
+            if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 
-                TelefoneLabel.textProperty().bind(endereco_cliente.TelefoneProperty());
-                TelefoneFixoLabel.textProperty().bind(endereco_cliente.Telefone_FixoProperty());
+                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+                TelefoneFixoLabel.textProperty().bind(endereco_cliente.telefoneFixoProperty());
             } else {
                 TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
                 TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -155,11 +155,11 @@ public class CentralTextoController implements Initializable {
         cliente = AgendaView.getSelectionModel().getSelectedItem();
         try {
 
-            CPFLabel.textProperty().bind(cliente.CPFProperty());
-            CartaoSUSLabel.textProperty().bind(cliente.Cartao_SUSProperty());
-            NascimentoLabel.textProperty().bind(cliente.Data_NascimentoProperty());
-            EmailLabel.textProperty().bind(cliente.EmailProperty());
-            NomeLabel.textProperty().bind(cliente.NomeProperty());
+            CPFLabel.textProperty().bind(cliente.cpfProperty());
+            CartaoSUSLabel.textProperty().bind(cliente.cartaoSUSProperty());
+            NascimentoLabel.textProperty().bind(cliente.dataNascimentoProperty());
+            EmailLabel.textProperty().bind(cliente.emailProperty());
+            NomeLabel.textProperty().bind(cliente.nomeProperty());
 
         } catch (Exception ex) {
             CPFLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -172,12 +172,12 @@ public class CentralTextoController implements Initializable {
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getID_cliente());
+            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getIdClient());
             System.out.println(endereco_cliente);
-            if (endereco_cliente != null && endereco_cliente.getID_Endereco_Cliente() != 0) {
+            if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 
-                TelefoneLabel.textProperty().bind(endereco_cliente.TelefoneProperty());
-                TelefoneFixoLabel.textProperty().bind(endereco_cliente.Telefone_FixoProperty());
+                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+                TelefoneFixoLabel.textProperty().bind(endereco_cliente.telefoneFixoProperty());
             } else {
                 TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
                 TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));

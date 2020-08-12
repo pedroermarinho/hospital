@@ -103,31 +103,31 @@
                                 </ToolBar>
                                 <ToolBar maxWidth="330.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
                                     <items>
-                                        <TextField fx:id="usuarioField" alignment="BOTTOM_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" styleClass="text-field" />
+                                        <TextField fx:id="usuarioField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" styleClass="text-field" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
                                     </items>
                                 </ToolBar>
                                 <ToolBar maxWidth="330.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
                                     <items>
-                                        <TextField fx:id="EmailField" alignment="BOTTOM_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" styleClass="text-field" />
+                                        <TextField fx:id="EmailField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" styleClass="text-field" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
                                     </items>
                                 </ToolBar>
                                 <ToolBar maxWidth="330.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
                                     <items>
-                                        <PasswordField fx:id="senhaField" prefHeight="32.0" prefWidth="210.0" styleClass="text-field" />
+                                        <PasswordField fx:id="senhaField" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="210.0" styleClass="text-field" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Senha" />
                                     </items>
                                 </ToolBar>
                                 <ToolBar maxWidth="330.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
                                     <items>
-                                        <DatePicker fx:id="dpData" prefHeight="32.0" prefWidth="210.0" />
+                                        <DatePicker fx:id="dpData" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data" />
                                     </items>
                                 </ToolBar>
                                 <ToolBar maxWidth="330.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
                                     <items>
-                                        <ComboBox fx:id="SexoBox" prefHeight="32.0" prefWidth="210.0" />
+                                        <ComboBox fx:id="SexoBox" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sexo" />
                                     </items>
                                 </ToolBar>

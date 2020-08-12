@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Model.Usuario.UsuarioDAO;
 
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
-import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class UserDAO {
 
-    private final DataBaseCliente db = DataBaseCliente.instance();
+    private final DataBaseClient db = DataBaseClient.instance();
     private PreparedStatement stmt;
 
     public UserModel getUsuarioID(int ID) {
@@ -28,18 +28,18 @@ public class UserDAO {
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `usuario` WHERE ID_usuario = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `user` WHERE id_user = '" + ID + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                obj.setID_usuario(rs.getInt("ID_usuario"));//1
-                obj.setNome(rs.getString("Nome"));//2
-                obj.setSobrenome(rs.getString("Sobrenome"));//3
-                obj.setSenha(rs.getString("Senha"));//4
-                obj.setSexo(rs.getInt("ID_sexo"));//5
-                obj.setDataNascimento(rs.getDate("DataNascimento"));//6
-                obj.setUsuario(rs.getString("Usuario"));//7
-                obj.setEmail(rs.getString("Email"));//8
+                obj.setIdUser(rs.getInt("id_user"));//1
+                obj.setNome(rs.getString("nome"));//2
+                obj.setSobrenome(rs.getString("sobrenome"));//3
+                obj.setSenha(rs.getString("senha"));//4
+                obj.setSexo(rs.getInt("sexo"));//5
+                obj.setDataNascimento(rs.getDate("data_nascimento"));//6
+                obj.setUserName(rs.getString("user_name"));//7
+                obj.setEmail(rs.getString("email"));//8
             }
 
             return obj;
@@ -54,20 +54,20 @@ public class UserDAO {
         ArrayList<UserModel> result = new ArrayList<>();
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `usuario` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `user` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 UserModel obj = new UserModel();
 
-                obj.setID_usuario(rs.getInt("ID_usuario"));//1
-                obj.setNome(rs.getString("Nome"));//2
-                obj.setSobrenome(rs.getString("Sobrenome"));//3
-                obj.setSenha(rs.getString("Senha"));//4
-                obj.setSexo(rs.getInt("ID_sexo"));//5
-                obj.setDataNascimento(rs.getDate("DataNascimento"));//6
-                obj.setUsuario(rs.getString("Usuario"));//7
-                obj.setEmail(rs.getString("Email"));//8
+                obj.setIdUser(rs.getInt("id_user"));//1
+                obj.setNome(rs.getString("nome"));//2
+                obj.setSobrenome(rs.getString("sobrenome"));//3
+                obj.setSenha(rs.getString("senha"));//4
+                obj.setSexo(rs.getInt("sexo"));//5
+                obj.setDataNascimento(rs.getDate("data_nascimento"));//6
+                obj.setUserName(rs.getString("user_name"));//7
+                obj.setEmail(rs.getString("email"));//8
                 result.add(obj);
             }
             return result;
@@ -82,7 +82,7 @@ public class UserDAO {
 
     public void creatUsuario(UserModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO usuario (`Nome`, `Sobrenome`, `Senha`, `ID_sexo`, `DataNascimento`, `Usuario`, `Email`) VALUES(?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO user (`nome`, `sobrenome`, `senha`, `sexo`, `data_nascimento`, `user_name`, `email`) VALUES(?,?,?,?,?,?,?);");
 
 
             stmt.setString(1, obj.getNome());
@@ -90,7 +90,7 @@ public class UserDAO {
             stmt.setString(3, obj.getSenha());
             stmt.setInt(4, obj.getSexo());
             stmt.setDate(5, obj.getDataNascimento());
-            stmt.setString(6, obj.getUsuario());
+            stmt.setString(6, obj.getUserName());
             stmt.setString(7, obj.getEmail());
 
             stmt.executeUpdate();
@@ -103,24 +103,24 @@ public class UserDAO {
 
     public void updateUsuario(UserModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("UPDATE usuario SET"
-                    + " Nome = ?,"//1
-                    + " Sobrenome = ?,"//2
-                    + " Senha = ?,"//3
-                    + " ID_sexo = ?,"//4
-                    + " DataNascimento = ?,"//5
-                    + " Usuario = ?,"//6
-                    + " Email = ?"//7
-                    + " WHERE ID_usuario = ?;");//8
+            stmt = db.getConnection().prepareStatement("UPDATE user SET"
+                    + " nome = ?,"//1
+                    + " sobrenome = ?,"//2
+                    + " senha = ?,"//3
+                    + " sexo = ?,"//4
+                    + " data_nascimento = ?,"//5
+                    + " user_name = ?,"//6
+                    + " email = ?"//7
+                    + " WHERE id_user = ?;");//8
 
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getSobrenome());
             stmt.setString(3, obj.getSenha());
             stmt.setInt(4, obj.getSexo());
             stmt.setDate(5, obj.getDataNascimento());
-            stmt.setString(6, obj.getUsuario());
+            stmt.setString(6, obj.getUserName());
             stmt.setString(7, obj.getEmail());
-            stmt.setInt(8, obj.getID_usuario());
+            stmt.setInt(8, obj.getIdUser());
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -131,9 +131,9 @@ public class UserDAO {
 
     public void deleteUsuario(UserModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("DELETE FROM usuario WHERE ID_usuario = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM user WHERE id_user = ?;");
 
-            stmt.setInt(1, obj.getID_usuario());
+            stmt.setInt(1, obj.getIdUser());
 
             stmt.executeUpdate();
 

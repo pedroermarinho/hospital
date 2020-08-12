@@ -81,7 +81,7 @@ public class CadastroUsuarioController implements Initializable {
         if (isInputValid()) {
             modificao_usuario.setDataNascimento(java.sql.Date.valueOf(dpData.getValue()));
             modificao_usuario.setEmail(EmailField.getText());
-            modificao_usuario.setUsuario(usuarioField.getText());
+            modificao_usuario.setUserName(usuarioField.getText());
             modificao_usuario.setNome(PrimeiroNomeField.getText());
             modificao_usuario.setSenha(senhaField.getText());
             modificao_usuario.setSobrenome(SobrenomeField.getText());
@@ -134,12 +134,12 @@ public class CadastroUsuarioController implements Initializable {
         } else {
             dpData.setStyle("");
         }
-        if (SexoBox.getValue() == null || SexoBox.getValue().toString().length() == 0) {
-            errorMessage += "Data inválido!\n";
-            SexoBox.setStyle("-fx-border-color:red");
-        } else {
-            SexoBox.setStyle("");
-        }
+//        if (SexoBox.getValue() == null || SexoBox.getValue().toString().length() == 0) {
+//            errorMessage += "Data inválido!\n";
+//            SexoBox.setStyle("-fx-border-color:red");
+//        } else {
+//            SexoBox.setStyle("");
+//        }
 
         if (errorMessage.length() == 0) {
             return true;

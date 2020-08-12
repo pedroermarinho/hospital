@@ -6,10 +6,9 @@
 package io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao;
 
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.SettingsModel;
-import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
+import io.github.pedroermarinho.hospital.Util.BD.DataBaseSettings;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,8 +20,8 @@ import java.util.List;
  */
 public class SettingsDAO {
 
-    protected Connection conexao = null;
-    private DataBaseCliente db = DataBaseCliente.instance();
+
+    private final DataBaseSettings db = DataBaseSettings.instance();
     private PreparedStatement stmt;
 
 
@@ -32,7 +31,7 @@ public class SettingsDAO {
 
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `clientes` WHERE ID_cliente = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `clientes` WHERE ID_cliente = '" + ID + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -61,7 +60,7 @@ public class SettingsDAO {
         ArrayList<SettingsModel> result = new ArrayList<>();
         try {
 
-            stmt = conexao.prepareStatement("SELECT * FROM `clientes` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `clientes` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -95,7 +94,7 @@ public class SettingsDAO {
 
     public void creatConfiguracao(SettingsModel obj) {
         try {
-            stmt = conexao.prepareStatement("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?,?);");
 
 //            stmt.setInt(1,0);
 //            stmt.setString(2, obj.getCPF());
@@ -117,7 +116,7 @@ public class SettingsDAO {
 
     public void updateConfiguracao(SettingsModel obj) {
         try {
-            stmt = conexao.prepareStatement("UPDATE clientes SET"
+            stmt = db.getConnection().prepareStatement("UPDATE clientes SET"
                     + " cpf = ?,"//1
                     + " nome = ?,"//2
                     + " mae = ?,"//3
@@ -149,7 +148,7 @@ public class SettingsDAO {
 
     public void deleteConfiguracao(SettingsModel obj) {
      try {
-            stmt = conexao.prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
+         stmt = db.getConnection().prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
 
             stmt.setInt(1, obj.getID_configuracao());
 

@@ -10,11 +10,10 @@ import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -88,6 +87,14 @@ public class InformacaoController implements Initializable {
     @FXML
     private Label TelefoneFixoLabel;
 
+    @FXML
+    private Button btnPesquisar;
+
+    @FXML
+    private TextField PesquisarField;
+
+
+
 
 
     public void setMainApp(MainApp mainApp) {
@@ -105,23 +112,23 @@ public class InformacaoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-        IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("ID_cliente"));
+        IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("idClient"));
         NomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("Nome"));
         RegistroClientesView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> Informacoes(newValue));
     }
 
-    private void Informacoes(ClientModel newValue) {
+    private void Informacoes(ClientModel newValue)  {
         try {
 
-            CPFLabel.textProperty().bind(newValue.CPFProperty());
-            CartaoSUSLabel.textProperty().bind(newValue.Cartao_SUSProperty());
-            NascimentoLabel.textProperty().bind(newValue.Data_NascimentoProperty());
-            MaeLabel.textProperty().bind(newValue.MaeProperty());
-            EmailLabel.textProperty().bind(newValue.EmailProperty());
-            NomeLabel.textProperty().bind(newValue.NomeProperty());
-            PaiLabel.textProperty().bind(newValue.PaiProperty());
+            CPFLabel.textProperty().bind(newValue.cpfProperty());
+            CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
+            NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
+            MaeLabel.textProperty().bind(newValue.maeProperty());
+            EmailLabel.textProperty().bind(newValue.emailProperty());
+            NomeLabel.textProperty().bind(newValue.nomeProperty());
+            PaiLabel.textProperty().bind(newValue.paiProperty());
 
-        } catch (Exception ex) {
+        } catch (NullPointerException ex) {
             CPFLabel.textProperty().bind(new SimpleStringProperty(""));
             CartaoSUSLabel.textProperty().bind(new SimpleStringProperty(""));
             NascimentoLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -134,27 +141,23 @@ public class InformacaoController implements Initializable {
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getID_cliente());
+            endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
             System.out.println(endereco_cliente);
-            if (endereco_cliente != null && endereco_cliente.getID_Endereco_Cliente() != 0) {
+            if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
                 System.out.println("ok");
 
-
-                NCasaLabel.textProperty().bind(endereco_cliente.Numero_CasaProperty().asString());
-                TelefoneLabel.textProperty().bind(endereco_cliente.TelefoneProperty());
-                TelefoneFixoLabel.textProperty().bind(endereco_cliente.Telefone_FixoProperty());
+                RuaLabel.textProperty().bind(endereco_cliente.ruaProperty());
+                BairroLabel.textProperty().bind(endereco_cliente.bairroProperty());
+                CidadeLabel.textProperty().bind(endereco_cliente.cidadeProperty());
+                EstadoLabel.textProperty().bind(endereco_cliente.estadoProperty());
+                PaisLabel.textProperty().bind(endereco_cliente.paisProperty());
+                NCasaLabel.textProperty().bind(endereco_cliente.numeroCasaProperty().asString());
+                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+                TelefoneFixoLabel.textProperty().bind(endereco_cliente.telefoneFixoProperty());
             } else {
-                RuaLabel.textProperty().bind(new SimpleStringProperty(""));
-                BairroLabel.textProperty().bind(new SimpleStringProperty(""));
-                CidadeLabel.textProperty().bind(new SimpleStringProperty(""));
-                EstadoLabel.textProperty().bind(new SimpleStringProperty(""));
-                PaisLabel.textProperty().bind(new SimpleStringProperty(""));
-
-                NCasaLabel.textProperty().bind(new SimpleStringProperty(""));
-                TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-                TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
+              throw new NullPointerException("Sem dados");
             }
-        } catch (Exception a) {
+        } catch (NullPointerException e) {
             RuaLabel.textProperty().bind(new SimpleStringProperty(""));
             BairroLabel.textProperty().bind(new SimpleStringProperty(""));
             CidadeLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -169,5 +172,9 @@ public class InformacaoController implements Initializable {
     }
 
 
+    @FXML
+    void OnPesquisar(ActionEvent event) {
+
+    }
 
 }

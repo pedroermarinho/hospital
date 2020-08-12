@@ -76,12 +76,12 @@ public class ClientesController implements Initializable {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
-                if (itens.getID_cliente() == ID) {
+                if (itens.getIdClient() == ID) {
                     itensEncontrados.add(itens);
 
                 }
             } else {
-                if (itens.getCPF().contains(PesquisarField.getText()) || itens.getCartao_SUS().equalsIgnoreCase(PesquisarField.getText()) || itens.getNome().contains(PesquisarField.getText())) {
+                if (itens.getCpf().contains(PesquisarField.getText()) || itens.getCartaoSUS().equalsIgnoreCase(PesquisarField.getText()) || itens.getNome().contains(PesquisarField.getText())) {
                     itensEncontrados.add(itens);
 
                 }

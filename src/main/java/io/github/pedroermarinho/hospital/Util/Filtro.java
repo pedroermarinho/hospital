@@ -16,29 +16,26 @@ import java.util.List;
  */
 public class Filtro {
 
-    public static AddressClientModel Cliente_para_Endereco(int ID_Cliente) {
+    public static AddressClientModel Cliente_para_Endereco(int idClient) {
         List<AddressClientModel> enderecos = AddressClientModel.all();
-        AddressClientModel result = null;
         for (AddressClientModel endereco : enderecos) {
-            if (endereco.getID_cliente() == ID_Cliente) {
-                result = endereco;
-                break;
+            if (endereco.getIdClient() == idClient) {
+                return  endereco;
             }
         }
-        return result;
+        return null;
     }
 
 
     public static UserModel Senha_Usuario(String Usuario, String Senha, MainApp mainApp) {
-        List<UserModel> usuarios = UserModel.all(mainApp);
-        UserModel result = null;
-        for (UserModel usuario : usuarios) {
-            if (usuario.getUsuario().equals(Usuario) && usuario.getSenha().equals(Senha)) {
-                result = usuario;
-                break;
+        List<UserModel> users = UserModel.all(mainApp);
+        for (UserModel user : users) {
+            if (user.getUserName().equals(Usuario) && user.getSenha().equals(Senha)) {
+                return user;
+
             }
         }
-        return result;
+        return null;
     }
 
 

@@ -74,10 +74,10 @@
                             </items>
                         </ToolBar>
                         <ToolBar maxWidth="330.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                            <items>
-                                <ComboBox fx:id="SexoBox" onMouseClicked="#sexo" prefHeight="32.0" prefWidth="210.0"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sexo"/>
-                            </items>
+<!--                            <items>-->
+<!--                                <ComboBox fx:id="SexoBox" onMouseClicked="#sexo" prefHeight="32.0" prefWidth="210.0"/>-->
+<!--                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sexo"/>-->
+<!--                            </items>-->
                         </ToolBar>
                     </children>
                 </VBox>

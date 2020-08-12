@@ -99,12 +99,12 @@ public class SelectUsuarioController implements Initializable {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
-                if (itens.getID_usuario() == ID) {
+                if (itens.getIdUser() == ID) {
                     itensEncontrados.add(itens);
 
                 }
             } else {
-                if (itens.getNome().contains(PesquisarField.getText()) || itens.getSobrenome().equalsIgnoreCase(PesquisarField.getText()) || itens.getUsuario().contains(PesquisarField.getText()) || itens.getEmail().contains(PesquisarField.getText())) {
+                if (itens.getNome().contains(PesquisarField.getText()) || itens.getSobrenome().equalsIgnoreCase(PesquisarField.getText()) || itens.getUserName().contains(PesquisarField.getText()) || itens.getEmail().contains(PesquisarField.getText())) {
                     itensEncontrados.add(itens);
 
                 }

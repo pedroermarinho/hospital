@@ -6,6 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Cadastros;
 
 import io.github.pedroermarinho.hospital.MainApp;
+import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
@@ -20,12 +21,14 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import static io.github.pedroermarinho.hospital.Util.Filtro.Cliente_para_Endereco;
+
 /**
  * FXML Controller class
  *
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class PacienteController implements Initializable {
+public class ClientController implements Initializable {
 
     private ClientModel modifição_cliente;
 
@@ -114,12 +117,12 @@ public class PacienteController implements Initializable {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
-                if (itens.getID_cliente() == ID) {
+                if (itens.getIdClient() == ID) {
                     itensEncontrados.add(itens);
 
                 }
             } else {
-                if (itens.getCPF().contains(PesquisarField.getText()) || itens.getCartao_SUS().equalsIgnoreCase(PesquisarField.getText()) || itens.getNome().contains(PesquisarField.getText())) {
+                if (itens.getCpf().contains(PesquisarField.getText()) || itens.getCartaoSUS().equalsIgnoreCase(PesquisarField.getText()) || itens.getNome().contains(PesquisarField.getText())) {
                     itensEncontrados.add(itens);
 
                 }
@@ -140,10 +143,12 @@ public class PacienteController implements Initializable {
         System.out.println("DeletaPessoa");
         ClientModel selected = registrosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
+            final var addressClientModel = Cliente_para_Endereco(selected.getIdClient());
+            if(addressClientModel!=null){
+                addressClientModel.delete();
+            }
             selected.delete();
             mainApp.getDadosData().getClientData();
-        } else {
-
         }
     }
 
@@ -152,11 +157,11 @@ public class PacienteController implements Initializable {
         On_Off_Button(true);
         modifição_cliente = registrosView.getSelectionModel().getSelectedItem();
         NomeText.setText(modifição_cliente.getNome());
-        CPFText.setText(modifição_cliente.getCPF());
+        CPFText.setText(modifição_cliente.getCpf());
         NomeMaeText.setText(modifição_cliente.getMae());
         NomePaiText.setText(modifição_cliente.getPai());
-        NascimentoDate.setValue(LocalDate.parse(modifição_cliente.getData_Nascimento()));
-        CartaoText.setText(modifição_cliente.getCartao_SUS());
+        NascimentoDate.setValue(LocalDate.parse(modifição_cliente.getDataNascimento()));
+        CartaoText.setText(modifição_cliente.getCartaoSUS());
         EmailText.setText(modifição_cliente.getEmail());
     }
 
@@ -165,11 +170,11 @@ public class PacienteController implements Initializable {
         On_Off_Button(false);
         modifição_cliente = registrosView.getSelectionModel().getSelectedItem();
         NomeText.setText(modifição_cliente.getNome());
-        CPFText.setText(modifição_cliente.getCPF());
+        CPFText.setText(modifição_cliente.getCpf());
         NomeMaeText.setText(modifição_cliente.getMae());
         NomePaiText.setText(modifição_cliente.getPai());
-        NascimentoDate.setValue(LocalDate.parse(modifição_cliente.getData_Nascimento()));
-        CartaoText.setText(modifição_cliente.getCartao_SUS());
+        NascimentoDate.setValue(LocalDate.parse(modifição_cliente.getDataNascimento()));
+        CartaoText.setText(modifição_cliente.getCartaoSUS());
         EmailText.setText(modifição_cliente.getEmail());
 
     }
@@ -191,11 +196,11 @@ public class PacienteController implements Initializable {
 //            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
             modifição_cliente.setNome(NomeText.getText());
-            modifição_cliente.setCPF(CPFText.getText());
+            modifição_cliente.setCpf(CPFText.getText());
             modifição_cliente.setMae(NomeMaeText.getText());
             modifição_cliente.setPai(NomePaiText.getText());
-            modifição_cliente.setData_Nascimento(String.valueOf(java.sql.Date.valueOf(NascimentoDate.getValue())));
-            modifição_cliente.setCartao_SUS(CartaoText.getText());
+            modifição_cliente.setDataNascimento(String.valueOf(java.sql.Date.valueOf(NascimentoDate.getValue())));
+            modifição_cliente.setCartaoSUS(CartaoText.getText());
             modifição_cliente.setEmail(EmailText.getText());
             modifição_cliente.save();
             LimparCampo();
@@ -232,10 +237,6 @@ public class PacienteController implements Initializable {
         BtnCancelar.setDisable(es);
     }
 
-    @FXML
-    void OnFoto(ActionEvent event) {
-
-    }
 
     private boolean isInputValid() {
         System.out.println("isInputValid");
@@ -307,8 +308,8 @@ public class PacienteController implements Initializable {
         btnEditar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
         btnDeletar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
 
-        IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID_cliente"));
-        ClienteColumn.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("idClient"));
+        ClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
     }
 

@@ -56,7 +56,7 @@ public class Bancos_de_DadosController implements Initializable {
         if (!PesquisarField.getText().equals("")) {
             BancosView.setItems(findItems());
         } else {
-            BancosView.setItems(mainApp.getDadosData().getBancos_de_DadosData());
+            BancosView.setItems(mainApp.getDadosData().getDataBaseData());
         }
 
     }
@@ -75,7 +75,7 @@ public class Bancos_de_DadosController implements Initializable {
     public void setMainApp(MainApp mainApp) {
         System.out.println("setMainApp");
         this.mainApp = mainApp;
-        BancosView.setItems(mainApp.getDadosData().getBancos_de_DadosData());
+        BancosView.setItems(mainApp.getDadosData().getDataBaseData());
 
     }
 
@@ -93,7 +93,7 @@ public class Bancos_de_DadosController implements Initializable {
             ID = null;
 
         }
-        for (DataBaseModel itens : mainApp.getDadosData().getBancos_de_DadosData()) {
+        for (DataBaseModel itens : mainApp.getDadosData().getDataBaseData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {

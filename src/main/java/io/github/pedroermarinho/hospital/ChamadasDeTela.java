@@ -17,7 +17,7 @@ import io.github.pedroermarinho.hospital.Controller.Usuario.UsuariosController;
 import io.github.pedroermarinho.hospital.Controller.Util.ErroController;
 import io.github.pedroermarinho.hospital.Controller.Util.SenhaController;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -359,7 +359,7 @@ public class ChamadasDeTela {
 
     }
 
-    public boolean senha(model_usuario pessoa) {
+    public boolean senha(UserModel pessoa) {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
@@ -418,7 +418,7 @@ public class ChamadasDeTela {
 
     }
 
-    public model_usuario usuario() {
+    public UserModel usuario() {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
@@ -455,7 +455,7 @@ public class ChamadasDeTela {
         }
     }
 
-    public model_usuario CadastroUsuario() {
+    public UserModel CadastroUsuario() {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
             System.out.println("CadastroUsuario");

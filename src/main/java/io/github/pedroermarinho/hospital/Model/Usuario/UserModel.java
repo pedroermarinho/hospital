@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Model.Usuario;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Usuario.UsuarioDAO.usuarioDAO;
+import io.github.pedroermarinho.hospital.Model.Usuario.UsuarioDAO.UserDAO;
 import javafx.beans.property.*;
 
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class model_usuario {
+public class UserModel {
 
-    private static usuarioDAO dao;
+    private static UserDAO dao;
     private final IntegerProperty ID_usuario = new SimpleIntegerProperty();
     private final StringProperty Usuario = new SimpleStringProperty();
     private final StringProperty Email = new SimpleStringProperty();
@@ -26,16 +26,16 @@ public class model_usuario {
     private final IntegerProperty ID_sexo = new SimpleIntegerProperty();
     private final ObjectProperty<java.sql.Date> DataNascimento = new SimpleObjectProperty<>();
 
-    public model_usuario() {
-        dao = new usuarioDAO();
+    public UserModel() {
+        dao = new UserDAO();
     }
 
-    public static List<model_usuario> all(MainApp mainApp) {
-        return new usuarioDAO().getUsuarioList();
+    public static List<UserModel> all(MainApp mainApp) {
+        return new UserDAO().getUsuarioList();
     }
 
-    public static model_usuario find(int pk) {
-        return new usuarioDAO().getUsuarioID(pk);
+    public static UserModel find(int pk) {
+        return new UserDAO().getUsuarioID(pk);
     }
 
     public int getID_usuario() {

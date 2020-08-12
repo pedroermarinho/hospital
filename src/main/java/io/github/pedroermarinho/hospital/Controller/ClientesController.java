@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 public class ClientesController implements Initializable {
 
     private MainApp mainApp;
-    private model_cliente cliente;
+    private ClientModel cliente;
     @FXML
     private Button btnPesquisar;
 
@@ -41,13 +41,13 @@ public class ClientesController implements Initializable {
     private Button btnCancelar;
 
     @FXML
-    private TableView<model_cliente> ClientesView;
+    private TableView<ClientModel> ClientesView;
 
     @FXML
-    private TableColumn<model_cliente, String> IDColumn;
+    private TableColumn<ClientModel, String> IDColumn;
 
     @FXML
-    private TableColumn<model_cliente, String> NomeColumn;
+    private TableColumn<ClientModel, String> NomeColumn;
 
     @FXML
     private TextField PesquisarField;
@@ -58,12 +58,12 @@ public class ClientesController implements Initializable {
         if (!PesquisarField.getText().equals("")) {
             ClientesView.setItems(findItems());
         } else {
-            ClientesView.setItems(mainApp.getDadosData().getClientesData());
+            ClientesView.setItems(mainApp.getDadosData().getClientData());
         }
     }
 
-    private ObservableList<model_cliente> findItems() {
-        ObservableList<model_cliente> itensEncontrados = FXCollections.observableArrayList();
+    private ObservableList<ClientModel> findItems() {
+        ObservableList<ClientModel> itensEncontrados = FXCollections.observableArrayList();
         Integer ID;
         try {
             ID = Integer.parseInt(PesquisarField.getText());
@@ -72,7 +72,7 @@ public class ClientesController implements Initializable {
             ID = null;
 
         }
-        for (model_cliente itens : mainApp.getDadosData().getClientesData()) {
+        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
@@ -99,11 +99,11 @@ public class ClientesController implements Initializable {
     public void setMainApp(MainApp mainApp) {
         System.out.println("setMainApp");
         this.mainApp = mainApp;
-        this.ClientesView.setItems(this.mainApp.getDadosData().getClientesData());
+        this.ClientesView.setItems(this.mainApp.getDadosData().getClientData());
 
     }
 
-    public model_cliente getclinte() {
+    public ClientModel getclinte() {
         return cliente;
     }
 

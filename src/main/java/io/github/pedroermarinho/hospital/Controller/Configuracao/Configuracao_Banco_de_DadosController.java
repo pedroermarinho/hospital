@@ -58,7 +58,7 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        BancosView.setItems(mainApp.getDadosData().getBancos_de_DadosData());
+        BancosView.setItems(mainApp.getDadosData().getDataBaseData());
     }
 
     @FXML
@@ -73,7 +73,7 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
         DataBaseModel selected = BancosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
             selected.delete();
-            mainApp.getDadosData().getBancos_de_DadosData();
+            mainApp.getDadosData().getDataBaseData();
         } else {
 
         }
@@ -95,7 +95,7 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
             modificao_banco_dados.save();
             LimparCampo();
             On_Off_Button(true);
-            mainApp.getDadosData().getBancos_de_DadosData();
+            mainApp.getDadosData().getDataBaseData();
 
         }
 

@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Util;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import io.github.pedroermarinho.hospital.Util.Senha;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,7 +29,7 @@ public class SenhaController implements Initializable {
     @FXML
     private PasswordField senha;
     private MainApp mainapp;
-    private model_usuario pessoa;
+    private UserModel pessoa;
     private Stage dialogStage;
     private boolean senhabool = false;
 
@@ -38,7 +38,7 @@ public class SenhaController implements Initializable {
         this.dialogStage = dialogStage;
     }
 
-    public void setMainApp(MainApp mainapp, model_usuario pessoa) {
+    public void setMainApp(MainApp mainapp, UserModel pessoa) {
         System.out.println("setMainApp");
         this.mainapp = mainapp;
         this.pessoa = pessoa;

@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Usuario;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 public class SelectUsuarioController implements Initializable {
 
     private MainApp mainApp;
-    private model_usuario usuario;
+    private UserModel usuario;
     @FXML
     private Button btnPesquisar;
 
@@ -45,13 +45,13 @@ public class SelectUsuarioController implements Initializable {
     private Button btnCancelar;
 
     @FXML
-    private TableView<model_usuario> ClientesView;
+    private TableView<UserModel> ClientesView;
 
     @FXML
-    private TableColumn<model_usuario, String> IDColumn;
+    private TableColumn<UserModel, String> IDColumn;
 
     @FXML
-    private TableColumn<model_usuario, String> NomeColumn;
+    private TableColumn<UserModel, String> NomeColumn;
     private Stage dialogStage;
 
     @FXML
@@ -64,7 +64,7 @@ public class SelectUsuarioController implements Initializable {
         if (!PesquisarField.getText().equals("")) {
             ClientesView.setItems(findItems());
         } else {
-            ClientesView.setItems(mainApp.getDadosData().getUsuariosData());
+            ClientesView.setItems(mainApp.getDadosData().getUserData());
         }
     }
 
@@ -77,16 +77,16 @@ public class SelectUsuarioController implements Initializable {
     public void setMainApp(MainApp mainApp) {
         System.out.println("setMainApp");
         this.mainApp = mainApp;
-        this.ClientesView.setItems(this.mainApp.getDadosData().getUsuariosData());
+        this.ClientesView.setItems(this.mainApp.getDadosData().getUserData());
 
     }
 
-    public model_usuario getUsuario() {
+    public UserModel getUsuario() {
         return usuario;
     }
 
-    private ObservableList<model_usuario> findItems() {
-        ObservableList<model_usuario> itensEncontrados = FXCollections.observableArrayList();
+    private ObservableList<UserModel> findItems() {
+        ObservableList<UserModel> itensEncontrados = FXCollections.observableArrayList();
         Integer ID;
         try {
             ID = Integer.parseInt(PesquisarField.getText());
@@ -95,7 +95,7 @@ public class SelectUsuarioController implements Initializable {
             ID = null;
 
         }
-        for (model_usuario itens : mainApp.getDadosData().getUsuariosData()) {
+        for (UserModel itens : mainApp.getDadosData().getUserData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {

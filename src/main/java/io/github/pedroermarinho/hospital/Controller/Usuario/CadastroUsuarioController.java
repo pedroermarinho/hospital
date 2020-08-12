@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Usuario;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,7 +54,7 @@ public class CadastroUsuarioController implements Initializable {
     private ComboBox<String> SexoBox;
 
     private MainApp mainapp;
-    private model_usuario modificao_usuario = null;
+    private UserModel modificao_usuario = null;
     private Stage dialogStage;
 
     public void setDialogStage(Stage dialogStage) {
@@ -76,7 +76,7 @@ public class CadastroUsuarioController implements Initializable {
     @FXML
     void OnSalvar(ActionEvent event) {
         if (modificao_usuario == null) {
-            modificao_usuario = new model_usuario();
+            modificao_usuario = new UserModel();
         }
         if (isInputValid()) {
             modificao_usuario.setDataNascimento(java.sql.Date.valueOf(dpData.getValue()));
@@ -87,13 +87,13 @@ public class CadastroUsuarioController implements Initializable {
             modificao_usuario.setSobrenome(SobrenomeField.getText());
             modificao_usuario.save();
 
-            mainapp.getDadosData().getUsuariosData();
+            mainapp.getDadosData().getUserData();
             dialogStage.close();
 
         }
     }
 
-    public model_usuario getUsuario() {
+    public UserModel getUsuario() {
         return modificao_usuario;
     }
 

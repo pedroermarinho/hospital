@@ -5,8 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.model_configuracao;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.SettingsModel;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -20,16 +19,16 @@ import java.util.List;
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class configuracaoDAO {
+public class SettingsDAO {
 
     protected Connection conexao = null;
     private DataBaseCliente db = DataBaseCliente.instance();
     private PreparedStatement stmt;
 
 
-    public model_configuracao getConfiguracaoID(int ID) {
+    public SettingsModel getConfiguracaoID(int ID) {
 
-        model_configuracao obj = new model_configuracao();
+        SettingsModel obj = new SettingsModel();
 
         try {
 
@@ -58,15 +57,15 @@ public class configuracaoDAO {
         }
     }
 
-    public List<model_configuracao> getConfiguracaoList() {
-        ArrayList<model_configuracao> result = new ArrayList<>();
+    public List<SettingsModel> getConfiguracaoList() {
+        ArrayList<SettingsModel> result = new ArrayList<>();
         try {
 
             stmt = conexao.prepareStatement("SELECT * FROM `clientes` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                model_configuracao obj = new model_configuracao();
+                SettingsModel obj = new SettingsModel();
 
 //                obj.setID_cliente(rs.getInt("ID_cliente"));//1
 //                obj.setCPF(rs.getString("cpf"));//2
@@ -94,7 +93,7 @@ public class configuracaoDAO {
         }
     }
 
-    public void creatConfiguracao(model_configuracao obj) {
+    public void creatConfiguracao(SettingsModel obj) {
         try {
             stmt = conexao.prepareStatement("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?,?);");
 
@@ -116,7 +115,7 @@ public class configuracaoDAO {
         }
     }
 
-    public void updateConfiguracao(model_configuracao obj) {
+    public void updateConfiguracao(SettingsModel obj) {
         try {
             stmt = conexao.prepareStatement("UPDATE clientes SET"
                     + " cpf = ?,"//1
@@ -148,7 +147,7 @@ public class configuracaoDAO {
         }
     }
 
-    public void deleteConfiguracao(model_configuracao obj) {
+    public void deleteConfiguracao(SettingsModel obj) {
      try {
             stmt = conexao.prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
 

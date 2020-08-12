@@ -5,12 +5,10 @@
  */
 package io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,14 +18,14 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class clienteDAO {
+public class ClientDAO {
 
     private final DataBaseCliente db= DataBaseCliente.instance();
     private PreparedStatement stmt;
 
 
-    public model_cliente getClienteID(int ID) {
-        model_cliente obj = new model_cliente();
+    public ClientModel getClienteID(int ID) {
+        ClientModel obj = new ClientModel();
 
         try {
 
@@ -56,15 +54,15 @@ public class clienteDAO {
         }
     }
 
-    public List<model_cliente> getClienteList() {
-        ArrayList<model_cliente> result = new ArrayList<>();
+    public List<ClientModel> getClienteList() {
+        ArrayList<ClientModel> result = new ArrayList<>();
         try {
 
             stmt = db.getConnection().prepareStatement("SELECT * FROM `clientes` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                model_cliente obj = new model_cliente();
+                ClientModel obj = new ClientModel();
 
                 obj.setID_cliente(rs.getInt("ID_cliente"));//1
                 obj.setCPF(rs.getString("cpf"));//2
@@ -88,7 +86,7 @@ public class clienteDAO {
         }
     }
 
-    public void creatCliente(model_cliente obj) {
+    public void creatCliente(ClientModel obj) {
 
         try {
             stmt = db.getConnection().prepareStatement("INSERT INTO clientes (`cpf`, `nome`, `mae`, `pai`, `data_nascimento`, `cartao_sus`, `ID_sexo`, `email`, `foto`) VALUES(?,?,?,?,?,?,?,?,?);");
@@ -111,7 +109,7 @@ public class clienteDAO {
         }
     }
 
-    public void updateCliente(model_cliente obj) {
+    public void updateCliente(ClientModel obj) {
 
         try {
             stmt = db.getConnection().prepareStatement("UPDATE clientes SET"
@@ -145,7 +143,7 @@ public class clienteDAO {
         }
     }
 
-    public void deleteCliente(model_cliente obj) {
+    public void deleteCliente(ClientModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
 

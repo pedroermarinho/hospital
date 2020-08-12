@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Usuario;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,15 +26,15 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroFormula
 public class UsuariosController implements Initializable {
 
     private MainApp mainapp;
-    private model_usuario modificao_usuario;
+    private UserModel modificao_usuario;
     @FXML
-    private TableView<model_usuario> PessoaTable;
+    private TableView<UserModel> PessoaTable;
     @FXML
-    private TableColumn<model_usuario, Integer> IDColumn;
+    private TableColumn<UserModel, Integer> IDColumn;
     @FXML
-    private TableColumn<model_usuario, String> UsuarioColumn;
+    private TableColumn<UserModel, String> UsuarioColumn;
     @FXML
-    private TableColumn<model_usuario, String> NomeColumn;
+    private TableColumn<UserModel, String> NomeColumn;
     @FXML
     private MenuItem btnDetalhes;
     @FXML
@@ -67,7 +67,7 @@ public class UsuariosController implements Initializable {
      */
     public void setMainApp(MainApp mainapp) {
         this.mainapp = mainapp;
-        PessoaTable.setItems(this.mainapp.getDadosData().getUsuariosData());
+        PessoaTable.setItems(this.mainapp.getDadosData().getUserData());
     }
 
     @FXML
@@ -79,7 +79,7 @@ public class UsuariosController implements Initializable {
     @FXML
     void OnSalvar(ActionEvent event) {
         if (modificao_usuario == null) {
-            modificao_usuario = new model_usuario();
+            modificao_usuario = new UserModel();
         }
         if (isInputValid()) {
             modificao_usuario.setDataNascimento(java.sql.Date.valueOf(dpData.getValue()));
@@ -90,7 +90,7 @@ public class UsuariosController implements Initializable {
             modificao_usuario.setSobrenome(SobrenomeField.getText());
             modificao_usuario.save();
             LimparCampo();
-            mainapp.getDadosData().getUsuariosData();
+            mainapp.getDadosData().getUserData();
             On_Off_Button(true);
 
         }
@@ -98,7 +98,7 @@ public class UsuariosController implements Initializable {
 
     @FXML
     void DeletarPessoa(ActionEvent event) {
-        model_usuario selected = PessoaTable.getSelectionModel().getSelectedItem();
+        UserModel selected = PessoaTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
             selected.delete();
 //            mainapp.getDadosData().getAgendaData();

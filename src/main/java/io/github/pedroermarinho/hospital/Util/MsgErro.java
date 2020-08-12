@@ -34,8 +34,6 @@ public class MsgErro {
 
         } catch (HeadlessException e) {
             System.err.println(Arrays.toString(e.getStackTrace()));
-        } catch (Exception e) {
-            System.err.println(Arrays.toString(e.getStackTrace()));
         }
 
     }
@@ -52,8 +50,6 @@ public class MsgErro {
                 mensagem_erro += erro.toString() + "\n";
             }
         } catch (HeadlessException e) {
-            System.err.println(Arrays.toString(e.getStackTrace()));
-        } catch (Exception e) {
             System.err.println(Arrays.toString(e.getStackTrace()));
         }
 
@@ -80,8 +76,6 @@ public class MsgErro {
                     JOptionPane.INFORMATION_MESSAGE);
 
         } catch (HeadlessException e) {
-            System.err.println(Arrays.toString(e.getStackTrace()));
-        } catch (Exception e) {
             System.err.println(Arrays.toString(e.getStackTrace()));
         }
 

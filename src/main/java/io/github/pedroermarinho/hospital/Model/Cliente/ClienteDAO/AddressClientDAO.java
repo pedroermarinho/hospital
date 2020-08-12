@@ -5,8 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_endereco_cliente;
+import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -19,15 +18,15 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class endereco_clienteDAO {
+public class AddressClientDAO {
 
     private final DataBaseCliente db = DataBaseCliente.instance();
     private PreparedStatement stmt;
 
 
 
-    public model_endereco_cliente getEnderecoClienteID(int ID) {
-        model_endereco_cliente obj = new model_endereco_cliente();
+    public AddressClientModel getEnderecoClienteID(int ID) {
+        AddressClientModel obj = new AddressClientModel();
 
         try {
 
@@ -54,15 +53,15 @@ public class endereco_clienteDAO {
         }
     }
 
-    public List<model_endereco_cliente> getEnderecoClienteList() {
-        ArrayList<model_endereco_cliente> result = new ArrayList<>();
+    public List<AddressClientModel> getEnderecoClienteList() {
+        ArrayList<AddressClientModel> result = new ArrayList<>();
         try {
 
             stmt = db.getConnection().prepareStatement("SELECT * FROM `endereco_cliente` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                model_endereco_cliente obj = new model_endereco_cliente();
+                AddressClientModel obj = new AddressClientModel();
 
                 obj.setID_Endereco_Cliente(rs.getInt("ID_endereco_cliente"));
                 obj.setID_cliente(rs.getInt("ID_cliente"));
@@ -85,7 +84,7 @@ public class endereco_clienteDAO {
         }
     }
 
-    public void creatEnderecoCliente(model_endereco_cliente obj) {
+    public void creatEnderecoCliente(AddressClientModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("INSERT INTO endereco_cliente ( `ID_cliente`, `telefone`, `telefone_fixo`, `ID_cidade`, `ID_rua`, `ID_bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);");
 
@@ -107,7 +106,7 @@ public class endereco_clienteDAO {
         }
     }
 
-    public void updateEnderecoCliente(model_endereco_cliente obj) {
+    public void updateEnderecoCliente(AddressClientModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("UPDATE endereco_cliente SET"
                     + " ID_cliente = ?,"
@@ -138,7 +137,7 @@ public class endereco_clienteDAO {
         }
     }
 
-    public void deleteEnderecoCliente(model_endereco_cliente obj) {
+    public void deleteEnderecoCliente(AddressClientModel obj) {
 
         try {
             stmt = db.getConnection().prepareStatement("DELETE FROM endereco_cliente WHERE ID_endereco_cliente = ?;");

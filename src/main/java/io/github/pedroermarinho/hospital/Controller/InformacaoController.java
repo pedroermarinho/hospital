@@ -6,8 +6,8 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_endereco_cliente;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -28,17 +28,17 @@ import java.util.ResourceBundle;
 public class InformacaoController implements Initializable {
 
     private MainApp mainApp;
-    private model_endereco_cliente endereco_cliente;
+    private AddressClientModel endereco_cliente;
 
 
     @FXML
-    private TableView<model_cliente> RegistroClientesView;
+    private TableView<ClientModel> RegistroClientesView;
 
     @FXML
-    private TableColumn<model_cliente, String> IDClienteColumn;
+    private TableColumn<ClientModel, String> IDClienteColumn;
 
     @FXML
-    private TableColumn<model_cliente, String> NomeClienteColumn;
+    private TableColumn<ClientModel, String> NomeClienteColumn;
 
     @FXML
     private Label CPFLabel;
@@ -92,7 +92,7 @@ public class InformacaoController implements Initializable {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        RegistroClientesView.setItems(this.mainApp.getDadosData().getClientesData());
+        RegistroClientesView.setItems(this.mainApp.getDadosData().getClientData());
     }
 
     /**
@@ -110,7 +110,7 @@ public class InformacaoController implements Initializable {
         RegistroClientesView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> Informacoes(newValue));
     }
 
-    private void Informacoes(model_cliente newValue) {
+    private void Informacoes(ClientModel newValue) {
         try {
 
             CPFLabel.textProperty().bind(newValue.CPFProperty());

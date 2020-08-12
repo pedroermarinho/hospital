@@ -5,8 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Cliente;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO.endereco_clienteDAO;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO.AddressClientDAO;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,9 +16,9 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class model_endereco_cliente {
+public class AddressClientModel {
 
-    private static final endereco_clienteDAO dao= new endereco_clienteDAO();
+    private static final AddressClientDAO dao= new AddressClientDAO();
     private final IntegerProperty ID_Endereco_Cliente = new SimpleIntegerProperty();
     private final IntegerProperty ID_cidade = new SimpleIntegerProperty();
     private final IntegerProperty ID_Rua = new SimpleIntegerProperty();
@@ -32,12 +31,12 @@ public class model_endereco_cliente {
 
 
 
-    public static List<model_endereco_cliente> all() {
-        return new endereco_clienteDAO().getEnderecoClienteList();
+    public static List<AddressClientModel> all() {
+        return new AddressClientDAO().getEnderecoClienteList();
     }
 
-    public static model_endereco_cliente find(int pk) {
-        return new endereco_clienteDAO().getEnderecoClienteID(pk);
+    public static AddressClientModel find(int pk) {
+        return new AddressClientDAO().getEnderecoClienteID(pk);
     }
 
     public int getID_cliente() {

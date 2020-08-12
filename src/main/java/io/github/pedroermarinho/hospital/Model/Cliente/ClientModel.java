@@ -1,8 +1,6 @@
 package io.github.pedroermarinho.hospital.Model.Cliente;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO.clienteDAO;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO.endereco_clienteDAO;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO.ClientDAO;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,9 +11,9 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class model_cliente {
+public class ClientModel {
 
-    private static final clienteDAO dao=new clienteDAO();
+    private static final ClientDAO dao=new ClientDAO();
     private final IntegerProperty ID_cliente = new SimpleIntegerProperty(0);
     private final StringProperty Nome = new SimpleStringProperty("teste");
     private final StringProperty CPF = new SimpleStringProperty("1212331");
@@ -29,13 +27,13 @@ public class model_cliente {
 
 
 
-    public static List<model_cliente> all() {
+    public static List<ClientModel> all() {
 
-        return new clienteDAO().getClienteList();
+        return new ClientDAO().getClienteList();
     }
 
-    public static model_cliente find(int pk) {
-        return new clienteDAO().getClienteID(pk);
+    public static ClientModel find(int pk) {
+        return new ClientDAO().getClienteID(pk);
     }
 
     public int getID_cliente() {

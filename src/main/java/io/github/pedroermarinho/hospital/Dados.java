@@ -5,11 +5,11 @@
  */
 package io.github.pedroermarinho.hospital;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_endereco_cliente;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,11 +22,11 @@ import java.util.List;
  */
 public class Dados {
 
-    private final ObservableList<model_cliente> ClientesData = FXCollections.observableArrayList();
-    private final ObservableList<model_endereco_cliente> EnderecoClienteData = FXCollections.observableArrayList();
+    private final ObservableList<ClientModel> ClientesData = FXCollections.observableArrayList();
+    private final ObservableList<AddressClientModel> EnderecoClienteData = FXCollections.observableArrayList();
 
     private final ObservableList<DataBaseModel> Bancos_de_DadosData = FXCollections.observableArrayList();
-    private final ObservableList<model_usuario> UsuariosData = FXCollections.observableArrayList();
+    private final ObservableList<UserModel> UsuariosData = FXCollections.observableArrayList();
     public Thread SincronizarBD_Thread;
     private final MainApp MainApp;
 
@@ -34,7 +34,7 @@ public class Dados {
         this.MainApp = MainApp;
     }
 
-    public ObservableList<DataBaseModel> getBancos_de_DadosData() {
+    public ObservableList<DataBaseModel> getDataBaseData() {
         List<DataBaseModel> ObjData = DataBaseModel.all();
         if (ObjData != null) {
             Bancos_de_DadosData.clear();
@@ -43,49 +43,42 @@ public class Dados {
         return Bancos_de_DadosData;
     }
 
-    public ObservableList<model_usuario> getUsuariosData() {
+    public ObservableList<UserModel> getUserData() {
         if (MainApp.getDados_db().getPrefix().equals("jdbc:sqlite:")) {
-            UsuariosDataNotThread();
+            userDataNotThread();
         } else {
-            new Thread(() -> {
-                UsuariosDataNotThread();
-            }).start();
+            new Thread(this::userDataNotThread).start();
         }
         return UsuariosData;
     }
 
 
 
-    public ObservableList<model_cliente> getClientesData() {
+    public ObservableList<ClientModel> getClientData() {
         if (MainApp.getDados_db().getPrefix().equals("jdbc:sqlite:")) {
-            ClientesDataNotThread();
+            clientDataNotThread();
         } else {
-            new Thread(() -> {
-                ClientesDataNotThread();
-            }).start();
+            new Thread(this::clientDataNotThread).start();
         }
         return ClientesData;
     }
 
 
-    public ObservableList<model_endereco_cliente> getEnderecoClienteData() {
+    public void getAddressClientData() {
         if (MainApp.getDados_db().getPrefix().equals("jdbc:sqlite:")) {
-            EnderecoClienteDataNotThread();
+            addressClientDataNotThread();
         } else {
-            new Thread(() -> {
-                EnderecoClienteDataNotThread();
-            }).start();
+            new Thread(this::addressClientDataNotThread).start();
         }
-        return EnderecoClienteData;
     }
 
 
 
 
 
-    public ObservableList<model_usuario> UsuariosDataNotThread() {
+    public ObservableList<UserModel> userDataNotThread() {
 
-        List<model_usuario> ObjData = model_usuario.all(MainApp);
+        List<UserModel> ObjData = UserModel.all(MainApp);
         if (ObjData != null) {
             UsuariosData.clear();
             UsuariosData.setAll(ObjData);
@@ -98,30 +91,28 @@ public class Dados {
 
 
 
-    public ObservableList<model_cliente> ClientesDataNotThread() {
+    public void clientDataNotThread() {
 
-        List<model_cliente> ObjData = model_cliente.all();
+        List<ClientModel> ObjData = ClientModel.all();
         if (ObjData != null) {
             ClientesData.clear();
             ClientesData.setAll(ObjData);
         }
 
-        return ClientesData;
     }
 
 
-    public ObservableList<model_endereco_cliente> EnderecoClienteDataNotThread() {
+    public void addressClientDataNotThread() {
 
-        List<model_endereco_cliente> ObjData = model_endereco_cliente.all();
+        List<AddressClientModel> ObjData = AddressClientModel.all();
         if (ObjData != null) {
             EnderecoClienteData.clear();
             EnderecoClienteData.setAll(ObjData);
         }
 
-        return EnderecoClienteData;
     }
 
-    public void SincronizarBD() {
+    public void sincronizarBD() {
         try {
             if (!MainApp.getDados_db().getPrefix().equals("jdbc:sqlite:")) {
                 System.out.println("not jdbc:sqlite: ");
@@ -129,9 +120,9 @@ public class Dados {
                     while (true) {
                         System.out.println("SincronizarBD");
 
-                        getClientesData();
-                        getEnderecoClienteData();
-                        getUsuariosData();
+                        getClientData();
+                        getAddressClientData();
+                        getUserData();
 
                         if (!MainApp.getTelas().primeriaCena.isShowing()) {
                             SincronizarBD_Thread.stop();

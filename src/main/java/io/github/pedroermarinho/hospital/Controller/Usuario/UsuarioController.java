@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Usuario;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,7 +50,7 @@ public class UsuarioController implements Initializable {
 
     private ImagePattern pattern;
 
-    private model_usuario usuario = null;
+    private UserModel usuario = null;
 
     @FXML
     void ok(ActionEvent event) {
@@ -73,7 +73,7 @@ public class UsuarioController implements Initializable {
 //        }
     }
 
-    public model_usuario usuario() {
+    public UserModel usuario() {
         return usuario;
     }
 

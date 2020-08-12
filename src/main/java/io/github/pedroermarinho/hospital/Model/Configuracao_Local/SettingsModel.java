@@ -5,8 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Configuracao_Local;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao.configuracaoDAO;
+import io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao.SettingsDAO;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -15,21 +14,21 @@ import java.util.List;
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class model_configuracao {
+public class SettingsModel {
 
-    private static configuracaoDAO dao = new configuracaoDAO();
+    private static SettingsDAO dao = new SettingsDAO();
     private final IntegerProperty ID_configuracao = new SimpleIntegerProperty();
     private final IntegerProperty ID_db = new SimpleIntegerProperty();
 
 
 
 
-    public static List<model_configuracao> all() {
-        return new configuracaoDAO().getConfiguracaoList();
+    public static List<SettingsModel> all() {
+        return new SettingsDAO().getConfiguracaoList();
     }
 
-    public static model_configuracao find(int pk) {
-        return new configuracaoDAO().getConfiguracaoID(pk);
+    public static SettingsModel find(int pk) {
+        return new SettingsDAO().getConfiguracaoID(pk);
     }
 
     public int getID_db() {

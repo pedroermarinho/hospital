@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Cadastros;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
  */
 public class PacienteController implements Initializable {
 
-    private model_cliente modifição_cliente;
+    private ClientModel modifição_cliente;
 
     @FXML
     private TextField NomeText;
@@ -60,13 +60,13 @@ public class PacienteController implements Initializable {
     private Button BtnCancelar;
 
     @FXML
-    private TableView<model_cliente> registrosView;
+    private TableView<ClientModel> registrosView;
 
     @FXML
-    private TableColumn<model_cliente, Integer> IDColumn;
+    private TableColumn<ClientModel, Integer> IDColumn;
 
     @FXML
-    private TableColumn<model_cliente, String> ClienteColumn;
+    private TableColumn<ClientModel, String> ClienteColumn;
 
     @FXML
     private MenuItem bntDetalhes;
@@ -86,7 +86,7 @@ public class PacienteController implements Initializable {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        registrosView.setItems(this.mainApp.getDadosData().getClientesData());
+        registrosView.setItems(this.mainApp.getDadosData().getClientData());
 //        SexoBox.setItems(this.mainApp.getDadosData().getSexosData());
 
     }
@@ -96,12 +96,12 @@ public class PacienteController implements Initializable {
         if (!PesquisarField.getText().equals("")) {
             registrosView.setItems(findItems());
         } else {
-            registrosView.setItems(mainApp.getDadosData().getClientesData());
+            registrosView.setItems(mainApp.getDadosData().getClientData());
         }
     }
 
-    private ObservableList<model_cliente> findItems() {
-        ObservableList<model_cliente> itensEncontrados = FXCollections.observableArrayList();
+    private ObservableList<ClientModel> findItems() {
+        ObservableList<ClientModel> itensEncontrados = FXCollections.observableArrayList();
         Integer ID;
         try {
             ID = Integer.parseInt(PesquisarField.getText());
@@ -110,7 +110,7 @@ public class PacienteController implements Initializable {
             ID = null;
 
         }
-        for (model_cliente itens : mainApp.getDadosData().getClientesData()) {
+        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
@@ -138,10 +138,10 @@ public class PacienteController implements Initializable {
     @FXML
     void OnDeletar(ActionEvent event) {
         System.out.println("DeletaPessoa");
-        model_cliente selected = registrosView.getSelectionModel().getSelectedItem();
+        ClientModel selected = registrosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
             selected.delete();
-            mainApp.getDadosData().getClientesData();
+            mainApp.getDadosData().getClientData();
         } else {
 
         }
@@ -185,7 +185,7 @@ public class PacienteController implements Initializable {
     @FXML
     void OnSalvar(ActionEvent event) {
         if (modifição_cliente == null) {
-            modifição_cliente = new model_cliente();
+            modifição_cliente = new ClientModel();
         }
         if (isInputValid()) {
 //            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -199,7 +199,7 @@ public class PacienteController implements Initializable {
             modifição_cliente.setEmail(EmailText.getText());
             modifição_cliente.save();
             LimparCampo();
-            mainApp.getDadosData().getClientesData();
+            mainApp.getDadosData().getClientData();
             On_Off_Button(true);
         }
 

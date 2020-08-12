@@ -99,7 +99,7 @@ public class CadastroBancoDeDadosController implements Initializable {
             banco_de_dados.setPrefix(PrefixField.getText());
             banco_de_dados.setUser(UserField.getText());
             banco_de_dados.save();
-            mainApp.getDadosData().getBancos_de_DadosData();
+            mainApp.getDadosData().getDataBaseData();
             dialogStage.close();
         }
     }

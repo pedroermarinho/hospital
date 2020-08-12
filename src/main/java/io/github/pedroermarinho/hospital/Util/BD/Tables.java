@@ -16,9 +16,9 @@ import java.sql.SQLException;
  * @author Pedro Marinho
  * <pedro.marinho238@gmail.com & https://github.com/pedroermarinho>
  */
-public class Tabelas {
+public class Tables {
 
-    public static void CriarTabela(Connection conexao, DataBaseModel db) {
+    public static void createTable(Connection connection, DataBaseModel db) {
 
         String AUTO_INCREMENT = "AUTO_INCREMENT";
         if (db.getPrefix().equals("jdbc:sqlite:")) {
@@ -79,14 +79,14 @@ public class Tabelas {
         PreparedStatement stmt;
 
         try {
-            stmt = conexao.prepareStatement(CLIENTES_STRING);
+            stmt = connection.prepareStatement(CLIENTES_STRING);
             stmt.executeUpdate();
         } catch (SQLException ex) {
             MsgErro.MessagemErroBD(ex, "CriarTable.CLIENTES_STRING");
         }
 
         try {
-            stmt = conexao.prepareStatement(USUARIO_STRING);
+            stmt = connection.prepareStatement(USUARIO_STRING);
             stmt.executeUpdate();
         } catch (SQLException ex) {
             MsgErro.MessagemErroBD(ex, "CriarTable.USUARIO_STRING");

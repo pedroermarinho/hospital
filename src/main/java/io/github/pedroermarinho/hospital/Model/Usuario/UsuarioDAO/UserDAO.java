@@ -5,7 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Usuario.UsuarioDAO;
 
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -18,13 +18,13 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class usuarioDAO {
+public class UserDAO {
 
     private final DataBaseCliente db = DataBaseCliente.instance();
     private PreparedStatement stmt;
 
-    public model_usuario getUsuarioID(int ID) {
-        model_usuario obj = new model_usuario();
+    public UserModel getUsuarioID(int ID) {
+        UserModel obj = new UserModel();
 
         try {
 
@@ -50,15 +50,15 @@ public class usuarioDAO {
         }
     }
 
-    public List<model_usuario> getUsuarioList() {
-        ArrayList<model_usuario> result = new ArrayList<>();
+    public List<UserModel> getUsuarioList() {
+        ArrayList<UserModel> result = new ArrayList<>();
         try {
 
             stmt = db.getConnection().prepareStatement("SELECT * FROM `usuario` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                model_usuario obj = new model_usuario();
+                UserModel obj = new UserModel();
 
                 obj.setID_usuario(rs.getInt("ID_usuario"));//1
                 obj.setNome(rs.getString("Nome"));//2
@@ -80,7 +80,7 @@ public class usuarioDAO {
         }
     }
 
-    public void creatUsuario(model_usuario obj) {
+    public void creatUsuario(UserModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("INSERT INTO usuario (`Nome`, `Sobrenome`, `Senha`, `ID_sexo`, `DataNascimento`, `Usuario`, `Email`) VALUES(?,?,?,?,?,?,?);");
 
@@ -101,7 +101,7 @@ public class usuarioDAO {
         }
     }
 
-    public void updateUsuario(model_usuario obj) {
+    public void updateUsuario(UserModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("UPDATE usuario SET"
                     + " Nome = ?,"//1
@@ -129,7 +129,7 @@ public class usuarioDAO {
         }
     }
 
-    public void deleteUsuario(model_usuario obj) {
+    public void deleteUsuario(UserModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("DELETE FROM usuario WHERE ID_usuario = ?;");
 

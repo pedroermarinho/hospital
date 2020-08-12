@@ -1,13 +1,13 @@
 package io.github.pedroermarinho.hospital;
 
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
-import io.github.pedroermarinho.hospital.Model.Usuario.model_usuario;
+import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseCliente;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import static io.github.pedroermarinho.hospital.Util.BD.Tabelas.CriarTabela;
+import static io.github.pedroermarinho.hospital.Util.BD.Tables.createTable;
 
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com > marinho
@@ -17,7 +17,7 @@ public class MainApp extends Application {
     private final Dados DadosData = new Dados(this);
     private final ChamadasDeTela telas = new ChamadasDeTela();
     private final DataBaseCliente banco_de_dados = DataBaseCliente.instance();
-    private model_usuario usuario = null;
+    private UserModel usuario = null;
     private DataBaseModel dados_db = new DataBaseModel();
 
     /**
@@ -40,11 +40,11 @@ public class MainApp extends Application {
         return telas;
     }
 
-    public model_usuario getUsuario() {
+    public UserModel getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(model_usuario usuario) {
+    public void setUsuario(UserModel usuario) {
         this.usuario = usuario;
     }
 
@@ -54,10 +54,6 @@ public class MainApp extends Application {
 
     public void setDados_db(DataBaseModel dados_db) {
         this.dados_db = dados_db;
-    }
-
-    public DataBaseCliente getBanco_de_dados() {
-        return banco_de_dados;
     }
 
     @Override
@@ -74,14 +70,14 @@ public class MainApp extends Application {
         setDados_db(telas.SelectBanco_de_Dados());
         banco_de_dados.open(dados_db);
         if (banco_de_dados.getConnection() != null) {
-            CriarTabela(banco_de_dados.getConnection(), dados_db);
+            createTable(banco_de_dados.getConnection(), dados_db);
 
             Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
 
-            if (!getDadosData().UsuariosDataNotThread().isEmpty()) {
+            if (!getDadosData().userDataNotThread().isEmpty()) {
                 if (telas.usuario() != null) {
                     telas.primeriaCena.getIcons().add(image);
-                    getDadosData().SincronizarBD();
+                    getDadosData().sincronizarBD();
                     telas.PalcoPrincipal();
                     telas.MenuTop();
                     telas.CentralTexto();
@@ -90,7 +86,7 @@ public class MainApp extends Application {
                 setUsuario(telas.CadastroUsuario());
                 if (getUsuario() != null) {
                     if (telas.usuario() != null) {
-                        getDadosData().SincronizarBD();
+                        getDadosData().sincronizarBD();
                         telas.PalcoPrincipal();
                         telas.MenuTop();
                         telas.CentralTexto();

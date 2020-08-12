@@ -6,8 +6,8 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_cliente;
-import io.github.pedroermarinho.hospital.Model.Cliente.model_endereco_cliente;
+import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -38,8 +38,8 @@ import java.util.ResourceBundle;
  */
 public class CentralTextoController implements Initializable {
 
-    private model_endereco_cliente endereco_cliente;
-    private model_cliente cliente;
+    private AddressClientModel endereco_cliente;
+    private ClientModel cliente;
 
     @FXML
     private AnchorPane TextoMenuAnchor;
@@ -62,7 +62,7 @@ public class CentralTextoController implements Initializable {
     private Button btnPesquisarData;
 
     @FXML
-    private ListView<model_cliente> ClientesDataListView;
+    private ListView<ClientModel> ClientesDataListView;
 
     @FXML
     private MenuItem btnDetalhesListCenter;
@@ -77,10 +77,10 @@ public class CentralTextoController implements Initializable {
     private Label UsuarioŁistCenterLabel;
 
     @FXML
-    private TableView<model_cliente> AgendaView;
+    private TableView<ClientModel> AgendaView;
 
     @FXML
-    private TableColumn<model_cliente, Time> HoraAgendaColumn;
+    private TableColumn<ClientModel, Time> HoraAgendaColumn;
 
     @FXML
     private MenuItem btnDetalhesViewHoje;

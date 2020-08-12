@@ -14,8 +14,8 @@
     <children>
         <VBox alignment="CENTER" layoutX="289.0" layoutY="77.0" prefHeight="201.0" prefWidth="449.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <TextField fx:id="usuarioText" maxWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" />
-                <PasswordField fx:id="senhaPassword" maxWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" />
+                <TextField fx:id="usuarioText" maxWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" />
+                <PasswordField fx:id="senhaPassword" maxWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" />
                 <HBox alignment="CENTER" prefHeight="31.0" prefWidth="600.0" spacing="1.0">
                     <children>
                         <Button fx:id="btOk" alignment="CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" onAction="#ok" prefHeight="32.0" prefWidth="160.0" styleClass="button-azul" text="Entrar" />
@@ -30,7 +30,6 @@
         <Circle fx:id="avatarCircle" fill="WHITE" layoutX="239.0" layoutY="64.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="188.0" AnchorPane.topAnchor="14.0" />
     </children>
     <stylesheets>
-        <URL value="@../../Styles/DarkTheme.css" />
         <URL value="@../../Styles/Styles.css" />
     </stylesheets>
 </AnchorPane>

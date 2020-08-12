@@ -10,6 +10,8 @@ import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -174,7 +176,39 @@ public class InformacaoController implements Initializable {
 
     @FXML
     void OnPesquisar(ActionEvent event) {
+        if (!PesquisarField.getText().equals("")) {
+            RegistroClientesView.setItems(findItems());
+        } else {
+            RegistroClientesView.setItems(mainApp.getDadosData().getClientData());
+        }
+    }
 
+    private ObservableList<ClientModel> findItems() {
+        ObservableList<ClientModel> itensEncontrados = FXCollections.observableArrayList();
+        Integer ID;
+        try {
+            ID = Integer.parseInt(PesquisarField.getText());
+
+        } catch (NumberFormatException a) {
+            ID = null;
+
+        }
+        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
+
+            //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
+            if (ID != null) {
+                if (itens.getIdClient() == ID) {
+                    itensEncontrados.add(itens);
+
+                }
+            } else {
+                if (itens.getCpf().contains(PesquisarField.getText()) || itens.getCartaoSUS().equalsIgnoreCase(PesquisarField.getText()) || itens.getNome().contains(PesquisarField.getText())) {
+                    itensEncontrados.add(itens);
+
+                }
+            }
+        }
+        return itensEncontrados;
     }
 
 }

@@ -84,13 +84,3 @@
     -fx-background-radius: 0;
 
 }
-.text-field:hover{
-    -fx-base: black;  
-}
-
-.label{
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: black;
-    -fx-opacity: 1;
-}

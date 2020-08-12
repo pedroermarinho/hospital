@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="85.0" prefWidth="424.0"
-            styleClass="background2" stylesheets="@Estilo/DarkTheme.css" xmlns="http://javafx.com/javafx/8"
+            styleClass="background2" xmlns="http://javafx.com/javafx/8"
             fx:controller="io.github.pedroermarinho.hospital.Controller.Util.ErroController">
     <children>
         <Label fx:id="lbErro" contentDisplay="CENTER" layoutX="129.0" layoutY="19.0" prefHeight="78.0" prefWidth="280.0"

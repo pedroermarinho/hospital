@@ -32,7 +32,7 @@
                     <children>
                         <HBox alignment="CENTER" minWidth="120.0" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Endereço" textFill="WHITE">
+                                <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Endereço">
                                     <font>
                                         <Font name="System Bold" size="61.0" />
                                     </font>
@@ -78,36 +78,47 @@
                             </contextMenu>
                         </TableView>
                </center>
-               <top>
-                        <HBox prefHeight="42.0" prefWidth="325.0" spacing="3.0" BorderPane.alignment="CENTER">
-                            <children>
-                                <TextField fx:id="PesquisaText" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="1000.0" />
-                                <Button fx:id="btnPesquisar" minWidth="119.0" mnemonicParsing="false" onAction="#OnPesquisar" prefHeight="33.0" prefWidth="120.0" styleClass="button-black" text="Pesquisar" />
-                            </children>
-                            <padding>
-                                <Insets left="5.0" right="5.0" />
-                            </padding>
-                        </HBox>
-               </top>
                <bottom>
                         <HBox alignment="CENTER" maxHeight="35.0" prefHeight="58.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
                             <children>
-                                <Button fx:id="btnEditar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnEditar" prefWidth="150.0" styleClass="button-black" text="Editar" />
+                                <Button fx:id="btnEditar" maxHeight="35.0" maxWidth="1.7976931348623157E308" minHeight="35.0" mnemonicParsing="false" onAction="#OnEditar" prefHeight="35.0" prefWidth="150.0" styleClass="button-black" text="Editar" />
                             </children>
+                     <BorderPane.margin>
+                        <Insets top="5.0" />
+                     </BorderPane.margin>
                         </HBox>
                </bottom>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
+               <top>
+                  <GridPane hgap="5.0" BorderPane.alignment="CENTER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="209.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="80.0" prefWidth="120.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="btnPesquisar" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="85.0" mnemonicParsing="false" onAction="#OnPesquisar" prefHeight="30.0" prefWidth="100.0" styleClass="button-azul" text="Pesquisar" GridPane.columnIndex="1" />
+                        <TextField fx:id="PesquisarText" minHeight="25.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#OnPesquisar" prefHeight="30.0" prefWidth="310.0">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </TextField>
+                     </children>
+                  </GridPane>
+               </top>
             </BorderPane>
          </center>
          <right>
-            <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="420.0" prefWidth="370.0" BorderPane.alignment="CENTER">
+            <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="460.0" prefWidth="360.0" BorderPane.alignment="CENTER">
                <bottom>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="39.0" prefWidth="645.0" spacing="15.0" BorderPane.alignment="CENTER">
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="645.0" spacing="15.0" BorderPane.alignment="CENTER">
                             <children>
-                                <Button fx:id="bntSalva" maxHeight="33.0" minHeight="33.0" mnemonicParsing="false" onAction="#OnSalvar" prefHeight="33.0" prefWidth="184.0" styleClass="button-verde" stylesheets="@../../Styles/Styles.css" text="Salvar" textFill="#0a0a0a" />
-                                <Button fx:id="BtnCancelar" maxHeight="33.0" minHeight="33.0" mnemonicParsing="false" onAction="#OnCancelar" prefHeight="33.0" prefWidth="184.0" styleClass="button-red" stylesheets="@../../Styles/Styles.css" text="Cancelar" />
+                                <Button fx:id="bntSalva" maxHeight="35.0" minHeight="33.0" mnemonicParsing="false" onAction="#OnSalvar" prefHeight="35.0" prefWidth="184.0" styleClass="button-verde" stylesheets="@../../Styles/Styles.css" text="Salvar" textFill="#0a0a0a" />
+                                <Button fx:id="BtnCancelar" maxHeight="35.0" minHeight="33.0" mnemonicParsing="false" onAction="#OnCancelar" prefHeight="35.0" prefWidth="184.0" styleClass="button-red" stylesheets="@../../Styles/Styles.css" text="Cancelar" />
                             </children>
                         </HBox>
                </bottom>

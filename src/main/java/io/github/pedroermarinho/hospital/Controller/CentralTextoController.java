@@ -10,6 +10,8 @@ import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,27 +56,22 @@ public class CentralTextoController implements Initializable {
 
     @FXML
     private Label DataMenuTopLabel;
-//
-//    @FXML
-//    private JFXDatePicker PequisaDataPicker;
+
 
     @FXML
     private Button btnPesquisarData;
 
     @FXML
-    private ListView<ClientModel> ClientesDataListView;
+    private TableView<ClientModel> clientTableView;
+
+    @FXML
+    private TableColumn<ClientModel, String> cartaoSUSColumn;
+
+    @FXML
+    private TableColumn<ClientModel, String> nomeColumn;
 
     @FXML
     private MenuItem btnDetalhesListCenter;
-
-    @FXML
-    private Label horaŁistCenterLabel;
-
-    @FXML
-    private Label ClinicaListCenterLabel;
-
-    @FXML
-    private Label UsuarioŁistCenterLabel;
 
     @FXML
     private TableView<ClientModel> AgendaView;
@@ -108,12 +105,17 @@ public class CentralTextoController implements Initializable {
 
     @FXML
     private Label TelefoneLabel;
-    private boolean on_off;
+
+    @FXML
+    private TextField PesquisarField;
+
     private MainApp mainApp;
+
+    private boolean on_off;
 
     @FXML
     void OnDetalhesListCenter(ActionEvent event) {
-        cliente = ClientesDataListView.getSelectionModel().getSelectedItem();
+        cliente = clientTableView.getSelectionModel().getSelectedItem();
         try {
 
             CPFLabel.textProperty().bind(cliente.cpfProperty());
@@ -190,7 +192,11 @@ public class CentralTextoController implements Initializable {
 
     @FXML
     void OnPesquisarData(ActionEvent event) {
-//        ClientesDataListView.setItems(Filtro.Agenda_Cliente_Data_Atual(mainApp, PequisaDataPicker.getValue()));
+        if (!PesquisarField.getText().equals("")) {
+            clientTableView.setItems(findItems());
+        } else {
+            clientTableView.setItems(mainApp.getDadosData().getClientData());
+        }
     }
 
     @FXML
@@ -212,22 +218,80 @@ public class CentralTextoController implements Initializable {
 
         HoraAgendaColumn.setCellValueFactory(new PropertyValueFactory<>("horario"));
 
+        cartaoSUSColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
+        nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        clientTableView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> Informacoes(newValue));
+
+
         btnDetalhesViewHoje.disableProperty().bind(AgendaView.getSelectionModel().selectedItemProperty().isNull());
-        btnDetalhesListCenter.disableProperty().bind(ClientesDataListView.getSelectionModel().selectedItemProperty().isNull());
+        btnDetalhesListCenter.disableProperty().bind(clientTableView.getSelectionModel().selectedItemProperty().isNull());
 
         Date date = new Date();
         DataMenuTopLabel.setText(String.valueOf(new java.sql.Date(date.getTime())));
     }
 
     public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-//        AgendaView.setItems(Agenda_Data_Atual(this.mainApp));
+        this.mainApp=mainApp;
+        //        AgendaView.setItems(Agenda_Data_Atual(this.mainApp));
+        clientTableView.setItems(mainApp.getDadosData().getClientData());
     }
 
-    private void InforListCenter() {
-        horaŁistCenterLabel.setText("");
-        ClinicaListCenterLabel.setText("");
-        UsuarioŁistCenterLabel.setText("");
+    private void Informacoes(ClientModel newValue)  {
+        try {
+            CPFLabel.textProperty().bind(newValue.cpfProperty());
+            CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
+            NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
+            EmailLabel.textProperty().bind(newValue.emailProperty());
+            NomeLabel.textProperty().bind(newValue.nomeProperty());
+        } catch (NullPointerException ex) {
+            CPFLabel.textProperty().bind(new SimpleStringProperty(""));
+            CartaoSUSLabel.textProperty().bind(new SimpleStringProperty(""));
+            NascimentoLabel.textProperty().bind(new SimpleStringProperty(""));
+            SexoLabel.textProperty().bind(new SimpleStringProperty(""));
+            EmailLabel.textProperty().bind(new SimpleStringProperty(""));
+            NomeLabel.textProperty().bind(new SimpleStringProperty(""));
+        }
+        try {
+            endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
+            if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
+                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+                TelefoneFixoLabel.textProperty().bind(endereco_cliente.telefoneFixoProperty());
+            } else {
+                throw new NullPointerException("Sem dados");
+            }
+        } catch (NullPointerException e) {
+            TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
+            TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
+        }
+
+    }
+
+    private ObservableList<ClientModel> findItems() {
+        ObservableList<ClientModel> itensEncontrados = FXCollections.observableArrayList();
+        Integer ID;
+        try {
+            ID = Integer.parseInt(PesquisarField.getText());
+
+        } catch (NumberFormatException a) {
+            ID = null;
+
+        }
+        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
+
+            //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
+            if (ID != null) {
+                if (itens.getIdClient() == ID) {
+                    itensEncontrados.add(itens);
+
+                }
+            } else {
+                if (itens.getCpf().contains(PesquisarField.getText()) || itens.getCartaoSUS().equalsIgnoreCase(PesquisarField.getText()) || itens.getNome().contains(PesquisarField.getText())) {
+                    itensEncontrados.add(itens);
+
+                }
+            }
+        }
+        return itensEncontrados;
     }
 
 }

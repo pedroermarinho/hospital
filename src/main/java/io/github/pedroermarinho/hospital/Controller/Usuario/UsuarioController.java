@@ -7,15 +7,10 @@ package io.github.pedroermarinho.hospital.Controller.Usuario;
 
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -29,33 +24,30 @@ import static io.github.pedroermarinho.hospital.Util.Filtro.Senha_Usuario;
  * @author pedro
  */
 public class UsuarioController implements Initializable {
-
     @FXML
     private TextField usuarioText;
 
     @FXML
     private PasswordField senhaPassword;
 
-    @FXML
-    private Button btOk;
+//    @FXML
+//    private Button btOk;
 
-    @FXML
-    private Circle avatarCircle;
+//    @FXML
+//    private Circle avatarCircle;
 
     private Stage dialogStage;
 
-    private MainApp mainapp;
-
-    private Image img;
-
-    private ImagePattern pattern;
+    //    private Image img;
+//
+//    private ImagePattern pattern;
 
     private UserModel usuario = null;
 
     @FXML
-    void ok(ActionEvent event) {
+    void ok() {
 
-        usuario = Senha_Usuario(usuarioText.getText(), senhaPassword.getText(), mainapp);
+        usuario = Senha_Usuario(usuarioText.getText(), senhaPassword.getText());
         if (usuario != null) {
             dialogStage.close();
         }
@@ -82,9 +74,8 @@ public class UsuarioController implements Initializable {
     }
 
     public void setMainApp(MainApp mainapp) {
-        this.mainapp = mainapp;
-        if (this.mainapp.getUsuario() != null) {
-            usuarioText.setText(this.mainapp.getUsuario().getUserName());
+        if (mainapp.getUsuario() != null) {
+            usuarioText.setText(mainapp.getUsuario().getUserName());
         }
     }
 

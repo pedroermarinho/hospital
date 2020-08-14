@@ -5,9 +5,9 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Usuario;
 
-import io.github.pedroermarinho.hospital.MainApp;
+import io.github.pedroermarinho.hospital.Controller.Util.SexoEnum;
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -23,10 +23,9 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroFormula
  *
  * @author pedro
  */
-public class UsuariosController implements Initializable {
-
-    private MainApp mainapp;
-    private UserModel modificao_usuario;
+public class UsersController implements Initializable {
+    private final Dados data = new Dados();
+    private UserModel modificaoUser;
     @FXML
     private TableView<UserModel> PessoaTable;
     @FXML
@@ -37,8 +36,8 @@ public class UsuariosController implements Initializable {
     private TableColumn<UserModel, String> NomeColumn;
     @FXML
     private MenuItem btnDetalhes;
-    @FXML
-    private Button btNovo;
+//    @FXML
+//    private Button btNovo;
     @FXML
     private Button btEditar;
     @FXML
@@ -60,83 +59,80 @@ public class UsuariosController implements Initializable {
     @FXML
     private TextField EmailField;
     @FXML
-    private ComboBox<String> SexoBox;
+    private ComboBox<SexoEnum> SexoBox;
 
-    /**
-     * @param mainapp
-     */
-    public void setMainApp(MainApp mainapp) {
-        this.mainapp = mainapp;
-        PessoaTable.setItems(this.mainapp.getDadosData().getUserData());
-    }
+
 
     @FXML
-    void OnCancelar(ActionEvent event) {
+    void OnCancelar() {
         LimparCampo();
         On_Off_Button(true);
     }
 
     @FXML
-    void OnSalvar(ActionEvent event) {
-        if (modificao_usuario == null) {
-            modificao_usuario = new UserModel();
+    void OnSalvar() {
+        if (modificaoUser == null) {
+            modificaoUser = new UserModel();
         }
         if (isInputValid()) {
-            modificao_usuario.setDataNascimento(java.sql.Date.valueOf(dpData.getValue()));
-            modificao_usuario.setEmail(EmailField.getText());
-            modificao_usuario.setUserName(usuarioField.getText());
-            modificao_usuario.setNome(PrimeiroNomeField.getText());
-            modificao_usuario.setSenha(senhaField.getText());
-            modificao_usuario.setSobrenome(SobrenomeField.getText());
-            modificao_usuario.save();
+            modificaoUser.setDataNascimento(java.sql.Date.valueOf(dpData.getValue()));
+            modificaoUser.setEmail(EmailField.getText());
+            modificaoUser.setUserName(usuarioField.getText());
+            modificaoUser.setNome(PrimeiroNomeField.getText());
+            modificaoUser.setSenha(senhaField.getText());
+            modificaoUser.setSobrenome(SobrenomeField.getText());
+            System.out.println(SobrenomeField.getText());
+            modificaoUser.setSexo(SexoBox.getValue().getDescricao());
+            modificaoUser.save();
             LimparCampo();
-            mainapp.getDadosData().getUserData();
+            data.getUserData();
             On_Off_Button(true);
 
         }
     }
 
     @FXML
-    void DeletarPessoa(ActionEvent event) {
+    void DeletarPessoa() {
         UserModel selected = PessoaTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
             selected.delete();
 //            mainapp.getDadosData().getAgendaData();
-        } else {
-
         }
     }
 
     @FXML
-    void EditarPessoa(ActionEvent event) {
+    void EditarPessoa() {
         LimparCampo();
         On_Off_Button(false);
-        modificao_usuario = PessoaTable.getSelectionModel().getSelectedItem();
-        PrimeiroNomeField.setText(modificao_usuario.getNome());
-        SobrenomeField.setText(modificao_usuario.getSobrenome());
-        usuarioField.setText(modificao_usuario.getUserName());
-        senhaField.setText(modificao_usuario.getSenha());
-        dpData.setValue(modificao_usuario.getDataNascimento().toLocalDate());
-        EmailField.setText(modificao_usuario.getEmail());
+        modificaoUser = PessoaTable.getSelectionModel().getSelectedItem();
+        PrimeiroNomeField.setText(modificaoUser.getNome());
+        SobrenomeField.setText(modificaoUser.getSobrenome());
+        usuarioField.setText(modificaoUser.getUserName());
+        senhaField.setText(modificaoUser.getSenha());
+        dpData.setValue(modificaoUser.getDataNascimento().toLocalDate());
+        EmailField.setText(modificaoUser.getEmail());
+        System.out.println(modificaoUser.getSexo().toUpperCase());
+        SexoBox.setValue(SexoEnum.valueOf(modificaoUser.getSexo().toUpperCase()));
     }
 
     @FXML
-    void NovaPessoa(ActionEvent event) {
+    void NovaPessoa() {
         LimparCampo();
         On_Off_Button(false);
     }
 
     @FXML
-    void OnDetalhes(ActionEvent event) {
+    void OnDetalhes() {
         LimparCampo();
         On_Off_Button(true);
-        modificao_usuario = PessoaTable.getSelectionModel().getSelectedItem();
-        PrimeiroNomeField.setText(modificao_usuario.getNome());
-        SobrenomeField.setText(modificao_usuario.getSobrenome());
-        usuarioField.setText(modificao_usuario.getUserName());
-        senhaField.setText(modificao_usuario.getSenha());
-        dpData.setValue(modificao_usuario.getDataNascimento().toLocalDate());
-        EmailField.setText(modificao_usuario.getEmail());
+        modificaoUser = PessoaTable.getSelectionModel().getSelectedItem();
+        PrimeiroNomeField.setText(modificaoUser.getNome());
+        SobrenomeField.setText(modificaoUser.getSobrenome());
+        usuarioField.setText(modificaoUser.getUserName());
+        senhaField.setText(modificaoUser.getSenha());
+        dpData.setValue(modificaoUser.getDataNascimento().toLocalDate());
+        EmailField.setText(modificaoUser.getEmail());
+        SexoBox.setValue(SexoEnum.valueOf(modificaoUser.getSexo()));
 
     }
 
@@ -149,6 +145,7 @@ public class UsuariosController implements Initializable {
         SexoBox.setDisable(es);
         btnSalvar.setDisable(es);
         btnCancelar.setDisable(es);
+        EmailField.setDisable(es);
     }
 
     private void LimparCampo() {
@@ -159,7 +156,7 @@ public class UsuariosController implements Initializable {
         senhaField.setText("");
         dpData.setValue(null);
         SexoBox.setValue(null);
-        modificao_usuario = null;
+        modificaoUser = null;
 
     }
 
@@ -219,12 +216,13 @@ public class UsuariosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         On_Off_Button(true);
-
+        PessoaTable.setItems(data.getUserData());
+        SexoBox.getItems().addAll(SexoEnum.values());
         btnDetalhes.disableProperty().bind(PessoaTable.getSelectionModel().selectedItemProperty().isNull());
         btEditar.disableProperty().bind(PessoaTable.getSelectionModel().selectedItemProperty().isNull());
         btDeletar.disableProperty().bind(PessoaTable.getSelectionModel().selectedItemProperty().isNull());
 
-        IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID_usuario"));
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         UsuarioColumn.setCellValueFactory(new PropertyValueFactory<>("Usuario"));
         NomeColumn.setCellValueFactory(new PropertyValueFactory<>("Nome"));
     }

@@ -13,30 +13,18 @@ import java.util.List;
  */
 public class ClientModel {
 
-    private static final ClientDAO dao=new ClientDAO();
+
     private final IntegerProperty idClient = new SimpleIntegerProperty(0);
-    private final StringProperty nome = new SimpleStringProperty("teste");
-    private final StringProperty cpf = new SimpleStringProperty("1212331");
-    private final StringProperty mae = new SimpleStringProperty("teste");
-    private final StringProperty pai = new SimpleStringProperty("teste");
-    private final StringProperty dataNascimento = new SimpleStringProperty("2000-01-02");
+    private final StringProperty cpf = new SimpleStringProperty();
     private final StringProperty cartaoSUS = new SimpleStringProperty();
+    private final StringProperty identidade = new SimpleStringProperty();
+    private final StringProperty nome = new SimpleStringProperty("");
+    private final StringProperty mae = new SimpleStringProperty();
+    private final StringProperty dataNascimento = new SimpleStringProperty();
     private final StringProperty sexo = new SimpleStringProperty();
-    private final StringProperty foto = new SimpleStringProperty("/e");
-    private final StringProperty email = new SimpleStringProperty("teste");
-
-
-
-    public static List<ClientModel> all() {
-
-        return new ClientDAO().getClienteList();
-    }
-
-    public static ClientModel find(int pk) {
-        return new ClientDAO().getClienteID(pk);
-    }
-
-
+    private final StringProperty email = new SimpleStringProperty();
+    private final StringProperty especialidade = new SimpleStringProperty();
+    private final StringProperty recepcao = new SimpleStringProperty();
 
     public int getIdClient() {
         return idClient.get();
@@ -48,18 +36,6 @@ public class ClientModel {
 
     public void setIdClient(int idClient) {
         this.idClient.set(idClient);
-    }
-
-    public String getNome() {
-        return nome.get();
-    }
-
-    public StringProperty nomeProperty() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome.set(nome);
     }
 
     public String getCpf() {
@@ -74,6 +50,42 @@ public class ClientModel {
         this.cpf.set(cpf);
     }
 
+    public String getCartaoSUS() {
+        return cartaoSUS.get();
+    }
+
+    public StringProperty cartaoSUSProperty() {
+        return cartaoSUS;
+    }
+
+    public void setCartaoSUS(String cartaoSUS) {
+        this.cartaoSUS.set(cartaoSUS);
+    }
+
+    public String getIdentidade() {
+        return identidade.get();
+    }
+
+    public StringProperty identidadeProperty() {
+        return identidade;
+    }
+
+    public void setIdentidade(String identidade) {
+        this.identidade.set(identidade);
+    }
+
+    public String getNome() {
+        return nome.get();
+    }
+
+    public StringProperty nomeProperty() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome.set(nome);
+    }
+
     public String getMae() {
         return mae.get();
     }
@@ -84,18 +96,6 @@ public class ClientModel {
 
     public void setMae(String mae) {
         this.mae.set(mae);
-    }
-
-    public String getPai() {
-        return pai.get();
-    }
-
-    public StringProperty paiProperty() {
-        return pai;
-    }
-
-    public void setPai(String pai) {
-        this.pai.set(pai);
     }
 
     public String getDataNascimento() {
@@ -110,18 +110,6 @@ public class ClientModel {
         this.dataNascimento.set(dataNascimento);
     }
 
-    public String getCartaoSUS() {
-        return cartaoSUS.get();
-    }
-
-    public StringProperty cartaoSUSProperty() {
-        return cartaoSUS;
-    }
-
-    public void setCartaoSUS(String cartaoSUS) {
-        this.cartaoSUS.set(cartaoSUS);
-    }
-
     public String getSexo() {
         return sexo.get();
     }
@@ -132,18 +120,6 @@ public class ClientModel {
 
     public void setSexo(String sexo) {
         this.sexo.set(sexo);
-    }
-
-    public String getFoto() {
-        return foto.get();
-    }
-
-    public StringProperty fotoProperty() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto.set(foto);
     }
 
     public String getEmail() {
@@ -158,14 +134,49 @@ public class ClientModel {
         this.email.set(email);
     }
 
-    @Override
-    public String toString() {
-        return idClient.get() + ") " + nome.get() + "->" + cpf.get();
+    public String getEspecialidade() {
+        return especialidade.get();
     }
 
-    public void save() {
-        //  System.out.println("Verificação para save: Registro ->" + id + " Resultado do DAO.find ->" + dao.find(id));
+    public StringProperty especialidadeProperty() {
+        return especialidade;
+    }
 
+    public void setEspecialidade(String especialidade) {
+        this.especialidade.set(especialidade);
+    }
+
+    public String getRecepcao() {
+        return recepcao.get();
+    }
+
+    public StringProperty recepcaoProperty() {
+        return recepcao;
+    }
+
+    public void setRecepcao(String recepcao) {
+        this.recepcao.set(recepcao);
+    }
+
+    @Override
+    public String toString() {
+        return nome.get();
+    }
+
+
+    private static final ClientDAO dao=new ClientDAO();
+
+    public static List<ClientModel> all() {
+
+        return new ClientDAO().getClienteList();
+    }
+
+    public static ClientModel find(int pk) {
+        return new ClientDAO().getClienteID(pk);
+    }
+
+
+    public void save() {
         if (idClient.getValue() != null && idClient.get() != 0) {
             if (find(idClient.get()) != null) {
                 dao.updateCliente(this);

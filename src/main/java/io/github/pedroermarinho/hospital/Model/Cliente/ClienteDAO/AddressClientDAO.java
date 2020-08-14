@@ -37,7 +37,6 @@ public class AddressClientDAO {
                 obj.setIdAddressClient(rs.getInt("id_address_client"));
                 obj.setIdClient(rs.getInt("id_client"));
                 obj.setTelefone(rs.getString("telefone"));
-                obj.setTelefoneFixo(rs.getString("telefone_fixo"));
                 obj.setCidade(rs.getString("cidade"));
                 obj.setRua(rs.getString("rua"));
                 obj.setBairro(rs.getString("bairro"));
@@ -66,7 +65,6 @@ public class AddressClientDAO {
                 obj.setIdAddressClient(rs.getInt("id_address_client"));
                 obj.setIdClient(rs.getInt("id_client"));
                 obj.setTelefone(rs.getString("telefone"));
-                obj.setTelefoneFixo(rs.getString("telefone_fixo"));
                 obj.setPais(rs.getString("pais"));
                 obj.setEstado(rs.getString("estado"));
                 obj.setCidade(rs.getString("cidade"));
@@ -88,19 +86,18 @@ public class AddressClientDAO {
 
     public void creatAddressClient(AddressClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `telefone`, `telefone_fixo`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `telefone`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?,?);");
 
 
             stmt.setInt(1, obj.getIdClient());
             stmt.setString(2, obj.getTelefone());
-            stmt.setString(3, obj.getTelefoneFixo());
-            stmt.setString(4, obj.getPais());
-            stmt.setString(5, obj.getEstado());
-            stmt.setString(6, obj.getCidade());
-            stmt.setString(7, obj.getRua());
-            stmt.setString(8, obj.getBairro());
-            stmt.setInt(9, obj.getNumeroCasa());
-            stmt.setString(10, obj.getComplemento());
+            stmt.setString(3, obj.getPais());
+            stmt.setString(4, obj.getEstado());
+            stmt.setString(5, obj.getCidade());
+            stmt.setString(6, obj.getRua());
+            stmt.setString(7, obj.getBairro());
+            stmt.setInt(8, obj.getNumeroCasa());
+            stmt.setString(9, obj.getComplemento());
 
             stmt.executeUpdate();
 
@@ -115,7 +112,6 @@ public class AddressClientDAO {
             stmt = db.getConnection().prepareStatement("UPDATE address_client SET"
                     + " id_client = ?,"
                     + " telefone = ?,"
-                    + " telefone_fixo = ?,"
                     + " pais = ?,"
                     + " estado = ?,"
                     + " cidade = ?,"
@@ -127,15 +123,14 @@ public class AddressClientDAO {
 
             stmt.setInt(1, obj.getIdClient());
             stmt.setString(2, obj.getTelefone());
-            stmt.setString(3, obj.getTelefoneFixo());
-            stmt.setString(4, obj.getPais());
-            stmt.setString(5, obj.getEstado());
-            stmt.setString(6, obj.getCidade());
-            stmt.setString(7, obj.getRua());
-            stmt.setString(8, obj.getBairro());
-            stmt.setInt(9, obj.getNumeroCasa());
-            stmt.setString(10, obj.getComplemento());
-            stmt.setInt(11, obj.getIdAddressClient());
+            stmt.setString(3, obj.getPais());
+            stmt.setString(4, obj.getEstado());
+            stmt.setString(5, obj.getCidade());
+            stmt.setString(6, obj.getRua());
+            stmt.setString(7, obj.getBairro());
+            stmt.setInt(8, obj.getNumeroCasa());
+            stmt.setString(9, obj.getComplemento());
+            stmt.setInt(10, obj.getIdAddressClient());
 
             stmt.executeUpdate();
 

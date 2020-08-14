@@ -6,15 +6,11 @@
 package io.github.pedroermarinho.hospital;
 
 import io.github.pedroermarinho.hospital.Controller.*;
-import io.github.pedroermarinho.hospital.Controller.Cadastros.AddressClientController;
-import io.github.pedroermarinho.hospital.Controller.Cadastros.ClientController;
-import io.github.pedroermarinho.hospital.Controller.Configuracao.Bancos_de_DadosController;
-import io.github.pedroermarinho.hospital.Controller.Configuracao.CadastroBancoDeDadosController;
-import io.github.pedroermarinho.hospital.Controller.Configuracao.Configuracao_Banco_de_DadosController;
+import io.github.pedroermarinho.hospital.Controller.Configuracao.DataBaseController;
+import io.github.pedroermarinho.hospital.Controller.Configuracao.CadastroDataBaseController;
 import io.github.pedroermarinho.hospital.Controller.Configuracao.Menu_ConfiguracaoController;
 import io.github.pedroermarinho.hospital.Controller.Usuario.CadastroUsuarioController;
 import io.github.pedroermarinho.hospital.Controller.Usuario.UsuarioController;
-import io.github.pedroermarinho.hospital.Controller.Usuario.UsuariosController;
 import io.github.pedroermarinho.hospital.Controller.Util.ErroController;
 import io.github.pedroermarinho.hospital.Controller.Util.SenhaController;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
@@ -140,11 +136,6 @@ public class ChamadasDeTela {
             //PalcoPrincipal.setCenter(personOverview);
             PalcoPrincipal.setCenter(personOverview);
 
-            // Dá ao controlador acesso à the main app.
-            CentralTextoController controller = loader.getController();
-            controller.setMainApp(mainapp);
-
-//            controller.setMainApp(this);
         } catch (IOException e) {
             MsgErro.MessagemErroTela(e, "CentralTexto");
         }
@@ -219,9 +210,6 @@ public class ChamadasDeTela {
             //PalcoPrincipal.setCenter(personOverview);
             PalcoPrincipal.setCenter(personOverview);
 
-            // Dá ao controlador acesso à the main app.
-            InformacaoController controller = loader.getController();
-            controller.setMainApp(mainapp);
 
         } catch (IOException e) {
             MsgErro.MessagemErroTela(e, "Informacao");
@@ -259,12 +247,8 @@ public class ChamadasDeTela {
             // Carrega a TabelaDeJogos.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Cadastros/Client.fxml"));
-            AnchorPane personOverview = loader.load();
 
-            // Dá ao controlador acesso à the main app.
-            ClientController controller = loader.getController();
-            controller.setMainApp(mainapp);
-            return personOverview;
+            return loader.load();
         } catch (IOException e) {
             MsgErro.MessagemErroTela(e, "CadastroCliente");
             return null;
@@ -281,12 +265,8 @@ public class ChamadasDeTela {
             // Carrega a TabelaDeJogos.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Configuracao/Configuracao_Banco_de_Dados.fxml"));
-            AnchorPane personOverview = loader.load();
 
-            // Dá ao controlador acesso à the main app.
-            Configuracao_Banco_de_DadosController controller = loader.getController();
-            controller.setMainApp(mainapp);
-            return personOverview;
+            return loader.load();
         } catch (IOException e) {
             MsgErro.MessagemErroTela(e, "Configuracao_Banco_de_Dados");
             return null;
@@ -303,12 +283,8 @@ public class ChamadasDeTela {
             // Carrega a TabelaDeJogos.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Cadastros/AddressClient.fxml"));
-            AnchorPane personOverview = loader.load();
 
-            // Dá ao controlador acesso à the main app.
-            AddressClientController controller = loader.getController();
-            controller.setMainApp(mainapp);
-            return personOverview;
+            return loader.load();
         } catch (IOException e) {
             MsgErro.MessagemErroTela(e, "CadastroEnderecoCliente");
             return null;
@@ -333,7 +309,7 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
+            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
             dialogStage.getIcons().add(image);
             // Define a pessoa no controller.
             ErroController controller = loader.getController();
@@ -365,7 +341,7 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
+            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
             dialogStage.getIcons().add(image);
 
             // Define a pessoa no controller.
@@ -399,7 +375,7 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
+            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
             dialogStage.getIcons().add(image);
 
             // Define a pessoa no controller.
@@ -427,10 +403,6 @@ public class ChamadasDeTela {
 
             PalcoPrincipal.setCenter(page);
 
-            // Define a pessoa no controller.
-            UsuariosController controller = loader.getController();
-            //controller.setDialogStage(dialogStage);
-            controller.setMainApp(mainapp);
 
             // Mostra a janela e espera até o usuário fechar.
 //            dialogStage.showAndWait();
@@ -458,7 +430,7 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
+            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
             dialogStage.getIcons().add(image);
 
             // Define a pessoa no controller.
@@ -496,13 +468,12 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
+            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
             dialogStage.getIcons().add(image);
 
             // Define a pessoa no controller.
             CadastroUsuarioController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setMainApp(mainapp);
 
             // Mostra a janela e espera até o usuário fechar.
             dialogStage.showAndWait();
@@ -533,18 +504,18 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
+            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
             dialogStage.getIcons().add(image);
 
             // Define a pessoa no controller.
-            Bancos_de_DadosController controller = loader.getController();
+            DataBaseController controller = loader.getController();
 
             controller.setDialogStage(dialogStage);
             controller.setMainApp(mainapp);
 
             // Mostra a janela e espera até o usuário fechar.
             dialogStage.showAndWait();
-            return controller.getBanco_de_Dados();
+            return controller.getDataBase();
         } catch (Exception e) {
             MessagemErroTela(e, "SelectBanco_de_Dados");
             return null;
@@ -569,13 +540,12 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
+            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
             dialogStage.getIcons().add(image);
 
             // Define a pessoa no controller.
-            CadastroBancoDeDadosController controller = loader.getController();
+            CadastroDataBaseController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setMainApp(mainapp);
 
             // Mostra a janela e espera até o usuário fechar.
             dialogStage.showAndWait();

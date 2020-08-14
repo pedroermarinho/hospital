@@ -36,7 +36,7 @@ public class UserDAO {
                 obj.setNome(rs.getString("nome"));//2
                 obj.setSobrenome(rs.getString("sobrenome"));//3
                 obj.setSenha(rs.getString("senha"));//4
-                obj.setSexo(rs.getInt("sexo"));//5
+                obj.setSexo(rs.getString("sexo"));//5
                 obj.setDataNascimento(rs.getDate("data_nascimento"));//6
                 obj.setUserName(rs.getString("user_name"));//7
                 obj.setEmail(rs.getString("email"));//8
@@ -64,7 +64,7 @@ public class UserDAO {
                 obj.setNome(rs.getString("nome"));//2
                 obj.setSobrenome(rs.getString("sobrenome"));//3
                 obj.setSenha(rs.getString("senha"));//4
-                obj.setSexo(rs.getInt("sexo"));//5
+                obj.setSexo(rs.getString("sexo"));//5
                 obj.setDataNascimento(rs.getDate("data_nascimento"));//6
                 obj.setUserName(rs.getString("user_name"));//7
                 obj.setEmail(rs.getString("email"));//8
@@ -88,7 +88,7 @@ public class UserDAO {
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getSobrenome());
             stmt.setString(3, obj.getSenha());
-            stmt.setInt(4, obj.getSexo());
+            stmt.setString(4, obj.getSexo());
             stmt.setDate(5, obj.getDataNascimento());
             stmt.setString(6, obj.getUserName());
             stmt.setString(7, obj.getEmail());
@@ -116,7 +116,7 @@ public class UserDAO {
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getSobrenome());
             stmt.setString(3, obj.getSenha());
-            stmt.setInt(4, obj.getSexo());
+            stmt.setString(4, obj.getSexo());
             stmt.setDate(5, obj.getDataNascimento());
             stmt.setString(6, obj.getUserName());
             stmt.setString(7, obj.getEmail());

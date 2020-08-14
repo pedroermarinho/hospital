@@ -102,7 +102,7 @@
                      </rowConstraints>
                      <children>
                         <Button fx:id="btnPesquisar" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="85.0" mnemonicParsing="false" onAction="#OnPesquisar" prefHeight="30.0" prefWidth="100.0" styleClass="button-azul" text="Pesquisar" GridPane.columnIndex="1" />
-                        <TextField fx:id="PesquisarText" minHeight="25.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#OnPesquisar" prefHeight="30.0" prefWidth="310.0">
+                        <TextField fx:id="PesquisarField" minHeight="25.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#OnPesquisar" prefHeight="30.0" prefWidth="310.0">
                            <padding>
                               <Insets left="5.0" />
                            </padding>
@@ -135,19 +135,19 @@
                            <children>
                               <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
                                  <items>
-                                    <TextField fx:id="PaisText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
+                                    <TextField fx:id="PaisText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" text="Brasil" />
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="País" wrappingWidth="33.70263671875" />
                                  </items>
                               </ToolBar>
                               <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
                                  <items>
-                                    <TextField fx:id="EstadoText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
+                                    <TextField fx:id="EstadoText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" text="Amazonas" />
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estado" wrappingWidth="49.70263671875" />
                                  </items>
                               </ToolBar>
                               <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
                                  <items>
-                                    <TextField fx:id="CidadeText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
+                                    <TextField fx:id="CidadeText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" text="Eirunepé" />
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade" wrappingWidth="55.1572265625" />
                                  </items>
                               </ToolBar>
@@ -175,19 +175,9 @@
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" wrappingWidth="65.70263671875" />
                                  </items>
                               </ToolBar>
-                              <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="210.0">
-                                 <items>
-                                    <TextField fx:id="TelefoneFixoText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone Fixo" wrappingWidth="62.1572265625" />
-                                 </items>
-                              </ToolBar>
                               <ToolBar maxHeight="1.7976931348623157E308" maxWidth="210.0" minHeight="102.0" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="101.0" prefWidth="337.0">
                                  <items>
-                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Observação">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Observação" />
                                     <TextArea fx:id="ObservacaoText" maxWidth="210.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="210.0" />
                                  </items>
                               </ToolBar>

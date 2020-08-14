@@ -5,9 +5,9 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Usuario;
 
-import io.github.pedroermarinho.hospital.MainApp;
+import io.github.pedroermarinho.hospital.Controller.Util.SexoEnum;
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -25,12 +25,12 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroFormula
  * <pedro.marinho238@gmail.com & https://github.com/TECFlyingCommunity>
  */
 public class CadastroUsuarioController implements Initializable {
-
-    @FXML
-    private Button btnCancelar;
-
-    @FXML
-    private Button btnSalvar;
+    private final Dados data = new Dados();
+//    @FXML
+//    private Button btnCancelar;
+//
+//    @FXML
+//    private Button btnSalvar;
 
     @FXML
     private TextField PrimeiroNomeField;
@@ -51,9 +51,8 @@ public class CadastroUsuarioController implements Initializable {
     private DatePicker dpData;
 
     @FXML
-    private ComboBox<String> SexoBox;
+    private ComboBox<SexoEnum> SexoBox;
 
-    private MainApp mainapp;
     private UserModel modificao_usuario = null;
     private Stage dialogStage;
 
@@ -61,20 +60,13 @@ public class CadastroUsuarioController implements Initializable {
         this.dialogStage = dialogStage;
     }
 
-    /**
-     * @param mainapp
-     */
-    public void setMainApp(MainApp mainapp) {
-        this.mainapp = mainapp;
-    }
-
     @FXML
-    void OnCancelar(ActionEvent event) {
+    void OnCancelar() {
         dialogStage.close();
     }
 
     @FXML
-    void OnSalvar(ActionEvent event) {
+    void OnSalvar() {
         if (modificao_usuario == null) {
             modificao_usuario = new UserModel();
         }
@@ -85,9 +77,10 @@ public class CadastroUsuarioController implements Initializable {
             modificao_usuario.setNome(PrimeiroNomeField.getText());
             modificao_usuario.setSenha(senhaField.getText());
             modificao_usuario.setSobrenome(SobrenomeField.getText());
+            modificao_usuario.setSexo(SexoBox.getValue().getDescricao());
             modificao_usuario.save();
 
-            mainapp.getDadosData().getUserData();
+            data.getUserData();
             dialogStage.close();
 
         }
@@ -134,12 +127,12 @@ public class CadastroUsuarioController implements Initializable {
         } else {
             dpData.setStyle("");
         }
-//        if (SexoBox.getValue() == null || SexoBox.getValue().toString().length() == 0) {
-//            errorMessage += "Data inválido!\n";
-//            SexoBox.setStyle("-fx-border-color:red");
-//        } else {
-//            SexoBox.setStyle("");
-//        }
+        if (SexoBox.getValue() == null || SexoBox.getValue().getDescricao().length() == 0) {
+            errorMessage += "Data inválido!\n";
+            SexoBox.setStyle("-fx-border-color:red");
+        } else {
+            SexoBox.setStyle("");
+        }
 
         if (errorMessage.length() == 0) {
             return true;
@@ -157,7 +150,7 @@ public class CadastroUsuarioController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        SexoBox.getItems().addAll(SexoEnum.values());
     }
 
 }

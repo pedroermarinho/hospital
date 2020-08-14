@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Configuracao;
 
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import javafx.event.ActionEvent;
@@ -26,10 +27,8 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroFormula
  * @author Pedro Marinho
  * <pedro.marinho238@gmail.com & https://github.com/TECFlyingCommunity>
  */
-public class CadastroBancoDeDadosController implements Initializable {
-
-    private MainApp mainApp;
-    private DataBaseModel banco_de_dados;
+public class CadastroDataBaseController implements Initializable {
+    private final Dados data = new Dados();
     @FXML
     private TextField HostField;
 
@@ -47,9 +46,9 @@ public class CadastroBancoDeDadosController implements Initializable {
 
     @FXML
     private TextField PortField;
-
-    @FXML
-    private Button bntCancelar;
+//
+//    @FXML
+//    private Button bntCancelar;
 
     @FXML
     private Button btnSalvar;
@@ -62,16 +61,16 @@ public class CadastroBancoDeDadosController implements Initializable {
     private Stage dialogStage;
 
     @FXML
-    void OnCancelar(ActionEvent event) {
+    void OnCancelar() {
         dialogStage.close();
     }
 
     @FXML
-    void OnOffline(ActionEvent event) {
+    void OnOffline() {
         DisableBnt(true);
-        boolean value = false;
-        DataBaseField.setDisable(value);
-        btnSalvar.setDisable(value);
+//        boolean value = false;
+        DataBaseField.setDisable(false);
+        btnSalvar.setDisable(false);
         bntOffline.setSelected(true);
         bntOnline.setSelected(false);
         PrefixField.setText("jdbc:sqlite:");
@@ -80,7 +79,7 @@ public class CadastroBancoDeDadosController implements Initializable {
     }
 
     @FXML
-    void OnOnline(ActionEvent event) {
+    void OnOnline() {
         DisableBnt(false);
         bntOffline.setSelected(true);
         bntOnline.setSelected(false);
@@ -89,17 +88,17 @@ public class CadastroBancoDeDadosController implements Initializable {
     }
 
     @FXML
-    void OnSalvar(ActionEvent event) {
+    void OnSalvar() {
         if (isInputValid()) {
-            banco_de_dados = new DataBaseModel();
-            banco_de_dados.setDataBase(DataBaseField.getText());
-            banco_de_dados.setHost(HostField.getText());
-            banco_de_dados.setPassword(PasswordField.getText());
-            banco_de_dados.setPorts(Integer.valueOf(PortField.getText()));
-            banco_de_dados.setPrefix(PrefixField.getText());
-            banco_de_dados.setUser(UserField.getText());
-            banco_de_dados.save();
-            mainApp.getDadosData().getDataBaseData();
+            DataBaseModel dataBaseModel = new DataBaseModel();
+            dataBaseModel.setDataBase(DataBaseField.getText());
+            dataBaseModel.setHost(HostField.getText());
+            dataBaseModel.setPassword(PasswordField.getText());
+            dataBaseModel.setPorts(Integer.parseInt(PortField.getText()));
+            dataBaseModel.setPrefix(PrefixField.getText());
+            dataBaseModel.setUser(UserField.getText());
+            dataBaseModel.save();
+            data.getDataBaseData();
             dialogStage.close();
         }
     }
@@ -181,12 +180,7 @@ public class CadastroBancoDeDadosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         DisableBnt(true);
-    }
-
-    public void setMainApp(MainApp mainApp) {
-        System.out.println("setMainApp");
-        this.mainApp = mainApp;
-
+        bntOnline.setDisable(true);
     }
 
     public void setDialogStage(Stage dialogStage) {

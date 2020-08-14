@@ -5,13 +5,12 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Cadastros;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
+import io.github.pedroermarinho.hospital.Controller.Util.SexoEnum;
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -29,8 +28,8 @@ import static io.github.pedroermarinho.hospital.Util.Filtro.Cliente_para_Enderec
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
 public class ClientController implements Initializable {
-
-    private ClientModel modifição_cliente;
+    private final Dados data = new Dados();
+    private ClientModel modificaoClient;
 
     @FXML
     private TextField NomeText;
@@ -42,16 +41,13 @@ public class ClientController implements Initializable {
     private TextField NomeMaeText;
 
     @FXML
-    private TextField NomePaiText;
-
-    @FXML
     private DatePicker NascimentoDate;
 
     @FXML
     private TextField CartaoText;
 
     @FXML
-    private ComboBox<String> SexoBox;
+    private ComboBox<SexoEnum> SexoBox;
 
     @FXML
     private TextField EmailText;
@@ -80,26 +76,31 @@ public class ClientController implements Initializable {
     @FXML
     private Button btnDeletar;
 
-    @FXML
-    private Button btnNovo;
+//    @FXML
+//    private Button btnNovo;
 
-    private MainApp mainApp;
+    @FXML
+    private TextField atendimentoField;
+
+    @FXML
+    private TextField recepcaoField;
+
+    @FXML
+    private TextField identidadeField;
+
+
+
     @FXML
     private TextField PesquisarField;
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-        registrosView.setItems(this.mainApp.getDadosData().getClientData());
-//        SexoBox.setItems(this.mainApp.getDadosData().getSexosData());
 
-    }
 
     @FXML
-    void OnPesquisar(ActionEvent event) {
+    void OnPesquisar() {
         if (!PesquisarField.getText().equals("")) {
             registrosView.setItems(findItems());
         } else {
-            registrosView.setItems(mainApp.getDadosData().getClientData());
+            registrosView.setItems(data.getClientData());
         }
     }
 
@@ -113,7 +114,7 @@ public class ClientController implements Initializable {
             ID = null;
 
         }
-        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
+        for (ClientModel itens : data.getClientData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
@@ -132,14 +133,14 @@ public class ClientController implements Initializable {
     }
 
     @FXML
-    void OnCancelar(ActionEvent event) {
+    void OnCancelar() {
         LimparCampo();
         On_Off_Button(true);
 
     }
 
     @FXML
-    void OnDeletar(ActionEvent event) {
+    void OnDeletar() {
         System.out.println("DeletaPessoa");
         ClientModel selected = registrosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
@@ -148,39 +149,44 @@ public class ClientController implements Initializable {
                 addressClientModel.delete();
             }
             selected.delete();
-            mainApp.getDadosData().getClientData();
+            data.getClientData();
         }
     }
 
     @FXML
-    void OnDetalhes(ActionEvent event) {
+    void OnDetalhes() {
         On_Off_Button(true);
-        modifição_cliente = registrosView.getSelectionModel().getSelectedItem();
-        NomeText.setText(modifição_cliente.getNome());
-        CPFText.setText(modifição_cliente.getCpf());
-        NomeMaeText.setText(modifição_cliente.getMae());
-        NomePaiText.setText(modifição_cliente.getPai());
-        NascimentoDate.setValue(LocalDate.parse(modifição_cliente.getDataNascimento()));
-        CartaoText.setText(modifição_cliente.getCartaoSUS());
-        EmailText.setText(modifição_cliente.getEmail());
+        modificaoClient = registrosView.getSelectionModel().getSelectedItem();
+        NomeText.setText(modificaoClient.getNome());
+        CPFText.setText(modificaoClient.getCpf());
+        NomeMaeText.setText(modificaoClient.getMae());
+        NascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
+        CartaoText.setText(modificaoClient.getCartaoSUS());
+        EmailText.setText(modificaoClient.getEmail());
+        SexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
+        atendimentoField.setText(modificaoClient.getEspecialidade());
+        recepcaoField.setText(modificaoClient.getRecepcao());
+        identidadeField.setText(modificaoClient.getIdentidade());
     }
 
     @FXML
-    void OnEditar(ActionEvent event) {
+    void OnEditar() {
         On_Off_Button(false);
-        modifição_cliente = registrosView.getSelectionModel().getSelectedItem();
-        NomeText.setText(modifição_cliente.getNome());
-        CPFText.setText(modifição_cliente.getCpf());
-        NomeMaeText.setText(modifição_cliente.getMae());
-        NomePaiText.setText(modifição_cliente.getPai());
-        NascimentoDate.setValue(LocalDate.parse(modifição_cliente.getDataNascimento()));
-        CartaoText.setText(modifição_cliente.getCartaoSUS());
-        EmailText.setText(modifição_cliente.getEmail());
-
+        modificaoClient = registrosView.getSelectionModel().getSelectedItem();
+        NomeText.setText(modificaoClient.getNome());
+        CPFText.setText(modificaoClient.getCpf());
+        NomeMaeText.setText(modificaoClient.getMae());
+        NascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
+        CartaoText.setText(modificaoClient.getCartaoSUS());
+        EmailText.setText(modificaoClient.getEmail());
+        SexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
+        atendimentoField.setText(modificaoClient.getEspecialidade());
+        recepcaoField.setText(modificaoClient.getRecepcao());
+        identidadeField.setText(modificaoClient.getIdentidade());
     }
 
     @FXML
-    void OnNovo(ActionEvent event) {
+    void OnNovo() {
 
         On_Off_Button(false);
 
@@ -188,23 +194,26 @@ public class ClientController implements Initializable {
     }
 
     @FXML
-    void OnSalvar(ActionEvent event) {
-        if (modifição_cliente == null) {
-            modifição_cliente = new ClientModel();
+    void OnSalvar() {
+        if (modificaoClient == null) {
+            modificaoClient = new ClientModel();
         }
         if (isInputValid()) {
 //            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-            modifição_cliente.setNome(NomeText.getText());
-            modifição_cliente.setCpf(CPFText.getText());
-            modifição_cliente.setMae(NomeMaeText.getText());
-            modifição_cliente.setPai(NomePaiText.getText());
-            modifição_cliente.setDataNascimento(String.valueOf(java.sql.Date.valueOf(NascimentoDate.getValue())));
-            modifição_cliente.setCartaoSUS(CartaoText.getText());
-            modifição_cliente.setEmail(EmailText.getText());
-            modifição_cliente.save();
+            modificaoClient.setNome(NomeText.getText());
+            modificaoClient.setCpf(CPFText.getText());
+            modificaoClient.setMae(NomeMaeText.getText());
+            modificaoClient.setDataNascimento(String.valueOf(java.sql.Date.valueOf(NascimentoDate.getValue())));
+            modificaoClient.setCartaoSUS(CartaoText.getText());
+            modificaoClient.setEmail(EmailText.getText());
+            modificaoClient.setIdentidade(identidadeField.getText());
+            modificaoClient.setRecepcao(recepcaoField.getText());
+            modificaoClient.setEspecialidade(atendimentoField.getText());
+            modificaoClient.setSexo(SexoBox.getValue().getDescricao());
+            modificaoClient.save();
             LimparCampo();
-            mainApp.getDadosData().getClientData();
+            data.getClientData();
             On_Off_Button(true);
         }
 
@@ -215,24 +224,27 @@ public class ClientController implements Initializable {
         NomeText.setText("");
         CPFText.setText("");
         NomeMaeText.setText("");
-        NomePaiText.setText("");
         NascimentoDate.setValue(null);
         CartaoText.setText("");
         SexoBox.setValue(null);
         EmailText.setText("");
-
-        modifição_cliente = null;
+        atendimentoField.setText("");
+        recepcaoField.setText("");
+        identidadeField.setText("");
+        modificaoClient = null;
     }
 
     private void On_Off_Button(boolean es) {
         NomeText.setDisable(es);
         CPFText.setDisable(es);
         NomeMaeText.setDisable(es);
-        NomePaiText.setDisable(es);
         NascimentoDate.setDisable(es);
         CartaoText.setDisable(es);
         SexoBox.setDisable(es);
         EmailText.setDisable(es);
+        atendimentoField.setDisable(es);
+        recepcaoField.setDisable(es);
+        identidadeField.setDisable(es);
         bntSalva.setDisable(es);
         BtnCancelar.setDisable(es);
     }
@@ -260,12 +272,6 @@ public class ClientController implements Initializable {
         } else {
             NomeMaeText.setStyle("");
         }
-        if (NomePaiText.getText() == null || NomePaiText.getText().length() == 0) {
-            errorMessage += "Nome Pai inválido!\n";
-            NomePaiText.setStyle("-fx-border-color:red");
-        } else {
-            NomePaiText.setStyle("");
-        }
         if (CartaoText.getText() == null || CartaoText.getText().length() == 0) {
             errorMessage += "Cartão SUS inválido!\n";
             CartaoText.setStyle("-fx-border-color:red");
@@ -278,7 +284,24 @@ public class ClientController implements Initializable {
         } else {
             EmailText.setStyle("");
         }
-
+        if (atendimentoField.getText() == null || atendimentoField.getText().length() == 0) {
+            errorMessage += "Email inválido!\n";
+            atendimentoField.setStyle("-fx-border-color:red");
+        } else {
+            atendimentoField.setStyle("");
+        }
+        if (recepcaoField.getText() == null || recepcaoField.getText().length() == 0) {
+            errorMessage += "Email inválido!\n";
+            recepcaoField.setStyle("-fx-border-color:red");
+        } else {
+            recepcaoField.setStyle("");
+        }
+        if (identidadeField.getText() == null || identidadeField.getText().length() == 0) {
+            errorMessage += "Email inválido!\n";
+            identidadeField.setStyle("-fx-border-color:red");
+        } else {
+            identidadeField.setStyle("");
+        }
         if (NascimentoDate.getValue() == null || NascimentoDate.getValue().toString().length() == 0) {
             errorMessage += "Data inválido!\n";
             NascimentoDate.setStyle("-fx-border-color:red");
@@ -302,8 +325,9 @@ public class ClientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        registrosView.setItems(data.getClientData());
         On_Off_Button(true);
+        SexoBox.getItems().addAll(SexoEnum.values());
         bntDetalhes.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
         btnEditar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
         btnDeletar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());

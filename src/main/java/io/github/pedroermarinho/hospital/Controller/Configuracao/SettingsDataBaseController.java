@@ -5,9 +5,8 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Configuracao;
 
-import io.github.pedroermarinho.hospital.MainApp;
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -25,10 +24,9 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroFormula
  *
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class Configuracao_Banco_de_DadosController implements Initializable {
-
-    private MainApp mainApp;
-    private DataBaseModel modificao_banco_dados;
+public class SettingsDataBaseController implements Initializable {
+    private final Dados data = new Dados();
+    private DataBaseModel dataBaseModel;
     @FXML
     private ListView<DataBaseModel> BancosView;
     @FXML
@@ -37,8 +35,8 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
     private Button btnEditar;
     @FXML
     private Button btnDeletar;
-    @FXML
-    private Button btnNovo;
+//    @FXML
+//    private Button btnNovo;
     @FXML
     private Button btnCancelar;
     @FXML
@@ -56,75 +54,70 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
     @FXML
     private TextField PortField;
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-        BancosView.setItems(mainApp.getDadosData().getDataBaseData());
-    }
+
 
     @FXML
-    void OnCancelar(ActionEvent event) {
+    void OnCancelar() {
         On_Off_Button(true);
 
         LimparCampo();
     }
 
     @FXML
-    void OnDeletar(ActionEvent event) {
+    void OnDeletar() {
         DataBaseModel selected = BancosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
             selected.delete();
-            mainApp.getDadosData().getDataBaseData();
-        } else {
-
+            data.getDataBaseData();
         }
     }
 
     @FXML
-    void OnSalvar(ActionEvent event) {
-        if (modificao_banco_dados == null) {
-            modificao_banco_dados = new DataBaseModel();
+    void OnSalvar() {
+        if (dataBaseModel == null) {
+            dataBaseModel = new DataBaseModel();
         }
         if (isInputValid()) {
-            modificao_banco_dados = new DataBaseModel();
-            modificao_banco_dados.setDataBase(DataBaseField.getText());
-            modificao_banco_dados.setHost(HostField.getText());
-            modificao_banco_dados.setPassword(PasswordField.getText());
-            modificao_banco_dados.setPorts(Integer.valueOf(PortField.getText()));
-            modificao_banco_dados.setPrefix(PrefixField.getText());
-            modificao_banco_dados.setUser(UserField.getText());
-            modificao_banco_dados.save();
+            dataBaseModel = new DataBaseModel();
+            dataBaseModel.setDataBase(DataBaseField.getText());
+            dataBaseModel.setHost(HostField.getText());
+            dataBaseModel.setPassword(PasswordField.getText());
+            dataBaseModel.setPorts(Integer.parseInt(PortField.getText()));
+            dataBaseModel.setPrefix(PrefixField.getText());
+            dataBaseModel.setUser(UserField.getText());
+            dataBaseModel.save();
             LimparCampo();
             On_Off_Button(true);
-            mainApp.getDadosData().getDataBaseData();
+            data.getDataBaseData();
 
         }
 
     }
 
     @FXML
-    void OnDetalhes(ActionEvent event) {
+    void OnDetalhes() {
         On_Off_Button(true);
-        DataBaseField.setText(modificao_banco_dados.getDataBase());
-        HostField.setText(modificao_banco_dados.getHost());
-        PasswordField.setText(modificao_banco_dados.getPassword());
-        PortField.setText(String.valueOf(modificao_banco_dados.getPorts()));
-        PrefixField.setText(modificao_banco_dados.getPrefix());
-        UserField.setText(modificao_banco_dados.getUser());
+        DataBaseField.setText(dataBaseModel.getDataBase());
+        HostField.setText(dataBaseModel.getHost());
+        PasswordField.setText(dataBaseModel.getPassword());
+        PortField.setText(String.valueOf(dataBaseModel.getPorts()));
+        PrefixField.setText(dataBaseModel.getPrefix());
+        UserField.setText(dataBaseModel.getUser());
     }
 
     @FXML
-    void OnEditar(ActionEvent event) {
+    void OnEditar() {
         On_Off_Button(false);
-        DataBaseField.setText(modificao_banco_dados.getDataBase());
-        HostField.setText(modificao_banco_dados.getHost());
-        PasswordField.setText(modificao_banco_dados.getPassword());
-        PortField.setText(String.valueOf(modificao_banco_dados.getPorts()));
-        PrefixField.setText(modificao_banco_dados.getPrefix());
-        UserField.setText(modificao_banco_dados.getUser());
+        DataBaseField.setText(dataBaseModel.getDataBase());
+        HostField.setText(dataBaseModel.getHost());
+        PasswordField.setText(dataBaseModel.getPassword());
+        PortField.setText(String.valueOf(dataBaseModel.getPorts()));
+        PrefixField.setText(dataBaseModel.getPrefix());
+        UserField.setText(dataBaseModel.getUser());
     }
 
     @FXML
-    void OnNovo(ActionEvent event) {
+    void OnNovo() {
         On_Off_Button(false);
         LimparCampo();
     }
@@ -207,7 +200,7 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
         DataBaseField.setText("");
         PrefixField.setText("");
         PortField.setText("");
-        modificao_banco_dados = null;
+        dataBaseModel = null;
     }
 
     /**
@@ -216,6 +209,7 @@ public class Configuracao_Banco_de_DadosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         On_Off_Button(true);
+        BancosView.setItems(data.getDataBaseData());
         // TODO
         bntDetalhes.disableProperty().bind(BancosView.getSelectionModel().selectedItemProperty().isNull());
         btnEditar.disableProperty().bind(BancosView.getSelectionModel().selectedItemProperty().isNull());

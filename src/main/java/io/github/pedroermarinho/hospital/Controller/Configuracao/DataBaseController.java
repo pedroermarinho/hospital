@@ -5,11 +5,11 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Configuracao;
 
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,12 +26,12 @@ import java.util.ResourceBundle;
  * @author Pedro Marinho
  * <pedro.marinho238@gmail.com & https://github.com/TECFlyingCommunity>
  */
-public class Bancos_de_DadosController implements Initializable {
-
+public class DataBaseController implements Initializable {
+    private final Dados data = new Dados();
     private MainApp mainApp;
-    private DataBaseModel banco_de_dados;
-    @FXML
-    private Button btnPesquisar;
+    private DataBaseModel dataBaseModel;
+//    @FXML
+//    private Button btnPesquisar;
 
     @FXML
     private TextField PesquisarField;
@@ -39,48 +39,48 @@ public class Bancos_de_DadosController implements Initializable {
     @FXML
     private Button btnSelecionar;
 
-    @FXML
-    private Button btnCancelar;
+//    @FXML
+//    private Button btnCancelar;
 
     @FXML
     private ListView<DataBaseModel> BancosView;
     private Stage dialogStage;
 
     @FXML
-    void OnCancelar(ActionEvent event) {
+    void OnCancelar() {
         dialogStage.close();
     }
 
     @FXML
-    void OnPesquisar(ActionEvent event) {
+    void OnPesquisar() {
         if (!PesquisarField.getText().equals("")) {
             BancosView.setItems(findItems());
         } else {
-            BancosView.setItems(mainApp.getDadosData().getDataBaseData());
+            BancosView.setItems(data.getDataBaseData());
         }
 
     }
 
     @FXML
-    void OnADD(ActionEvent event) {
+    void OnADD() {
         mainApp.getTelas().CadastroBancoDeDados();
     }
 
     @FXML
-    void OnSelecionar(ActionEvent event) {
-        banco_de_dados = BancosView.getSelectionModel().getSelectedItem();
+    void OnSelecionar() {
+        dataBaseModel = BancosView.getSelectionModel().getSelectedItem();
         dialogStage.close();
     }
 
     public void setMainApp(MainApp mainApp) {
         System.out.println("setMainApp");
         this.mainApp = mainApp;
-        BancosView.setItems(mainApp.getDadosData().getDataBaseData());
+        BancosView.setItems(data.getDataBaseData());
 
     }
 
-    public DataBaseModel getBanco_de_Dados() {
-        return banco_de_dados;
+    public DataBaseModel getDataBase() {
+        return dataBaseModel;
     }
 
     private ObservableList<DataBaseModel> findItems() {
@@ -93,7 +93,7 @@ public class Bancos_de_DadosController implements Initializable {
             ID = null;
 
         }
-        for (DataBaseModel itens : mainApp.getDadosData().getDataBaseData()) {
+        for (DataBaseModel itens : data.getDataBaseData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
@@ -111,12 +111,7 @@ public class Bancos_de_DadosController implements Initializable {
         return itensEncontrados;
     }
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnSelecionar.disableProperty().bind(BancosView.getSelectionModel().selectedItemProperty().isNull());

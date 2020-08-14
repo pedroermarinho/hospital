@@ -23,14 +23,14 @@ public class UserModel {
     private final StringProperty nome = new SimpleStringProperty();
     private final StringProperty sobrenome = new SimpleStringProperty();
     private final StringProperty senha = new SimpleStringProperty();
-    private final IntegerProperty sexo = new SimpleIntegerProperty();
+    private final StringProperty sexo = new SimpleStringProperty();
     private final ObjectProperty<java.sql.Date> dataNascimento = new SimpleObjectProperty<>();
 
     public UserModel() {
         dao = new UserDAO();
     }
 
-    public static List<UserModel> all(MainApp mainApp) {
+    public static List<UserModel> all() {
         return new UserDAO().getUsuarioList();
     }
 
@@ -86,15 +86,15 @@ public class UserModel {
         return dataNascimento;
     }
 
-    public int getSexo() {
+    public String getSexo() {
         return sexo.get();
     }
 
-    public void setSexo(int value) {
+    public void setSexo(String value) {
         sexo.set(value);
     }
 
-    public IntegerProperty SexoProperty() {
+    public StringProperty SexoProperty() {
         return sexo;
     }
 

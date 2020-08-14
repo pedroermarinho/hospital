@@ -5,13 +5,13 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Cadastros;
 
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,9 +28,9 @@ import static io.github.pedroermarinho.hospital.Util.Filtro.Cliente_para_Enderec
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
 public class AddressClientController implements Initializable {
+    private final Dados data = new Dados();
 
-    private MainApp mainApp;
-    private AddressClientModel modifição_endereco;
+    private AddressClientModel modificaoAddress;
     private ClientModel cliente;
     @FXML
     private TextField PaisText;
@@ -47,17 +47,13 @@ public class AddressClientController implements Initializable {
     @FXML
     private TextField TelefoneText;
     @FXML
-    private TextField TelefoneFixoText;
-    @FXML
     private TextArea ObservacaoText;
     @FXML
     private Button bntSalva;
     @FXML
     private Button BtnCancelar;
-    @FXML
-    private TextField PesquisaText;
-    @FXML
-    private Button btnPesquisar;
+//    @FXML
+//    private Button btnPesquisar;
     @FXML
     private TableView<ClientModel> registrosView;
     @FXML
@@ -71,17 +67,12 @@ public class AddressClientController implements Initializable {
     @FXML
     private TextField PesquisarField;
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-        registrosView.setItems(this.mainApp.getDadosData().getClientData());
-    }
-
     @FXML
-    void OnPesquisar(ActionEvent event) {
+    void OnPesquisar() {
         if (!PesquisarField.getText().equals("")) {
             registrosView.setItems(findItems());
         } else {
-            registrosView.setItems(mainApp.getDadosData().getClientData());
+            registrosView.setItems(data.getClientData());
         }
     }
 
@@ -95,7 +86,7 @@ public class AddressClientController implements Initializable {
             ID = null;
 
         }
-        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
+        for (ClientModel itens : data.getClientData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
@@ -114,73 +105,69 @@ public class AddressClientController implements Initializable {
     }
 
     @FXML
-    void OnCancelar(ActionEvent event) {
+    void OnCancelar() {
         LimparCampo();
         On_Off_Button(true);
     }
 
     @FXML
-    void OnDetalhes(ActionEvent event) {
+    void OnDetalhes() {
         On_Off_Button(true);
         cliente = registrosView.getSelectionModel().getSelectedItem();
-        modifição_endereco = Cliente_para_Endereco(cliente.getIdClient());
-        if (modifição_endereco != null) {
+        modificaoAddress = Cliente_para_Endereco(cliente.getIdClient());
+        if (modificaoAddress != null) {
 
-            NCasaText.setText(String.valueOf(modifição_endereco.getNumeroCasa()));
-            TelefoneText.setText(modifição_endereco.getTelefone());
-            TelefoneFixoText.setText(modifição_endereco.getTelefoneFixo());
-            ObservacaoText.setText(modifição_endereco.getTelefoneFixo());
-
-            RuaText.setText(modifição_endereco.getRua());
-            BairroText.setText(modifição_endereco.getBairro());
-            CidadeText.setText(modifição_endereco.getCidade());
-            EstadoText.setText(modifição_endereco.getEstado());
-            PaisText.setText(modifição_endereco.getPais());
+            NCasaText.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
+            TelefoneText.setText(modificaoAddress.getTelefone());
+            ObservacaoText.setText(modificaoAddress.getComplemento());
+            RuaText.setText(modificaoAddress.getRua());
+            BairroText.setText(modificaoAddress.getBairro());
+            CidadeText.setText(modificaoAddress.getCidade());
+            EstadoText.setText(modificaoAddress.getEstado());
+            PaisText.setText(modificaoAddress.getPais());
         }
     }
 
 
     @FXML
-    void OnEditar(ActionEvent event) {
+    void OnEditar() {
         On_Off_Button(false);
         cliente = registrosView.getSelectionModel().getSelectedItem();
 
-        modifição_endereco = Cliente_para_Endereco(cliente.getIdClient());
-        if (modifição_endereco != null) {
-            NCasaText.setText(String.valueOf(modifição_endereco.getNumeroCasa()));
-            TelefoneText.setText(modifição_endereco.getTelefone());
-            TelefoneFixoText.setText(modifição_endereco.getTelefoneFixo());
-            ObservacaoText.setText(modifição_endereco.getComplemento());
+        modificaoAddress = Cliente_para_Endereco(cliente.getIdClient());
+        if (modificaoAddress != null) {
+            NCasaText.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
+            TelefoneText.setText(modificaoAddress.getTelefone());
+            ObservacaoText.setText(modificaoAddress.getComplemento());
 
-            RuaText.setText(modifição_endereco.getRua());
-            BairroText.setText(modifição_endereco.getBairro());
-            CidadeText.setText(modifição_endereco.getCidade());
-            EstadoText.setText(modifição_endereco.getEstado());
-            PaisText.setText(modifição_endereco.getPais());
+            RuaText.setText(modificaoAddress.getRua());
+            BairroText.setText(modificaoAddress.getBairro());
+            CidadeText.setText(modificaoAddress.getCidade());
+            EstadoText.setText(modificaoAddress.getEstado());
+            PaisText.setText(modificaoAddress.getPais());
         }
     }
 
     @FXML
-    void OnSalvar(ActionEvent event) {
-        if (modifição_endereco == null) {
-            modifição_endereco = new AddressClientModel();
+    void OnSalvar() {
+        if (modificaoAddress == null) {
+            modificaoAddress = new AddressClientModel();
         }
         if (isInputValid()) {
 
-            modifição_endereco.setPais(PaisText.getText());
-            modifição_endereco.setEstado(EstadoText.getText());
-            modifição_endereco.setCidade(CidadeText.getText());
-            modifição_endereco.setBairro(BairroText.getText());
-            modifição_endereco.setRua(RuaText.getText());
-            modifição_endereco.setNumeroCasa(Integer.parseInt(NCasaText.getText()));
-            modifição_endereco.setTelefone(TelefoneText.getText());
-            modifição_endereco.setTelefoneFixo(TelefoneFixoText.getText());
-            modifição_endereco.setComplemento(ObservacaoText.getText());
-            modifição_endereco.setIdClient(cliente.getIdClient());
+            modificaoAddress.setPais(PaisText.getText());
+            modificaoAddress.setEstado(EstadoText.getText());
+            modificaoAddress.setCidade(CidadeText.getText());
+            modificaoAddress.setBairro(BairroText.getText());
+            modificaoAddress.setRua(RuaText.getText());
+            modificaoAddress.setNumeroCasa(Integer.parseInt(NCasaText.getText()));
+            modificaoAddress.setTelefone(TelefoneText.getText());
+            modificaoAddress.setComplemento(ObservacaoText.getText());
+            modificaoAddress.setIdClient(cliente.getIdClient());
 
-            modifição_endereco.save();
+            modificaoAddress.save();
             LimparCampo();
-            mainApp.getDadosData().getAddressClientData();
+            data.getAddressClientData();
             On_Off_Button(true);
         }
 
@@ -189,9 +176,7 @@ public class AddressClientController implements Initializable {
     private void LimparCampo() {
         NCasaText.setText("");
         TelefoneText.setText("");
-        TelefoneFixoText.setText("");
         ObservacaoText.setText("");
-//
         PaisText.setText("");
         EstadoText.setText("");
         CidadeText.setText("");
@@ -199,17 +184,15 @@ public class AddressClientController implements Initializable {
         RuaText.setText("");
 
         cliente = null;
-        modifição_endereco = null;
+        modificaoAddress = null;
     }
 
 
     private void On_Off_Button(boolean es) {
-        modifição_endereco = null;
+        modificaoAddress = null;
         NCasaText.setDisable(es);
         TelefoneText.setDisable(es);
-        TelefoneFixoText.setDisable(es);
         ObservacaoText.setDisable(es);
-
         PaisText.setDisable(es);
         EstadoText.setDisable(es);
         CidadeText.setDisable(es);
@@ -229,7 +212,7 @@ public class AddressClientController implements Initializable {
             NCasaText.setStyle("-fx-border-color:red");
         } else {
             try {
-                final var i =Integer.valueOf(NCasaText.getText());
+                Integer.valueOf(NCasaText.getText());
             }catch (NumberFormatException e){
                 errorMessage += "Nº Casa inválido!\n";
                 NCasaText.setStyle("-fx-border-color:red");
@@ -241,12 +224,6 @@ public class AddressClientController implements Initializable {
             TelefoneText.setStyle("-fx-border-color:red");
         } else {
             TelefoneText.setStyle("");
-        }
-        if (TelefoneFixoText.getText() == null || TelefoneFixoText.getText().length() == 0) {
-            errorMessage += "Nome inválido!\n";
-            TelefoneFixoText.setStyle("-fx-border-color:red");
-        } else {
-            TelefoneFixoText.setStyle("");
         }
         if (ObservacaoText.getText() == null || ObservacaoText.getText().length() == 0) {
             errorMessage += "Nome inválido!\n";
@@ -292,22 +269,17 @@ public class AddressClientController implements Initializable {
         } else {
             // Mostra a mensagem de erro.
             MsgErro.MessagemErroFormulario(errorMessage);
-//            System.out.println(errorMessage);
-//           
+
             return false;
         }
     }
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         On_Off_Button(true);
+        registrosView.setItems(data.getClientData());
         bntDetalhes.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
         btnEditar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
 

@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Controller;
 
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import javafx.collections.FXCollections;
@@ -28,17 +29,17 @@ import java.util.ResourceBundle;
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
 public class ClientesController implements Initializable {
+    private final Dados data = new Dados();
 
-    private MainApp mainApp;
     private ClientModel cliente;
-    @FXML
-    private Button btnPesquisar;
-
-    @FXML
-    private Button btnSelecionar;
-
-    @FXML
-    private Button btnCancelar;
+//    @FXML
+//    private Button btnPesquisar;
+//
+//    @FXML
+//    private Button btnSelecionar;
+//
+//    @FXML
+//    private Button btnCancelar;
 
     @FXML
     private TableView<ClientModel> ClientesView;
@@ -54,11 +55,11 @@ public class ClientesController implements Initializable {
     private Stage dialogStage;
 
     @FXML
-    void OnPesquisar(ActionEvent event) {
+    void OnPesquisar() {
         if (!PesquisarField.getText().equals("")) {
             ClientesView.setItems(findItems());
         } else {
-            ClientesView.setItems(mainApp.getDadosData().getClientData());
+            ClientesView.setItems(data.getClientData());
         }
     }
 
@@ -72,7 +73,7 @@ public class ClientesController implements Initializable {
             ID = null;
 
         }
-        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
+        for (ClientModel itens : data.getClientData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
@@ -91,24 +92,13 @@ public class ClientesController implements Initializable {
     }
 
     @FXML
-    void OnSelecionar(ActionEvent event) {
+    void OnSelecionar() {
         cliente = ClientesView.getSelectionModel().getSelectedItem();
         dialogStage.close();
     }
 
-    public void setMainApp(MainApp mainApp) {
-        System.out.println("setMainApp");
-        this.mainApp = mainApp;
-        this.ClientesView.setItems(this.mainApp.getDadosData().getClientData());
-
-    }
-
-    public ClientModel getclinte() {
-        return cliente;
-    }
-
     @FXML
-    void OnCancelar(ActionEvent event) {
+    void OnCancelar() {
         dialogStage.close();
     }
 
@@ -117,7 +107,7 @@ public class ClientesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        this.ClientesView.setItems(data.getClientData());
         IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID_cliente"));
         NomeColumn.setCellValueFactory(new PropertyValueFactory<>("Nome"));
     }

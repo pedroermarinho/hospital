@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Usuario;
 
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import javafx.collections.FXCollections;
@@ -29,7 +30,7 @@ import java.util.ResourceBundle;
  * <pedro.marinho238@gmail.com & https://github.com/TECFlyingCommunity>
  */
 public class SelectUsuarioController implements Initializable {
-
+    private final Dados data = new Dados();
     private MainApp mainApp;
     private UserModel usuario;
     @FXML
@@ -64,7 +65,7 @@ public class SelectUsuarioController implements Initializable {
         if (!PesquisarField.getText().equals("")) {
             ClientesView.setItems(findItems());
         } else {
-            ClientesView.setItems(mainApp.getDadosData().getUserData());
+            ClientesView.setItems(data.getUserData());
         }
     }
 
@@ -77,7 +78,7 @@ public class SelectUsuarioController implements Initializable {
     public void setMainApp(MainApp mainApp) {
         System.out.println("setMainApp");
         this.mainApp = mainApp;
-        this.ClientesView.setItems(this.mainApp.getDadosData().getUserData());
+        this.ClientesView.setItems(data.getUserData());
 
     }
 
@@ -95,7 +96,7 @@ public class SelectUsuarioController implements Initializable {
             ID = null;
 
         }
-        for (UserModel itens : mainApp.getDadosData().getUserData()) {
+        for (UserModel itens : data.getUserData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {

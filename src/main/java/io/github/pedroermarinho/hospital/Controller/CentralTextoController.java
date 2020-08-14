@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Controller;
 
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
@@ -25,20 +26,14 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-
-//import io.github.pedroermarinho.hospital.Model.model_bairros;
-//import io.github.pedroermarinho.hospital.Model.model_cidades;
-//import io.github.pedroermarinho.hospital.Model.model_estado;
-//import io.github.pedroermarinho.hospital.Model.model_pais;
-//import io.github.pedroermarinho.hospital.Model.model_ruas;
-//import com.jfoenix.controls.JFXDatePicker;
-
 /**
  * FXML Controller class
  *
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
 public class CentralTextoController implements Initializable {
+
+    private final Dados data = new Dados();
 
     private AddressClientModel endereco_cliente;
     private ClientModel cliente;
@@ -47,19 +42,19 @@ public class CentralTextoController implements Initializable {
     private AnchorPane TextoMenuAnchor;
     @FXML
     private BorderPane BorderTop;
-
-    @FXML
-    private Button btnOFF_ON_TopMenu;
-
-    @FXML
-    private Label TituloMenuTopLabel;
+//
+//    @FXML
+//    private Button btnOFF_ON_TopMenu;
+//
+//    @FXML
+//    private Label TituloMenuTopLabel;
 
     @FXML
     private Label DataMenuTopLabel;
 
-
-    @FXML
-    private Button btnPesquisarData;
+//
+//    @FXML
+//    private Button btnPesquisarData;
 
     @FXML
     private TableView<ClientModel> clientTableView;
@@ -100,8 +95,6 @@ public class CentralTextoController implements Initializable {
     @FXML
     private Label EmailLabel;
 
-    @FXML
-    private Label TelefoneFixoLabel;
 
     @FXML
     private Label TelefoneLabel;
@@ -109,12 +102,11 @@ public class CentralTextoController implements Initializable {
     @FXML
     private TextField PesquisarField;
 
-    private MainApp mainApp;
 
     private boolean on_off;
 
     @FXML
-    void OnDetalhesListCenter(ActionEvent event) {
+    void OnDetalhesListCenter() {
         cliente = clientTableView.getSelectionModel().getSelectedItem();
         try {
 
@@ -123,6 +115,7 @@ public class CentralTextoController implements Initializable {
             NascimentoLabel.textProperty().bind(cliente.dataNascimentoProperty());
             EmailLabel.textProperty().bind(cliente.emailProperty());
             NomeLabel.textProperty().bind(cliente.nomeProperty());
+            SexoLabel.textProperty().bind(cliente.sexoProperty());
 
         } catch (Exception ex) {
             CPFLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -140,19 +133,16 @@ public class CentralTextoController implements Initializable {
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 
                 TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
-                TelefoneFixoLabel.textProperty().bind(endereco_cliente.telefoneFixoProperty());
             } else {
                 TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-                TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
             }
         } catch (Exception a) {
             TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-            TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
         }
     }
 
     @FXML
-    void OnDetalhesViewHoje(ActionEvent event) {
+    void OnDetalhesViewHoje() {
 
         cliente = AgendaView.getSelectionModel().getSelectedItem();
         try {
@@ -162,6 +152,7 @@ public class CentralTextoController implements Initializable {
             NascimentoLabel.textProperty().bind(cliente.dataNascimentoProperty());
             EmailLabel.textProperty().bind(cliente.emailProperty());
             NomeLabel.textProperty().bind(cliente.nomeProperty());
+            SexoLabel.textProperty().bind(cliente.sexoProperty());
 
         } catch (Exception ex) {
             CPFLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -179,28 +170,25 @@ public class CentralTextoController implements Initializable {
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 
                 TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
-                TelefoneFixoLabel.textProperty().bind(endereco_cliente.telefoneFixoProperty());
             } else {
                 TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-                TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
             }
         } catch (Exception a) {
             TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-            TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
         }
     }
 
     @FXML
-    void OnPesquisarData(ActionEvent event) {
+    void OnPesquisarData() {
         if (!PesquisarField.getText().equals("")) {
             clientTableView.setItems(findItems());
         } else {
-            clientTableView.setItems(mainApp.getDadosData().getClientData());
+            clientTableView.setItems(data.getClientData());
         }
     }
 
     @FXML
-    void On_OFF_ON_TopMenu(ActionEvent event) {
+    void On_OFF_ON_TopMenu() {
         if (on_off) {
             BorderTop.setMaxHeight(80);
             BorderTop.setCenter(TextoMenuAnchor);
@@ -215,7 +203,7 @@ public class CentralTextoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        clientTableView.setItems(data.getClientData());
         HoraAgendaColumn.setCellValueFactory(new PropertyValueFactory<>("horario"));
 
         cartaoSUSColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
@@ -230,12 +218,6 @@ public class CentralTextoController implements Initializable {
         DataMenuTopLabel.setText(String.valueOf(new java.sql.Date(date.getTime())));
     }
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp=mainApp;
-        //        AgendaView.setItems(Agenda_Data_Atual(this.mainApp));
-        clientTableView.setItems(mainApp.getDadosData().getClientData());
-    }
-
     private void Informacoes(ClientModel newValue)  {
         try {
             CPFLabel.textProperty().bind(newValue.cpfProperty());
@@ -243,6 +225,7 @@ public class CentralTextoController implements Initializable {
             NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
             EmailLabel.textProperty().bind(newValue.emailProperty());
             NomeLabel.textProperty().bind(newValue.nomeProperty());
+            SexoLabel.textProperty().bind(newValue.sexoProperty());
         } catch (NullPointerException ex) {
             CPFLabel.textProperty().bind(new SimpleStringProperty(""));
             CartaoSUSLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -255,13 +238,11 @@ public class CentralTextoController implements Initializable {
             endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
                 TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
-                TelefoneFixoLabel.textProperty().bind(endereco_cliente.telefoneFixoProperty());
             } else {
                 throw new NullPointerException("Sem dados");
             }
         } catch (NullPointerException e) {
             TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-            TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
         }
 
     }
@@ -276,7 +257,7 @@ public class CentralTextoController implements Initializable {
             ID = null;
 
         }
-        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
+        for (ClientModel itens : data.getClientData()) {
 
             //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {

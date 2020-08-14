@@ -19,6 +19,8 @@ import java.sql.SQLException;
 public class Tables {
 
     public static void createTable(Connection connection, DataBaseModel db) {
+        System.out.println("banco de dados->"+db);
+        System.out.println(connection);
 
         String AUTO_INCREMENT = "AUTO_INCREMENT";
         if (db.getPrefix().equals("jdbc:sqlite:")) {
@@ -28,24 +30,24 @@ public class Tables {
         }
         System.out.println(AUTO_INCREMENT);
 
-        final String CLIENTES_STRING = "CREATE TABLE IF NOT EXISTS client ("
-                + "  id_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
-                + "  cpf varchar(16) not null,"
-                + "  nome varchar(220) not null,"
-                + "  mae varchar(220),"
-                + "  pai varchar(220),"
-                + "  data_nascimento date,"
+        final String CLIENTS_STRING = "CREATE TABLE IF NOT EXISTS client ("
+                + "  id_client INTEGER PRIMARY KEY " + AUTO_INCREMENT + ","
+                + "  cpf varchar(16) UNIQUE,"
                 + "  cartao_sus varchar(50) UNIQUE,"
+                + "  identidade varchar(50),"
+                + "  nome varchar(220),"
+                + "  mae varchar(220),"
+                + "  data_nascimento date,"
                 + "  sexo varchar(50),"
-                + "  email VARCHAR (250) ,"
-                + "  foto TEXT"
+                + "  email VARCHAR (250),"
+                + "  especialidade VARCHAR (250),"
+                + "  recepcao VARCHAR (250)"
                 + ");";
 
         final String ADDRESS_CLIENT_STRING = "CREATE TABLE IF NOT EXISTS address_client ("
                 + "  id_address_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
                 + "  id_client INTEGER not null UNIQUE, "
                 + "  telefone varchar(21),"
-                + "  telefone_fixo varchar(21),"
                 + "  pais varchar(30),"
                 + "  estado varchar(30),"
                 + "  cidade varchar(30),"
@@ -74,7 +76,7 @@ public class Tables {
         PreparedStatement stmt;
 
         try {
-            stmt = connection.prepareStatement(CLIENTES_STRING);
+            stmt = connection.prepareStatement(CLIENTS_STRING);
             stmt.executeUpdate();
         } catch (SQLException ex) {
             MsgErro.MessagemErroBD(ex, "CriarTable.CLIENTES_STRING");

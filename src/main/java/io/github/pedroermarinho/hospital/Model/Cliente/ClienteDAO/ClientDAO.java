@@ -35,14 +35,15 @@ public class ClientDAO {
             while (rs.next()) {
                 obj.setIdClient(rs.getInt("id_client"));//1
                 obj.setCpf(rs.getString("cpf"));//2
+                obj.setCartaoSUS(rs.getString("cartao_sus"));//7
+                obj.setIdentidade(rs.getString("identidade"));//7
                 obj.setNome(rs.getString("nome"));//3
                 obj.setMae(rs.getString("mae"));//4
-                obj.setPai(rs.getString("pai"));//5
                 obj.setDataNascimento(rs.getString("data_nascimento"));//6
-                obj.setCartaoSUS(rs.getString("cartao_sus"));//7
                 obj.setSexo(rs.getString("sexo"));//8
                 obj.setEmail(rs.getString("email"));//9
-                obj.setFoto(rs.getString("foto"));//10
+                obj.setEspecialidade(rs.getString("especialidade"));//9
+                obj.setRecepcao(rs.getString("recepcao"));//9
 
             }
 
@@ -64,16 +65,17 @@ public class ClientDAO {
             while (rs.next()) {
                 ClientModel obj = new ClientModel();
 
-                obj.setIdClient(rs.getInt("id_client"));//1
-                obj.setCpf(rs.getString("cpf"));//2
-                obj.setNome(rs.getString("nome"));//3
-                obj.setMae(rs.getString("mae"));//4
-                obj.setPai(rs.getString("pai"));//5
-                obj.setDataNascimento(rs.getString("data_nascimento"));//6
-                obj.setCartaoSUS(rs.getString("cartao_sus"));//7
-                obj.setSexo(rs.getString("sexo"));//8
-                obj.setEmail(rs.getString("email"));//9
-                obj.setFoto(rs.getString("foto"));//10
+                obj.setIdClient(rs.getInt("id_client"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setCartaoSUS(rs.getString("cartao_sus"));
+                obj.setIdentidade(rs.getString("identidade"));
+                obj.setNome(rs.getString("nome"));
+                obj.setMae(rs.getString("mae"));
+                obj.setDataNascimento(rs.getString("data_nascimento"));
+                obj.setSexo(rs.getString("sexo"));
+                obj.setEmail(rs.getString("email"));
+                obj.setEspecialidade(rs.getString("especialidade"));
+                obj.setRecepcao(rs.getString("recepcao"));
                 result.add(obj);
             }
             return result;
@@ -89,17 +91,18 @@ public class ClientDAO {
     public void creatCliente(ClientModel obj) {
 
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO client (`cpf`, `nome`, `mae`, `pai`, `data_nascimento`, `cartao_sus`, `sexo`, `email`, `foto`) VALUES(?,?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO client (`cpf`,`cartao_sus`,`identidade`, `nome`, `mae`,`data_nascimento`,`sexo`, `email`,`especialidade`,`recepcao`) VALUES(?,?,?,?,?,?,?,?,?,?);");
 
             stmt.setString(1, obj.getCpf());
-            stmt.setString(2, obj.getNome());
-            stmt.setString(3, obj.getMae());
-            stmt.setString(4, obj.getPai());
-            stmt.setString(5, obj.getDataNascimento());
-            stmt.setString(6, obj.getCartaoSUS());
+            stmt.setString(2, obj.getCartaoSUS());
+            stmt.setString(3, obj.getIdentidade());
+            stmt.setString(4, obj.getNome());
+            stmt.setString(5, obj.getMae());
+            stmt.setString(6, obj.getDataNascimento());
             stmt.setString(7, obj.getSexo());
             stmt.setString(8, obj.getEmail());
-            stmt.setString(9, obj.getFoto());
+            stmt.setString(9, obj.getEspecialidade());
+            stmt.setString(10, obj.getRecepcao());
 
             stmt.executeUpdate();
 
@@ -113,27 +116,30 @@ public class ClientDAO {
 
         try {
             stmt = db.getConnection().prepareStatement("UPDATE client SET"
-                    + " cpf = ?,"//1
-                    + " nome = ?,"//2
-                    + " mae = ?,"//3
-                    + " pai = ?,"//4
-                    + " data_nascimento = ?,"//5
-                    + " cartao_sus = ?,"//6
-                    + " sexo = ?,"//7
-                    + " email = ?,"//8
-                    + " foto = ?"//9
-                    + " WHERE id_client = ?;");//10
+                    + " cpf = ?,"
+                    + " cartao_sus = ?,"
+                    + " identidade = ?,"
+                    + " nome = ?,"
+                    + " mae = ?,"
+                    + " data_nascimento = ?,"
+                    + " sexo = ?,"
+                    + " email = ?,"
+                    + " especialidade = ?,"
+                    + " recepcao = ?"
+                    + " WHERE id_client = ?;"
+            );
 
             stmt.setString(1, obj.getCpf());
-            stmt.setString(2, obj.getNome());
-            stmt.setString(3, obj.getMae());
-            stmt.setString(4, obj.getPai());
-            stmt.setString(5, obj.getDataNascimento());
-            stmt.setString(6, obj.getCartaoSUS());
+            stmt.setString(2, obj.getCartaoSUS());
+            stmt.setString(3, obj.getIdentidade());
+            stmt.setString(4, obj.getNome());
+            stmt.setString(5, obj.getMae());
+            stmt.setString(6, obj.getDataNascimento());
             stmt.setString(7, obj.getSexo());
             stmt.setString(8, obj.getEmail());
-            stmt.setString(9, obj.getFoto());
-            stmt.setInt(10, obj.getIdClient());
+            stmt.setString(9, obj.getEspecialidade());
+            stmt.setString(10, obj.getRecepcao());
+            stmt.setInt(11, obj.getIdClient());
 
             stmt.executeUpdate();
 

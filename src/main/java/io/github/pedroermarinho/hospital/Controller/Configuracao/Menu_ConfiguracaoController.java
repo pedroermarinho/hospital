@@ -6,10 +6,8 @@
 package io.github.pedroermarinho.hospital.Controller.Configuracao;
 
 import io.github.pedroermarinho.hospital.MainApp;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
@@ -23,8 +21,8 @@ import java.util.ResourceBundle;
 public class Menu_ConfiguracaoController implements Initializable {
 
     private MainApp mainApp;
-    @FXML
-    private Button btnBancoDeDados;
+//    @FXML
+//    private Button btnBancoDeDados;
     @FXML
     private BorderPane Border;
 
@@ -33,7 +31,7 @@ public class Menu_ConfiguracaoController implements Initializable {
     }
 
     @FXML
-    void OnBancoDeDados(ActionEvent event) {
+    void OnBancoDeDados() {
         Border.setCenter(mainApp.getTelas().Configuracao_Banco_de_Dados());
     }
 

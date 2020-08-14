@@ -18,13 +18,7 @@ import java.util.ResourceBundle;
  */
 public class AlertasController implements Initializable {
 
-    private MainApp mainApp;
 
-    public void setMainApp(MainApp mainApp) {
-        System.out.println("setMainApp");
-        this.mainApp = mainApp;
-
-    }
 
     /**
      * Initializes the controller class.

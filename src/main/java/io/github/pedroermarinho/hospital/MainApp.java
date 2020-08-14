@@ -14,11 +14,10 @@ import static io.github.pedroermarinho.hospital.Util.BD.Tables.createTable;
  * @author Pedro Marinho  < pedro.marinho238@gmail.com > marinho
  */
 public class MainApp extends Application {
-
+    private final Dados data = new Dados();
     private final DataBaseClient banco_de_dados = DataBaseClient.instance();
-    private final Dados DadosData = new Dados(this);
     private final ChamadasDeTela telas = new ChamadasDeTela();
-    DataBaseSettings dataBaseSettings = DataBaseSettings.instance();
+    final DataBaseSettings dataBaseSettings = DataBaseSettings.instance();
     private UserModel usuario = null;
     private DataBaseModel dados_db = new DataBaseModel();
 
@@ -34,10 +33,6 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    public Dados getDadosData() {
-        return DadosData;
-    }
-
     public ChamadasDeTela getTelas() {
         return telas;
     }
@@ -50,9 +45,6 @@ public class MainApp extends Application {
         this.usuario = usuario;
     }
 
-    public DataBaseModel getDados_db() {
-        return dados_db;
-    }
 
     public void setDados_db(DataBaseModel dados_db) {
         this.dados_db = dados_db;
@@ -61,9 +53,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         System.out.println("start");
-
-
-
 
         this.telas.primeriaCena = stage;
         this.telas.primeriaCena.setTitle("Clinica");
@@ -74,12 +63,11 @@ public class MainApp extends Application {
         if (banco_de_dados.getConnection() != null) {
             createTable(banco_de_dados.getConnection(), dados_db);
 
-            Image image = new Image("/io/github/pedroermarinho/hospital/Icons/icon.png");
+            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
 
-            if (!getDadosData().userDataNotThread().isEmpty()) {
+            if (!data.getUserData().isEmpty()) {
                 if (telas.usuario() != null) {
                     telas.primeriaCena.getIcons().add(image);
-                    getDadosData().sincronizarBD();
                     telas.PalcoPrincipal();
                     telas.MenuTop();
                     telas.CentralTexto();
@@ -88,7 +76,6 @@ public class MainApp extends Application {
                 setUsuario(telas.CadastroUsuario());
                 if (getUsuario() != null) {
                     if (telas.usuario() != null) {
-                        getDadosData().sincronizarBD();
                         telas.PalcoPrincipal();
                         telas.MenuTop();
                         telas.CentralTexto();

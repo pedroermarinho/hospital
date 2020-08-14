@@ -27,8 +27,8 @@ public class Filtro {
     }
 
 
-    public static UserModel Senha_Usuario(String Usuario, String Senha, MainApp mainApp) {
-        List<UserModel> users = UserModel.all(mainApp);
+    public static UserModel Senha_Usuario(String Usuario, String Senha) {
+        List<UserModel> users = UserModel.all();
         for (UserModel user : users) {
             if (user.getUserName().equals(Usuario) && user.getSenha().equals(Senha)) {
                 return user;

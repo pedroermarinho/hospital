@@ -5,14 +5,13 @@
  */
 package io.github.pedroermarinho.hospital.Controller;
 
-import io.github.pedroermarinho.hospital.MainApp;
+import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -27,9 +26,8 @@ import java.util.ResourceBundle;
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
 public class InformacaoController implements Initializable {
+    private final Dados data = new Dados();
 
-    private MainApp mainApp;
-    private AddressClientModel endereco_cliente;
 
 
     @FXML
@@ -63,9 +61,6 @@ public class InformacaoController implements Initializable {
     private Label NomeLabel;
 
     @FXML
-    private Label PaiLabel;
-
-    @FXML
     private Label CidadeLabel;
 
     @FXML
@@ -86,34 +81,29 @@ public class InformacaoController implements Initializable {
     @FXML
     private Label TelefoneLabel;
 
-    @FXML
-    private Label TelefoneFixoLabel;
-
-    @FXML
-    private Button btnPesquisar;
+//    @FXML
+//    private Button btnPesquisar;
 
     @FXML
     private TextField PesquisarField;
 
+    @FXML
+    private Label identidadeLabel;
+
+    @FXML
+    private Label especialidadeLabel;
+
+    @FXML
+    private Label recepcaoLabel;
 
 
 
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-        RegistroClientesView.setItems(this.mainApp.getDadosData().getClientData());
-    }
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        RegistroClientesView.setItems(data.getClientData());
         IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("idClient"));
         NomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("Nome"));
         RegistroClientesView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> Informacoes(newValue));
@@ -121,14 +111,18 @@ public class InformacaoController implements Initializable {
 
     private void Informacoes(ClientModel newValue)  {
         try {
-
+            System.out.println(newValue.getSexo());
             CPFLabel.textProperty().bind(newValue.cpfProperty());
             CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
             NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
             MaeLabel.textProperty().bind(newValue.maeProperty());
             EmailLabel.textProperty().bind(newValue.emailProperty());
             NomeLabel.textProperty().bind(newValue.nomeProperty());
-            PaiLabel.textProperty().bind(newValue.paiProperty());
+            SexoLabel.textProperty().bind(newValue.sexoProperty());
+            identidadeLabel.textProperty().bind(newValue.identidadeProperty());
+            especialidadeLabel.textProperty().bind(newValue.especialidadeProperty());
+            recepcaoLabel.textProperty().bind(newValue.recepcaoProperty());
+
 
         } catch (NullPointerException ex) {
             CPFLabel.textProperty().bind(new SimpleStringProperty(""));
@@ -138,12 +132,13 @@ public class InformacaoController implements Initializable {
             MaeLabel.textProperty().bind(new SimpleStringProperty(""));
             EmailLabel.textProperty().bind(new SimpleStringProperty(""));
             NomeLabel.textProperty().bind(new SimpleStringProperty(""));
-            PaiLabel.textProperty().bind(new SimpleStringProperty(""));
-
+            identidadeLabel.textProperty().bind(new SimpleStringProperty(""));
+            especialidadeLabel.textProperty().bind(new SimpleStringProperty(""));
+            recepcaoLabel.textProperty().bind(new SimpleStringProperty(""));
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
+            AddressClientModel endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
             System.out.println(endereco_cliente);
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
                 System.out.println("ok");
@@ -155,7 +150,7 @@ public class InformacaoController implements Initializable {
                 PaisLabel.textProperty().bind(endereco_cliente.paisProperty());
                 NCasaLabel.textProperty().bind(endereco_cliente.numeroCasaProperty().asString());
                 TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
-                TelefoneFixoLabel.textProperty().bind(endereco_cliente.telefoneFixoProperty());
+
             } else {
               throw new NullPointerException("Sem dados");
             }
@@ -165,21 +160,19 @@ public class InformacaoController implements Initializable {
             CidadeLabel.textProperty().bind(new SimpleStringProperty(""));
             EstadoLabel.textProperty().bind(new SimpleStringProperty(""));
             PaisLabel.textProperty().bind(new SimpleStringProperty(""));
-
             NCasaLabel.textProperty().bind(new SimpleStringProperty(""));
             TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-            TelefoneFixoLabel.textProperty().bind(new SimpleStringProperty(""));
         }
 
     }
 
 
     @FXML
-    void OnPesquisar(ActionEvent event) {
+    void OnPesquisar() {
         if (!PesquisarField.getText().equals("")) {
             RegistroClientesView.setItems(findItems());
         } else {
-            RegistroClientesView.setItems(mainApp.getDadosData().getClientData());
+            RegistroClientesView.setItems(data.getClientData());
         }
     }
 
@@ -193,9 +186,7 @@ public class InformacaoController implements Initializable {
             ID = null;
 
         }
-        for (ClientModel itens : mainApp.getDadosData().getClientData()) {
-
-            //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
+        for (ClientModel itens :data.getClientData()) {
             if (ID != null) {
                 if (itens.getIdClient() == ID) {
                     itensEncontrados.add(itens);

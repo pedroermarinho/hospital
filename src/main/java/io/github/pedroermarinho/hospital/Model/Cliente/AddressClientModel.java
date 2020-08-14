@@ -18,26 +18,40 @@ import java.util.List;
  */
 public class AddressClientModel {
 
-    private static final AddressClientDAO dao = new AddressClientDAO();
+
     private final IntegerProperty idAddressClient = new SimpleIntegerProperty();
-    private final StringProperty pais = new SimpleStringProperty();
-    private final StringProperty estado = new SimpleStringProperty();
-    private final StringProperty cidade = new SimpleStringProperty();
+    private final IntegerProperty idClient = new SimpleIntegerProperty();
+    private final StringProperty pais = new SimpleStringProperty("Brasil");
+    private final StringProperty estado = new SimpleStringProperty("Amazonas");
+    private final StringProperty cidade = new SimpleStringProperty("Eirunepé");
     private final StringProperty rua = new SimpleStringProperty();
     private final StringProperty bairro = new SimpleStringProperty();
     private final IntegerProperty numeroCasa = new SimpleIntegerProperty();
     private final StringProperty telefone = new SimpleStringProperty();
-    private final StringProperty telefoneFixo = new SimpleStringProperty();
     private final StringProperty complemento = new SimpleStringProperty();
-    private final IntegerProperty idClient = new SimpleIntegerProperty();
 
-
-    public static List<AddressClientModel> all() {
-        return new AddressClientDAO().getAddressClientList();
+    public int getIdAddressClient() {
+        return idAddressClient.get();
     }
 
-    public static AddressClientModel find(int pk) {
-        return new AddressClientDAO().getAddressClientID(pk);
+    public IntegerProperty idAddressClientProperty() {
+        return idAddressClient;
+    }
+
+    public void setIdAddressClient(int idAddressClient) {
+        this.idAddressClient.set(idAddressClient);
+    }
+
+    public int getIdClient() {
+        return idClient.get();
+    }
+
+    public IntegerProperty idClientProperty() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient.set(idClient);
     }
 
     public String getPais() {
@@ -62,18 +76,6 @@ public class AddressClientModel {
 
     public void setEstado(String estado) {
         this.estado.set(estado);
-    }
-
-    public int getIdAddressClient() {
-        return idAddressClient.get();
-    }
-
-    public IntegerProperty idAddressClientProperty() {
-        return idAddressClient;
-    }
-
-    public void setIdAddressClient(int idAddressClient) {
-        this.idAddressClient.set(idAddressClient);
     }
 
     public String getCidade() {
@@ -136,18 +138,6 @@ public class AddressClientModel {
         this.telefone.set(telefone);
     }
 
-    public String getTelefoneFixo() {
-        return telefoneFixo.get();
-    }
-
-    public StringProperty telefoneFixoProperty() {
-        return telefoneFixo;
-    }
-
-    public void setTelefoneFixo(String telefoneFixo) {
-        this.telefoneFixo.set(telefoneFixo);
-    }
-
     public String getComplemento() {
         return complemento.get();
     }
@@ -160,18 +150,16 @@ public class AddressClientModel {
         this.complemento.set(complemento);
     }
 
-    public int getIdClient() {
-        return idClient.get();
+    public static List<AddressClientModel> all() {
+        return new AddressClientDAO().getAddressClientList();
     }
 
-    public IntegerProperty idClientProperty() {
-        return idClient;
+    public static AddressClientModel find(int pk) {
+        return new AddressClientDAO().getAddressClientID(pk);
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient.set(idClient);
-    }
 
+    private static final AddressClientDAO dao = new AddressClientDAO();
     public void save() {
         if (idAddressClient.get() != 0) {
             if (find(idAddressClient.get()) != null) {

@@ -23,7 +23,7 @@ public class DataBaseModel {
     private final StringProperty Hosts = new SimpleStringProperty("localhost");
     private final StringProperty Users = new SimpleStringProperty("root");
     private final StringProperty Passwords = new SimpleStringProperty("");
-    private final StringProperty DataBases = new SimpleStringProperty("clinica");
+    private final StringProperty DataBases = new SimpleStringProperty("hospital");
     private final StringProperty Prefixs = new SimpleStringProperty("jdbc:mysql:");
     private final IntegerProperty Ports = new SimpleIntegerProperty(3306);
 

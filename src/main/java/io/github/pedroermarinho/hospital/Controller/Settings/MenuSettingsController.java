@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Controller.Util;
+package io.github.pedroermarinho.hospital.Controller.Settings;
 
 import io.github.pedroermarinho.hospital.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,26 +16,23 @@ import java.util.ResourceBundle;
 /**
  * FXML Controller class
  *
- * @author pedro
+ * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class ErroController implements Initializable {
+public class MenuSettingsController implements Initializable {
 
-    @FXML
-    private Label lbErro;
-    private String erro;
-    private Stage dialogStage;
     private MainApp mainApp;
+//    @FXML
+//    private Button btnBancoDeDados;
+    @FXML
+    private BorderPane Border;
 
-
-    public void setMainApp(MainApp mainApp, Exception ex) {
+    public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        this.erro = erro;
-        lbErro.setText(erro);
     }
 
     @FXML
-    private void ok() {
-        dialogStage.close();
+    void OnBancoDeDados() {
+        Border.setCenter(mainApp.getTelas().Configuracao_Banco_de_Dados());
     }
 
     /**

@@ -128,8 +128,6 @@ public class DataBaseModel {
     }
 
     public void save() {
-        //  System.out.println("Verificação para save: Registro ->" + id + " Resultado do DAO.find ->" + dao.find(id));
-
         if (ID_banco_de_dados.getValue() != null && ID_banco_de_dados.get() != 0) {
             if (find(ID_banco_de_dados.get()) != null) {
                 dao.updateDados_db(this);

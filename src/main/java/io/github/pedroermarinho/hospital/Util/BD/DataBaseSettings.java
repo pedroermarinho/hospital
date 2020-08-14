@@ -29,7 +29,7 @@ public class DataBaseSettings {
     public Connection open() {
         try {
             if (connection == null) {
-                connection = DriverManager.getConnection("jdbc:sqlite:Configuracao.db");
+                connection = DriverManager.getConnection("jdbc:sqlite:settings.db");
             }
             return connection;
         } catch (SQLException ex) {

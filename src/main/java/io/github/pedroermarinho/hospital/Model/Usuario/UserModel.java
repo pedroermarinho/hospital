@@ -135,7 +135,6 @@ public class UserModel {
     }
 
     public void save() {
-        //  System.out.println("Verificação para save: Registro ->" + id + " Resultado do DAO.find ->" + dao.find(id));
 
         if (idUser.getValue() != null && idUser.get() != 0) {
             if (find(idUser.get()) != null) {

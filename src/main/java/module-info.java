@@ -5,16 +5,14 @@ module hospital
 {
     requires javafx.fxml;
     requires javafx.controls;
-    requires javafx.graphics;
-    requires javafx.base;
     requires java.sql;
     requires org.jfxtras.styles.jmetro;
     requires java.desktop;
 
-    opens io.github.pedroermarinho.hospital to javafx.fxml, javafx.controls,javafx.graphics;
-    opens io.github.pedroermarinho.hospital.Controller.Configuracao to javafx.fxml;
-    opens io.github.pedroermarinho.hospital.Controller.Cadastros to javafx.fxml;
-    opens io.github.pedroermarinho.hospital.Controller.Usuario to javafx.fxml;
+    opens io.github.pedroermarinho.hospital to javafx.fxml, javafx.controls;
+    opens io.github.pedroermarinho.hospital.Controller.Settings to javafx.fxml;
+    opens io.github.pedroermarinho.hospital.Controller.Register to javafx.fxml;
+    opens io.github.pedroermarinho.hospital.Controller.User to javafx.fxml;
     opens io.github.pedroermarinho.hospital.Controller.Util to javafx.fxml;
     opens io.github.pedroermarinho.hospital.Controller to javafx.fxml;
     opens io.github.pedroermarinho.hospital.Model.Cliente to javafx.base;

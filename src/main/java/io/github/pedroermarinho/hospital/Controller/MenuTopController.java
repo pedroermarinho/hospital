@@ -77,7 +77,6 @@ public class MenuTopController implements Initializable {
 
 
     public void setMainApp(MainApp mainApp) {
-        System.out.println("setMainApp");
         this.mainApp = mainApp;
         this.primeira_cena = this.mainApp.getTelas().getPrimeriaCena();
 

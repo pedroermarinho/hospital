@@ -19,8 +19,6 @@ import java.sql.SQLException;
 public class Tables {
 
     public static void createTable(Connection connection, DataBaseModel db) {
-        System.out.println("banco de dados->"+db);
-        System.out.println(connection);
 
         String AUTO_INCREMENT = "AUTO_INCREMENT";
         if (db.getPrefix().equals("jdbc:sqlite:")) {
@@ -28,7 +26,6 @@ public class Tables {
         } else if (db.getPrefix().equals("jdbc:mysql:")) {
             AUTO_INCREMENT = "AUTO_INCREMENT";
         }
-        System.out.println(AUTO_INCREMENT);
 
         final String CLIENTS_STRING = "CREATE TABLE IF NOT EXISTS client ("
                 + "  id_client INTEGER PRIMARY KEY " + AUTO_INCREMENT + ","

@@ -56,8 +56,6 @@ public class SettingsModel {
     }
 
     public void save() {
-        //  System.out.println("Verificação para save: Registro ->" + id + " Resultado do DAO.find ->" + dao.find(id));
-
         if (ID_configuracao.getValue() != null && ID_configuracao.get() != 0) {
             if (find(ID_configuracao.get()) != null) {
                 dao.updateConfiguracao(this);

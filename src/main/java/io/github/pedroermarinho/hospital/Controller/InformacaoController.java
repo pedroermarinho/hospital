@@ -111,7 +111,6 @@ public class InformacaoController implements Initializable {
 
     private void Informacoes(ClientModel newValue)  {
         try {
-            System.out.println(newValue.getSexo());
             CPFLabel.textProperty().bind(newValue.cpfProperty());
             CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
             NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
@@ -139,10 +138,7 @@ public class InformacaoController implements Initializable {
         try {
 
             AddressClientModel endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
-            System.out.println(endereco_cliente);
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
-                System.out.println("ok");
-
                 RuaLabel.textProperty().bind(endereco_cliente.ruaProperty());
                 BairroLabel.textProperty().bind(endereco_cliente.bairroProperty());
                 CidadeLabel.textProperty().bind(endereco_cliente.cidadeProperty());

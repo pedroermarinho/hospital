@@ -34,12 +34,10 @@ public class SenhaController implements Initializable {
     private boolean senhabool = false;
 
     public void setDialogStage(Stage dialogStage) {
-        System.out.println("setDialogStage");
         this.dialogStage = dialogStage;
     }
 
     public void setMainApp(MainApp mainapp, UserModel pessoa) {
-        System.out.println("setMainApp");
         this.mainapp = mainapp;
         this.pessoa = pessoa;
         lbUsuario.setText(pessoa.getUserName());

@@ -18,7 +18,6 @@ import java.util.Locale;
 public class PDF {
 
     public static void RELATORIO(String nome, int idade, String sexo, float peso, int altura, String nafs, int nam, int nfm, float quadril, String PAJ, String IMC, String IMC_S, String IAC, String IAC_S, String PI, String PI2, String PN, String TA, String TFB, String TMB, String AP) {
-        System.out.println("RELATORIO");
         String site = "<html>\n"
                 + "\n"
                 + "<head>\n"
@@ -300,7 +299,6 @@ public class PDF {
                 + "</html>";
 
         FileWriter arquivo;
-        System.out.println("salvando");
         try {
             arquivo = new FileWriter(new File("Arquivo.html"));
             arquivo.write(site);

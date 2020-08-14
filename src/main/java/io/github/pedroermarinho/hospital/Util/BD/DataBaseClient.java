@@ -41,7 +41,6 @@ public final class DataBaseClient {
                 return connection;
             } catch (SQLException ex) {
                 close();
-                System.out.println("erro");
                 MsgErro.MessagemErroBD(ex, "open");
                 return null;
             }

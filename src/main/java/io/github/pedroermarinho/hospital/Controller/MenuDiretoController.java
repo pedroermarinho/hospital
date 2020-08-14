@@ -38,13 +38,11 @@ public class MenuDiretoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {//dados a ser inicializado em conjunto com a interface
-        System.out.println("Interface de cadastrdos inicializada ");
         //tablePessoa.refresh();
 
     }
 
     public void setMainApp(MainApp mainApp) {
-        System.out.println("setMainApp");
         this.mainApp = mainApp;
         this.PalcoPrincipal = this.mainApp.getTelas().getPalcoPrincipal();
 

@@ -5,8 +5,9 @@ public enum SexoEnum {
     FEMININO("Feminino");
 
     final String descricao;
-    SexoEnum(String descricao){
-        this.descricao =descricao;
+
+    SexoEnum(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getDescricao() {

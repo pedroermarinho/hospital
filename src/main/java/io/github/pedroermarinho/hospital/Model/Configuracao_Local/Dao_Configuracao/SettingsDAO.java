@@ -147,8 +147,8 @@ public class SettingsDAO {
     }
 
     public void deleteConfiguracao(SettingsModel obj) {
-     try {
-         stmt = db.getConnection().prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
+        try {
+            stmt = db.getConnection().prepareStatement("DELETE FROM clientes WHERE ID_cliente = ?;");
 
             stmt.setInt(1, obj.getID_configuracao());
 

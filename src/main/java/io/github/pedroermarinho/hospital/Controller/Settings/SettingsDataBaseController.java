@@ -35,7 +35,7 @@ public class SettingsDataBaseController implements Initializable {
     private Button btnEditar;
     @FXML
     private Button btnDeletar;
-//    @FXML
+    //    @FXML
 //    private Button btnNovo;
     @FXML
     private Button btnCancelar;
@@ -53,7 +53,6 @@ public class SettingsDataBaseController implements Initializable {
     private TextField PrefixField;
     @FXML
     private TextField PortField;
-
 
 
     @FXML

@@ -5,10 +5,13 @@
  */
 package io.github.pedroermarinho.hospital;
 
-import io.github.pedroermarinho.hospital.Controller.*;
+import io.github.pedroermarinho.hospital.Controller.MenuDiretoController;
+import io.github.pedroermarinho.hospital.Controller.MenuTopController;
+import io.github.pedroermarinho.hospital.Controller.PalcoPrincipalController;
+import io.github.pedroermarinho.hospital.Controller.RegisterController;
 import io.github.pedroermarinho.hospital.Controller.Settings.DataBaseController;
-import io.github.pedroermarinho.hospital.Controller.Settings.RegisterDataBaseController;
 import io.github.pedroermarinho.hospital.Controller.Settings.MenuSettingsController;
+import io.github.pedroermarinho.hospital.Controller.Settings.RegisterDataBaseController;
 import io.github.pedroermarinho.hospital.Controller.User.RegisterUserController;
 import io.github.pedroermarinho.hospital.Controller.User.UsuarioController;
 import io.github.pedroermarinho.hospital.Controller.Util.ErroController;
@@ -83,7 +86,7 @@ public class ChamadasDeTela {
 
             // Dá ao controller o acesso ao main app.
             PalcoPrincipalController controller = loader.getController();
-            controller.setMainApp(mainapp);
+
 
             primeriaCena.show();
         } catch (IOException e) {

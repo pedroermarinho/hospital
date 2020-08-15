@@ -14,6 +14,10 @@ import java.util.Arrays;
  */
 public class MsgErro {
 
+    @SuppressWarnings("unused")
+    public static void IGNORE_RESULT(boolean b) {
+    }
+
     public static void MessagemErroTela(Exception ex, String msg) {
         ex.printStackTrace();
 

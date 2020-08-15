@@ -36,7 +36,7 @@ public class UsersController implements Initializable {
     private TableColumn<UserModel, String> NomeColumn;
     @FXML
     private MenuItem btnDetalhes;
-//    @FXML
+    //    @FXML
 //    private Button btNovo;
     @FXML
     private Button btEditar;
@@ -60,7 +60,6 @@ public class UsersController implements Initializable {
     private TextField EmailField;
     @FXML
     private ComboBox<SexoEnum> SexoBox;
-
 
 
     @FXML

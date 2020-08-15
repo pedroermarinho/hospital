@@ -2,16 +2,22 @@ package io.github.pedroermarinho.hospital.Util.BD;
 
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
+import net.harawata.appdirs.AppDirs;
+import net.harawata.appdirs.AppDirsFactory;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import static io.github.pedroermarinho.hospital.Util.MsgErro.IGNORE_RESULT;
 
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
 public final class DataBaseClient {
-
+    private final AppDirs appDirs = AppDirsFactory.getInstance();
     private static volatile DataBaseClient instanceDataBaseClient;
     private Connection connection;
 
@@ -26,14 +32,17 @@ public final class DataBaseClient {
         return instanceDataBaseClient;
     }
 
+
     public Connection open(DataBaseModel dataBaseModel) {
         if (dataBaseModel != null) {
             String url = dataBaseModel.getPrefix() + "//" + dataBaseModel.getHost() + ":" + dataBaseModel.getPorts() + "/" + dataBaseModel.getDataBase() + ".db";
             try {
                 if (connection == null) {
                     if (dataBaseModel.getPrefix().equals("jdbc:sqlite:")) {
-                        connection = DriverManager.getConnection(dataBaseModel.getPrefix() + dataBaseModel.getDataBase() + ".db");
-                        System.out.println("Sqlite->" + dataBaseModel.getPrefix() + "/" + dataBaseModel.getDataBase());
+                        final String path = appDirs.getUserDataDir("hospital", null, "pedroermarinho");
+                        IGNORE_RESULT(new File(path).mkdirs());
+                        final String pathDataBase = Paths.get(path, dataBaseModel.getDataBase() + ".db").toString();
+                        connection = DriverManager.getConnection(dataBaseModel.getPrefix() + pathDataBase);
                     } else {
                         connection = DriverManager.getConnection(url, dataBaseModel.getUser(), dataBaseModel.getPassword());
                     }

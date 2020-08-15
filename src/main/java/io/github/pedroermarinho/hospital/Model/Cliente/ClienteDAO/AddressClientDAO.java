@@ -24,7 +24,6 @@ public class AddressClientDAO {
     private PreparedStatement stmt;
 
 
-
     public AddressClientModel getAddressClientID(int ID) {
         AddressClientModel obj = new AddressClientModel();
 

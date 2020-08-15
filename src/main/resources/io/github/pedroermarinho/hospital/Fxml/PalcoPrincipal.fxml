@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.layout.BorderPane?>
-
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1040.0" stylesheets="@../Styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pedroermarinho.hospital.Controller.PalcoPrincipalController" />
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
+            prefWidth="1040.0" stylesheets="@../Styles/Styles.css"
+            xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="io.github.pedroermarinho.hospital.Controller.PalcoPrincipalController"/>

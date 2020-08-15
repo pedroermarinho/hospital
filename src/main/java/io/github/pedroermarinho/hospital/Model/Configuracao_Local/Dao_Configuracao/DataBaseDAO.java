@@ -23,8 +23,8 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroBD;
  */
 public class DataBaseDAO {
 
-    private PreparedStatement stmt;
     private final DataBaseSettings db = DataBaseSettings.instance();
+    private PreparedStatement stmt;
 
     public DataBaseDAO() {
         try {

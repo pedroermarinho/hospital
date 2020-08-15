@@ -14,6 +14,7 @@ import java.util.List;
 public class ClientModel {
 
 
+    private static final ClientDAO dao = new ClientDAO();
     private final IntegerProperty idClient = new SimpleIntegerProperty(0);
     private final StringProperty cpf = new SimpleStringProperty();
     private final StringProperty cartaoSUS = new SimpleStringProperty();
@@ -26,146 +27,6 @@ public class ClientModel {
     private final StringProperty especialidade = new SimpleStringProperty();
     private final StringProperty recepcao = new SimpleStringProperty();
 
-    public int getIdClient() {
-        return idClient.get();
-    }
-
-    public IntegerProperty idClientProperty() {
-        return idClient;
-    }
-
-    public void setIdClient(int idClient) {
-        this.idClient.set(idClient);
-    }
-
-    public String getCpf() {
-        return cpf.get();
-    }
-
-    public StringProperty cpfProperty() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf.set(cpf);
-    }
-
-    public String getCartaoSUS() {
-        return cartaoSUS.get();
-    }
-
-    public StringProperty cartaoSUSProperty() {
-        return cartaoSUS;
-    }
-
-    public void setCartaoSUS(String cartaoSUS) {
-        this.cartaoSUS.set(cartaoSUS);
-    }
-
-    public String getIdentidade() {
-        return identidade.get();
-    }
-
-    public StringProperty identidadeProperty() {
-        return identidade;
-    }
-
-    public void setIdentidade(String identidade) {
-        this.identidade.set(identidade);
-    }
-
-    public String getNome() {
-        return nome.get();
-    }
-
-    public StringProperty nomeProperty() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome.set(nome);
-    }
-
-    public String getMae() {
-        return mae.get();
-    }
-
-    public StringProperty maeProperty() {
-        return mae;
-    }
-
-    public void setMae(String mae) {
-        this.mae.set(mae);
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento.get();
-    }
-
-    public StringProperty dataNascimentoProperty() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento.set(dataNascimento);
-    }
-
-    public String getSexo() {
-        return sexo.get();
-    }
-
-    public StringProperty sexoProperty() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo.set(sexo);
-    }
-
-    public String getEmail() {
-        return email.get();
-    }
-
-    public StringProperty emailProperty() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email.set(email);
-    }
-
-    public String getEspecialidade() {
-        return especialidade.get();
-    }
-
-    public StringProperty especialidadeProperty() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade.set(especialidade);
-    }
-
-    public String getRecepcao() {
-        return recepcao.get();
-    }
-
-    public StringProperty recepcaoProperty() {
-        return recepcao;
-    }
-
-    public void setRecepcao(String recepcao) {
-        this.recepcao.set(recepcao);
-    }
-
-    @Override
-    public String toString() {
-        return nome.get();
-    }
-
-
-    private static final ClientDAO dao=new ClientDAO();
-
     public static List<ClientModel> all() {
 
         return new ClientDAO().getClienteList();
@@ -175,6 +36,142 @@ public class ClientModel {
         return new ClientDAO().getClienteID(pk);
     }
 
+    public int getIdClient() {
+        return idClient.get();
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient.set(idClient);
+    }
+
+    public IntegerProperty idClientProperty() {
+        return idClient;
+    }
+
+    public String getCpf() {
+        return cpf.get();
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf.set(cpf);
+    }
+
+    public StringProperty cpfProperty() {
+        return cpf;
+    }
+
+    public String getCartaoSUS() {
+        return cartaoSUS.get();
+    }
+
+    public void setCartaoSUS(String cartaoSUS) {
+        this.cartaoSUS.set(cartaoSUS);
+    }
+
+    public StringProperty cartaoSUSProperty() {
+        return cartaoSUS;
+    }
+
+    public String getIdentidade() {
+        return identidade.get();
+    }
+
+    public void setIdentidade(String identidade) {
+        this.identidade.set(identidade);
+    }
+
+    public StringProperty identidadeProperty() {
+        return identidade;
+    }
+
+    public String getNome() {
+        return nome.get();
+    }
+
+    public void setNome(String nome) {
+        this.nome.set(nome);
+    }
+
+    public StringProperty nomeProperty() {
+        return nome;
+    }
+
+    public String getMae() {
+        return mae.get();
+    }
+
+    public void setMae(String mae) {
+        this.mae.set(mae);
+    }
+
+    public StringProperty maeProperty() {
+        return mae;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento.get();
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento.set(dataNascimento);
+    }
+
+    public StringProperty dataNascimentoProperty() {
+        return dataNascimento;
+    }
+
+    public String getSexo() {
+        return sexo.get();
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo.set(sexo);
+    }
+
+    public StringProperty sexoProperty() {
+        return sexo;
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public String getEspecialidade() {
+        return especialidade.get();
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade.set(especialidade);
+    }
+
+    public StringProperty especialidadeProperty() {
+        return especialidade;
+    }
+
+    public String getRecepcao() {
+        return recepcao.get();
+    }
+
+    public void setRecepcao(String recepcao) {
+        this.recepcao.set(recepcao);
+    }
+
+    public StringProperty recepcaoProperty() {
+        return recepcao;
+    }
+
+    @Override
+    public String toString() {
+        return nome.get();
+    }
 
     public void save() {
         if (idClient.getValue() != null && idClient.get() != 0) {

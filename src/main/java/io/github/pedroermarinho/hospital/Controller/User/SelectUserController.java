@@ -73,7 +73,6 @@ public class SelectUserController implements Initializable {
     }
 
 
-
     public UserModel getUserModel() {
         return userModel;
     }

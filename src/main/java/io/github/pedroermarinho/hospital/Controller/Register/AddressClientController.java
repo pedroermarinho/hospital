@@ -51,7 +51,7 @@ public class AddressClientController implements Initializable {
     private Button bntSalva;
     @FXML
     private Button BtnCancelar;
-//    @FXML
+    //    @FXML
 //    private Button btnPesquisar;
     @FXML
     private TableView<ClientModel> registrosView;
@@ -211,7 +211,7 @@ public class AddressClientController implements Initializable {
         } else {
             try {
                 Integer.valueOf(NCasaText.getText());
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 errorMessage += "Nº Casa inválido!\n";
                 NCasaText.setStyle("-fx-border-color:red");
             }

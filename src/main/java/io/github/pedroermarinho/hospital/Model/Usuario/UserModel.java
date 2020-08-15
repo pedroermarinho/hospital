@@ -5,7 +5,6 @@
  */
 package io.github.pedroermarinho.hospital.Model.Usuario;
 
-import io.github.pedroermarinho.hospital.MainApp;
 import io.github.pedroermarinho.hospital.Model.Usuario.UsuarioDAO.UserDAO;
 import javafx.beans.property.*;
 

@@ -1,55 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane id="AnchorPane" prefHeight="568.0" prefWidth="201.0" stylesheets="@../Styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pedroermarinho.hospital.Controller.MenuDiretoController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="568.0" prefWidth="201.0"
+            stylesheets="@../Styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="io.github.pedroermarinho.hospital.Controller.MenuDiretoController">
     <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-                <Label maxWidth="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" prefWidth="140.0" style="-fx-alignment: center; -fx-font-size: 16; -fx-text-fill: #7387A8; -fx-border-color: #7387A8; -fx-border-width: 0 0 2 0;" text="MENU" />
-              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="485.0" prefWidth="201.0" spacing="15.0" styleClass="background-black-1d">
-                  <children>
-                      <Button fx:id="btnInicio" maxWidth="1.7976931348623157E308" onAction="#OnInicio" prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Inicio" textFill="WHITE">
-                          <font>
-                              <Font name="Roboto Bold" size="14.0" />
-                          </font>
-      
-                            </Button>
-                      <Button fx:id="btnUsuarios" layoutX="10.0" layoutY="109.0" maxWidth="1.7976931348623157E308" onAction="#OnUsuarios" prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Usuarios" textFill="WHITE">
-                          <font>
-                              <Font name="Roboto Bold" size="14.0" />
-                          </font>
-      
-                      </Button>
-                      <Button fx:id="btnCadastros" layoutX="10.0" layoutY="151.0" maxWidth="1.7976931348623157E308" onAction="#OnCadastros" prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Cadastros" textFill="WHITE">
-                          <font>
-                              <Font name="Roboto Bold" size="14.0" />
-                          </font>
-      
-                      </Button>
-                      <Button fx:id="btnConfiguracao" maxWidth="1.7976931348623157E308" onAction="#OnConfiguracao" prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Configuração" textFill="WHITE">
-                          <font>
-                              <Font name="Roboto Bold" size="14.0" />
-                          </font>
-      
-                      </Button>
-                      <Button fx:id="btnSobre" maxWidth="1.7976931348623157E308" onAction="#OnSobre" prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Sobre" textFill="WHITE">
-                          <font>
-                              <Font name="Roboto Bold" size="14.0" />
-                          </font>
-                      </Button>
-                      <Button fx:id="btnFecharMenu" maxWidth="1.7976931348623157E308" onAction="#OnFecharMenu" prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Fechar Menu" textFill="WHITE">
-                          <font>
-                              <Font size="14.0" />
-                          </font>
-                      </Button>
-                  </children>
-              </VBox>
-         </children>
-      </VBox>
+        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label maxWidth="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" prefWidth="140.0"
+                       style="-fx-alignment: center; -fx-font-size: 16; -fx-text-fill: #7387A8; -fx-border-color: #7387A8; -fx-border-width: 0 0 2 0;"
+                       text="MENU"/>
+                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                      prefHeight="485.0" prefWidth="201.0" spacing="15.0" styleClass="background-black-1d">
+                    <children>
+                        <Button fx:id="btnInicio" maxWidth="1.7976931348623157E308" onAction="#OnInicio"
+                                prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Inicio"
+                                textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="14.0"/>
+                            </font>
+
+                        </Button>
+                        <Button fx:id="btnUsuarios" layoutX="10.0" layoutY="109.0" maxWidth="1.7976931348623157E308"
+                                onAction="#OnUsuarios" prefHeight="50.0" prefWidth="139.0"
+                                styleClass="background-black-1d" text="Usuarios" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="14.0"/>
+                            </font>
+
+                        </Button>
+                        <Button fx:id="btnCadastros" layoutX="10.0" layoutY="151.0" maxWidth="1.7976931348623157E308"
+                                onAction="#OnCadastros" prefHeight="50.0" prefWidth="139.0"
+                                styleClass="background-black-1d" text="Cadastros" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="14.0"/>
+                            </font>
+
+                        </Button>
+                        <Button fx:id="btnConfiguracao" maxWidth="1.7976931348623157E308" onAction="#OnConfiguracao"
+                                prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Configuração"
+                                textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="14.0"/>
+                            </font>
+
+                        </Button>
+                        <Button fx:id="btnSobre" maxWidth="1.7976931348623157E308" onAction="#OnSobre" prefHeight="50.0"
+                                prefWidth="139.0" styleClass="background-black-1d" text="Sobre" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="14.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="btnFecharMenu" maxWidth="1.7976931348623157E308" onAction="#OnFecharMenu"
+                                prefHeight="50.0" prefWidth="139.0" styleClass="background-black-1d" text="Fechar Menu"
+                                textFill="WHITE">
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>

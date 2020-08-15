@@ -89,10 +89,8 @@ public class ClientController implements Initializable {
     private TextField identidadeField;
 
 
-
     @FXML
     private TextField PesquisarField;
-
 
 
     @FXML
@@ -144,7 +142,7 @@ public class ClientController implements Initializable {
         ClientModel selected = registrosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
             final var addressClientModel = Cliente_para_Endereco(selected.getIdClient());
-            if(addressClientModel!=null){
+            if (addressClientModel != null) {
                 addressClientModel.delete();
             }
             selected.delete();

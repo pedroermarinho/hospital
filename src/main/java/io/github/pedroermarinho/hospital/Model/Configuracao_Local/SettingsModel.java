@@ -21,8 +21,6 @@ public class SettingsModel {
     private final IntegerProperty ID_db = new SimpleIntegerProperty();
 
 
-
-
     public static List<SettingsModel> all() {
         return new SettingsDAO().getConfiguracaoList();
     }

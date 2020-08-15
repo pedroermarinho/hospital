@@ -10,7 +10,10 @@ import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -89,7 +92,6 @@ public class RegisterUserController implements Initializable {
     public UserModel getUsuario() {
         return modificao_usuario;
     }
-
 
 
     private boolean isInputValid() {

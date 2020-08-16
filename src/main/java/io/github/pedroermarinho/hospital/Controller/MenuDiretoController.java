@@ -19,19 +19,19 @@ public class MenuDiretoController implements Initializable {
 
     protected BorderPane PalcoPrincipal;
     private MainApp mainApp;
-    @FXML
-    private Button btnInicio;
-    @FXML
-    private Button btnAgenda;
-    @FXML
-    private Button btnUsuarios;
-    @FXML
-    private Button btnCadastros;
-
-    @FXML
-    private Button btnConfiguracao;
-    @FXML
-    private Button btnFecharMenu;
+//    @FXML
+//    private Button btnInicio;
+//    @FXML
+//    private Button btnAgenda;
+//    @FXML
+//    private Button btnUsuarios;
+//    @FXML
+//    private Button btnCadastros;
+//
+//    @FXML
+//    private Button btnConfiguracao;
+//    @FXML
+//    private Button btnFecharMenu;
 
     /**
      * Initializes the controller class.
@@ -53,10 +53,10 @@ public class MenuDiretoController implements Initializable {
         this.mainApp.getTelas().Cadastros();
     }
 
-    @FXML
-    void OnUsuarios(ActionEvent event) {
-        this.mainApp.getTelas().usuarios();
-    }
+//    @FXML
+//    void OnUsuarios(ActionEvent event) {
+//        this.mainApp.getTelas().usuarios();
+//    }
 
     @FXML
     void OnConfiguracao(ActionEvent event) {

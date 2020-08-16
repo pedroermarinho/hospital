@@ -65,24 +65,24 @@ public class MainApp extends Application {
 
             Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
 
-            if (!data.getUserData().isEmpty()) {
-                if (telas.usuario() != null) {
+//            if (!data.getUserData().isEmpty()) {
+//                if (telas.usuario() != null) {
                     telas.primeriaCena.getIcons().add(image);
                     telas.PalcoPrincipal();
                     telas.MenuTop();
                     telas.CentralTexto();
-                }
-            } else {
-                setUser(telas.CadastroUsuario());
-                if (getUser() != null) {
-                    if (telas.usuario() != null) {
-                        telas.PalcoPrincipal();
-                        telas.MenuTop();
-                        telas.CentralTexto();
-                    }
-                }
-
-            }
+//                }
+//            } else {
+//                setUser(telas.CadastroUsuario());
+//                if (getUser() != null) {
+//                    if (telas.usuario() != null) {
+//                        telas.PalcoPrincipal();
+//                        telas.MenuTop();
+//                        telas.CentralTexto();
+//                    }
+//                }
+//
+//            }
         }
 
     }

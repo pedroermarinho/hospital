@@ -191,3 +191,11 @@ factoryConfiguration.json
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle
+
+
+# Created by https://www.toptal.com/developers/gitignore/api/executable
+# Edit at https://www.toptal.com/developers/gitignore?templates=executable
+
+### Executable ###
+*.exe
+# End of https://www.toptal.com/developers/gitignore/api/executable

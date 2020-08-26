@@ -56,7 +56,7 @@ public class MenuTopController implements Initializable {
 
     @FXML
     void OnCadastros(ActionEvent event) {
-        mainApp.getTelas().Cadastros();
+        mainApp.getTelas().Register();
     }
 
 
@@ -67,7 +67,7 @@ public class MenuTopController implements Initializable {
 
     @FXML
     void OnInicio(ActionEvent event) {
-        mainApp.getTelas().CentralTexto();
+        mainApp.getTelas().CentralText();
     }
 
     @FXML

@@ -7,17 +7,11 @@ package io.github.pedroermarinho.hospital;
 
 import io.github.pedroermarinho.hospital.Controller.MenuDiretoController;
 import io.github.pedroermarinho.hospital.Controller.MenuTopController;
-import io.github.pedroermarinho.hospital.Controller.PalcoPrincipalController;
 import io.github.pedroermarinho.hospital.Controller.RegisterController;
 import io.github.pedroermarinho.hospital.Controller.Settings.DataBaseController;
 import io.github.pedroermarinho.hospital.Controller.Settings.MenuSettingsController;
 import io.github.pedroermarinho.hospital.Controller.Settings.RegisterDataBaseController;
-import io.github.pedroermarinho.hospital.Controller.User.RegisterUserController;
-import io.github.pedroermarinho.hospital.Controller.User.UsuarioController;
 import io.github.pedroermarinho.hospital.Controller.Util.ErroController;
-import io.github.pedroermarinho.hospital.Controller.Util.SenhaController;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
-import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -84,10 +78,6 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             primeriaCena.setScene(scene);
 
-            // Dá ao controller o acesso ao main app.
-            PalcoPrincipalController controller = loader.getController();
-
-
             primeriaCena.show();
         } catch (IOException e) {
             MsgErro.MessagemErroTela(e, "PalcoPrincipal");
@@ -122,7 +112,7 @@ public class ChamadasDeTela {
     /**
      *
      */
-    public void CentralTexto() {
+    public void CentralText() {
         try {
 
 
@@ -169,7 +159,7 @@ public class ChamadasDeTela {
     /**
      *
      */
-    public void Cadastros() {
+    public void Register() {
         try {
 
             // Carrega a TabelaDeJogos.
@@ -211,7 +201,7 @@ public class ChamadasDeTela {
             MsgErro.MessagemErroTela(e, "Informacao");
         }
     }
-    public void Menu_Configuracao() {
+    public void MenuSettings() {
         try {
 
             // Carrega a TabelaDeJogos.
@@ -235,7 +225,7 @@ public class ChamadasDeTela {
     /**
      * @return AnchorPane
      */
-    public AnchorPane CadastroCliente() {
+    public AnchorPane RegisterClient() {
         try {
 
             // Carrega a TabelaDeJogos.
@@ -252,7 +242,7 @@ public class ChamadasDeTela {
     /**
      * @return AnchorPane
      */
-    public AnchorPane Configuracao_Banco_de_Dados() {
+    public AnchorPane SettingsDataBase() {
         try {
 
             // Carrega a TabelaDeJogos.
@@ -269,7 +259,7 @@ public class ChamadasDeTela {
     /**
      * @return AnchorPane
      */
-    public AnchorPane CadastroEnderecoCliente() {
+    public AnchorPane RegisterAddressClient() {
         try {
 
             // Carrega a TabelaDeJogos.
@@ -283,7 +273,7 @@ public class ChamadasDeTela {
         }
     }
 
-    public void Erro(Exception ex) {
+    public void Error(Exception ex) {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
@@ -315,7 +305,7 @@ public class ChamadasDeTela {
 
     }
 
-    public void sobre() {
+    public void About() {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
@@ -343,12 +333,12 @@ public class ChamadasDeTela {
             dialogStage.showAndWait();
 
         } catch (IOException e) {
-            Erro(e);
+            Error(e);
 
         }
 
     }
-
+/*
     public boolean senha(UserModel pessoa) {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
@@ -476,48 +466,37 @@ public class ChamadasDeTela {
 
         }
     }
-    public DataBaseModel SelectBanco_de_Dados() {
+
+ */
+    public void SelectDataBase() {
         try {
-            JMetro jMetro = new JMetro(Style.LIGHT);
-            // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/io/github/pedroermarinho/hospital/Fxml/Settings/DataBase.fxml"));
-            AnchorPane page = loader.load();
+            AnchorPane anchorPane = loader.load();
 
-            // Cria o palco dialogStage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("SelectBanco_de_Dados");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-//            dialogStage.initOwner(primeriaCena);
-            Scene scene = new Scene(page);
-            jMetro.setScene(scene);
-            dialogStage.setScene(scene);
+            PalcoPrincipal.setCenter(anchorPane);
 
-            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
-            dialogStage.getIcons().add(image);
-
-            // Define a pessoa no controller.
             DataBaseController controller = loader.getController();
 
-            controller.setDialogStage(dialogStage);
             controller.setMainApp(mainapp);
 
-            // Mostra a janela e espera até o usuário fechar.
-            dialogStage.showAndWait();
-            return controller.getDataBase();
         } catch (Exception e) {
             MessagemErroTela(e, "SelectBanco_de_Dados");
-            return null;
         }
     }
 
-    public void CadastroBancoDeDados() {
+    public void RegisterDataBase() {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/io/github/pedroermarinho/hospital/Fxml/Settings/RegisterDataBase.fxml"));
             AnchorPane page = loader.load();
+
+
+
+
+
 
             // Cria o palco dialogStage.
             Stage dialogStage = new Stage();

@@ -9,6 +9,7 @@ import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
+import io.github.pedroermarinho.hospital.Util.PDF;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -95,7 +97,8 @@ public class InformacaoController implements Initializable {
 
     @FXML
     private Label recepcaoLabel;
-
+    @FXML
+    private Button btnGerarPDF;
 
 
 
@@ -107,6 +110,15 @@ public class InformacaoController implements Initializable {
         IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("idClient"));
         NomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("Nome"));
         RegistroClientesView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> Informacoes(newValue));
+    }
+
+    @FXML
+    void onGerarPDF() {
+        try {
+            PDF.createPDF(RegistroClientesView.getSelectionModel().getSelectedItem());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void Informacoes(ClientModel newValue)  {

@@ -4,7 +4,6 @@ import io.github.pedroermarinho.hospital.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
@@ -50,7 +49,7 @@ public class MenuDiretoController implements Initializable {
 
     @FXML
     void OnCadastros(ActionEvent event) {
-        this.mainApp.getTelas().Cadastros();
+        this.mainApp.getTelas().Register();
     }
 
 //    @FXML
@@ -60,7 +59,7 @@ public class MenuDiretoController implements Initializable {
 
     @FXML
     void OnConfiguracao(ActionEvent event) {
-        this.mainApp.getTelas().Menu_Configuracao();
+        this.mainApp.getTelas().MenuSettings();
     }
 
     @FXML
@@ -71,12 +70,12 @@ public class MenuDiretoController implements Initializable {
 
     @FXML
     void OnInicio(ActionEvent event) {
-        this.mainApp.getTelas().CentralTexto();
+        this.mainApp.getTelas().CentralText();
     }
 
     @FXML
     void OnSobre(ActionEvent event) {
-        this.mainApp.getTelas().sobre();
+        this.mainApp.getTelas().About();
     }
 
 }

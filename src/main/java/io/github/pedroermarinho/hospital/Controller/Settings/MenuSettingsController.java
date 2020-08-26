@@ -32,7 +32,7 @@ public class MenuSettingsController implements Initializable {
 
     @FXML
     void OnBancoDeDados() {
-        Border.setCenter(mainApp.getTelas().Configuracao_Banco_de_Dados());
+        Border.setCenter(mainApp.getTelas().SettingsDataBase());
     }
 
     /**

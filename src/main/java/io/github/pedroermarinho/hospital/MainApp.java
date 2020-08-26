@@ -14,12 +14,11 @@ import static io.github.pedroermarinho.hospital.Util.BD.Tables.createTable;
  * @author Pedro Marinho  < pedro.marinho238@gmail.com > marinho
  */
 public class MainApp extends Application {
-    private final Dados data = new Dados();
-    private final DataBaseClient banco_de_dados = DataBaseClient.instance();
+
+    private final DataBaseClient dataBaseClient = DataBaseClient.instance();
     private final ChamadasDeTela telas = new ChamadasDeTela();
     final DataBaseSettings dataBaseSettings = DataBaseSettings.instance();
     private UserModel userModel = null;
-    private DataBaseModel dataBaseModel = new DataBaseModel();
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -46,8 +45,13 @@ public class MainApp extends Application {
     }
 
 
-    public void setDataBaseModel(DataBaseModel dataBaseModel) {
-        this.dataBaseModel = dataBaseModel;
+    public void initApp(DataBaseModel dataBaseModel){
+        dataBaseClient.open(dataBaseModel);
+        if (dataBaseClient.getConnection() != null) {
+            createTable(dataBaseClient.getConnection(), dataBaseModel);
+            telas.MenuTop();
+            telas.CentralText();
+        }
     }
 
     @Override
@@ -57,33 +61,11 @@ public class MainApp extends Application {
         this.telas.primeriaCena = stage;
         this.telas.primeriaCena.setTitle("Clinica");
         telas.setMainApp(this);
+        Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
 
-        setDataBaseModel(telas.SelectBanco_de_Dados());
-        banco_de_dados.open(dataBaseModel);
-        if (banco_de_dados.getConnection() != null) {
-            createTable(banco_de_dados.getConnection(), dataBaseModel);
-
-            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
-
-//            if (!data.getUserData().isEmpty()) {
-//                if (telas.usuario() != null) {
-                    telas.primeriaCena.getIcons().add(image);
-                    telas.PalcoPrincipal();
-                    telas.MenuTop();
-                    telas.CentralTexto();
-//                }
-//            } else {
-//                setUser(telas.CadastroUsuario());
-//                if (getUser() != null) {
-//                    if (telas.usuario() != null) {
-//                        telas.PalcoPrincipal();
-//                        telas.MenuTop();
-//                        telas.CentralTexto();
-//                    }
-//                }
-//
-//            }
-        }
+        telas.primeriaCena.getIcons().add(image);
+        telas.PalcoPrincipal();
+        telas.SelectDataBase();
 
     }
 

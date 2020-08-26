@@ -9,6 +9,7 @@ module hospital
     requires org.jfxtras.styles.jmetro;
     requires java.desktop;
     requires net.harawata.appdirs;
+    requires org.apache.pdfbox;
 
     opens io.github.pedroermarinho.hospital to javafx.fxml, javafx.controls;
     opens io.github.pedroermarinho.hospital.Controller.Settings to javafx.fxml;

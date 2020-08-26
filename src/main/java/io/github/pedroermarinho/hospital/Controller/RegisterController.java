@@ -31,7 +31,7 @@ public class RegisterController {
     @FXML
     void OnCliente() {
         try {
-            TelaCadastrosBorderPane.setCenter(mainApp.getTelas().CadastroCliente());
+            TelaCadastrosBorderPane.setCenter(mainApp.getTelas().RegisterClient());
         } catch (Exception e) {
             MsgErro.MessagemErroTela(e, "OnCliente");
         }
@@ -54,7 +54,7 @@ public class RegisterController {
     @FXML
     void OnEndereco() {
         try {
-            TelaCadastrosBorderPane.setCenter(mainApp.getTelas().CadastroEnderecoCliente());
+            TelaCadastrosBorderPane.setCenter(mainApp.getTelas().RegisterAddressClient());
         } catch (Exception e) {
             MsgErro.MessagemErroTela(e, "OnEndereco");
         }

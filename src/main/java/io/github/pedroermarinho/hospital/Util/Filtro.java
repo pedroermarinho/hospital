@@ -5,8 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Util;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 
 import java.util.List;

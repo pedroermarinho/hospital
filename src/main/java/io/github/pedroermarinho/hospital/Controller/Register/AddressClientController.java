@@ -6,8 +6,8 @@
 package io.github.pedroermarinho.hospital.Controller.Register;
 
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -117,7 +117,7 @@ public class AddressClientController implements Initializable {
         if (modificaoAddress != null) {
 
             NCasaText.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
-            TelefoneText.setText(modificaoAddress.getTelefone());
+//            TelefoneText.setText(modificaoAddress.getTelefone());
             ObservacaoText.setText(modificaoAddress.getComplemento());
             RuaText.setText(modificaoAddress.getRua());
             BairroText.setText(modificaoAddress.getBairro());
@@ -136,7 +136,7 @@ public class AddressClientController implements Initializable {
         modificaoAddress = Cliente_para_Endereco(cliente.getIdClient());
         if (modificaoAddress != null) {
             NCasaText.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
-            TelefoneText.setText(modificaoAddress.getTelefone());
+//            TelefoneText.setText(modificaoAddress.getTelefone());
             ObservacaoText.setText(modificaoAddress.getComplemento());
 
             RuaText.setText(modificaoAddress.getRua());
@@ -160,7 +160,7 @@ public class AddressClientController implements Initializable {
             modificaoAddress.setBairro(BairroText.getText());
             modificaoAddress.setRua(RuaText.getText());
             modificaoAddress.setNumeroCasa(Integer.parseInt(NCasaText.getText()));
-            modificaoAddress.setTelefone(TelefoneText.getText());
+//            modificaoAddress.setTelefone(TelefoneText.getText());
             modificaoAddress.setComplemento(ObservacaoText.getText());
             modificaoAddress.setIdClient(cliente.getIdClient());
 

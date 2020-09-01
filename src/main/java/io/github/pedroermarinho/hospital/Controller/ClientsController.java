@@ -6,14 +6,11 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.MainApp;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;

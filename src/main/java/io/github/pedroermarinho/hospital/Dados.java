@@ -5,8 +5,8 @@
  */
 package io.github.pedroermarinho.hospital;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
 import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
 import javafx.collections.FXCollections;

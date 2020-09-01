@@ -6,12 +6,14 @@
 package io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao;
 
 import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
+import io.github.pedroermarinho.hospital.Model.InterfaceDao;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseSettings;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,12 +48,12 @@ public class DataBaseDAO {
 
     }
 
-    public DataBaseModel getDados_dbID(int ID) {
+    public DataBaseModel get(int id) {
         DataBaseModel obj = new DataBaseModel();
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `dados_db` WHERE ID_banco_de_dados = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `dados_db` WHERE ID_banco_de_dados = '" + id + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -73,7 +75,7 @@ public class DataBaseDAO {
         }
     }
 
-    public List<DataBaseModel> getDados_dbList() {
+    public List<DataBaseModel> getAll() {
         ArrayList<DataBaseModel> result = new ArrayList<>();
         try {
 
@@ -102,7 +104,7 @@ public class DataBaseDAO {
         }
     }
 
-    public void creatDados_db(DataBaseModel obj) {
+    public Integer create(DataBaseModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("INSERT INTO `dados_db` ( Hosts, Users, Passwords, DataBases, Prefixs, Ports )VALUES(?,?,?,?,?,?);");
 
@@ -115,15 +117,15 @@ public class DataBaseDAO {
             stmt.setInt(6, obj.getPorts());
 //           
 
-            stmt.executeUpdate();
+            return  stmt.executeUpdate();
 
         } catch (SQLException ex) {
-
             MessagemErroBD(ex, "creatDados_db");
+            return null;
         }
     }
 
-    public void updateDados_db(DataBaseModel obj) {
+    public Integer update(DataBaseModel obj) {
 
         try {
             stmt = db.getConnection().prepareStatement("UPDATE `dados_db` SET"
@@ -143,23 +145,25 @@ public class DataBaseDAO {
             stmt.setInt(6, obj.getPorts());
             stmt.setInt(7, obj.getID_banco_de_dados());
 
-            stmt.executeUpdate();
+           return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             MessagemErroBD(ex, "updateDados_db");
+            return null;
         }
     }
 
-    public void deleteDados_db(DataBaseModel obj) {
+    public Integer delete(int id) {
         try {
             stmt = db.getConnection().prepareStatement("DELETE FROM dados_db WHERE ID_banco_de_dados = ?;");
 
-            stmt.setInt(1, obj.getID_banco_de_dados());
+            stmt.setInt(1,id);
 
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             MessagemErroBD(ex, "deleteDados_db");
+            return null;
         }
     }
 }

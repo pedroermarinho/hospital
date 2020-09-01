@@ -27,7 +27,7 @@ public class Tables {
             AUTO_INCREMENT = "AUTO_INCREMENT";
         }
 
-        final String CLIENTS_STRING = "CREATE TABLE IF NOT EXISTS client ("
+        final String CLIENTS_SQL = "CREATE TABLE IF NOT EXISTS client ("
                 + "  id_client INTEGER PRIMARY KEY " + AUTO_INCREMENT + ","
                 + "  cpf varchar(16) UNIQUE,"
                 + "  cartao_sus varchar(50) UNIQUE,"
@@ -35,16 +35,29 @@ public class Tables {
                 + "  nome varchar(220),"
                 + "  mae varchar(220),"
                 + "  data_nascimento date,"
-                + "  sexo varchar(50),"
-                + "  email VARCHAR (250),"
-                + "  especialidade VARCHAR (250),"
-                + "  recepcao VARCHAR (250)"
+                + "  sexo varchar(50)"
                 + ");";
 
-        final String ADDRESS_CLIENT_STRING = "CREATE TABLE IF NOT EXISTS address_client ("
+        final String CONTACT_CLIENT_SQL = "CREATE TABLE IF NOT EXISTS contact_client ("
+                + "  id_contact_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
+                + "  id_client INTEGER not null UNIQUE, "
+                + "  email VARCHAR (250),"
+                + "  telefone varchar(21),"
+                + "  FOREIGN KEY (id_client) REFERENCES client ( id_client )"
+                +");";
+
+        final String RECEPTION_CLIENT_SQL = "CREATE TABLE IF NOT EXISTS reception_client ("
+                + "  id_reception_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
+                + "  id_client INTEGER not null UNIQUE, "
+                + "  especialidade VARCHAR (250),"
+                + "  recepcao VARCHAR (250),"
+                + "  modification_date date,"
+                + "  FOREIGN KEY (id_client) REFERENCES client ( id_client )"
+                +");";
+
+        final String ADDRESS_CLIENT_SQL = "CREATE TABLE IF NOT EXISTS address_client ("
                 + "  id_address_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
                 + "  id_client INTEGER not null UNIQUE, "
-                + "  telefone varchar(21),"
                 + "  pais varchar(30),"
                 + "  estado varchar(30),"
                 + "  cidade varchar(30),"
@@ -56,42 +69,57 @@ public class Tables {
                 + ");";
 
 
-
-        final String USER_STRING = "CREATE TABLE IF NOT EXISTS user("
-                + "    id_user INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
-                + "    nome varchar(220) not null,"
-                + "    sobrenome varchar(220) not null,"
-                + "    senha varchar(50) not null,"
-                + "    sexo varchar(50),"
-                + "    data_nascimento date,"
-                + "    user_name varchar(100) not null UNIQUE,"
-                + "    email varchar(220) not null UNIQUE"
-                + ");";
+//
+//        final String USER_SQL = "CREATE TABLE IF NOT EXISTS user("
+//                + "    id_user INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
+//                + "    nome varchar(220) not null,"
+//                + "    sobrenome varchar(220) not null,"
+//                + "    senha varchar(50) not null,"
+//                + "    sexo varchar(50),"
+//                + "    data_nascimento date,"
+//                + "    user_name varchar(100) not null UNIQUE,"
+//                + "    email varchar(220) not null UNIQUE"
+//                + ");";
 
 
 
         PreparedStatement stmt;
 
         try {
-            stmt = connection.prepareStatement(CLIENTS_STRING);
+            stmt = connection.prepareStatement(CLIENTS_SQL);
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "CriarTable.CLIENTES_STRING");
+            MsgErro.MessagemErroBD(ex, "CriarTable.CLIENTS_SQL");
         }
 
         try {
-            stmt = connection.prepareStatement(USER_STRING);
+            stmt = connection.prepareStatement(CONTACT_CLIENT_SQL);
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "CriarTable.USUARIO_STRING");
+            MsgErro.MessagemErroBD(ex, "CriarTable.CONTACT_CLIENT_SQL");
         }
 
         try {
-            stmt = connection.prepareStatement(ADDRESS_CLIENT_STRING);
+            stmt = connection.prepareStatement(RECEPTION_CLIENT_SQL);
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "CriarTable.USUARIO_STRING");
+            MsgErro.MessagemErroBD(ex, "CriarTable.RECEPTION_CLIENT_SQL");
         }
+
+        try {
+            stmt = connection.prepareStatement(ADDRESS_CLIENT_SQL);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            MsgErro.MessagemErroBD(ex, "CriarTable.ADDRESS_CLIENT_SQL");
+        }
+
+        //
+//        try {
+//            stmt = connection.prepareStatement(USER_SQL);
+//            stmt.executeUpdate();
+//        } catch (SQLException ex) {
+//            MsgErro.MessagemErroBD(ex, "CriarTable.USUARIO_STRING");
+//        }
 
     }
 

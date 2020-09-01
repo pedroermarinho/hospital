@@ -6,8 +6,8 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
-import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -111,7 +111,7 @@ public class CentralTextController implements Initializable {
             CPFLabel.textProperty().bind(cliente.cpfProperty());
             CartaoSUSLabel.textProperty().bind(cliente.cartaoSUSProperty());
             NascimentoLabel.textProperty().bind(cliente.dataNascimentoProperty());
-            EmailLabel.textProperty().bind(cliente.emailProperty());
+//            EmailLabel.textProperty().bind(cliente.emailProperty());
             NomeLabel.textProperty().bind(cliente.nomeProperty());
             SexoLabel.textProperty().bind(cliente.sexoProperty());
 
@@ -129,7 +129,7 @@ public class CentralTextController implements Initializable {
             endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getIdClient());
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 
-                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+//                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
             } else {
                 TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
             }
@@ -147,7 +147,7 @@ public class CentralTextController implements Initializable {
             CPFLabel.textProperty().bind(cliente.cpfProperty());
             CartaoSUSLabel.textProperty().bind(cliente.cartaoSUSProperty());
             NascimentoLabel.textProperty().bind(cliente.dataNascimentoProperty());
-            EmailLabel.textProperty().bind(cliente.emailProperty());
+//            EmailLabel.textProperty().bind(cliente.emailProperty());
             NomeLabel.textProperty().bind(cliente.nomeProperty());
             SexoLabel.textProperty().bind(cliente.sexoProperty());
 
@@ -165,7 +165,7 @@ public class CentralTextController implements Initializable {
             endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getIdClient());
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 
-                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+//                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
             } else {
                 TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
             }
@@ -219,7 +219,7 @@ public class CentralTextController implements Initializable {
             CPFLabel.textProperty().bind(newValue.cpfProperty());
             CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
             NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
-            EmailLabel.textProperty().bind(newValue.emailProperty());
+//            EmailLabel.textProperty().bind(newValue.emailProperty());
             NomeLabel.textProperty().bind(newValue.nomeProperty());
             SexoLabel.textProperty().bind(newValue.sexoProperty());
         } catch (NullPointerException ex) {
@@ -233,7 +233,7 @@ public class CentralTextController implements Initializable {
         try {
             endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
-                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+//                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
             } else {
                 throw new NullPointerException("Sem dados");
             }

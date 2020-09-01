@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO;
+package io.github.pedroermarinho.hospital.Model.Cliente.Address;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -18,24 +17,23 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class AddressClientDAO {
+public class AddressClientDAO implements AddressClientDaoInterface {
 
     private final DataBaseClient db = DataBaseClient.instance();
     private PreparedStatement stmt;
 
-
-    public AddressClientModel getAddressClientID(int ID) {
+    @Override
+    public AddressClientModel get(int id) {
         AddressClientModel obj = new AddressClientModel();
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `address_client` WHERE id_address_client = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `address_client` WHERE id_address_client = '" + id + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 obj.setIdAddressClient(rs.getInt("id_address_client"));
                 obj.setIdClient(rs.getInt("id_client"));
-                obj.setTelefone(rs.getString("telefone"));
                 obj.setCidade(rs.getString("cidade"));
                 obj.setRua(rs.getString("rua"));
                 obj.setBairro(rs.getString("bairro"));
@@ -51,7 +49,8 @@ public class AddressClientDAO {
         }
     }
 
-    public List<AddressClientModel> getAddressClientList() {
+    @Override
+    public List<AddressClientModel> getAll() {
         ArrayList<AddressClientModel> result = new ArrayList<>();
         try {
 
@@ -63,7 +62,6 @@ public class AddressClientDAO {
 
                 obj.setIdAddressClient(rs.getInt("id_address_client"));
                 obj.setIdClient(rs.getInt("id_client"));
-                obj.setTelefone(rs.getString("telefone"));
                 obj.setPais(rs.getString("pais"));
                 obj.setEstado(rs.getString("estado"));
                 obj.setCidade(rs.getString("cidade"));
@@ -83,34 +81,35 @@ public class AddressClientDAO {
         }
     }
 
-    public void creatAddressClient(AddressClientModel obj) {
+    @Override
+    public Integer create(AddressClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `telefone`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);");
 
 
             stmt.setInt(1, obj.getIdClient());
-            stmt.setString(2, obj.getTelefone());
-            stmt.setString(3, obj.getPais());
-            stmt.setString(4, obj.getEstado());
-            stmt.setString(5, obj.getCidade());
-            stmt.setString(6, obj.getRua());
-            stmt.setString(7, obj.getBairro());
-            stmt.setInt(8, obj.getNumeroCasa());
-            stmt.setString(9, obj.getComplemento());
+            stmt.setString(2, obj.getPais());
+            stmt.setString(3, obj.getEstado());
+            stmt.setString(4, obj.getCidade());
+            stmt.setString(5, obj.getRua());
+            stmt.setString(6, obj.getBairro());
+            stmt.setInt(7, obj.getNumeroCasa());
+            stmt.setString(8, obj.getComplemento());
 
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
+            return null;
         }
     }
 
-    public void updateAddressClient(AddressClientModel obj) {
+    @Override
+    public Integer update(AddressClientModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("UPDATE address_client SET"
                     + " id_client = ?,"
-                    + " telefone = ?,"
                     + " pais = ?,"
                     + " estado = ?,"
                     + " cidade = ?,"
@@ -121,36 +120,37 @@ public class AddressClientDAO {
                     + " WHERE id_address_client = ?;");
 
             stmt.setInt(1, obj.getIdClient());
-            stmt.setString(2, obj.getTelefone());
-            stmt.setString(3, obj.getPais());
-            stmt.setString(4, obj.getEstado());
-            stmt.setString(5, obj.getCidade());
-            stmt.setString(6, obj.getRua());
-            stmt.setString(7, obj.getBairro());
-            stmt.setInt(8, obj.getNumeroCasa());
-            stmt.setString(9, obj.getComplemento());
-            stmt.setInt(10, obj.getIdAddressClient());
+            stmt.setString(2, obj.getPais());
+            stmt.setString(3, obj.getEstado());
+            stmt.setString(4, obj.getCidade());
+            stmt.setString(5, obj.getRua());
+            stmt.setString(6, obj.getBairro());
+            stmt.setInt(7, obj.getNumeroCasa());
+            stmt.setString(8, obj.getComplemento());
+            stmt.setInt(9, obj.getIdAddressClient());
 
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
+            return null;
         }
     }
 
-    public void deleteAddressClient(AddressClientModel obj) {
+    public Integer delete(int id) {
 
         try {
             stmt = db.getConnection().prepareStatement("DELETE FROM address_client WHERE id_address_client = ?;");
 
-            stmt.setInt(1, obj.getIdAddressClient());
+            stmt.setInt(1, id);
 
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
+            return null;
         }
     }
 

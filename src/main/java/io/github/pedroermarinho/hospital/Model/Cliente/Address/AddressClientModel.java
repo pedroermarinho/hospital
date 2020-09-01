@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Model.Cliente;
+package io.github.pedroermarinho.hospital.Model.Cliente.Address;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO.AddressClientDAO;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,7 +18,6 @@ import java.util.List;
 public class AddressClientModel {
 
 
-    private static final AddressClientDAO dao = new AddressClientDAO();
     private final IntegerProperty idAddressClient = new SimpleIntegerProperty();
     private final IntegerProperty idClient = new SimpleIntegerProperty();
     private final StringProperty pais = new SimpleStringProperty("Brasil");
@@ -28,16 +26,9 @@ public class AddressClientModel {
     private final StringProperty rua = new SimpleStringProperty();
     private final StringProperty bairro = new SimpleStringProperty();
     private final IntegerProperty numeroCasa = new SimpleIntegerProperty();
-    private final StringProperty telefone = new SimpleStringProperty();
+
     private final StringProperty complemento = new SimpleStringProperty();
 
-    public static List<AddressClientModel> all() {
-        return new AddressClientDAO().getAddressClientList();
-    }
-
-    public static AddressClientModel find(int pk) {
-        return new AddressClientDAO().getAddressClientID(pk);
-    }
 
     public int getIdAddressClient() {
         return idAddressClient.get();
@@ -135,18 +126,6 @@ public class AddressClientModel {
         return numeroCasa;
     }
 
-    public String getTelefone() {
-        return telefone.get();
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone.set(telefone);
-    }
-
-    public StringProperty telefoneProperty() {
-        return telefone;
-    }
-
     public String getComplemento() {
         return complemento.get();
     }
@@ -159,21 +138,31 @@ public class AddressClientModel {
         return complemento;
     }
 
+    private static final AddressClientDaoInterface dao = new AddressClientDAO();
+
+    public static List<AddressClientModel> all() {
+        return new AddressClientDAO().getAll();
+    }
+
+    public static AddressClientModel find(int pk) {
+        return new AddressClientDAO().get(pk);
+    }
+
     public void save() {
         if (idAddressClient.get() != 0) {
             if (find(idAddressClient.get()) != null) {
-                dao.updateAddressClient(this);
+                dao.update(this);
             } else {
-                dao.creatAddressClient(this);
+                dao.create(this);
             }
         } else {
-            dao.creatAddressClient(this);
+            dao.create(this);
         }
     }
 
     public void delete() {
         if (find(idAddressClient.get()) != null) {
-            dao.deleteAddressClient(this);
+            dao.delete(getIdAddressClient());
         }
     }
 

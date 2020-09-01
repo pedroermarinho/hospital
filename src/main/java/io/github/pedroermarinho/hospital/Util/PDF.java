@@ -7,17 +7,12 @@ package io.github.pedroermarinho.hospital.Util;
 import org.apache.pdfbox.pdmodel.PDDocument;
 //import com.qoppa.pdfWriter.PDFDocument;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >

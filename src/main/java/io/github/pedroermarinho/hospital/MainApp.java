@@ -59,7 +59,7 @@ public class MainApp extends Application {
         dataBaseSettings.open();
 
         this.telas.primeriaCena = stage;
-        this.telas.primeriaCena.setTitle("Clinica");
+        this.telas.primeriaCena.setTitle("Hospital");
         telas.setMainApp(this);
         Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
 

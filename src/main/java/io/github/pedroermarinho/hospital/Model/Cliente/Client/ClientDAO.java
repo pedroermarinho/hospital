@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Model.Cliente.ClienteDAO;
+package io.github.pedroermarinho.hospital.Model.Cliente.Client;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -18,18 +17,18 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class ClientDAO {
+public class ClientDAO implements ClientDaoInterface {
 
     private final DataBaseClient db = DataBaseClient.instance();
     private PreparedStatement stmt;
 
-
-    public ClientModel getClienteID(int ID) {
+    @Override
+    public ClientModel get(int id) {
         ClientModel obj = new ClientModel();
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `client` WHERE id_client = '" + ID + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `client` WHERE id_client = '" + id + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -41,9 +40,6 @@ public class ClientDAO {
                 obj.setMae(rs.getString("mae"));//4
                 obj.setDataNascimento(rs.getString("data_nascimento"));//6
                 obj.setSexo(rs.getString("sexo"));//8
-                obj.setEmail(rs.getString("email"));//9
-                obj.setEspecialidade(rs.getString("especialidade"));//9
-                obj.setRecepcao(rs.getString("recepcao"));//9
 
             }
 
@@ -55,7 +51,8 @@ public class ClientDAO {
         }
     }
 
-    public List<ClientModel> getClienteList() {
+    @Override
+    public List<ClientModel> getAll() {
         ArrayList<ClientModel> result = new ArrayList<>();
         try {
 
@@ -73,9 +70,6 @@ public class ClientDAO {
                 obj.setMae(rs.getString("mae"));
                 obj.setDataNascimento(rs.getString("data_nascimento"));
                 obj.setSexo(rs.getString("sexo"));
-                obj.setEmail(rs.getString("email"));
-                obj.setEspecialidade(rs.getString("especialidade"));
-                obj.setRecepcao(rs.getString("recepcao"));
                 result.add(obj);
             }
             return result;
@@ -88,10 +82,11 @@ public class ClientDAO {
         }
     }
 
-    public void creatCliente(ClientModel obj) {
+    @Override
+    public Integer create(ClientModel obj) {
 
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO client (`cpf`,`cartao_sus`,`identidade`, `nome`, `mae`,`data_nascimento`,`sexo`, `email`,`especialidade`,`recepcao`) VALUES(?,?,?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO client (`cpf`,`cartao_sus`,`identidade`, `nome`, `mae`,`data_nascimento`,`sexo`) VALUES(?,?,?,?,?,?,?);");
 
             stmt.setString(1, obj.getCpf());
             stmt.setString(2, obj.getCartaoSUS());
@@ -100,19 +95,18 @@ public class ClientDAO {
             stmt.setString(5, obj.getMae());
             stmt.setString(6, obj.getDataNascimento());
             stmt.setString(7, obj.getSexo());
-            stmt.setString(8, obj.getEmail());
-            stmt.setString(9, obj.getEspecialidade());
-            stmt.setString(10, obj.getRecepcao());
 
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "creatCliente");
+            return null;
         }
     }
 
-    public void updateCliente(ClientModel obj) {
+    @Override
+    public Integer update(ClientModel obj) {
 
         try {
             stmt = db.getConnection().prepareStatement("UPDATE client SET"
@@ -122,10 +116,7 @@ public class ClientDAO {
                     + " nome = ?,"
                     + " mae = ?,"
                     + " data_nascimento = ?,"
-                    + " sexo = ?,"
-                    + " email = ?,"
-                    + " especialidade = ?,"
-                    + " recepcao = ?"
+                    + " sexo = ?"
                     + " WHERE id_client = ?;"
             );
 
@@ -136,30 +127,29 @@ public class ClientDAO {
             stmt.setString(5, obj.getMae());
             stmt.setString(6, obj.getDataNascimento());
             stmt.setString(7, obj.getSexo());
-            stmt.setString(8, obj.getEmail());
-            stmt.setString(9, obj.getEspecialidade());
-            stmt.setString(10, obj.getRecepcao());
-            stmt.setInt(11, obj.getIdClient());
+            stmt.setInt(8, obj.getIdClient());
 
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "updateCliente");
+            return null;
         }
     }
 
-    public void deleteCliente(ClientModel obj) {
+    public Integer delete(int id) {
         try {
             stmt = db.getConnection().prepareStatement("DELETE FROM client WHERE id_client = ?;");
 
-            stmt.setInt(1, obj.getIdClient());
+            stmt.setInt(1, id);
 
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "deleteCliente");
+            return null;
         }
     }
 }

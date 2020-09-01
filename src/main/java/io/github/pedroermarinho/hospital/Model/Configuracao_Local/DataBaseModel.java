@@ -29,13 +29,12 @@ public class DataBaseModel {
 
 
     public static List<DataBaseModel> all() {
-
-        return new DataBaseDAO().getDados_dbList();
+        return new DataBaseDAO().getAll();
     }
 
     public static DataBaseModel find(int pk) {
 
-        return new DataBaseDAO().getDados_dbID(pk);
+        return new DataBaseDAO().get(pk);
     }
 
     public int getPorts() {
@@ -130,18 +129,18 @@ public class DataBaseModel {
     public void save() {
         if (ID_banco_de_dados.getValue() != null && ID_banco_de_dados.get() != 0) {
             if (find(ID_banco_de_dados.get()) != null) {
-                dao.updateDados_db(this);
+                dao.update(this);
             } else {
-                dao.creatDados_db(this);
+                dao.create(this);
             }
         } else {
-            dao.creatDados_db(this);
+            dao.create(this);
         }
     }
 
     public void delete() {
         if (find(ID_banco_de_dados.get()) != null) {
-            dao.deleteDados_db(this);
+            dao.delete(this);
         }
     }
 }

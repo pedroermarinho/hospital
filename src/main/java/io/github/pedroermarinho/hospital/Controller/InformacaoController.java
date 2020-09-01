@@ -6,8 +6,8 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
-import io.github.pedroermarinho.hospital.Model.Cliente.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import io.github.pedroermarinho.hospital.Util.PDF;
 import javafx.beans.property.SimpleStringProperty;
@@ -127,12 +127,12 @@ public class InformacaoController implements Initializable {
             CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
             NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
             MaeLabel.textProperty().bind(newValue.maeProperty());
-            EmailLabel.textProperty().bind(newValue.emailProperty());
+//            EmailLabel.textProperty().bind(newValue.emailProperty());
             NomeLabel.textProperty().bind(newValue.nomeProperty());
             SexoLabel.textProperty().bind(newValue.sexoProperty());
             identidadeLabel.textProperty().bind(newValue.identidadeProperty());
-            especialidadeLabel.textProperty().bind(newValue.especialidadeProperty());
-            recepcaoLabel.textProperty().bind(newValue.recepcaoProperty());
+//            especialidadeLabel.textProperty().bind(newValue.especialidadeProperty());
+//            recepcaoLabel.textProperty().bind(newValue.recepcaoProperty());
 
 
         } catch (NullPointerException ex) {
@@ -157,7 +157,7 @@ public class InformacaoController implements Initializable {
                 EstadoLabel.textProperty().bind(endereco_cliente.estadoProperty());
                 PaisLabel.textProperty().bind(endereco_cliente.paisProperty());
                 NCasaLabel.textProperty().bind(endereco_cliente.numeroCasaProperty().asString());
-                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+//                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
 
             } else {
               throw new NullPointerException("Sem dados");

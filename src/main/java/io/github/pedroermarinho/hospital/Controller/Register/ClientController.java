@@ -7,7 +7,7 @@ package io.github.pedroermarinho.hospital.Controller.Register;
 
 import io.github.pedroermarinho.hospital.Controller.Util.SexoEnum;
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Cliente.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -159,10 +159,10 @@ public class ClientController implements Initializable {
         NomeMaeText.setText(modificaoClient.getMae());
         NascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
         CartaoText.setText(modificaoClient.getCartaoSUS());
-        EmailText.setText(modificaoClient.getEmail());
+//        EmailText.setText(modificaoClient.getEmail());
         SexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
-        atendimentoField.setText(modificaoClient.getEspecialidade());
-        recepcaoField.setText(modificaoClient.getRecepcao());
+//        atendimentoField.setText(modificaoClient.getEspecialidade());
+//        recepcaoField.setText(modificaoClient.getRecepcao());
         identidadeField.setText(modificaoClient.getIdentidade());
     }
 
@@ -175,10 +175,10 @@ public class ClientController implements Initializable {
         NomeMaeText.setText(modificaoClient.getMae());
         NascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
         CartaoText.setText(modificaoClient.getCartaoSUS());
-        EmailText.setText(modificaoClient.getEmail());
+//        EmailText.setText(modificaoClient.getEmail());
         SexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
-        atendimentoField.setText(modificaoClient.getEspecialidade());
-        recepcaoField.setText(modificaoClient.getRecepcao());
+//        atendimentoField.setText(modificaoClient.getEspecialidade());
+//        recepcaoField.setText(modificaoClient.getRecepcao());
         identidadeField.setText(modificaoClient.getIdentidade());
     }
 
@@ -203,10 +203,10 @@ public class ClientController implements Initializable {
             modificaoClient.setMae(NomeMaeText.getText());
             modificaoClient.setDataNascimento(String.valueOf(java.sql.Date.valueOf(NascimentoDate.getValue())));
             modificaoClient.setCartaoSUS(CartaoText.getText());
-            modificaoClient.setEmail(EmailText.getText());
+//            modificaoClient.setEmail(EmailText.getText());
             modificaoClient.setIdentidade(identidadeField.getText());
-            modificaoClient.setRecepcao(recepcaoField.getText());
-            modificaoClient.setEspecialidade(atendimentoField.getText());
+//            modificaoClient.setRecepcao(recepcaoField.getText());
+//            modificaoClient.setEspecialidade(atendimentoField.getText());
             modificaoClient.setSexo(SexoBox.getValue().getDescricao());
             modificaoClient.save();
             LimparCampo();

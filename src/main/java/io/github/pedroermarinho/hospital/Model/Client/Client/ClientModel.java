@@ -1,4 +1,4 @@
-package io.github.pedroermarinho.hospital.Model.Cliente.Client;
+package io.github.pedroermarinho.hospital.Model.Client.Client;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -125,7 +125,7 @@ public class ClientModel {
         return nome.get();
     }
 
-    private static final ClientDaoInterface dao = new ClientDAO();
+    private static final ClientDAOInterface dao = new ClientDAO();
 
     public static List<ClientModel> all() {
         return new ClientDAO().getAll();

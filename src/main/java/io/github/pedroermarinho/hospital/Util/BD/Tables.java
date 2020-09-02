@@ -5,7 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Util.BD;
 
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
+import io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase.DataBaseModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
 import java.sql.Connection;
@@ -69,20 +69,6 @@ public class Tables {
                 + ");";
 
 
-//
-//        final String USER_SQL = "CREATE TABLE IF NOT EXISTS user("
-//                + "    id_user INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
-//                + "    nome varchar(220) not null,"
-//                + "    sobrenome varchar(220) not null,"
-//                + "    senha varchar(50) not null,"
-//                + "    sexo varchar(50),"
-//                + "    data_nascimento date,"
-//                + "    user_name varchar(100) not null UNIQUE,"
-//                + "    email varchar(220) not null UNIQUE"
-//                + ");";
-
-
-
         PreparedStatement stmt;
 
         try {
@@ -112,15 +98,6 @@ public class Tables {
         } catch (SQLException ex) {
             MsgErro.MessagemErroBD(ex, "CriarTable.ADDRESS_CLIENT_SQL");
         }
-
-        //
-//        try {
-//            stmt = connection.prepareStatement(USER_SQL);
-//            stmt.executeUpdate();
-//        } catch (SQLException ex) {
-//            MsgErro.MessagemErroBD(ex, "CriarTable.USUARIO_STRING");
-//        }
-
     }
 
 }

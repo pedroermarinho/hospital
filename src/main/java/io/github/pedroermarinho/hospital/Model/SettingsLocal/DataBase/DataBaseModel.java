@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Model.Configuracao_Local;
+package io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase;
 
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao.DataBaseDAO;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -140,7 +139,7 @@ public class DataBaseModel {
 
     public void delete() {
         if (find(ID_banco_de_dados.get()) != null) {
-            dao.delete(this);
+            dao.delete(getID_banco_de_dados());
         }
     }
 }

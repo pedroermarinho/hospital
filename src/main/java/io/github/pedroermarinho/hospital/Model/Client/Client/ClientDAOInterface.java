@@ -1,9 +1,9 @@
-package io.github.pedroermarinho.hospital.Model.Cliente.Client;
+package io.github.pedroermarinho.hospital.Model.Client.Client;
 
 
 import java.util.List;
 
-public interface ClientDaoInterface {
+public interface ClientDAOInterface {
     ClientModel get(int id);
 
     List<ClientModel> getAll();

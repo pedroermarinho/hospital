@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

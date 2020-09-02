@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Model.Cliente.Address;
+package io.github.pedroermarinho.hospital.Model.Client.Address;
 
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class AddressClientDAO implements AddressClientDaoInterface {
+public class AddressClientDAO implements AddressClientDAOInterface {
 
     private final DataBaseClient db = DataBaseClient.instance();
     private PreparedStatement stmt;

@@ -7,7 +7,7 @@ package io.github.pedroermarinho.hospital.Util;
 import org.apache.pdfbox.pdmodel.PDDocument;
 //import com.qoppa.pdfWriter.PDFDocument;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;

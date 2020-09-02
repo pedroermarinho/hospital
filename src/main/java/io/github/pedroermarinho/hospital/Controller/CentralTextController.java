@@ -6,8 +6,8 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
-import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Util.Filtro;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

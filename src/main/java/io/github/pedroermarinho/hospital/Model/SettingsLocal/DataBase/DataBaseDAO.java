@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Model.Configuracao_Local.Dao_Configuracao;
+package io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase;
 
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
-import io.github.pedroermarinho.hospital.Model.InterfaceDao;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseSettings;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +20,7 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.MessagemErroBD;
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class DataBaseDAO {
+public class DataBaseDAO implements DataBaseDAOInterface {
 
     private final DataBaseSettings db = DataBaseSettings.instance();
     private PreparedStatement stmt;
@@ -48,6 +45,7 @@ public class DataBaseDAO {
 
     }
 
+    @Override
     public DataBaseModel get(int id) {
         DataBaseModel obj = new DataBaseModel();
 
@@ -75,6 +73,7 @@ public class DataBaseDAO {
         }
     }
 
+    @Override
     public List<DataBaseModel> getAll() {
         ArrayList<DataBaseModel> result = new ArrayList<>();
         try {
@@ -104,6 +103,7 @@ public class DataBaseDAO {
         }
     }
 
+    @Override
     public Integer create(DataBaseModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("INSERT INTO `dados_db` ( Hosts, Users, Passwords, DataBases, Prefixs, Ports )VALUES(?,?,?,?,?,?);");
@@ -125,6 +125,7 @@ public class DataBaseDAO {
         }
     }
 
+    @Override
     public Integer update(DataBaseModel obj) {
 
         try {
@@ -153,6 +154,7 @@ public class DataBaseDAO {
         }
     }
 
+    @Override
     public Integer delete(int id) {
         try {
             stmt = db.getConnection().prepareStatement("DELETE FROM dados_db WHERE ID_banco_de_dados = ?;");

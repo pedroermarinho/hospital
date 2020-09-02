@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Model.Cliente.Address;
+package io.github.pedroermarinho.hospital.Model.Client.Address;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -138,7 +138,7 @@ public class AddressClientModel {
         return complemento;
     }
 
-    private static final AddressClientDaoInterface dao = new AddressClientDAO();
+    private static final AddressClientDAOInterface dao = new AddressClientDAO();
 
     public static List<AddressClientModel> all() {
         return new AddressClientDAO().getAll();

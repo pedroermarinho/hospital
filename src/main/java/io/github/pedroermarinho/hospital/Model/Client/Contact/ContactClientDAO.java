@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.pedroermarinho.hospital.Model.Cliente.Reception;
+package io.github.pedroermarinho.hospital.Model.Client.Contact;
 
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
@@ -17,27 +17,25 @@ import java.util.List;
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
-public class ReceptionClientDAO implements ReceptionClientDaoInterface {
+public class ContactClientDAO implements ContactClientDAOInterface {
 
     private final DataBaseClient db = DataBaseClient.instance();
     private PreparedStatement stmt;
 
     @Override
-    public ReceptionClientModel get(int id) {
-        ReceptionClientModel obj = new ReceptionClientModel();
+    public ContactClientModel get(int id) {
+        ContactClientModel obj = new ContactClientModel();
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` WHERE id_address_client = '" + id + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `contact_client` WHERE id_contact_client = '" + id + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                obj.setIdReceptionClient(rs.getInt("id_reception_client"));
+                obj.setIdContactClient(rs.getInt("id_contact_client"));
                 obj.setIdClient(rs.getInt("id_client"));
-                obj.setEspecialidade(rs.getString("especialidade"));
-                obj.setRecepcao(rs.getString("recepcao"));
-                obj.setModificationDate(rs.getString("modification_date"));
-
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
             }
 
             return obj;
@@ -49,21 +47,20 @@ public class ReceptionClientDAO implements ReceptionClientDaoInterface {
     }
 
     @Override
-    public List<ReceptionClientModel> getAll() {
-        ArrayList<ReceptionClientModel> result = new ArrayList<>();
+    public List<ContactClientModel> getAll() {
+        ArrayList<ContactClientModel> result = new ArrayList<>();
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `contact_client` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                ReceptionClientModel obj = new ReceptionClientModel();
+                ContactClientModel obj = new ContactClientModel();
 
-                obj.setIdReceptionClient(rs.getInt("id_reception_client"));
+                obj.setIdContactClient(rs.getInt("id_contact_client"));
                 obj.setIdClient(rs.getInt("id_client"));
-                obj.setEspecialidade(rs.getString("especialidade"));
-                obj.setRecepcao(rs.getString("recepcao"));
-                obj.setModificationDate(rs.getString("modification_date"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
                 result.add(obj);
             }
             return result;
@@ -77,15 +74,14 @@ public class ReceptionClientDAO implements ReceptionClientDaoInterface {
     }
 
     @Override
-    public Integer create(ReceptionClientModel obj) {
+    public Integer create(ContactClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO reception_client ( `id_client`, `especialidade`, `recepcao`, `modification_date`) VALUES(?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO contact_client ( `id_client`, `email`, `telefone`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?);");
 
 
             stmt.setInt(1, obj.getIdClient());
-            stmt.setString(2, obj.getEspecialidade());
-            stmt.setString(3, obj.getRecepcao());
-            stmt.setString(4, obj.getModificationDate());
+            stmt.setString(2, obj.getEmail());
+            stmt.setString(3, obj.getTelefone());
 
             return stmt.executeUpdate();
 
@@ -97,26 +93,25 @@ public class ReceptionClientDAO implements ReceptionClientDaoInterface {
     }
 
     @Override
-    public Integer update(ReceptionClientModel obj) {
+    public Integer update(ContactClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("UPDATE reception_client SET"
+            stmt = db.getConnection().prepareStatement("UPDATE contact_client SET"
                     + " id_client = ?,"
-                    + " especialidade = ?,"
-                    + " recepcao = ?,"
-                    + " modification_date = ?"
-                    + " WHERE id_reception_client = ?;");
+                    + " email = ?,"
+                    + " telefone = ?"
+                    + " WHERE id_contact_client = ?;");
 
             stmt.setInt(1, obj.getIdClient());
-            stmt.setString(2, obj.getEspecialidade());
-            stmt.setString(3, obj.getRecepcao());
-            stmt.setString(4, obj.getModificationDate());
-            stmt.setInt(9, obj.getIdReceptionClient());
+            stmt.setString(2, obj.getEmail());
+            stmt.setString(3, obj.getTelefone());
+            stmt.setInt(4, obj.getIdContactClient());
 
             return stmt.executeUpdate();
 
         } catch (SQLException ex) {
             db.close();
             MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
+
             return null;
         }
     }
@@ -124,7 +119,7 @@ public class ReceptionClientDAO implements ReceptionClientDaoInterface {
     public Integer delete(int id) {
 
         try {
-            stmt = db.getConnection().prepareStatement("DELETE FROM reception_client WHERE id_reception_client = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM contact_client WHERE id_contact_client = ?;");
 
             stmt.setInt(1, id);
 

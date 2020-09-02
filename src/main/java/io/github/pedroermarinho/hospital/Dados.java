@@ -5,10 +5,9 @@
  */
 package io.github.pedroermarinho.hospital;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
-import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
-import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
+import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase.DataBaseModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -30,16 +29,6 @@ public class Dados {
         return dataBase;
     }
 
-    final ObservableList<UserModel> userData = FXCollections.observableArrayList();
-
-    public ObservableList<UserModel> getUserData() {
-        final var data = UserModel.all();
-        if (data != null) {
-            userData.clear();
-            userData.setAll(data);
-        }
-        return userData;
-    }
 
 
     final ObservableList<ClientModel> clientData = FXCollections.observableArrayList();

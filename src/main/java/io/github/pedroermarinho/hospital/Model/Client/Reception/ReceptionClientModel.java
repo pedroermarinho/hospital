@@ -1,7 +1,7 @@
-package io.github.pedroermarinho.hospital.Model.Cliente.Reception;
+package io.github.pedroermarinho.hospital.Model.Client.Reception;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientDAO;
-import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientDAO;
+import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ReceptionClientModel {
 
-    private static final ReceptionClientDaoInterface dao = new ReceptionClientDAO();
+    private static final ReceptionClientDAOInterface dao = new ReceptionClientDAO();
     private final IntegerProperty idReceptionClient = new SimpleIntegerProperty();
     private final IntegerProperty idClient = new SimpleIntegerProperty();
     private final StringProperty especialidade = new SimpleStringProperty();

@@ -1,7 +1,7 @@
-package io.github.pedroermarinho.hospital.Model.Cliente.Contact;
+package io.github.pedroermarinho.hospital.Model.Client.Contact;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientDAO;
-import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientDAO;
+import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ContactClientModel {
 
-    private static final ContactClientDaoInterface dao = new ContactClientDAO();
+    private static final ContactClientDAOInterface dao = new ContactClientDAO();
     private final IntegerProperty idContactClient = new SimpleIntegerProperty();
     private final IntegerProperty idClient = new SimpleIntegerProperty();
     private final StringProperty telefone = new SimpleStringProperty();

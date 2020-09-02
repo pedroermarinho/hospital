@@ -1,6 +1,6 @@
 package io.github.pedroermarinho.hospital.Util.BD;
 
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
+import io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase.DataBaseModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import net.harawata.appdirs.AppDirs;
 import net.harawata.appdirs.AppDirsFactory;

@@ -6,7 +6,7 @@
 package io.github.pedroermarinho.hospital.Controller.Settings;
 
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
+import io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase.DataBaseModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

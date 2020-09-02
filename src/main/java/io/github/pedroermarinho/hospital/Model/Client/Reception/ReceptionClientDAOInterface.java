@@ -1,9 +1,9 @@
-package io.github.pedroermarinho.hospital.Model.Cliente.Reception;
+package io.github.pedroermarinho.hospital.Model.Client.Reception;
 
 
 import java.util.List;
 
-public interface ReceptionClientDaoInterface {
+public interface ReceptionClientDAOInterface {
     ReceptionClientModel get(int id);
 
     List<ReceptionClientModel> getAll();

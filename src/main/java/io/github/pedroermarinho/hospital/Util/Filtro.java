@@ -5,8 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Util;
 
-import io.github.pedroermarinho.hospital.Model.Cliente.Address.AddressClientModel;
-import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
+import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 
 import java.util.List;
 
@@ -24,19 +23,4 @@ public class Filtro {
         }
         return null;
     }
-
-
-    public static UserModel Senha_Usuario(String Usuario, String Senha) {
-        List<UserModel> users = UserModel.all();
-        for (UserModel user : users) {
-            if (user.getUserName().equals(Usuario) && user.getSenha().equals(Senha)) {
-                return user;
-
-            }
-        }
-        return null;
-    }
-
-
-
 }

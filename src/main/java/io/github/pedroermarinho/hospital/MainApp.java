@@ -1,7 +1,6 @@
 package io.github.pedroermarinho.hospital;
 
-import io.github.pedroermarinho.hospital.Model.Configuracao_Local.DataBaseModel;
-import io.github.pedroermarinho.hospital.Model.Usuario.UserModel;
+import io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase.DataBaseModel;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseSettings;
 import javafx.application.Application;
@@ -18,7 +17,6 @@ public class MainApp extends Application {
     private final DataBaseClient dataBaseClient = DataBaseClient.instance();
     private final ChamadasDeTela telas = new ChamadasDeTela();
     final DataBaseSettings dataBaseSettings = DataBaseSettings.instance();
-    private UserModel userModel = null;
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -35,15 +33,6 @@ public class MainApp extends Application {
     public ChamadasDeTela getTelas() {
         return telas;
     }
-
-    public UserModel getUser() {
-        return this.userModel;
-    }
-
-    public void setUser(UserModel userModel) {
-        this.userModel = userModel;
-    }
-
 
     public void initApp(DataBaseModel dataBaseModel){
         dataBaseClient.open(dataBaseModel);

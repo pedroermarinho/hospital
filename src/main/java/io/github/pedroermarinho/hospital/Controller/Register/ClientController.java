@@ -7,7 +7,7 @@ package io.github.pedroermarinho.hospital.Controller.Register;
 
 import io.github.pedroermarinho.hospital.Controller.Util.SexoEnum;
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Cliente.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

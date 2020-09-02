@@ -1,9 +1,9 @@
-package io.github.pedroermarinho.hospital.Model.Cliente.Address;
+package io.github.pedroermarinho.hospital.Model.Client.Address;
 
 
 import java.util.List;
 
-public interface AddressClientDaoInterface {
+public interface AddressClientDAOInterface {
     AddressClientModel get(int id);
 
     List<AddressClientModel> getAll();

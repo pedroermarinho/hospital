@@ -92,6 +92,8 @@ public class ClientController implements Initializable {
     @FXML
     private TextField PesquisarField;
 
+    @FXML
+    private TextField TelefoneText;
 
     @FXML
     void OnPesquisar() {
@@ -203,12 +205,17 @@ public class ClientController implements Initializable {
             modificaoClient.setMae(NomeMaeText.getText());
             modificaoClient.setDataNascimento(String.valueOf(java.sql.Date.valueOf(NascimentoDate.getValue())));
             modificaoClient.setCartaoSUS(CartaoText.getText());
-//            modificaoClient.setEmail(EmailText.getText());
+
             modificaoClient.setIdentidade(identidadeField.getText());
+            modificaoClient.setSexo(SexoBox.getValue().getDescricao());
+            final Integer id = modificaoClient.save();
+
+
+//            modificaoAddress.setTelefone(TelefoneText.getText());
+//            modificaoClient.setEmail(EmailText.getText());
 //            modificaoClient.setRecepcao(recepcaoField.getText());
 //            modificaoClient.setEspecialidade(atendimentoField.getText());
-            modificaoClient.setSexo(SexoBox.getValue().getDescricao());
-            modificaoClient.save();
+
             LimparCampo();
             data.getClientData();
             On_Off_Button(true);
@@ -219,6 +226,7 @@ public class ClientController implements Initializable {
     private void LimparCampo() {
 
         NomeText.setText("");
+        TelefoneText.setText("");
         CPFText.setText("");
         NomeMaeText.setText("");
         NascimentoDate.setValue(null);
@@ -233,6 +241,7 @@ public class ClientController implements Initializable {
 
     private void On_Off_Button(boolean es) {
         NomeText.setDisable(es);
+        TelefoneText.setDisable(es);
         CPFText.setDisable(es);
         NomeMaeText.setDisable(es);
         NascimentoDate.setDisable(es);
@@ -247,63 +256,14 @@ public class ClientController implements Initializable {
     }
 
 
+
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (NomeText.getText() == null || NomeText.getText().length() == 0) {
+        if(!isValidNomeField()){
             errorMessage += "Nome inválido!\n";
-            NomeText.setStyle("-fx-border-color:red");
-        } else {
-            NomeText.setStyle("");
         }
-        if (CPFText.getText() == null || CPFText.getText().length() == 0) {
-            errorMessage += "CPF inválido!\n";
-            CPFText.setStyle("-fx-border-color:red");
-        } else {
-            CPFText.setStyle("");
-        }
-        if (NomeMaeText.getText() == null || NomeMaeText.getText().length() == 0) {
-            errorMessage += "Nome Mãe inválido!\n";
-            NomeMaeText.setStyle("-fx-border-color:red");
-        } else {
-            NomeMaeText.setStyle("");
-        }
-        if (CartaoText.getText() == null || CartaoText.getText().length() == 0) {
-            errorMessage += "Cartão SUS inválido!\n";
-            CartaoText.setStyle("-fx-border-color:red");
-        } else {
-            CartaoText.setStyle("");
-        }
-        if (EmailText.getText() == null || EmailText.getText().length() == 0) {
-            errorMessage += "Email inválido!\n";
-            EmailText.setStyle("-fx-border-color:red");
-        } else {
-            EmailText.setStyle("");
-        }
-        if (atendimentoField.getText() == null || atendimentoField.getText().length() == 0) {
-            errorMessage += "Email inválido!\n";
-            atendimentoField.setStyle("-fx-border-color:red");
-        } else {
-            atendimentoField.setStyle("");
-        }
-        if (recepcaoField.getText() == null || recepcaoField.getText().length() == 0) {
-            errorMessage += "Email inválido!\n";
-            recepcaoField.setStyle("-fx-border-color:red");
-        } else {
-            recepcaoField.setStyle("");
-        }
-        if (identidadeField.getText() == null || identidadeField.getText().length() == 0) {
-            errorMessage += "Email inválido!\n";
-            identidadeField.setStyle("-fx-border-color:red");
-        } else {
-            identidadeField.setStyle("");
-        }
-        if (NascimentoDate.getValue() == null || NascimentoDate.getValue().toString().length() == 0) {
-            errorMessage += "Data inválido!\n";
-            NascimentoDate.setStyle("-fx-border-color:red");
-        } else {
-            NascimentoDate.setStyle("");
-        }
+
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -313,6 +273,120 @@ public class ClientController implements Initializable {
             return false;
         }
     }
+
+    @FXML
+    boolean isValidAtendimentoField() {
+        if (atendimentoField.getText() == null || atendimentoField.getText().length() == 0) {
+            atendimentoField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            atendimentoField.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidCPFField() {
+        if (CPFText.getText() == null || CPFText.getText().length() == 0) {
+
+            CPFText.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            CPFText.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidCartaoField() {
+        if (CartaoText.getText() == null || CartaoText.getText().length() == 0) {
+
+            CartaoText.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            CartaoText.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidEmailField() {
+        if (EmailText.getText() == null || EmailText.getText().length() == 0) {
+
+            EmailText.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            EmailText.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidIdentidadeField() {
+        if (identidadeField.getText() == null || identidadeField.getText().length() == 0) {
+            identidadeField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            identidadeField.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidNomeField() {
+        if (NomeText.getText() == null || NomeText.getText().length() == 0) {
+            NomeText.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            NomeText.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidNomeMaeField() {
+        if (NomeMaeText.getText() == null || NomeMaeText.getText().length() == 0) {
+            NomeMaeText.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            NomeMaeText.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidRecepcaoField() {
+        if (recepcaoField.getText() == null || recepcaoField.getText().length() == 0) {
+            recepcaoField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            recepcaoField.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidTelefoneField() {
+        if (TelefoneText.getText() == null || TelefoneText.getText().length() == 0) {
+            TelefoneText.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            TelefoneText.setStyle("");
+            return true;
+
+        }
+    }
+    @FXML
+    boolean isValidNascimentoDate() {
+        if (NascimentoDate.getValue() == null || NascimentoDate.getValue().toString().length() == 0) {
+            NascimentoDate.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            NascimentoDate.setStyle("");
+            return true;
+        }
+    }
+
 
     /**
      * Initializes the controller class.

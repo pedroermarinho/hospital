@@ -131,25 +131,27 @@ public class ClientModel {
         return new ClientDAO().getAll();
     }
 
-    public static ClientModel find(int pk) {
-        return new ClientDAO().get(pk);
+    public static ClientModel find(int id) {
+        return new ClientDAO().get(id);
     }
 
-    public void save() {
+    public Integer save() {
         if (idClient.getValue() != null && idClient.get() != 0) {
             if (find(idClient.get()) != null) {
-                dao.update(this);
+                return dao.update(this);
             } else {
-                dao.create(this);
+                return dao.create(this);
             }
         } else {
-            dao.create(this);
+            return dao.create(this);
         }
     }
 
-    public void delete() {
+    public Integer delete() {
         if (find(idClient.get()) != null) {
-            dao.delete(getIdClient());
+            return dao.delete(getIdClient());
+        } else {
+            return null;
         }
     }
 

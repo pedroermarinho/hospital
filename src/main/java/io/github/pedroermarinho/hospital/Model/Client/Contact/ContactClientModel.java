@@ -11,19 +11,13 @@ import java.util.List;
 
 public class ContactClientModel {
 
-    private static final ContactClientDAOInterface dao = new ContactClientDAO();
+
     private final IntegerProperty idContactClient = new SimpleIntegerProperty();
     private final IntegerProperty idClient = new SimpleIntegerProperty();
     private final StringProperty telefone = new SimpleStringProperty();
     private final StringProperty email = new SimpleStringProperty();
 
-    public static List<AddressClientModel> all() {
-        return new AddressClientDAO().getAll();
-    }
 
-    public static ContactClientModel find(int pk) {
-        return new ContactClientDAO().get(pk);
-    }
 
     public int getIdContactClient() {
         return idContactClient.get();
@@ -73,21 +67,33 @@ public class ContactClientModel {
         return email;
     }
 
-    public void save() {
+    private static final ContactClientDAOInterface dao = new ContactClientDAO();
+
+    public static List<AddressClientModel> all() {
+        return new AddressClientDAO().getAll();
+    }
+
+    public static ContactClientModel find(int id) {
+        return new ContactClientDAO().get(id);
+    }
+
+    public Integer save() {
         if (idContactClient.get() != 0) {
             if (find(idContactClient.get()) != null) {
-                dao.update(this);
+                return dao.update(this);
             } else {
-                dao.create(this);
+                return dao.create(this);
             }
         } else {
-            dao.create(this);
+            return dao.create(this);
         }
     }
 
-    public void delete() {
+    public Integer delete() {
         if (find(idContactClient.get()) != null) {
-            dao.delete(getIdContactClient());
+            return dao.delete(getIdContactClient());
+        } else {
+            return null;
         }
     }
 }

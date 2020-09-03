@@ -43,8 +43,7 @@ public class AddressClientController implements Initializable {
     private TextField RuaText;
     @FXML
     private TextField NCasaText;
-    @FXML
-    private TextField TelefoneText;
+
     @FXML
     private TextArea ObservacaoText;
     @FXML
@@ -160,7 +159,7 @@ public class AddressClientController implements Initializable {
             modificaoAddress.setBairro(BairroText.getText());
             modificaoAddress.setRua(RuaText.getText());
             modificaoAddress.setNumeroCasa(Integer.parseInt(NCasaText.getText()));
-//            modificaoAddress.setTelefone(TelefoneText.getText());
+
             modificaoAddress.setComplemento(ObservacaoText.getText());
             modificaoAddress.setIdClient(cliente.getIdClient());
 
@@ -174,7 +173,7 @@ public class AddressClientController implements Initializable {
 
     private void LimparCampo() {
         NCasaText.setText("");
-        TelefoneText.setText("");
+
         ObservacaoText.setText("");
         PaisText.setText("");
         EstadoText.setText("");
@@ -190,7 +189,7 @@ public class AddressClientController implements Initializable {
     private void On_Off_Button(boolean es) {
         modificaoAddress = null;
         NCasaText.setDisable(es);
-        TelefoneText.setDisable(es);
+
         ObservacaoText.setDisable(es);
         PaisText.setDisable(es);
         EstadoText.setDisable(es);
@@ -217,12 +216,7 @@ public class AddressClientController implements Initializable {
             }
             NCasaText.setStyle("");
         }
-        if (TelefoneText.getText() == null || TelefoneText.getText().length() == 0) {
-            errorMessage += "Nome inválido!\n";
-            TelefoneText.setStyle("-fx-border-color:red");
-        } else {
-            TelefoneText.setStyle("");
-        }
+
         if (ObservacaoText.getText() == null || ObservacaoText.getText().length() == 0) {
             errorMessage += "Nome inválido!\n";
             ObservacaoText.setStyle("-fx-border-color:red");

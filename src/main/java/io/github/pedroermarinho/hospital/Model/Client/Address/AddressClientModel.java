@@ -144,25 +144,27 @@ public class AddressClientModel {
         return new AddressClientDAO().getAll();
     }
 
-    public static AddressClientModel find(int pk) {
-        return new AddressClientDAO().get(pk);
+    public static AddressClientModel find(int id) {
+        return new AddressClientDAO().get(id);
     }
 
-    public void save() {
+    public Integer save() {
         if (idAddressClient.get() != 0) {
             if (find(idAddressClient.get()) != null) {
-                dao.update(this);
+                return dao.update(this);
             } else {
-                dao.create(this);
+                return dao.create(this);
             }
         } else {
-            dao.create(this);
+            return dao.create(this);
         }
     }
 
-    public void delete() {
+    public Integer delete() {
         if (find(idAddressClient.get()) != null) {
-            dao.delete(getIdAddressClient());
+            return dao.delete(getIdAddressClient());
+        } else {
+            return null;
         }
     }
 

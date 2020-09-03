@@ -168,12 +168,7 @@
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nº Casa"
                                       wrappingWidth="80.70263671875"/>
                             </ToolBar>
-                            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="TelefoneText" nodeOrientation="LEFT_TO_RIGHT"
-                                           prefHeight="32.0" prefWidth="210.0"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone"
-                                      wrappingWidth="65.70263671875"/>
-                            </ToolBar>
+
                             <ToolBar maxHeight="1.7976931348623157E308" maxWidth="210.0" minHeight="102.0"
                                      nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="101.0"
                                      prefWidth="337.0">

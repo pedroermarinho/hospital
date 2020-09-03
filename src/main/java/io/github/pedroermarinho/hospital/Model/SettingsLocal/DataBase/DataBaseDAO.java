@@ -55,7 +55,7 @@ public class DataBaseDAO implements DataBaseDAOInterface {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                obj.setID_banco_de_dados(rs.getInt("ID_banco_de_dados"));//1
+                obj.setIdDayabase(rs.getInt("ID_banco_de_dados"));//1
                 obj.setHost(rs.getString("Hosts"));//1
                 obj.setUser(rs.getString("Users"));//1
                 obj.setPassword(rs.getString("Passwords"));//1
@@ -84,7 +84,7 @@ public class DataBaseDAO implements DataBaseDAOInterface {
             while (rs.next()) {
                 DataBaseModel obj = new DataBaseModel();
 
-                obj.setID_banco_de_dados(rs.getInt("ID_banco_de_dados"));//1
+                obj.setIdDayabase(rs.getInt("ID_banco_de_dados"));//1
                 obj.setHost(rs.getString("Hosts"));
                 obj.setUser(rs.getString("Users"));
                 obj.setPassword(rs.getString("Passwords"));
@@ -144,7 +144,7 @@ public class DataBaseDAO implements DataBaseDAOInterface {
             stmt.setString(4, obj.getDataBase());
             stmt.setString(5, obj.getPrefix());
             stmt.setInt(6, obj.getPorts());
-            stmt.setInt(7, obj.getID_banco_de_dados());
+            stmt.setInt(7, obj.getIdDayabase());
 
            return stmt.executeUpdate();
 

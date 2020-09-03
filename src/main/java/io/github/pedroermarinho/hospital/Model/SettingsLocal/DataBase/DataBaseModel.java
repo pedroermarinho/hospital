@@ -17,129 +17,131 @@ import java.util.List;
  */
 public class DataBaseModel {
 
-    private final DataBaseDAO dao = new DataBaseDAO();
-    private final IntegerProperty ID_banco_de_dados = new SimpleIntegerProperty();
-    private final StringProperty Hosts = new SimpleStringProperty("localhost");
-    private final StringProperty Users = new SimpleStringProperty("root");
-    private final StringProperty Passwords = new SimpleStringProperty("");
-    private final StringProperty DataBases = new SimpleStringProperty("hospital");
-    private final StringProperty Prefixs = new SimpleStringProperty("jdbc:mysql:");
-    private final IntegerProperty Ports = new SimpleIntegerProperty(3306);
 
+    private final IntegerProperty idDayabase = new SimpleIntegerProperty();
+    private final StringProperty hosts = new SimpleStringProperty("localhost");
+    private final StringProperty users = new SimpleStringProperty("root");
+    private final StringProperty passwords = new SimpleStringProperty("");
+    private final StringProperty dataBases = new SimpleStringProperty("hospital");
+    private final StringProperty prefixs = new SimpleStringProperty("jdbc:mysql:");
+    private final IntegerProperty ports = new SimpleIntegerProperty(3306);
+
+
+
+    public int getPorts() {
+        return ports.get();
+    }
+
+    public void setPorts(int value) {
+        ports.set(value);
+    }
+
+    public IntegerProperty PortsProperty() {
+        return ports;
+    }
+
+    public String getPrefix() {
+        return prefixs.get();
+    }
+
+    public void setPrefix(String value) {
+        prefixs.set(value);
+    }
+
+    public StringProperty PrefixProperty() {
+        return prefixs;
+    }
+
+    public String getDataBase() {
+        return dataBases.get();
+    }
+
+    public void setDataBase(String value) {
+        dataBases.set(value);
+    }
+
+    public StringProperty DataBaseProperty() {
+        return dataBases;
+    }
+
+    public String getPassword() {
+        return passwords.get();
+    }
+
+    public void setPassword(String value) {
+        passwords.set(value);
+    }
+
+    public StringProperty PasswordProperty() {
+        return passwords;
+    }
+
+    public String getUser() {
+        return users.get();
+    }
+
+    public void setUser(String value) {
+        users.set(value);
+    }
+
+    public StringProperty UserProperty() {
+        return users;
+    }
+
+    public String getHost() {
+        return hosts.get();
+    }
+
+    public void setHost(String value) {
+        hosts.set(value);
+    }
+
+    public StringProperty HostProperty() {
+        return hosts;
+    }
+
+    public int getIdDayabase() {
+        return idDayabase.get();
+    }
+
+    public void setIdDayabase(int value) {
+        idDayabase.set(value);
+    }
+
+    public IntegerProperty idDayabaseProperty() {
+        return idDayabase;
+    }
+
+    @Override
+    public String toString() {
+        return hosts.get() + " -> " + dataBases.get();
+    }
+
+    private final DataBaseDAO dao = new DataBaseDAO();
 
     public static List<DataBaseModel> all() {
         return new DataBaseDAO().getAll();
     }
 
-    public static DataBaseModel find(int pk) {
+    public static DataBaseModel find(int id) { return new DataBaseDAO().get(id); }
 
-        return new DataBaseDAO().get(pk);
-    }
-
-    public int getPorts() {
-        return Ports.get();
-    }
-
-    public void setPorts(int value) {
-        Ports.set(value);
-    }
-
-    public IntegerProperty PortsProperty() {
-        return Ports;
-    }
-
-    public String getPrefix() {
-        return Prefixs.get();
-    }
-
-    public void setPrefix(String value) {
-        Prefixs.set(value);
-    }
-
-    public StringProperty PrefixProperty() {
-        return Prefixs;
-    }
-
-    public String getDataBase() {
-        return DataBases.get();
-    }
-
-    public void setDataBase(String value) {
-        DataBases.set(value);
-    }
-
-    public StringProperty DataBaseProperty() {
-        return DataBases;
-    }
-
-    public String getPassword() {
-        return Passwords.get();
-    }
-
-    public void setPassword(String value) {
-        Passwords.set(value);
-    }
-
-    public StringProperty PasswordProperty() {
-        return Passwords;
-    }
-
-    public String getUser() {
-        return Users.get();
-    }
-
-    public void setUser(String value) {
-        Users.set(value);
-    }
-
-    public StringProperty UserProperty() {
-        return Users;
-    }
-
-    public String getHost() {
-        return Hosts.get();
-    }
-
-    public void setHost(String value) {
-        Hosts.set(value);
-    }
-
-    public StringProperty HostProperty() {
-        return Hosts;
-    }
-
-    public int getID_banco_de_dados() {
-        return ID_banco_de_dados.get();
-    }
-
-    public void setID_banco_de_dados(int value) {
-        ID_banco_de_dados.set(value);
-    }
-
-    public IntegerProperty ID_banco_de_dadosProperty() {
-        return ID_banco_de_dados;
-    }
-
-    @Override
-    public String toString() {
-        return Hosts.get() + " -> " + DataBases.get();
-    }
-
-    public void save() {
-        if (ID_banco_de_dados.getValue() != null && ID_banco_de_dados.get() != 0) {
-            if (find(ID_banco_de_dados.get()) != null) {
-                dao.update(this);
+    public Integer save() {
+        if (idDayabase.getValue() != null && idDayabase.get() != 0) {
+            if (find(idDayabase.get()) != null) {
+                return dao.update(this);
             } else {
-                dao.create(this);
+                return dao.create(this);
             }
         } else {
-            dao.create(this);
+            return dao.create(this);
         }
     }
 
-    public void delete() {
-        if (find(ID_banco_de_dados.get()) != null) {
-            dao.delete(getID_banco_de_dados());
+    public Integer delete() {
+        if (find(idDayabase.get()) != null) {
+            return dao.delete(getIdDayabase());
+        } else {
+            return null;
         }
     }
 }

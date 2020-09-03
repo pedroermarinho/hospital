@@ -57,7 +57,7 @@ public class Tables {
 
         final String ADDRESS_CLIENT_SQL = "CREATE TABLE IF NOT EXISTS address_client ("
                 + "  id_address_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
-                + "  id_client INTEGER not null UNIQUE, "
+                + "  id_client INTEGER not null PRIMARY KEY, "
                 + "  pais varchar(30),"
                 + "  estado varchar(30),"
                 + "  cidade varchar(30),"

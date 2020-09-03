@@ -11,20 +11,14 @@ import java.util.List;
 
 public class ReceptionClientModel {
 
-    private static final ReceptionClientDAOInterface dao = new ReceptionClientDAO();
+
     private final IntegerProperty idReceptionClient = new SimpleIntegerProperty();
     private final IntegerProperty idClient = new SimpleIntegerProperty();
     private final StringProperty especialidade = new SimpleStringProperty();
     private final StringProperty recepcao = new SimpleStringProperty();
     private final StringProperty modificationDate = new SimpleStringProperty();
 
-    public static List<AddressClientModel> all() {
-        return new AddressClientDAO().getAll();
-    }
 
-    public static AddressClientModel find(int pk) {
-        return new AddressClientDAO().get(pk);
-    }
 
     public int getIdReceptionClient() {
         return idReceptionClient.get();
@@ -86,21 +80,34 @@ public class ReceptionClientModel {
         return modificationDate;
     }
 
-    public void save() {
+    private static final ReceptionClientDAOInterface dao = new ReceptionClientDAO();
+
+
+    public static List<AddressClientModel> all() {
+        return new AddressClientDAO().getAll();
+    }
+
+    public static AddressClientModel find(int id) {
+        return new AddressClientDAO().get(id);
+    }
+
+    public Integer save() {
         if (idReceptionClient.get() != 0) {
             if (find(idReceptionClient.get()) != null) {
-                dao.update(this);
+                return dao.update(this);
             } else {
-                dao.create(this);
+                return dao.create(this);
             }
         } else {
-            dao.create(this);
+            return dao.create(this);
         }
     }
 
-    public void delete() {
+    public Integer delete() {
         if (find(idReceptionClient.get()) != null) {
-            dao.delete(getIdReceptionClient());
+            return dao.delete(getIdReceptionClient());
+        } else {
+            return null;
         }
     }
 }

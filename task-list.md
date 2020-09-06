@@ -1,0 +1,9 @@
+- [ ] Desabilitar botão de gerar pdf (tela de informações)
+- [ ] Gerar pdf (tela de informações)
+- [ ] Telefone e email (tela inicial)
+- [ ] Lista de pessoas cadastrada por data (menu lateral da tela inicial)
+- [ ] Mudar Id por cartão do sus ou pdf na (tela de informações)
+- [ ] Mudar Id por cartão do sus ou pdf na (tela de cadastro cliente)
+- [ ] Mudar Id por cartão do sus ou pdf na (tela de cadastro endereço)
+- [ ] Recuperar ultimo id salvo (classe ClientController)
+- [ ] Refazer a tela de sobre

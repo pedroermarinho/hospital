@@ -25,10 +25,20 @@ public class AddressClientModel {
     private final StringProperty cidade = new SimpleStringProperty("Eirunepé");
     private final StringProperty rua = new SimpleStringProperty();
     private final StringProperty bairro = new SimpleStringProperty();
-    private final IntegerProperty numeroCasa = new SimpleIntegerProperty();
-
+    private final StringProperty numeroCasa = new SimpleStringProperty();
     private final StringProperty complemento = new SimpleStringProperty();
 
+    public String getNumeroCasa() {
+        return numeroCasa.get();
+    }
+
+    public StringProperty numeroCasaProperty() {
+        return numeroCasa;
+    }
+
+    public void setNumeroCasa(String numeroCasa) {
+        this.numeroCasa.set(numeroCasa);
+    }
 
     public int getIdAddressClient() {
         return idAddressClient.get();
@@ -112,18 +122,6 @@ public class AddressClientModel {
 
     public StringProperty bairroProperty() {
         return bairro;
-    }
-
-    public int getNumeroCasa() {
-        return numeroCasa.get();
-    }
-
-    public void setNumeroCasa(int numeroCasa) {
-        this.numeroCasa.set(numeroCasa);
-    }
-
-    public IntegerProperty numeroCasaProperty() {
-        return numeroCasa;
     }
 
     public String getComplemento() {

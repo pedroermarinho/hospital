@@ -48,7 +48,7 @@ public class Tables {
 
         final String RECEPTION_CLIENT_SQL = "CREATE TABLE IF NOT EXISTS reception_client ("
                 + "  id_reception_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
-                + "  id_client INTEGER not null UNIQUE, "
+                + "  id_client INTEGER not null, "
                 + "  especialidade VARCHAR (250),"
                 + "  recepcao VARCHAR (250),"
                 + "  modification_date date,"
@@ -57,13 +57,13 @@ public class Tables {
 
         final String ADDRESS_CLIENT_SQL = "CREATE TABLE IF NOT EXISTS address_client ("
                 + "  id_address_client INTEGER not null PRIMARY KEY " + AUTO_INCREMENT + ","
-                + "  id_client INTEGER not null PRIMARY KEY, "
+                + "  id_client INTEGER not null UNIQUE, "
                 + "  pais varchar(30),"
                 + "  estado varchar(30),"
                 + "  cidade varchar(30),"
                 + "  rua varchar(200),"
                 + "  bairro varchar(200),"
-                + "  numero_casa INTEGER,"
+                + "  numero_casa varchar(30),"
                 + "  complemento TEXT,"
                 + "  FOREIGN KEY (id_client) REFERENCES client ( id_client )"
                 + ");";

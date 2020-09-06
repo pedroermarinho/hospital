@@ -2,7 +2,8 @@ package io.github.pedroermarinho.hospital.Controller.Util;
 
 public enum SexoEnum {
     MASCULINO("Masculino"),
-    FEMININO("Feminino");
+    FEMININO("Feminino"),
+    INDEFINIDO("Indefinido");
 
     final String descricao;
 

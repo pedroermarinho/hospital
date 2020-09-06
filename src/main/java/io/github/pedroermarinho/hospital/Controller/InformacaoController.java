@@ -6,11 +6,11 @@
 package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.Dados;
-import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
-import io.github.pedroermarinho.hospital.Util.Filtro;
+import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Contact.ContactClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Reception.ReceptionClientModel;
 import io.github.pedroermarinho.hospital.Util.PDF;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -121,56 +121,43 @@ public class InformacaoController implements Initializable {
         }
     }
 
-    private void Informacoes(ClientModel newValue)  {
-        try {
-            CPFLabel.textProperty().bind(newValue.cpfProperty());
-            CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
-            NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
-            MaeLabel.textProperty().bind(newValue.maeProperty());
-//            EmailLabel.textProperty().bind(newValue.emailProperty());
-            NomeLabel.textProperty().bind(newValue.nomeProperty());
-            SexoLabel.textProperty().bind(newValue.sexoProperty());
-            identidadeLabel.textProperty().bind(newValue.identidadeProperty());
-//            especialidadeLabel.textProperty().bind(newValue.especialidadeProperty());
-//            recepcaoLabel.textProperty().bind(newValue.recepcaoProperty());
+    private void Informacoes(ClientModel newValue) {
+
+        CPFLabel.textProperty().bind(newValue.cpfProperty());
+        CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
+        NascimentoLabel.textProperty().bind(newValue.dataNascimentoProperty());
+        MaeLabel.textProperty().bind(newValue.maeProperty());
+
+        NomeLabel.textProperty().bind(newValue.nomeProperty());
+        SexoLabel.textProperty().bind(newValue.sexoProperty());
+        identidadeLabel.textProperty().bind(newValue.identidadeProperty());
 
 
-        } catch (NullPointerException ex) {
-            CPFLabel.textProperty().bind(new SimpleStringProperty(""));
-            CartaoSUSLabel.textProperty().bind(new SimpleStringProperty(""));
-            NascimentoLabel.textProperty().bind(new SimpleStringProperty(""));
-            SexoLabel.textProperty().bind(new SimpleStringProperty(""));
-            MaeLabel.textProperty().bind(new SimpleStringProperty(""));
-            EmailLabel.textProperty().bind(new SimpleStringProperty(""));
-            NomeLabel.textProperty().bind(new SimpleStringProperty(""));
-            identidadeLabel.textProperty().bind(new SimpleStringProperty(""));
-            especialidadeLabel.textProperty().bind(new SimpleStringProperty(""));
-            recepcaoLabel.textProperty().bind(new SimpleStringProperty(""));
+        ContactClientModel contactClientModel = ContactClientModel.find(newValue.getIdClient());
+
+        if (contactClientModel != null) {
+            EmailLabel.textProperty().bind(contactClientModel.emailProperty());
+            TelefoneLabel.textProperty().bind(contactClientModel.telefoneProperty());
         }
-        try {
 
-            AddressClientModel endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
-            if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
-                RuaLabel.textProperty().bind(endereco_cliente.ruaProperty());
-                BairroLabel.textProperty().bind(endereco_cliente.bairroProperty());
-                CidadeLabel.textProperty().bind(endereco_cliente.cidadeProperty());
-                EstadoLabel.textProperty().bind(endereco_cliente.estadoProperty());
-                PaisLabel.textProperty().bind(endereco_cliente.paisProperty());
-                NCasaLabel.textProperty().bind(endereco_cliente.numeroCasaProperty().asString());
-//                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
+        ReceptionClientModel receptionClientModel = ReceptionClientModel.find(newValue.getIdClient());
 
-            } else {
-              throw new NullPointerException("Sem dados");
-            }
-        } catch (NullPointerException e) {
-            RuaLabel.textProperty().bind(new SimpleStringProperty(""));
-            BairroLabel.textProperty().bind(new SimpleStringProperty(""));
-            CidadeLabel.textProperty().bind(new SimpleStringProperty(""));
-            EstadoLabel.textProperty().bind(new SimpleStringProperty(""));
-            PaisLabel.textProperty().bind(new SimpleStringProperty(""));
-            NCasaLabel.textProperty().bind(new SimpleStringProperty(""));
-            TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
+        if (receptionClientModel != null) {
+            especialidadeLabel.textProperty().bind(receptionClientModel.especialidadeProperty());
+            recepcaoLabel.textProperty().bind(receptionClientModel.recepcaoProperty());
         }
+
+        AddressClientModel addressClientModel = AddressClientModel.find(newValue.getIdClient());
+        if (addressClientModel != null) {
+            RuaLabel.textProperty().bind(addressClientModel.ruaProperty());
+            BairroLabel.textProperty().bind(addressClientModel.bairroProperty());
+            CidadeLabel.textProperty().bind(addressClientModel.cidadeProperty());
+            EstadoLabel.textProperty().bind(addressClientModel.estadoProperty());
+            PaisLabel.textProperty().bind(addressClientModel.paisProperty());
+            NCasaLabel.textProperty().bind(addressClientModel.numeroCasaProperty());
+
+        }
+
 
     }
 

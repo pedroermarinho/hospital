@@ -7,7 +7,10 @@ package io.github.pedroermarinho.hospital.Controller.Register;
 
 import io.github.pedroermarinho.hospital.Controller.Util.SexoEnum;
 import io.github.pedroermarinho.hospital.Dados;
+import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Contact.ContactClientModel;
+import io.github.pedroermarinho.hospital.Model.Client.Reception.ReceptionClientModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,9 +21,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
-import static io.github.pedroermarinho.hospital.Util.Filtro.Cliente_para_Endereco;
 
 /**
  * FXML Controller class
@@ -143,9 +146,19 @@ public class ClientController implements Initializable {
     void OnDeletar() {
         ClientModel selected = registrosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            final var addressClientModel = Cliente_para_Endereco(selected.getIdClient());
+            final var addressClientModel = AddressClientModel.find(selected.getIdClient());
             if (addressClientModel != null) {
                 addressClientModel.delete();
+            }
+            final var contactClientModel = ContactClientModel.find(selected.getIdClient());
+            if(contactClientModel!=null){
+                contactClientModel.delete();
+            }
+
+            final var receptionClientModel = ReceptionClientModel.find(selected.getIdClient());
+
+            if (receptionClientModel != null) {
+                receptionClientModel.delete();
             }
             selected.delete();
             data.getClientData();
@@ -161,11 +174,21 @@ public class ClientController implements Initializable {
         NomeMaeText.setText(modificaoClient.getMae());
         NascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
         CartaoText.setText(modificaoClient.getCartaoSUS());
-//        EmailText.setText(modificaoClient.getEmail());
         SexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
-//        atendimentoField.setText(modificaoClient.getEspecialidade());
-//        recepcaoField.setText(modificaoClient.getRecepcao());
         identidadeField.setText(modificaoClient.getIdentidade());
+        final var contactClientModel = ContactClientModel.find(modificaoClient.getIdClient());
+
+        if (contactClientModel != null) {
+            EmailText.setText(contactClientModel.getEmail());
+            TelefoneText.setText(contactClientModel.getTelefone());
+        }
+
+        final var receptionClientModel = ReceptionClientModel.find(modificaoClient.getIdClient());
+
+        if (receptionClientModel != null) {
+            atendimentoField.setText(receptionClientModel.getEspecialidade());
+            recepcaoField.setText(receptionClientModel.getRecepcao());
+        }
     }
 
     @FXML
@@ -177,11 +200,25 @@ public class ClientController implements Initializable {
         NomeMaeText.setText(modificaoClient.getMae());
         NascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
         CartaoText.setText(modificaoClient.getCartaoSUS());
-//        EmailText.setText(modificaoClient.getEmail());
         SexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
-//        atendimentoField.setText(modificaoClient.getEspecialidade());
-//        recepcaoField.setText(modificaoClient.getRecepcao());
         identidadeField.setText(modificaoClient.getIdentidade());
+
+        final var contactClientModel = ContactClientModel.find(modificaoClient.getIdClient());
+
+        if (contactClientModel != null) {
+            EmailText.setText(contactClientModel.getEmail());
+            TelefoneText.setText(contactClientModel.getTelefone());
+        }
+
+        final var receptionClientModel = ReceptionClientModel.find(modificaoClient.getIdClient());
+
+        if (receptionClientModel != null) {
+            atendimentoField.setText(receptionClientModel.getEspecialidade());
+            recepcaoField.setText(receptionClientModel.getRecepcao());
+        }
+
+
+
     }
 
     @FXML
@@ -209,12 +246,22 @@ public class ClientController implements Initializable {
             modificaoClient.setIdentidade(identidadeField.getText());
             modificaoClient.setSexo(SexoBox.getValue().getDescricao());
             final Integer id = modificaoClient.save();
+            System.out.println(id);
 
 
-//            modificaoAddress.setTelefone(TelefoneText.getText());
-//            modificaoClient.setEmail(EmailText.getText());
-//            modificaoClient.setRecepcao(recepcaoField.getText());
-//            modificaoClient.setEspecialidade(atendimentoField.getText());
+
+                final ContactClientModel contactClientModel = new ContactClientModel();
+                contactClientModel.setIdClient(id);
+                contactClientModel.setEmail(EmailText.getText());
+                contactClientModel.setTelefone(TelefoneText.getText());
+                contactClientModel.save();
+
+                final ReceptionClientModel receptionClientModel = new ReceptionClientModel();
+                receptionClientModel.setIdClient(id);
+                receptionClientModel.setRecepcao(recepcaoField.getText());
+                receptionClientModel.setEspecialidade(atendimentoField.getText());
+                receptionClientModel.setModificationDate(java.sql.Date.valueOf(LocalDate.now()).toString());
+                receptionClientModel.save();
 
             LimparCampo();
             data.getClientData();

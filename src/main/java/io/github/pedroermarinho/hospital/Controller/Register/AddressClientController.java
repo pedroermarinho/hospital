@@ -19,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static io.github.pedroermarinho.hospital.Util.Filtro.Cliente_para_Endereco;
 
 /**
  * FXML Controller class
@@ -112,11 +111,10 @@ public class AddressClientController implements Initializable {
     void OnDetalhes() {
         On_Off_Button(true);
         cliente = registrosView.getSelectionModel().getSelectedItem();
-        modificaoAddress = Cliente_para_Endereco(cliente.getIdClient());
+        modificaoAddress = AddressClientModel.find(cliente.getIdClient());
         if (modificaoAddress != null) {
 
             NCasaText.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
-//            TelefoneText.setText(modificaoAddress.getTelefone());
             ObservacaoText.setText(modificaoAddress.getComplemento());
             RuaText.setText(modificaoAddress.getRua());
             BairroText.setText(modificaoAddress.getBairro());
@@ -132,10 +130,9 @@ public class AddressClientController implements Initializable {
         On_Off_Button(false);
         cliente = registrosView.getSelectionModel().getSelectedItem();
 
-        modificaoAddress = Cliente_para_Endereco(cliente.getIdClient());
+        modificaoAddress = AddressClientModel.find(cliente.getIdClient());
         if (modificaoAddress != null) {
             NCasaText.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
-//            TelefoneText.setText(modificaoAddress.getTelefone());
             ObservacaoText.setText(modificaoAddress.getComplemento());
 
             RuaText.setText(modificaoAddress.getRua());
@@ -158,7 +155,7 @@ public class AddressClientController implements Initializable {
             modificaoAddress.setCidade(CidadeText.getText());
             modificaoAddress.setBairro(BairroText.getText());
             modificaoAddress.setRua(RuaText.getText());
-            modificaoAddress.setNumeroCasa(Integer.parseInt(NCasaText.getText()));
+            modificaoAddress.setNumeroCasa(NCasaText.getText());
 
             modificaoAddress.setComplemento(ObservacaoText.getText());
             modificaoAddress.setIdClient(cliente.getIdClient());
@@ -277,6 +274,8 @@ public class AddressClientController implements Initializable {
 
         IDColumn.setCellValueFactory(new PropertyValueFactory<>("idClient"));
         ClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+
+
 
     }
 

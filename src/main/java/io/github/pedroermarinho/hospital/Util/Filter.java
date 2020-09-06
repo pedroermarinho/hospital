@@ -12,15 +12,15 @@ import java.util.List;
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
-public class Filtro {
+public class Filter {
 
-    public static AddressClientModel Cliente_para_Endereco(int idClient) {
-        List<AddressClientModel> enderecos = AddressClientModel.all();
-        for (AddressClientModel endereco : enderecos) {
-            if (endereco.getIdClient() == idClient) {
-                return  endereco;
-            }
-        }
-        return null;
-    }
+//    public static AddressClientModel clientForAddress(int idClient) {
+//        List<AddressClientModel> addresses = AddressClientModel.all();
+//        for (AddressClientModel address : addresses) {
+//            if (address.getIdClient() == idClient) {
+//                return  address;
+//            }
+//        }
+//        return null;
+//    }
 }

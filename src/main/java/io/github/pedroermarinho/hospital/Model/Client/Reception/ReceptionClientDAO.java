@@ -24,11 +24,37 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
 
     @Override
     public ReceptionClientModel get(int id) {
-        ReceptionClientModel obj = new ReceptionClientModel();
+       final ReceptionClientModel obj = new ReceptionClientModel();
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` WHERE id_address_client = '" + id + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` WHERE id_reception_client = '" + id + "'");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                obj.setIdReceptionClient(rs.getInt("id_reception_client"));
+                obj.setIdClient(rs.getInt("id_client"));
+                obj.setEspecialidade(rs.getString("especialidade"));
+                obj.setRecepcao(rs.getString("recepcao"));
+                obj.setModificationDate(rs.getString("modification_date"));
+
+            }
+
+            return obj;
+        } catch (SQLException ex) {
+            db.close();
+            MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
+            return null;
+        }
+    }
+
+    @Override
+    public ReceptionClientModel getClient(int id) {
+        final ReceptionClientModel obj = new ReceptionClientModel();
+
+        try {
+
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` WHERE id_client = '" + id + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -110,7 +136,7 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             stmt.setString(2, obj.getEspecialidade());
             stmt.setString(3, obj.getRecepcao());
             stmt.setString(4, obj.getModificationDate());
-            stmt.setInt(9, obj.getIdReceptionClient());
+            stmt.setInt(5, obj.getIdReceptionClient());
 
             return stmt.executeUpdate();
 
@@ -124,7 +150,7 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
     public Integer delete(int id) {
 
         try {
-            stmt = db.getConnection().prepareStatement("DELETE FROM reception_client WHERE id_reception_client = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM reception_client WHERE id_client = ?;");
 
             stmt.setInt(1, id);
 

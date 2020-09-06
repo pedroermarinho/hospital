@@ -28,7 +28,7 @@ public class ContactClientDAO implements ContactClientDAOInterface {
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `contact_client` WHERE id_contact_client = '" + id + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `contact_client` WHERE id_client = '" + id + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -76,7 +76,7 @@ public class ContactClientDAO implements ContactClientDAOInterface {
     @Override
     public Integer create(ContactClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO contact_client ( `id_client`, `email`, `telefone`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO contact_client ( `id_client`, `email`, `telefone`) VALUES(?,?,?);");
 
 
             stmt.setInt(1, obj.getIdClient());
@@ -119,7 +119,7 @@ public class ContactClientDAO implements ContactClientDAOInterface {
     public Integer delete(int id) {
 
         try {
-            stmt = db.getConnection().prepareStatement("DELETE FROM contact_client WHERE id_contact_client = ?;");
+            stmt = db.getConnection().prepareStatement("DELETE FROM contact_client WHERE id_client = ?;");
 
             stmt.setInt(1, id);
 

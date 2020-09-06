@@ -8,7 +8,7 @@ package io.github.pedroermarinho.hospital.Controller;
 import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
-import io.github.pedroermarinho.hospital.Util.Filtro;
+import io.github.pedroermarinho.hospital.Util.Filter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -126,7 +126,7 @@ public class CentralTextController implements Initializable {
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getIdClient());
+            endereco_cliente = AddressClientModel.find(cliente.getIdClient());
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 
 //                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
@@ -162,7 +162,7 @@ public class CentralTextController implements Initializable {
         }
         try {
 
-            endereco_cliente = Filtro.Cliente_para_Endereco(cliente.getIdClient());
+            endereco_cliente = AddressClientModel.find(cliente.getIdClient());
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 
 //                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
@@ -231,7 +231,7 @@ public class CentralTextController implements Initializable {
             NomeLabel.textProperty().bind(new SimpleStringProperty(""));
         }
         try {
-            endereco_cliente = Filtro.Cliente_para_Endereco(newValue.getIdClient());
+            endereco_cliente = AddressClientModel.find(newValue.getIdClient());
             if (endereco_cliente != null && endereco_cliente.getIdAddressClient() != 0) {
 //                TelefoneLabel.textProperty().bind(endereco_cliente.telefoneProperty());
             } else {

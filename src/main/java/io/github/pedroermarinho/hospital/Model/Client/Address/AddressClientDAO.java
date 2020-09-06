@@ -28,7 +28,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `address_client` WHERE id_address_client = '" + id + "'");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `address_client` WHERE id_client = '" + id + "'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -37,7 +37,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
                 obj.setCidade(rs.getString("cidade"));
                 obj.setRua(rs.getString("rua"));
                 obj.setBairro(rs.getString("bairro"));
-                obj.setNumeroCasa(rs.getInt("numero_casa"));
+                obj.setNumeroCasa(rs.getString("numero_casa"));
                 obj.setComplemento(rs.getString("complemento"));
             }
 
@@ -67,7 +67,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
                 obj.setCidade(rs.getString("cidade"));
                 obj.setRua(rs.getString("rua"));
                 obj.setBairro(rs.getString("bairro"));
-                obj.setNumeroCasa(rs.getInt("numero_casa"));
+                obj.setNumeroCasa(rs.getString("numero_casa"));
                 obj.setComplemento(rs.getString("complemento"));
                 result.add(obj);
             }
@@ -93,7 +93,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             stmt.setString(4, obj.getCidade());
             stmt.setString(5, obj.getRua());
             stmt.setString(6, obj.getBairro());
-            stmt.setInt(7, obj.getNumeroCasa());
+            stmt.setString(7, obj.getNumeroCasa());
             stmt.setString(8, obj.getComplemento());
 
             return stmt.executeUpdate();
@@ -125,7 +125,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             stmt.setString(4, obj.getCidade());
             stmt.setString(5, obj.getRua());
             stmt.setString(6, obj.getBairro());
-            stmt.setInt(7, obj.getNumeroCasa());
+            stmt.setString(7, obj.getNumeroCasa());
             stmt.setString(8, obj.getComplemento());
             stmt.setInt(9, obj.getIdAddressClient());
 

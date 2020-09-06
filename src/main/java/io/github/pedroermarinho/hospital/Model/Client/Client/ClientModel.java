@@ -136,7 +136,7 @@ public class ClientModel {
     }
 
     public Integer save() {
-        if (idClient.getValue() != null && idClient.get() != 0) {
+        if (idClient.getValue() != null && idClient.get() != 0 ) {
             if (find(idClient.get()) != null) {
                 return dao.update(this);
             } else {

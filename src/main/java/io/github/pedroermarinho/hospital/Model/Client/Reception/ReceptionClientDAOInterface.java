@@ -6,6 +6,8 @@ import java.util.List;
 public interface ReceptionClientDAOInterface {
     ReceptionClientModel get(int id);
 
+    ReceptionClientModel getClient(int id);
+
     List<ReceptionClientModel> getAll();
 
     Integer create(ReceptionClientModel obj);

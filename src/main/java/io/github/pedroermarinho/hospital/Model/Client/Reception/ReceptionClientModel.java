@@ -83,16 +83,19 @@ public class ReceptionClientModel {
     private static final ReceptionClientDAOInterface dao = new ReceptionClientDAO();
 
 
-    public static List<AddressClientModel> all() {
-        return new AddressClientDAO().getAll();
+    public static List<ReceptionClientModel> all() {
+        return new ReceptionClientDAO().getAll();
     }
 
-    public static AddressClientModel find(int id) {
-        return new AddressClientDAO().get(id);
+    public static ReceptionClientModel find(int id) {
+        return new ReceptionClientDAO().get(id);
+    }
+    public static ReceptionClientModel findClient(int id) {
+        return new ReceptionClientDAO().getClient(id);
     }
 
     public Integer save() {
-        if (idReceptionClient.get() != 0) {
+        if (idReceptionClient.getValue() != null && idReceptionClient.get() != 0 ) {
             if (find(idReceptionClient.get()) != null) {
                 return dao.update(this);
             } else {
@@ -104,7 +107,7 @@ public class ReceptionClientModel {
     }
 
     public Integer delete() {
-        if (find(idReceptionClient.get()) != null) {
+        if (find(idClient.get()) != null) {
             return dao.delete(getIdReceptionClient());
         } else {
             return null;

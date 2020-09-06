@@ -43,25 +43,28 @@
                                 <RowConstraints minHeight="60.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Nome:" />
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="CPF:" GridPane.rowIndex="3" />
                             <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Cartão SUS:" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="1" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Identidade:" GridPane.rowIndex="2" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="CPF:" GridPane.rowIndex="3" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Mãe:" GridPane.rowIndex="4" />
                             <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Data de Nascimento:" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="5" />
                             <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Sexo:" GridPane.rowIndex="6" />
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Mãe:" GridPane.rowIndex="4" />
                             <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Email:" GridPane.rowIndex="7" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Telefone:" textAlignment="RIGHT" GridPane.rowIndex="8" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Especialidade / Atendimento:" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="9" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Responsavel pelo preenchimento (recepçao):" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="10" />
                             <Label fx:id="NomeLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" wrapText="true" GridPane.columnIndex="1" />
+                            <Label fx:id="identidadeLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            <Label fx:id="CPFLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             <Label fx:id="MaeLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                             <Label fx:id="NascimentoLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                            <Label fx:id="CPFLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             <Label fx:id="CartaoSUSLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             <Label fx:id="SexoLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                             <Label fx:id="EmailLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Identidade:" GridPane.rowIndex="2" />
-                            <Label fx:id="identidadeLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Especialidade / Atendimento:" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="8" />
-                            <Label fx:id="especialidadeLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Responsavel pelo preenchimento (recepçao):" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="9" />
-                            <Label fx:id="recepcaoLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                            <Label fx:id="TelefoneLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                            <Label fx:id="especialidadeLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                            <Label fx:id="recepcaoLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+
                         </GridPane>
                     </AnchorPane>
                 </Tab>
@@ -81,10 +84,10 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Cidade:" textAlignment="RIGHT" GridPane.rowIndex="2" />
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Estado:" textAlignment="RIGHT" GridPane.rowIndex="1" />
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Bairro:" textAlignment="RIGHT" GridPane.rowIndex="3" />
                             <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="País:" textAlignment="RIGHT" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Estado:" textAlignment="RIGHT" GridPane.rowIndex="1" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Cidade:" textAlignment="RIGHT" GridPane.rowIndex="2" />
+                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Bairro:" textAlignment="RIGHT" GridPane.rowIndex="3" />
                             <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Rua:" textAlignment="RIGHT" GridPane.rowIndex="4" />
                             <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Nº da Casa:" textAlignment="RIGHT" GridPane.rowIndex="5" />
                             <Label fx:id="PaisLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="1" />
@@ -93,8 +96,6 @@
                             <Label fx:id="BairroLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             <Label fx:id="RuaLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                             <Label fx:id="NCasaLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" text="Telefone:" textAlignment="RIGHT" GridPane.rowIndex="6" />
-                            <Label fx:id="TelefoneLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-bright" textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         </GridPane>
                     </AnchorPane>
                 </Tab>

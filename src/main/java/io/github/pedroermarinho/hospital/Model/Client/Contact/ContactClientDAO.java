@@ -40,7 +40,6 @@ public class ContactClientDAO implements ContactClientDAOInterface {
 
             return obj;
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
             return null;
         }
@@ -66,7 +65,6 @@ public class ContactClientDAO implements ContactClientDAOInterface {
             return result;
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "getEnderecoClienteList");
             return null;
 
@@ -82,11 +80,10 @@ public class ContactClientDAO implements ContactClientDAOInterface {
             stmt.setInt(1, obj.getIdClient());
             stmt.setString(2, obj.getEmail());
             stmt.setString(3, obj.getTelefone());
-
-            return stmt.executeUpdate();
+            stmt.executeUpdate();
+            return obj.getIdClient();
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
             return null;
         }
@@ -96,20 +93,17 @@ public class ContactClientDAO implements ContactClientDAOInterface {
     public Integer update(ContactClientModel obj) {
         try {
             stmt = db.getConnection().prepareStatement("UPDATE contact_client SET"
-                    + " id_client = ?,"
+
                     + " email = ?,"
                     + " telefone = ?"
-                    + " WHERE id_contact_client = ?;");
+                    + " WHERE id_client = ?;");
+            stmt.setString(1, obj.getEmail());
+            stmt.setString(2, obj.getTelefone());
+            stmt.setInt(3, obj.getIdClient());
 
-            stmt.setInt(1, obj.getIdClient());
-            stmt.setString(2, obj.getEmail());
-            stmt.setString(3, obj.getTelefone());
-            stmt.setInt(4, obj.getIdContactClient());
-
-            return stmt.executeUpdate();
-
+            stmt.executeUpdate();
+            return obj.getIdClient();
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
 
             return null;
@@ -123,10 +117,10 @@ public class ContactClientDAO implements ContactClientDAOInterface {
 
             stmt.setInt(1, id);
 
-            return stmt.executeUpdate();
+            stmt.executeUpdate();
 
+            return id;
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
             return null;
         }

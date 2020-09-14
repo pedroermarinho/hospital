@@ -90,13 +90,10 @@ public class ReceptionClientModel {
     public static ReceptionClientModel find(int id) {
         return new ReceptionClientDAO().get(id);
     }
-    public static ReceptionClientModel findClient(int id) {
-        return new ReceptionClientDAO().getClient(id);
-    }
 
     public Integer save() {
-        if (idReceptionClient.getValue() != null && idReceptionClient.get() != 0 ) {
-            if (find(idReceptionClient.get()) != null) {
+        if (idClient.getValue() != null && idClient.get() != 0 ) {
+            if (find(idClient.get()) != null && find(idClient.get()).getIdReceptionClient() != 0) {
                 return dao.update(this);
             } else {
                 return dao.create(this);

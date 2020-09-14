@@ -11,6 +11,7 @@ import io.github.pedroermarinho.hospital.Util.MsgErro;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             return result;
 
         } catch (SQLException ex) {
-            db.close();
+
             MsgErro.MessagemErroBD(ex, "getEnderecoClienteList");
             return null;
 
@@ -84,7 +85,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
     @Override
     public Integer create(AddressClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
 
 
             stmt.setInt(1, obj.getIdClient());
@@ -96,10 +97,15 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             stmt.setString(7, obj.getNumeroCasa());
             stmt.setString(8, obj.getComplemento());
 
-            return stmt.executeUpdate();
+             stmt.executeUpdate();
+            final ResultSet rs = stmt.getGeneratedKeys();
+            Integer resultID = null;
+            if (rs.next()) {
+                resultID= rs.getInt(1);
+            }
+            return resultID;
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
             return null;
         }
@@ -117,7 +123,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
                     + " bairro = ?,"
                     + " numero_casa = ?,"
                     + " complemento = ?"
-                    + " WHERE id_address_client = ?;");
+                    + " WHERE id_address_client = ?;", Statement.RETURN_GENERATED_KEYS);
 
             stmt.setInt(1, obj.getIdClient());
             stmt.setString(2, obj.getPais());
@@ -129,10 +135,11 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             stmt.setString(8, obj.getComplemento());
             stmt.setInt(9, obj.getIdAddressClient());
 
-            return stmt.executeUpdate();
+             stmt.executeUpdate();
+
+            return  obj.getIdAddressClient();
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
             return null;
         }
@@ -145,10 +152,11 @@ public class AddressClientDAO implements AddressClientDAOInterface {
 
             stmt.setInt(1, id);
 
-            return stmt.executeUpdate();
+           stmt.executeUpdate();
+
+            return id;
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
             return null;
         }

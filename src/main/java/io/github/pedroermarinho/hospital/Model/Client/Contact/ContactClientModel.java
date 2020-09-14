@@ -78,8 +78,8 @@ public class ContactClientModel {
     }
 
     public Integer save() {
-        if (idContactClient.getValue() != null  && idContactClient.get() != 0 ) {
-            if (find(idClient.get()) != null) {
+        if (idClient.getValue() != null  && idClient.get() != 0 ) {
+            if (find(idClient.get()) != null && find(idClient.get()).getIdContactClient() != 0 ) {
                 return dao.update(this);
             } else {
                 return dao.create(this);

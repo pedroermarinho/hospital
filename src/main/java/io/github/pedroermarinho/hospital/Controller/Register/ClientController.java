@@ -20,8 +20,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -146,12 +146,14 @@ public class ClientController implements Initializable {
     void OnDeletar() {
         ClientModel selected = registrosView.getSelectionModel().getSelectedItem();
         if (selected != null) {
+            selected.delete();
+
             final var addressClientModel = AddressClientModel.find(selected.getIdClient());
             if (addressClientModel != null) {
                 addressClientModel.delete();
             }
             final var contactClientModel = ContactClientModel.find(selected.getIdClient());
-            if(contactClientModel!=null){
+            if (contactClientModel != null) {
                 contactClientModel.delete();
             }
 
@@ -160,7 +162,7 @@ public class ClientController implements Initializable {
             if (receptionClientModel != null) {
                 receptionClientModel.delete();
             }
-            selected.delete();
+
             data.getClientData();
         }
     }
@@ -218,7 +220,6 @@ public class ClientController implements Initializable {
         }
 
 
-
     }
 
     @FXML
@@ -246,22 +247,21 @@ public class ClientController implements Initializable {
             modificaoClient.setIdentidade(identidadeField.getText());
             modificaoClient.setSexo(SexoBox.getValue().getDescricao());
             final Integer id = modificaoClient.save();
-            System.out.println(id);
+            System.out.println("id criado:"+id);
 
 
+            final ContactClientModel contactClientModel = new ContactClientModel();
+            contactClientModel.setIdClient(id);
+            contactClientModel.setEmail(EmailText.getText());
+            contactClientModel.setTelefone(TelefoneText.getText());
+            contactClientModel.save();
 
-                final ContactClientModel contactClientModel = new ContactClientModel();
-                contactClientModel.setIdClient(id);
-                contactClientModel.setEmail(EmailText.getText());
-                contactClientModel.setTelefone(TelefoneText.getText());
-                contactClientModel.save();
-
-                final ReceptionClientModel receptionClientModel = new ReceptionClientModel();
-                receptionClientModel.setIdClient(id);
-                receptionClientModel.setRecepcao(recepcaoField.getText());
-                receptionClientModel.setEspecialidade(atendimentoField.getText());
-                receptionClientModel.setModificationDate(java.sql.Date.valueOf(LocalDate.now()).toString());
-                receptionClientModel.save();
+            final ReceptionClientModel receptionClientModel = new ReceptionClientModel();
+            receptionClientModel.setIdClient(id);
+            receptionClientModel.setRecepcao(recepcaoField.getText());
+            receptionClientModel.setEspecialidade(atendimentoField.getText());
+            receptionClientModel.setModificationDate(java.sql.Date.valueOf(LocalDate.now()).toString());
+            receptionClientModel.save();
 
             LimparCampo();
             data.getClientData();
@@ -303,11 +303,10 @@ public class ClientController implements Initializable {
     }
 
 
-
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if(!isValidNomeField()){
+        if (!isValidNomeField()) {
             errorMessage += "Nome inválido!\n";
         }
 
@@ -423,15 +422,23 @@ public class ClientController implements Initializable {
 
         }
     }
+
     @FXML
     boolean isValidNascimentoDate() {
         if (NascimentoDate.getValue() == null || NascimentoDate.getValue().toString().length() == 0) {
             NascimentoDate.setStyle("-fx-border-color:red");
             return false;
         } else {
+            try {
+                java.sql.Date.valueOf(NascimentoDate.getValue());
+            }catch (NullPointerException e){
+                NascimentoDate.setStyle("-fx-border-color:red");
+                return false;
+            }
             NascimentoDate.setStyle("");
             return true;
         }
+
     }
 
 

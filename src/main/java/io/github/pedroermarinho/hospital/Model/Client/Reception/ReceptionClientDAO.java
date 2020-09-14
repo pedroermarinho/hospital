@@ -28,32 +28,6 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
 
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` WHERE id_reception_client = '" + id + "'");
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                obj.setIdReceptionClient(rs.getInt("id_reception_client"));
-                obj.setIdClient(rs.getInt("id_client"));
-                obj.setEspecialidade(rs.getString("especialidade"));
-                obj.setRecepcao(rs.getString("recepcao"));
-                obj.setModificationDate(rs.getString("modification_date"));
-
-            }
-
-            return obj;
-        } catch (SQLException ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
-            return null;
-        }
-    }
-
-    @Override
-    public ReceptionClientModel getClient(int id) {
-        final ReceptionClientModel obj = new ReceptionClientModel();
-
-        try {
-
             stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` WHERE id_client = '" + id + "'");
             ResultSet rs = stmt.executeQuery();
 
@@ -68,7 +42,6 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
 
             return obj;
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
             return null;
         }
@@ -79,7 +52,7 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
         ArrayList<ReceptionClientModel> result = new ArrayList<>();
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `id_client` ");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -95,7 +68,6 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             return result;
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "getEnderecoClienteList");
             return null;
 
@@ -116,7 +88,6 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             return stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
             return null;
         }
@@ -130,7 +101,7 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
                     + " especialidade = ?,"
                     + " recepcao = ?,"
                     + " modification_date = ?"
-                    + " WHERE id_reception_client = ?;");
+                    + " WHERE id_client = ?;");
 
             stmt.setInt(1, obj.getIdClient());
             stmt.setString(2, obj.getEspecialidade());
@@ -141,7 +112,6 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             return stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
             return null;
         }
@@ -157,7 +127,6 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             return stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            db.close();
             MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
             return null;
         }

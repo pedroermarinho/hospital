@@ -11,6 +11,7 @@ import io.github.pedroermarinho.hospital.Util.MsgErro;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ClientDAO implements ClientDAOInterface {
 
             return obj;
         } catch (SQLException ex) {
-            db.close();
+
             MsgErro.MessagemErroBD(ex, "getClienteID");
             return null;
         }
@@ -56,7 +57,7 @@ public class ClientDAO implements ClientDAOInterface {
         ArrayList<ClientModel> result = new ArrayList<>();
         try {
 
-            stmt = db.getConnection().prepareStatement("SELECT * FROM `client` ");
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `client`");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -75,7 +76,7 @@ public class ClientDAO implements ClientDAOInterface {
             return result;
 
         } catch (SQLException ex) {
-            db.close();
+
             MsgErro.MessagemErroBD(ex, "getClienteList");
             return null;
 
@@ -86,7 +87,7 @@ public class ClientDAO implements ClientDAOInterface {
     public Integer create(ClientModel obj) {
 
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO client (`cpf`,`cartao_sus`,`identidade`, `nome`, `mae`,`data_nascimento`,`sexo`) VALUES(?,?,?,?,?,?,?);");
+            stmt = db.getConnection().prepareStatement("INSERT INTO client (`cpf`,`cartao_sus`,`identidade`, `nome`, `mae`,`data_nascimento`,`sexo`) VALUES(?,?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, obj.getCpf());
             stmt.setString(2, obj.getCartaoSUS());
@@ -96,10 +97,16 @@ public class ClientDAO implements ClientDAOInterface {
             stmt.setString(6, obj.getDataNascimento());
             stmt.setString(7, obj.getSexo());
 
-            return stmt.executeUpdate();
+            stmt.executeUpdate();
+            final ResultSet rs = stmt.getGeneratedKeys();
+            Integer resultID = null;
+            if (rs.next()) {
+                resultID = rs.getInt(1);
+            }
+            return resultID;
 
         } catch (SQLException ex) {
-            db.close();
+
             MsgErro.MessagemErroBD(ex, "creatCliente");
             return null;
         }
@@ -129,10 +136,11 @@ public class ClientDAO implements ClientDAOInterface {
             stmt.setString(7, obj.getSexo());
             stmt.setInt(8, obj.getIdClient());
 
-            return stmt.executeUpdate();
+            stmt.executeUpdate();
+            return obj.getIdClient();
 
         } catch (SQLException ex) {
-            db.close();
+
             MsgErro.MessagemErroBD(ex, "updateCliente");
             return null;
         }
@@ -143,11 +151,11 @@ public class ClientDAO implements ClientDAOInterface {
             stmt = db.getConnection().prepareStatement("DELETE FROM client WHERE id_client = ?;");
 
             stmt.setInt(1, id);
-
-            return stmt.executeUpdate();
+            stmt.executeUpdate();
+            return id;
 
         } catch (SQLException ex) {
-            db.close();
+
             MsgErro.MessagemErroBD(ex, "deleteCliente");
             return null;
         }

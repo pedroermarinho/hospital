@@ -7,7 +7,6 @@ package io.github.pedroermarinho.hospital.Controller;
 
 import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
-import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Contact.ContactClientModel;
 import io.github.pedroermarinho.hospital.Util.Filter;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,7 +21,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
 import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -33,9 +32,6 @@ import java.util.ResourceBundle;
 public class CentralTextController implements Initializable {
 
     private final Dados data = new Dados();
-
-    private AddressClientModel endereco_cliente;
-    private ClientModel cliente;
 
     @FXML
     private AnchorPane TextoMenuAnchor;
@@ -64,17 +60,13 @@ public class CentralTextController implements Initializable {
     @FXML
     private TableColumn<ClientModel, String> nomeColumn;
 
-    @FXML
-    private MenuItem btnDetalhesListCenter;
 
     @FXML
     private TableView<ClientModel> AgendaView;
 
     @FXML
-    private TableColumn<ClientModel, Time> HoraAgendaColumn;
+    private TableColumn<ClientModel, Time> dataCartaoSUSColumn;
 
-    @FXML
-    private MenuItem btnDetalhesViewHoje;
 
     @FXML
     private Label NomeLabel;
@@ -104,73 +96,7 @@ public class CentralTextController implements Initializable {
 
     private boolean on_off;
 
-    @FXML
-    void OnDetalhesListCenter() {
-        cliente = clientTableView.getSelectionModel().getSelectedItem();
-        try {
 
-            CPFLabel.textProperty().bind(cliente.cpfProperty());
-            CartaoSUSLabel.textProperty().bind(cliente.cartaoSUSProperty());
-            NascimentoLabel.textProperty().bind(cliente.dataNascimentoProperty());
-
-            NomeLabel.textProperty().bind(cliente.nomeProperty());
-            SexoLabel.textProperty().bind(cliente.sexoProperty());
-
-        } catch (Exception ex) {
-            CPFLabel.textProperty().bind(new SimpleStringProperty(""));
-            CartaoSUSLabel.textProperty().bind(new SimpleStringProperty(""));
-            NascimentoLabel.textProperty().bind(new SimpleStringProperty(""));
-            SexoLabel.textProperty().bind(new SimpleStringProperty(""));
-            EmailLabel.textProperty().bind(new SimpleStringProperty(""));
-            NomeLabel.textProperty().bind(new SimpleStringProperty(""));
-
-        }
-        try {
-
-            ContactClientModel contactClientModel = ContactClientModel.find(cliente.getIdClient());
-
-            if (contactClientModel != null) {
-                EmailLabel.textProperty().bind(contactClientModel.emailProperty());
-                TelefoneLabel.textProperty().bind(contactClientModel.telefoneProperty());
-            }
-        } catch (Exception a) {
-            TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-        }
-    }
-
-    @FXML
-    void OnDetalhesViewHoje() {
-
-        cliente = AgendaView.getSelectionModel().getSelectedItem();
-        try {
-
-            CPFLabel.textProperty().bind(cliente.cpfProperty());
-            CartaoSUSLabel.textProperty().bind(cliente.cartaoSUSProperty());
-            NascimentoLabel.textProperty().bind(cliente.dataNascimentoProperty());
-            NomeLabel.textProperty().bind(cliente.nomeProperty());
-            SexoLabel.textProperty().bind(cliente.sexoProperty());
-
-        } catch (Exception ex) {
-            CPFLabel.textProperty().bind(new SimpleStringProperty(""));
-            CartaoSUSLabel.textProperty().bind(new SimpleStringProperty(""));
-            NascimentoLabel.textProperty().bind(new SimpleStringProperty(""));
-            SexoLabel.textProperty().bind(new SimpleStringProperty(""));
-            EmailLabel.textProperty().bind(new SimpleStringProperty(""));
-            NomeLabel.textProperty().bind(new SimpleStringProperty(""));
-
-        }
-        try {
-
-            ContactClientModel contactClientModel = ContactClientModel.find(cliente.getIdClient());
-
-            if (contactClientModel != null) {
-                EmailLabel.textProperty().bind(contactClientModel.emailProperty());
-                TelefoneLabel.textProperty().bind(contactClientModel.telefoneProperty());
-            }
-        } catch (Exception a) {
-            TelefoneLabel.textProperty().bind(new SimpleStringProperty(""));
-        }
-    }
 
     @FXML
     void OnPesquisarData() {
@@ -195,24 +121,11 @@ public class CentralTextController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        clientTableView.setItems(data.getClientData());
-        HoraAgendaColumn.setCellValueFactory(new PropertyValueFactory<>("horario"));
-
-        cartaoSUSColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
-        nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        clientTableView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> Informacoes(newValue));
 
 
-        btnDetalhesViewHoje.disableProperty().bind(AgendaView.getSelectionModel().selectedItemProperty().isNull());
-        btnDetalhesListCenter.disableProperty().bind(clientTableView.getSelectionModel().selectedItemProperty().isNull());
 
-        Date date = new Date();
-        DataMenuTopLabel.setText(String.valueOf(new java.sql.Date(date.getTime())));
-    }
 
-    private void Informacoes(ClientModel newValue)  {
+    private void info(ClientModel newValue)  {
         try {
             CPFLabel.textProperty().bind(newValue.cpfProperty());
             CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());
@@ -250,14 +163,11 @@ public class CentralTextController implements Initializable {
 
         } catch (NumberFormatException a) {
             ID = null;
-
         }
         for (ClientModel itens : data.getClientData()) {
-
             if (ID != null) {
                 if (itens.getIdClient() == ID) {
                     itensEncontrados.add(itens);
-
                 }
             } else {
                 if (itens.getCpf().contains(PesquisarField.getText()) || itens.getCartaoSUS().equalsIgnoreCase(PesquisarField.getText()) || itens.getNome().contains(PesquisarField.getText())) {
@@ -269,4 +179,17 @@ public class CentralTextController implements Initializable {
         return itensEncontrados;
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        AgendaView.setItems(Filter.findClientsData(LocalDate.now()));
+        clientTableView.setItems(data.getClientData());
+        dataCartaoSUSColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
+        AgendaView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> info(newValue));
+
+        cartaoSUSColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
+        nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        clientTableView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> info(newValue));
+
+        DataMenuTopLabel.setText( java.sql.Date.valueOf(LocalDate.now()).toString());
+    }
 }

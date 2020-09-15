@@ -106,7 +106,7 @@
                 <center>
                     <TableView fx:id="RegistroClientesView" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                         <columns>
-                            <TableColumn fx:id="IDClienteColumn" maxWidth="1200.0" prefWidth="65.0" text="ID" />
+                            <TableColumn fx:id="IDClienteColumn" maxWidth="1200.0" prefWidth="50.0" minWidth="50.0" text="Cartao SUS" />
                             <TableColumn fx:id="NomeClienteColumn" prefWidth="5000.0" text="NOME" />
                         </columns>
                         <columnResizePolicy>

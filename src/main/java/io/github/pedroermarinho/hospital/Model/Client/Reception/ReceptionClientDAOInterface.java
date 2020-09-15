@@ -1,10 +1,14 @@
 package io.github.pedroermarinho.hospital.Model.Client.Reception;
 
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public interface ReceptionClientDAOInterface {
     ReceptionClientModel get(int id);
+
+    public List<ReceptionClientModel> getAllData(LocalDate date);
 
     List<ReceptionClientModel> getAll();
 

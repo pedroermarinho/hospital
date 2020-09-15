@@ -31,20 +31,20 @@ public class AddressClientController implements Initializable {
     private AddressClientModel modificaoAddress;
     private ClientModel cliente;
     @FXML
-    private TextField PaisText;
+    private TextField paisField;
     @FXML
-    private TextField EstadoText;
+    private TextField estadoField;
     @FXML
-    private TextField CidadeText;
+    private TextField cidadeField;
     @FXML
-    private TextField BairroText;
+    private TextField bairroField;
     @FXML
-    private TextField RuaText;
+    private TextField ruaField;
     @FXML
-    private TextField NCasaText;
+    private TextField casaField;
 
     @FXML
-    private TextArea ObservacaoText;
+    private TextArea observacaoField;
     @FXML
     private Button bntSalva;
     @FXML
@@ -114,13 +114,13 @@ public class AddressClientController implements Initializable {
         modificaoAddress = AddressClientModel.find(cliente.getIdClient());
         if (modificaoAddress != null) {
 
-            NCasaText.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
-            ObservacaoText.setText(modificaoAddress.getComplemento());
-            RuaText.setText(modificaoAddress.getRua());
-            BairroText.setText(modificaoAddress.getBairro());
-            CidadeText.setText(modificaoAddress.getCidade());
-            EstadoText.setText(modificaoAddress.getEstado());
-            PaisText.setText(modificaoAddress.getPais());
+            casaField.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
+            observacaoField.setText(modificaoAddress.getComplemento());
+            ruaField.setText(modificaoAddress.getRua());
+            bairroField.setText(modificaoAddress.getBairro());
+            cidadeField.setText(modificaoAddress.getCidade());
+            estadoField.setText(modificaoAddress.getEstado());
+            paisField.setText(modificaoAddress.getPais());
         }
     }
 
@@ -132,14 +132,14 @@ public class AddressClientController implements Initializable {
 
         modificaoAddress = AddressClientModel.find(cliente.getIdClient());
         if (modificaoAddress != null) {
-            NCasaText.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
-            ObservacaoText.setText(modificaoAddress.getComplemento());
+            casaField.setText(String.valueOf(modificaoAddress.getNumeroCasa()));
+            observacaoField.setText(modificaoAddress.getComplemento());
 
-            RuaText.setText(modificaoAddress.getRua());
-            BairroText.setText(modificaoAddress.getBairro());
-            CidadeText.setText(modificaoAddress.getCidade());
-            EstadoText.setText(modificaoAddress.getEstado());
-            PaisText.setText(modificaoAddress.getPais());
+            ruaField.setText(modificaoAddress.getRua());
+            bairroField.setText(modificaoAddress.getBairro());
+            cidadeField.setText(modificaoAddress.getCidade());
+            estadoField.setText(modificaoAddress.getEstado());
+            paisField.setText(modificaoAddress.getPais());
         }
     }
 
@@ -150,14 +150,14 @@ public class AddressClientController implements Initializable {
         }
         if (isInputValid()) {
 
-            modificaoAddress.setPais(PaisText.getText());
-            modificaoAddress.setEstado(EstadoText.getText());
-            modificaoAddress.setCidade(CidadeText.getText());
-            modificaoAddress.setBairro(BairroText.getText());
-            modificaoAddress.setRua(RuaText.getText());
-            modificaoAddress.setNumeroCasa(NCasaText.getText());
+            modificaoAddress.setPais(paisField.getText());
+            modificaoAddress.setEstado(estadoField.getText());
+            modificaoAddress.setCidade(cidadeField.getText());
+            modificaoAddress.setBairro(bairroField.getText());
+            modificaoAddress.setRua(ruaField.getText());
+            modificaoAddress.setNumeroCasa(casaField.getText());
 
-            modificaoAddress.setComplemento(ObservacaoText.getText());
+            modificaoAddress.setComplemento(observacaoField.getText());
             modificaoAddress.setIdClient(cliente.getIdClient());
 
             modificaoAddress.save();
@@ -169,14 +169,14 @@ public class AddressClientController implements Initializable {
     }
 
     private void LimparCampo() {
-        NCasaText.setText("");
+        casaField.setText("");
 
-        ObservacaoText.setText("");
-        PaisText.setText("");
-        EstadoText.setText("");
-        CidadeText.setText("");
-        BairroText.setText("");
-        RuaText.setText("");
+        observacaoField.setText("");
+        paisField.setText("");
+        estadoField.setText("");
+        cidadeField.setText("");
+        bairroField.setText("");
+        ruaField.setText("");
 
         cliente = null;
         modificaoAddress = null;
@@ -185,14 +185,14 @@ public class AddressClientController implements Initializable {
 
     private void On_Off_Button(boolean es) {
         modificaoAddress = null;
-        NCasaText.setDisable(es);
+        casaField.setDisable(es);
 
-        ObservacaoText.setDisable(es);
-        PaisText.setDisable(es);
-        EstadoText.setDisable(es);
-        CidadeText.setDisable(es);
-        BairroText.setDisable(es);
-        RuaText.setDisable(es);
+        observacaoField.setDisable(es);
+        paisField.setDisable(es);
+        estadoField.setDisable(es);
+        cidadeField.setDisable(es);
+        bairroField.setDisable(es);
+        ruaField.setDisable(es);
 
         bntSalva.setDisable(es);
         BtnCancelar.setDisable(es);
@@ -201,56 +201,17 @@ public class AddressClientController implements Initializable {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (NCasaText.getText() == null || NCasaText.getText().length() == 0) {
-            errorMessage += "Nº Casa inválido!\n";
-            NCasaText.setStyle("-fx-border-color:red");
-        } else {
-            try {
-                Integer.valueOf(NCasaText.getText());
-            } catch (NumberFormatException e) {
-                errorMessage += "Nº Casa inválido!\n";
-                NCasaText.setStyle("-fx-border-color:red");
-            }
-            NCasaText.setStyle("");
-        }
 
-        if (ObservacaoText.getText() == null || ObservacaoText.getText().length() == 0) {
-            errorMessage += "Nome inválido!\n";
-            ObservacaoText.setStyle("-fx-border-color:red");
-        } else {
-            ObservacaoText.setStyle("");
-        }
 
-        if (PaisText.getText() == null || PaisText.getText().length() == 0) {
+        if(!isValidPaisField()){
             errorMessage += "País inválido!\n";
-            PaisText.setStyle("-fx-border-color:red");
-        } else {
-            PaisText.setStyle("");
         }
-        if (EstadoText.getText() == null || EstadoText.getText().length() == 0) {
+        if (!isValidEstadoField()){
             errorMessage += "Estado inválido!\n";
-            EstadoText.setStyle("-fx-border-color:red");
-        } else {
-            EstadoText.setStyle("");
-        }
-        if (CidadeText.getText() == null || CidadeText.getText().length() == 0) {
-            errorMessage += "Cidade inválido!\n";
-            CidadeText.setStyle("-fx-border-color:red");
-        } else {
-            CidadeText.setStyle("");
         }
 
-        if (BairroText.getText() == null || BairroText.getText().length() == 0) {
-            errorMessage += "Bairro inválido!\n";
-            BairroText.setStyle("-fx-border-color:red");
-        } else {
-            BairroText.setStyle("");
-        }
-        if (RuaText.getText() == null || RuaText.getText().length() == 0) {
-            errorMessage += "Bairro inválido!\n";
-            RuaText.setStyle("-fx-border-color:red");
-        } else {
-            RuaText.setStyle("");
+        if (!isValidCidadeField()){
+            errorMessage += "Cidade inválido!\n";
         }
 
         if (errorMessage.length() == 0) {
@@ -264,6 +225,79 @@ public class AddressClientController implements Initializable {
     }
 
 
+
+
+    public boolean isValidPaisField() {
+        if (paisField.getText() == null || paisField.getText().length() == 0) {
+            paisField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            paisField.setStyle("");
+            return true;
+        }
+    }
+
+    public boolean isValidEstadoField() {
+        if (estadoField.getText() == null || estadoField.getText().length() == 0) {
+            estadoField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            estadoField.setStyle("");
+            return true;
+        }
+    }
+
+    public boolean isValidCidadeField() {
+        if (cidadeField.getText() == null || cidadeField.getText().length() == 0) {
+            cidadeField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            cidadeField.setStyle("");
+            return true;
+        }
+    }
+
+    public boolean isValidBairroField() {
+        if (bairroField.getText() == null || bairroField.getText().length() == 0) {
+            bairroField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            bairroField.setStyle("");
+            return true;
+        }
+
+    }
+
+    public boolean isValidRuaField() {
+        if (ruaField.getText() == null || ruaField.getText().length() == 0) {
+            ruaField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            ruaField.setStyle("");
+            return true;
+        }
+    }
+
+    public boolean isValidNCasaField() {
+        if (casaField.getText() == null || casaField.getText().length() == 0) {
+            casaField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            casaField.setStyle("");
+            return true;
+        }
+    }
+
+    public boolean isValidObservacaoField() {
+        if (observacaoField.getText() == null || observacaoField.getText().length() == 0) {
+            observacaoField.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            observacaoField.setStyle("");
+            return true;
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -272,11 +306,7 @@ public class AddressClientController implements Initializable {
         bntDetalhes.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
         btnEditar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
 
-        IDColumn.setCellValueFactory(new PropertyValueFactory<>("idClient"));
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
         ClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
-
-
-
     }
-
 }

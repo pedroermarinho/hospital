@@ -70,7 +70,7 @@
                 <center>
                     <TableView fx:id="registrosView" maxHeight="1.7976931348623157E308" minWidth="1.0" prefHeight="378.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                         <columns>
-                            <TableColumn fx:id="IDColumn" minWidth="1.0" prefWidth="60.0" text="ID">
+                            <TableColumn fx:id="IDColumn" prefWidth="120.0" minWidth="120.0" text="Cartao SUS">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="rg" />
                                 </cellValueFactory>
@@ -127,11 +127,11 @@
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                             </padding>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="NomeText" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidNomeField" prefHeight="32.0" prefWidth="210.0" />
+                                <TextField fx:id="nomeField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidNomeField" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" wrappingWidth="49.70263671875" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="CPFText" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidCPFField" prefHeight="32.0" prefWidth="210.0" />
+                                <TextField fx:id="cpfField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidCPFField" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CPF" wrappingWidth="49.70263671875" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
@@ -139,27 +139,27 @@
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Identidade" wrappingWidth="71.1572265625" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="CartaoText" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidCartaoField" prefHeight="32.0" prefWidth="210.0" />
+                                <TextField fx:id="cartaoField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidCartaoField" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cartao SUS" wrappingWidth="80.70263671875" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="320.0">
-                                <TextField fx:id="NomeMaeText" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidNomeMaeField" prefHeight="32.0" prefWidth="210.0" />
+                                <TextField fx:id="nomeMaeField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidNomeMaeField" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mãe" wrappingWidth="71.1572265625" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <DatePicker fx:id="NascimentoDate" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidNascimentoDate" prefHeight="32.0" prefWidth="210.0" />
+                                <DatePicker fx:id="nascimentoDate" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidNascimentoDate" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nascimento" wrappingWidth="79.33984375" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <ComboBox fx:id="SexoBox" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
+                                <ComboBox fx:id="sexoBox" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sexo" wrappingWidth="49.70263671875" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="TelefoneText" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidTelefoneField" prefHeight="32.0" prefWidth="210.0" />
+                                <TextField fx:id="telefoneField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidTelefoneField" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" wrappingWidth="65.70263671875" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="EmailText" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidEmailField" prefHeight="32.0" prefWidth="210.0" />
+                                <TextField fx:id="emailField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidEmailField" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="71.1572265625" />
                             </ToolBar>
                             <ToolBar nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="90.0" prefWidth="222.0">

@@ -11,7 +11,9 @@ import io.github.pedroermarinho.hospital.Util.MsgErro;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +43,33 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             }
 
             return obj;
+        } catch (SQLException ex) {
+            MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
+            return null;
+        }
+    }
+
+    @Override
+    public List<ReceptionClientModel> getAllData(LocalDate date) {
+        ArrayList<ReceptionClientModel> result = new ArrayList<>();
+
+        try {
+            final var dateSql= java.sql.Date.valueOf(date.toString());
+
+            stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` WHERE modification_date = '" + dateSql.toString() + "'");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ReceptionClientModel obj = new ReceptionClientModel();
+                obj.setIdReceptionClient(rs.getInt("id_reception_client"));
+                obj.setIdClient(rs.getInt("id_client"));
+                obj.setEspecialidade(rs.getString("especialidade"));
+                obj.setRecepcao(rs.getString("recepcao"));
+                obj.setModificationDate(rs.getString("modification_date"));
+                result.add(obj);
+            }
+
+            return result;
         } catch (SQLException ex) {
             MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
             return null;

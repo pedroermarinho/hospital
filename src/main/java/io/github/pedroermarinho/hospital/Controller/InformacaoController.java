@@ -10,6 +10,7 @@ import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Contact.ContactClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Reception.ReceptionClientModel;
+import io.github.pedroermarinho.hospital.Util.Filter;
 import io.github.pedroermarinho.hospital.Util.PDF;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -106,10 +108,11 @@ public class InformacaoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        RegistroClientesView.setItems(data.getClientData());
-        IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("idClient"));
-        NomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("Nome"));
-        RegistroClientesView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> Informacoes(newValue));
+        btnGerarPDF.setDisable(true);
+        RegistroClientesView.setItems(Filter.findClientsData(LocalDate.now()));
+        IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
+        NomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        RegistroClientesView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> info(newValue));
     }
 
     @FXML
@@ -121,7 +124,7 @@ public class InformacaoController implements Initializable {
         }
     }
 
-    private void Informacoes(ClientModel newValue) {
+    private void info(ClientModel newValue) {
 
         CPFLabel.textProperty().bind(newValue.cpfProperty());
         CartaoSUSLabel.textProperty().bind(newValue.cartaoSUSProperty());

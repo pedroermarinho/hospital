@@ -109,19 +109,10 @@
                                maxWidth="1.7976931348623157E308" prefHeight="374.0" prefWidth="520.0"
                                BorderPane.alignment="CENTER">
                         <columns>
-                            <TableColumn fx:id="cartaoSUSColumn" prefWidth="150.0" text="Cartao SUS"/>
+                            <TableColumn fx:id="cartaoSUSColumn" prefWidth="150.0" text="Cartão SUS"/>
                             <TableColumn fx:id="nomeColumn" prefWidth="380.0000305175781" text="Nome"/>
                         </columns>
-                        <contextMenu>
-                            <ContextMenu>
-                                <items>
-                                    <MenuItem fx:id="btnDetalhesListCenter" mnemonicParsing="false"
-                                              onAction="#OnDetalhesListCenter" text="Detalhes">
 
-                                    </MenuItem>
-                                </items>
-                            </ContextMenu>
-                        </contextMenu>
                     </TableView>
                 </center>
                 <top>
@@ -159,7 +150,7 @@
                     <TableView fx:id="AgendaView" prefHeight="407.0" prefWidth="266.0"
                                BorderPane.alignment="CENTER">
                         <columns>
-                            <TableColumn fx:id="HoraAgendaColumn" prefWidth="133.0" text="Hora"/>
+                            <TableColumn fx:id="dataCartaoSUSColumn" prefWidth="50.0" minWidth="50.0" text="Cartão SUS"/>
                         </columns>
                         <BorderPane.margin>
                             <Insets bottom="3.0" left="3.0" top="1.0"/>
@@ -167,15 +158,7 @@
                         <columnResizePolicy>
                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                         </columnResizePolicy>
-                        <contextMenu>
-                            <ContextMenu>
-                                <items>
-                                    <MenuItem fx:id="btnDetalhesViewHoje" mnemonicParsing="false"
-                                              onAction="#OnDetalhesViewHoje" text="Detalhes">
-                                    </MenuItem>
-                                </items>
-                            </ContextMenu>
-                        </contextMenu>
+
                     </TableView>
                 </center>
                 <top>

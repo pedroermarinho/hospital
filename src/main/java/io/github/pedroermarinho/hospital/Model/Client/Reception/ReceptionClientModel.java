@@ -7,6 +7,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class ReceptionClientModel {
@@ -89,6 +91,9 @@ public class ReceptionClientModel {
 
     public static ReceptionClientModel find(int id) {
         return new ReceptionClientDAO().get(id);
+    }
+    public static List<ReceptionClientModel> findData(LocalDate date){
+        return new ReceptionClientDAO().getAllData(date);
     }
 
     public Integer save() {

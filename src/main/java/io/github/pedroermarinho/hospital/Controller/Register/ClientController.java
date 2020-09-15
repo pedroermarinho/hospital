@@ -20,7 +20,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -35,25 +34,25 @@ public class ClientController implements Initializable {
     private ClientModel modificaoClient;
 
     @FXML
-    private TextField NomeText;
+    private TextField nomeField;
 
     @FXML
-    private TextField CPFText;
+    private TextField cpfField;
 
     @FXML
-    private TextField NomeMaeText;
+    private TextField nomeMaeField;
 
     @FXML
-    private DatePicker NascimentoDate;
+    private DatePicker nascimentoDate;
 
     @FXML
-    private TextField CartaoText;
+    private TextField cartaoField;
 
     @FXML
-    private ComboBox<SexoEnum> SexoBox;
+    private ComboBox<SexoEnum> sexoBox;
 
     @FXML
-    private TextField EmailText;
+    private TextField emailField;
 
     @FXML
     private Button bntSalva;
@@ -96,7 +95,7 @@ public class ClientController implements Initializable {
     private TextField PesquisarField;
 
     @FXML
-    private TextField TelefoneText;
+    private TextField telefoneField;
 
     @FXML
     void OnPesquisar() {
@@ -171,18 +170,18 @@ public class ClientController implements Initializable {
     void OnDetalhes() {
         On_Off_Button(true);
         modificaoClient = registrosView.getSelectionModel().getSelectedItem();
-        NomeText.setText(modificaoClient.getNome());
-        CPFText.setText(modificaoClient.getCpf());
-        NomeMaeText.setText(modificaoClient.getMae());
-        NascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
-        CartaoText.setText(modificaoClient.getCartaoSUS());
-        SexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
+        nomeField.setText(modificaoClient.getNome());
+        cpfField.setText(modificaoClient.getCpf());
+        nomeMaeField.setText(modificaoClient.getMae());
+        nascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
+        cartaoField.setText(modificaoClient.getCartaoSUS());
+        sexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
         identidadeField.setText(modificaoClient.getIdentidade());
         final var contactClientModel = ContactClientModel.find(modificaoClient.getIdClient());
 
         if (contactClientModel != null) {
-            EmailText.setText(contactClientModel.getEmail());
-            TelefoneText.setText(contactClientModel.getTelefone());
+            emailField.setText(contactClientModel.getEmail());
+            telefoneField.setText(contactClientModel.getTelefone());
         }
 
         final var receptionClientModel = ReceptionClientModel.find(modificaoClient.getIdClient());
@@ -197,19 +196,19 @@ public class ClientController implements Initializable {
     void OnEditar() {
         On_Off_Button(false);
         modificaoClient = registrosView.getSelectionModel().getSelectedItem();
-        NomeText.setText(modificaoClient.getNome());
-        CPFText.setText(modificaoClient.getCpf());
-        NomeMaeText.setText(modificaoClient.getMae());
-        NascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
-        CartaoText.setText(modificaoClient.getCartaoSUS());
-        SexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
+        nomeField.setText(modificaoClient.getNome());
+        cpfField.setText(modificaoClient.getCpf());
+        nomeMaeField.setText(modificaoClient.getMae());
+        nascimentoDate.setValue(LocalDate.parse(modificaoClient.getDataNascimento()));
+        cartaoField.setText(modificaoClient.getCartaoSUS());
+        sexoBox.setValue(SexoEnum.valueOf(modificaoClient.getSexo().toUpperCase()));
         identidadeField.setText(modificaoClient.getIdentidade());
 
         final var contactClientModel = ContactClientModel.find(modificaoClient.getIdClient());
 
         if (contactClientModel != null) {
-            EmailText.setText(contactClientModel.getEmail());
-            TelefoneText.setText(contactClientModel.getTelefone());
+            emailField.setText(contactClientModel.getEmail());
+            telefoneField.setText(contactClientModel.getTelefone());
         }
 
         final var receptionClientModel = ReceptionClientModel.find(modificaoClient.getIdClient());
@@ -238,22 +237,22 @@ public class ClientController implements Initializable {
         if (isInputValid()) {
 //            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-            modificaoClient.setNome(NomeText.getText());
-            modificaoClient.setCpf(CPFText.getText());
-            modificaoClient.setMae(NomeMaeText.getText());
-            modificaoClient.setDataNascimento(String.valueOf(java.sql.Date.valueOf(NascimentoDate.getValue())));
-            modificaoClient.setCartaoSUS(CartaoText.getText());
+            modificaoClient.setNome(nomeField.getText());
+            modificaoClient.setCpf(cpfField.getText());
+            modificaoClient.setMae(nomeMaeField.getText());
+            modificaoClient.setDataNascimento(String.valueOf(java.sql.Date.valueOf(nascimentoDate.getValue())));
+            modificaoClient.setCartaoSUS(cartaoField.getText());
 
             modificaoClient.setIdentidade(identidadeField.getText());
-            modificaoClient.setSexo(SexoBox.getValue().getDescricao());
+            modificaoClient.setSexo(sexoBox.getValue().getDescricao());
             final Integer id = modificaoClient.save();
             System.out.println("id criado:"+id);
 
 
             final ContactClientModel contactClientModel = new ContactClientModel();
             contactClientModel.setIdClient(id);
-            contactClientModel.setEmail(EmailText.getText());
-            contactClientModel.setTelefone(TelefoneText.getText());
+            contactClientModel.setEmail(emailField.getText());
+            contactClientModel.setTelefone(telefoneField.getText());
             contactClientModel.save();
 
             final ReceptionClientModel receptionClientModel = new ReceptionClientModel();
@@ -272,14 +271,14 @@ public class ClientController implements Initializable {
 
     private void LimparCampo() {
 
-        NomeText.setText("");
-        TelefoneText.setText("");
-        CPFText.setText("");
-        NomeMaeText.setText("");
-        NascimentoDate.setValue(null);
-        CartaoText.setText("");
-        SexoBox.setValue(null);
-        EmailText.setText("");
+        nomeField.setText("");
+        telefoneField.setText("");
+        cpfField.setText("");
+        nomeMaeField.setText("");
+        nascimentoDate.setValue(null);
+        cartaoField.setText("");
+        sexoBox.setValue(null);
+        emailField.setText("");
         atendimentoField.setText("");
         recepcaoField.setText("");
         identidadeField.setText("");
@@ -287,14 +286,14 @@ public class ClientController implements Initializable {
     }
 
     private void On_Off_Button(boolean es) {
-        NomeText.setDisable(es);
-        TelefoneText.setDisable(es);
-        CPFText.setDisable(es);
-        NomeMaeText.setDisable(es);
-        NascimentoDate.setDisable(es);
-        CartaoText.setDisable(es);
-        SexoBox.setDisable(es);
-        EmailText.setDisable(es);
+        nomeField.setDisable(es);
+        telefoneField.setDisable(es);
+        cpfField.setDisable(es);
+        nomeMaeField.setDisable(es);
+        nascimentoDate.setDisable(es);
+        cartaoField.setDisable(es);
+        sexoBox.setDisable(es);
+        emailField.setDisable(es);
         atendimentoField.setDisable(es);
         recepcaoField.setDisable(es);
         identidadeField.setDisable(es);
@@ -333,36 +332,36 @@ public class ClientController implements Initializable {
 
     @FXML
     boolean isValidCPFField() {
-        if (CPFText.getText() == null || CPFText.getText().length() == 0) {
+        if (cpfField.getText() == null || cpfField.getText().length() == 0) {
 
-            CPFText.setStyle("-fx-border-color:red");
+            cpfField.setStyle("-fx-border-color:red");
             return false;
         } else {
-            CPFText.setStyle("");
+            cpfField.setStyle("");
             return true;
         }
     }
 
     @FXML
     boolean isValidCartaoField() {
-        if (CartaoText.getText() == null || CartaoText.getText().length() == 0) {
+        if (cartaoField.getText() == null || cartaoField.getText().length() == 0) {
 
-            CartaoText.setStyle("-fx-border-color:red");
+            cartaoField.setStyle("-fx-border-color:red");
             return false;
         } else {
-            CartaoText.setStyle("");
+            cartaoField.setStyle("");
             return true;
         }
     }
 
     @FXML
     boolean isValidEmailField() {
-        if (EmailText.getText() == null || EmailText.getText().length() == 0) {
+        if (emailField.getText() == null || emailField.getText().length() == 0) {
 
-            EmailText.setStyle("-fx-border-color:red");
+            emailField.setStyle("-fx-border-color:red");
             return false;
         } else {
-            EmailText.setStyle("");
+            emailField.setStyle("");
             return true;
         }
     }
@@ -380,22 +379,22 @@ public class ClientController implements Initializable {
 
     @FXML
     boolean isValidNomeField() {
-        if (NomeText.getText() == null || NomeText.getText().length() == 0) {
-            NomeText.setStyle("-fx-border-color:red");
+        if (nomeField.getText() == null || nomeField.getText().length() == 0) {
+            nomeField.setStyle("-fx-border-color:red");
             return false;
         } else {
-            NomeText.setStyle("");
+            nomeField.setStyle("");
             return true;
         }
     }
 
     @FXML
     boolean isValidNomeMaeField() {
-        if (NomeMaeText.getText() == null || NomeMaeText.getText().length() == 0) {
-            NomeMaeText.setStyle("-fx-border-color:red");
+        if (nomeMaeField.getText() == null || nomeMaeField.getText().length() == 0) {
+            nomeMaeField.setStyle("-fx-border-color:red");
             return false;
         } else {
-            NomeMaeText.setStyle("");
+            nomeMaeField.setStyle("");
             return true;
         }
     }
@@ -413,11 +412,11 @@ public class ClientController implements Initializable {
 
     @FXML
     boolean isValidTelefoneField() {
-        if (TelefoneText.getText() == null || TelefoneText.getText().length() == 0) {
-            TelefoneText.setStyle("-fx-border-color:red");
+        if (telefoneField.getText() == null || telefoneField.getText().length() == 0) {
+            telefoneField.setStyle("-fx-border-color:red");
             return false;
         } else {
-            TelefoneText.setStyle("");
+            telefoneField.setStyle("");
             return true;
 
         }
@@ -425,17 +424,17 @@ public class ClientController implements Initializable {
 
     @FXML
     boolean isValidNascimentoDate() {
-        if (NascimentoDate.getValue() == null || NascimentoDate.getValue().toString().length() == 0) {
-            NascimentoDate.setStyle("-fx-border-color:red");
+        if (nascimentoDate.getValue() == null || nascimentoDate.getValue().toString().length() == 0) {
+            nascimentoDate.setStyle("-fx-border-color:red");
             return false;
         } else {
             try {
-                java.sql.Date.valueOf(NascimentoDate.getValue());
+                java.sql.Date.valueOf(nascimentoDate.getValue());
             }catch (NullPointerException e){
-                NascimentoDate.setStyle("-fx-border-color:red");
+                nascimentoDate.setStyle("-fx-border-color:red");
                 return false;
             }
-            NascimentoDate.setStyle("");
+            nascimentoDate.setStyle("");
             return true;
         }
 
@@ -450,12 +449,12 @@ public class ClientController implements Initializable {
         // TODO
         registrosView.setItems(data.getClientData());
         On_Off_Button(true);
-        SexoBox.getItems().addAll(SexoEnum.values());
+        sexoBox.getItems().addAll(SexoEnum.values());
         bntDetalhes.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
         btnEditar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
         btnDeletar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
 
-        IDColumn.setCellValueFactory(new PropertyValueFactory<>("idClient"));
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
         ClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
     }

@@ -42,7 +42,7 @@
                                maxWidth="1.7976931348623157E308" minWidth="1.0" prefHeight="600.0" prefWidth="600.0"
                                BorderPane.alignment="CENTER">
                         <columns>
-                            <TableColumn fx:id="IDColumn" minWidth="1.0" prefWidth="60.0" text="ID">
+                            <TableColumn fx:id="IDColumn" prefWidth="120.0" minWidth="120.0" text="Cartao SUS">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="rg"/>
                                 </cellValueFactory>
@@ -133,37 +133,38 @@
                             </padding>
                             <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                      nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="PaisText" nodeOrientation="LEFT_TO_RIGHT"
+                                <TextField fx:id="paisField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidPaisField"
                                            prefHeight="32.0" prefWidth="210.0" text="Brasil"/>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="País"
                                       wrappingWidth="33.70263671875"/>
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="EstadoText" nodeOrientation="LEFT_TO_RIGHT"
+                                <TextField fx:id="estadoField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidEstadoField"
                                            prefHeight="32.0" prefWidth="210.0" text="Amazonas"/>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estado"
                                       wrappingWidth="49.70263671875"/>
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="CidadeText" nodeOrientation="LEFT_TO_RIGHT"
+                                <TextField fx:id="cidadeField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidCidadeField"
                                            prefHeight="32.0" prefWidth="210.0" text="Eirunepé"/>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade"
                                       wrappingWidth="55.1572265625"/>
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="BairroText" nodeOrientation="LEFT_TO_RIGHT"
+                                <TextField fx:id="bairroField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidBairroField"
                                            prefHeight="32.0" prefWidth="210.0"/>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro"
                                       wrappingWidth="46.1572265625"/>
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="RuaText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0"
+                                <TextField fx:id="ruaField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidRuaField"
+                                           prefHeight="32.0"
                                            prefWidth="210.0"/>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rua"
                                       wrappingWidth="35.33984375"/>
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <TextField fx:id="NCasaText" nodeOrientation="LEFT_TO_RIGHT"
+                                <TextField fx:id="casaField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidNCasaField"
                                            prefHeight="32.0" prefWidth="210.0"/>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nº Casa"
                                       wrappingWidth="80.70263671875"/>
@@ -173,9 +174,10 @@
                                      nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="101.0"
                                      prefWidth="337.0">
                                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308"
-                                       text="Observação"/>
-                                <TextArea fx:id="ObservacaoText" maxWidth="210.0"
-                                          nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0"
+                                       text="Observação" />
+                                <TextArea fx:id="observacaoField" maxWidth="210.0"
+                                          nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidObservacaoField"
+                                          prefHeight="50.0"
                                           prefWidth="210.0"/>
                             </ToolBar>
                         </VBox>

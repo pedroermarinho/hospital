@@ -94,8 +94,8 @@ public class CentralTextController implements Initializable {
     private TextField PesquisarField;
 
 
-    private boolean on_off;
 
+    private boolean on_off;
 
 
     @FXML

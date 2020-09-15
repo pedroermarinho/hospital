@@ -102,6 +102,8 @@ public class InformacaoController implements Initializable {
     @FXML
     private Button btnGerarPDF;
 
+    @FXML
+    private ToggleButton allToggle;
 
 
 
@@ -113,6 +115,14 @@ public class InformacaoController implements Initializable {
         IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
         NomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         RegistroClientesView.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> info(newValue));
+        allToggle.selectedProperty().addListener((Observable, oldValue, newValue) -> all(newValue));
+    }
+    private void all(boolean isSelect) {
+        if(isSelect){
+            RegistroClientesView.setItems(data.getClientData());
+        }else{
+            RegistroClientesView.setItems(Filter.findClientsData(LocalDate.now()));
+        }
     }
 
     @FXML
@@ -199,5 +209,6 @@ public class InformacaoController implements Initializable {
         }
         return itensEncontrados;
     }
+
 
 }

@@ -5,7 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Util;
 
-import io.github.pedroermarinho.hospital.MainApp;
+import io.github.pedroermarinho.hospital.Util.ExceptionCustom;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -22,16 +22,41 @@ import java.util.ResourceBundle;
 public class ErroController implements Initializable {
 
     @FXML
-    private Label lbErro;
-    private String erro;
+    public Label titleLabel;
+    @FXML
+    private Label errorLabel;
     private Stage dialogStage;
-    private MainApp mainApp;
 
 
-    public void setMainApp(MainApp mainApp, Exception ex) {
-        this.mainApp = mainApp;
-        this.erro = erro;
-        lbErro.setText(erro);
+    public void setMainApp(Exception ex, Stage dialogStage) {
+        this.dialogStage = dialogStage;
+        msg(ex);
+    }
+
+
+    private void msg(Exception ex) {
+        try {
+            throw ex;
+        } catch (ExceptionCustom e) {
+            titleLabel.setText("Campo Inválido");
+        } catch (org.sqlite.SQLiteException e) {
+            switch (e.getResultCode()) {
+                case SQLITE_CONSTRAINT:
+                    titleLabel.setText("Cartão do SUS ja cadastrado");
+                    break;
+                case SQLITE_CONSTRAINT_PRIMARYKEY:
+                    titleLabel.setText("Erro ao salvar o dados");
+                    break;
+                default:
+                    titleLabel.setText(e.getResultCode().message);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            errorLabel.setText(ex.getMessage());
+        }
+
     }
 
     @FXML

@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 package io.github.pedroermarinho.hospital.Util;
-import org.apache.pdfbox.pdmodel.PDDocument;
-//import com.qoppa.pdfWriter.PDFDocument;
 
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
+import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
@@ -24,16 +23,16 @@ public class PDF {
         createPDF(clientModel);
     }
 
-    public static void createPDF(ClientModel clientModel)throws IOException {
+    public static void createPDF(ClientModel clientModel) throws IOException {
 
-        try (PDDocument doc = new PDDocument()){
+        try (PDDocument doc = new PDDocument()) {
 
             PDPage page = new PDPage();
             doc.addPage(page);
-            try (PDPageContentStream contents = new PDPageContentStream(doc, page)){
+            try (PDPageContentStream contents = new PDPageContentStream(doc, page)) {
 
                 contents.beginText();
-                contents.setFont (PDType1Font.TIMES_ROMAN, 12);
+                contents.setFont(PDType1Font.TIMES_ROMAN, 12);
 
                 contents.newLineAtOffset(20, 700);
                 contents.setLeading(14.5f);
@@ -41,9 +40,8 @@ public class PDF {
                 contents.endText();
 
 
-
             }
-            doc.save(clientModel.getCartaoSUS()+".pdf");
+            doc.save(clientModel.getCartaoSUS() + ".pdf");
         }
     }
 }

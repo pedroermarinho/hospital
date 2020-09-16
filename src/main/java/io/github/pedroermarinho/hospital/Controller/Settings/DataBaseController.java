@@ -39,7 +39,7 @@ public class DataBaseController implements Initializable {
 
     @FXML
     void OnAtualizar() {
-            BancosView.setItems(data.getDataBaseData());
+        BancosView.setItems(data.getDataBaseData());
 
     }
 

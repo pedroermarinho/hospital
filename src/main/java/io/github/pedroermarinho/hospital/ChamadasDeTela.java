@@ -35,7 +35,7 @@ public class ChamadasDeTela {
     /**
      *
      */
-    protected Stage primeriaCena;
+    protected static Stage primeriaCena;
 
     /**
      *
@@ -273,12 +273,12 @@ public class ChamadasDeTela {
         }
     }
 
-    public void Error(Exception ex) {
+    public static void errorScreen(Exception ex) {
         try {
             JMetro jMetro = new JMetro(Style.LIGHT);
             // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/io/github/pedroermarinho/hospital/Fxml/Util/Erro.fxml"));
+            loader.setLocation(ChamadasDeTela.class.getResource("/io/github/pedroermarinho/hospital/Fxml/Util/Erro.fxml"));
             AnchorPane page = loader.load();
 
             // Cria o palco dialogStage.
@@ -290,11 +290,11 @@ public class ChamadasDeTela {
             jMetro.setScene(scene);
             dialogStage.setScene(scene);
 
-            Image image = new Image(getClass().getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
+            Image image = new Image(ChamadasDeTela.class.getResource("/io/github/pedroermarinho/hospital/Icons/icon.png").toString());
             dialogStage.getIcons().add(image);
             // Define a pessoa no controller.
             ErroController controller = loader.getController();
-            controller.setMainApp(mainapp, ex);
+            controller.setMainApp(ex, dialogStage);
 
             // Mostra a janela e espera até o usuário fechar.
             dialogStage.showAndWait();
@@ -333,7 +333,7 @@ public class ChamadasDeTela {
             dialogStage.showAndWait();
 
         } catch (IOException e) {
-            Error(e);
+            errorScreen(e);
 
         }
 
@@ -364,14 +364,9 @@ public class ChamadasDeTela {
             loader.setLocation(getClass().getResource("/io/github/pedroermarinho/hospital/Fxml/Settings/RegisterDataBase.fxml"));
             AnchorPane page = loader.load();
 
-
-
-
-
-
             // Cria o palco dialogStage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("CadastroBancoDeDados");
+            dialogStage.setTitle("Cadastro de banco de dados");
             dialogStage.initModality(Modality.WINDOW_MODAL);
 //            dialogStage.initOwner(primeriaCena);
             Scene scene = new Scene(page);

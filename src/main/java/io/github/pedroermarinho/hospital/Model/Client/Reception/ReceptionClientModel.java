@@ -1,26 +1,34 @@
 package io.github.pedroermarinho.hospital.Model.Client.Reception;
 
-import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientDAO;
-import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class ReceptionClientModel {
 
 
+    private static final ReceptionClientDAOInterface dao = new ReceptionClientDAO();
     private final IntegerProperty idReceptionClient = new SimpleIntegerProperty();
     private final IntegerProperty idClient = new SimpleIntegerProperty();
     private final StringProperty especialidade = new SimpleStringProperty();
     private final StringProperty recepcao = new SimpleStringProperty();
     private final StringProperty modificationDate = new SimpleStringProperty();
 
+    public static List<ReceptionClientModel> all() {
+        return new ReceptionClientDAO().getAll();
+    }
 
+    public static ReceptionClientModel find(int id) {
+        return new ReceptionClientDAO().get(id);
+    }
+
+    public static List<ReceptionClientModel> findData(LocalDate date) {
+        return new ReceptionClientDAO().getAllData(date);
+    }
 
     public int getIdReceptionClient() {
         return idReceptionClient.get();
@@ -82,22 +90,8 @@ public class ReceptionClientModel {
         return modificationDate;
     }
 
-    private static final ReceptionClientDAOInterface dao = new ReceptionClientDAO();
-
-
-    public static List<ReceptionClientModel> all() {
-        return new ReceptionClientDAO().getAll();
-    }
-
-    public static ReceptionClientModel find(int id) {
-        return new ReceptionClientDAO().get(id);
-    }
-    public static List<ReceptionClientModel> findData(LocalDate date){
-        return new ReceptionClientDAO().getAllData(date);
-    }
-
     public Integer save() {
-        if (idClient.getValue() != null && idClient.get() != 0 ) {
+        if (idClient.getValue() != null && idClient.get() != 0) {
             if (find(idClient.get()) != null && find(idClient.get()).getIdReceptionClient() != 0) {
                 return dao.update(this);
             } else {

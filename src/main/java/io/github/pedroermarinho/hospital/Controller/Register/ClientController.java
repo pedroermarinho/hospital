@@ -5,13 +5,14 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Register;
 
+import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Controller.Util.SexoEnum;
 import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Contact.ContactClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Reception.ReceptionClientModel;
-import io.github.pedroermarinho.hospital.Util.MsgErro;
+import io.github.pedroermarinho.hospital.Util.ExceptionCustom;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -234,8 +235,8 @@ public class ClientController implements Initializable {
         if (modificaoClient == null) {
             modificaoClient = new ClientModel();
         }
-        if (isInputValid()) {
-//            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        try {
+            isInputValid();
 
             modificaoClient.setNome(nomeField.getText());
             modificaoClient.setCpf(cpfField.getText());
@@ -246,25 +247,30 @@ public class ClientController implements Initializable {
             modificaoClient.setIdentidade(identidadeField.getText());
             modificaoClient.setSexo(sexoBox.getValue().getDescricao());
             final Integer id = modificaoClient.save();
-            System.out.println("id criado:"+id);
+            System.out.println("id criado:" + id);
+            if (id != null) {
 
 
-            final ContactClientModel contactClientModel = new ContactClientModel();
-            contactClientModel.setIdClient(id);
-            contactClientModel.setEmail(emailField.getText());
-            contactClientModel.setTelefone(telefoneField.getText());
-            contactClientModel.save();
+                final ContactClientModel contactClientModel = new ContactClientModel();
+                contactClientModel.setIdClient(id);
+                contactClientModel.setEmail(emailField.getText());
+                contactClientModel.setTelefone(telefoneField.getText());
+                contactClientModel.save();
 
-            final ReceptionClientModel receptionClientModel = new ReceptionClientModel();
-            receptionClientModel.setIdClient(id);
-            receptionClientModel.setRecepcao(recepcaoField.getText());
-            receptionClientModel.setEspecialidade(atendimentoField.getText());
-            receptionClientModel.setModificationDate(java.sql.Date.valueOf(LocalDate.now()).toString());
-            receptionClientModel.save();
+                final ReceptionClientModel receptionClientModel = new ReceptionClientModel();
+                receptionClientModel.setIdClient(id);
+                receptionClientModel.setRecepcao(recepcaoField.getText());
+                receptionClientModel.setEspecialidade(atendimentoField.getText());
+                receptionClientModel.setModificationDate(java.sql.Date.valueOf(LocalDate.now()).toString());
+                receptionClientModel.save();
 
             LimparCampo();
             data.getClientData();
             On_Off_Button(true);
+            }
+
+        } catch (ExceptionCustom exceptionCustom) {
+            ChamadasDeTela.errorScreen(exceptionCustom);
         }
 
     }
@@ -302,20 +308,15 @@ public class ClientController implements Initializable {
     }
 
 
-    private boolean isInputValid() {
-        String errorMessage = "";
-
+    private void isInputValid() throws ExceptionCustom {
         if (!isValidNomeField()) {
-            errorMessage += "Nome inválido!\n";
+            throw new ExceptionCustom("Nome inválido!");
         }
-
-        if (errorMessage.length() == 0) {
-            return true;
-        } else {
-            // Mostra a mensagem de erro.
-            MsgErro.MessagemErroFormulario(errorMessage);
-
-            return false;
+        if (!isValidNascimentoDate()) {
+            throw new ExceptionCustom("Data de nascimento inválido!");
+        }
+        if (!isValidSexo()) {
+            throw new ExceptionCustom("Sexo inválido!");
         }
     }
 
@@ -326,6 +327,17 @@ public class ClientController implements Initializable {
             return false;
         } else {
             atendimentoField.setStyle("");
+            return true;
+        }
+    }
+
+    @FXML
+    boolean isValidSexo() {
+        if (sexoBox.getValue() == null || sexoBox.getValue().getDescricao().length() == 0) {
+            sexoBox.setStyle("-fx-border-color:red");
+            return false;
+        } else {
+            sexoBox.setStyle("");
             return true;
         }
     }
@@ -422,6 +434,7 @@ public class ClientController implements Initializable {
         }
     }
 
+
     @FXML
     boolean isValidNascimentoDate() {
         if (nascimentoDate.getValue() == null || nascimentoDate.getValue().toString().length() == 0) {
@@ -456,6 +469,7 @@ public class ClientController implements Initializable {
 
         IDColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
         ClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+
 
     }
 

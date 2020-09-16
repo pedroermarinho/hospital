@@ -90,7 +90,7 @@
             <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="460.0" prefWidth="360.0" BorderPane.alignment="CENTER">
                 <bottom>
                     <HBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="645.0" spacing="15.0" BorderPane.alignment="CENTER">
-                        <Button fx:id="bntSalva" maxHeight="35.0" minHeight="33.0" mnemonicParsing="false" onAction="#OnSalvar" prefHeight="35.0" prefWidth="184.0" styleClass="button-verde" stylesheets="@../../Styles/Styles.css" text="Salvar" textFill="#0a0a0a" />
+                        <Button fx:id="bntSalva" maxHeight="35.0" minHeight="33.0" mnemonicParsing="false" onAction="#onSalvar" prefHeight="35.0" prefWidth="184.0" styleClass="button-verde" stylesheets="@../../Styles/Styles.css" text="Salvar" textFill="#0a0a0a" />
                         <Button fx:id="BtnCancelar" maxHeight="35.0" minHeight="33.0" mnemonicParsing="false" onAction="#OnCancelar" prefHeight="35.0" prefWidth="184.0" styleClass="button-red" stylesheets="@../../Styles/Styles.css" text="Cancelar" />
                     </HBox>
                 </bottom>

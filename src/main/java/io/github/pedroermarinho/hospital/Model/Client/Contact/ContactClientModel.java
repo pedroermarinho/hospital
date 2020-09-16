@@ -12,12 +12,19 @@ import java.util.List;
 public class ContactClientModel {
 
 
+    private static final ContactClientDAOInterface dao = new ContactClientDAO();
     private final IntegerProperty idContactClient = new SimpleIntegerProperty();
     private final IntegerProperty idClient = new SimpleIntegerProperty();
     private final StringProperty telefone = new SimpleStringProperty();
     private final StringProperty email = new SimpleStringProperty();
 
+    public static List<AddressClientModel> all() {
+        return new AddressClientDAO().getAll();
+    }
 
+    public static ContactClientModel find(int id) {
+        return new ContactClientDAO().get(id);
+    }
 
     public int getIdContactClient() {
         return idContactClient.get();
@@ -67,19 +74,9 @@ public class ContactClientModel {
         return email;
     }
 
-    private static final ContactClientDAOInterface dao = new ContactClientDAO();
-
-    public static List<AddressClientModel> all() {
-        return new AddressClientDAO().getAll();
-    }
-
-    public static ContactClientModel find(int id) {
-        return new ContactClientDAO().get(id);
-    }
-
     public Integer save() {
-        if (idClient.getValue() != null  && idClient.get() != 0 ) {
-            if (find(idClient.get()) != null && find(idClient.get()).getIdContactClient() != 0 ) {
+        if (idClient.getValue() != null && idClient.get() != 0) {
+            if (find(idClient.get()) != null && find(idClient.get()).getIdContactClient() != 0) {
                 return dao.update(this);
             } else {
                 return dao.create(this);

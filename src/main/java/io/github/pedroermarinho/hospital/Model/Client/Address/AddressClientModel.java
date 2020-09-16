@@ -18,6 +18,7 @@ import java.util.List;
 public class AddressClientModel {
 
 
+    private static final AddressClientDAOInterface dao = new AddressClientDAO();
     private final IntegerProperty idAddressClient = new SimpleIntegerProperty();
     private final IntegerProperty idClient = new SimpleIntegerProperty();
     private final StringProperty pais = new SimpleStringProperty("Brasil");
@@ -28,16 +29,24 @@ public class AddressClientModel {
     private final StringProperty numeroCasa = new SimpleStringProperty();
     private final StringProperty complemento = new SimpleStringProperty();
 
+    public static List<AddressClientModel> all() {
+        return new AddressClientDAO().getAll();
+    }
+
+    public static AddressClientModel find(int id) {
+        return new AddressClientDAO().get(id);
+    }
+
     public String getNumeroCasa() {
         return numeroCasa.get();
     }
 
-    public StringProperty numeroCasaProperty() {
-        return numeroCasa;
-    }
-
     public void setNumeroCasa(String numeroCasa) {
         this.numeroCasa.set(numeroCasa);
+    }
+
+    public StringProperty numeroCasaProperty() {
+        return numeroCasa;
     }
 
     public int getIdAddressClient() {
@@ -134,16 +143,6 @@ public class AddressClientModel {
 
     public StringProperty complementoProperty() {
         return complemento;
-    }
-
-    private static final AddressClientDAOInterface dao = new AddressClientDAO();
-
-    public static List<AddressClientModel> all() {
-        return new AddressClientDAO().getAll();
-    }
-
-    public static AddressClientModel find(int id) {
-        return new AddressClientDAO().get(id);
     }
 
     public Integer save() {

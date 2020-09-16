@@ -2,7 +2,6 @@ package io.github.pedroermarinho.hospital.Model.Client.Reception;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public interface ReceptionClientDAOInterface {

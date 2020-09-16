@@ -10,6 +10,7 @@ module hospital
     requires java.desktop;
     requires net.harawata.appdirs;
     requires org.apache.pdfbox;
+    requires sqlite.jdbc;
 
     opens io.github.pedroermarinho.hospital to javafx.fxml, javafx.controls;
     opens io.github.pedroermarinho.hospital.Controller.Settings to javafx.fxml;

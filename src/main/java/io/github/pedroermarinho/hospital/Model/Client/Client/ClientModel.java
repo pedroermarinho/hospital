@@ -13,6 +13,7 @@ import java.util.List;
 public class ClientModel {
 
 
+    private static final ClientDAOInterface dao = new ClientDAO();
     private final IntegerProperty idClient = new SimpleIntegerProperty(0);
     private final StringProperty cpf = new SimpleStringProperty();
     private final StringProperty cartaoSUS = new SimpleStringProperty();
@@ -22,6 +23,13 @@ public class ClientModel {
     private final StringProperty dataNascimento = new SimpleStringProperty();
     private final StringProperty sexo = new SimpleStringProperty();
 
+    public static List<ClientModel> all() {
+        return new ClientDAO().getAll();
+    }
+
+    public static ClientModel find(int id) {
+        return new ClientDAO().get(id);
+    }
 
     public int getIdClient() {
         return idClient.get();
@@ -119,24 +127,13 @@ public class ClientModel {
         return sexo;
     }
 
-
     @Override
     public String toString() {
         return nome.get();
     }
 
-    private static final ClientDAOInterface dao = new ClientDAO();
-
-    public static List<ClientModel> all() {
-        return new ClientDAO().getAll();
-    }
-
-    public static ClientModel find(int id) {
-        return new ClientDAO().get(id);
-    }
-
     public Integer save() {
-        if (idClient.getValue() != null && idClient.get() != 0 ) {
+        if (idClient.getValue() != null && idClient.get() != 0) {
             if (find(idClient.get()) != null) {
                 return dao.update(this);
             } else {

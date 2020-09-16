@@ -29,21 +29,6 @@
                 <BorderPane.margin>
                     <Insets bottom="10.0"/>
                 </BorderPane.margin>
-                <ImageView fitHeight="85.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../_icons/sistemas/if_github_245991.png"/>
-                </ImageView>
-                <ImageView fitHeight="85.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../_icons/sistemas/if_java_395222.png"/>
-                </ImageView>
-                <ImageView fitHeight="85.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../_icons/sistemas/if_linux_tox_395228.png"/>
-                </ImageView>
-                <ImageView fitHeight="85.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../_icons/sistemas/if_ubuntu_395254.png"/>
-                </ImageView>
-                <ImageView fitHeight="85.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../_icons/sistemas/if_windows_395257.png"/>
-                </ImageView>
             </HBox>
         </bottom>
     </BorderPane>

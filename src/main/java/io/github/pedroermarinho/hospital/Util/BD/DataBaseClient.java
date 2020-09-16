@@ -17,8 +17,8 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.IGNORE_RESULT;
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
 public final class DataBaseClient {
-    private final AppDirs appDirs = AppDirsFactory.getInstance();
     private static volatile DataBaseClient instanceDataBaseClient;
+    private final AppDirs appDirs = AppDirsFactory.getInstance();
     private Connection connection;
 
     public static DataBaseClient instance() {
@@ -57,9 +57,11 @@ public final class DataBaseClient {
             return connection;
         }
     }
+
     public Connection getConnection() {
         return connection;
     }
+
     public void close() {
         try {
             if (connection != null) {

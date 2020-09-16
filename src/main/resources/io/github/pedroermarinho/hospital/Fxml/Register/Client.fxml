@@ -129,7 +129,7 @@
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mãe" wrappingWidth="71.1572265625" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">
-                                <DatePicker fx:id="nascimentoDate" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#isValidNascimentoDate" prefHeight="32.0" prefWidth="210.0" />
+                                <DatePicker fx:id="nascimentoDate" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="210.0" />
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nascimento" wrappingWidth="79.33984375" />
                             </ToolBar>
                             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="228.0">

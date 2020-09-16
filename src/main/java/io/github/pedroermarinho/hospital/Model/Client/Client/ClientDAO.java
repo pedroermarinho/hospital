@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Client.Client;
 
+import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -45,9 +46,9 @@ public class ClientDAO implements ClientDAOInterface {
             }
 
             return obj;
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
 
-            MsgErro.MessagemErroBD(ex, "getClienteID");
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -75,9 +76,9 @@ public class ClientDAO implements ClientDAOInterface {
             }
             return result;
 
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
 
-            MsgErro.MessagemErroBD(ex, "getClienteList");
+            ChamadasDeTela.errorScreen(e);
             return null;
 
         }
@@ -105,9 +106,8 @@ public class ClientDAO implements ClientDAOInterface {
             }
             return resultID;
 
-        } catch (SQLException ex) {
-
-            MsgErro.MessagemErroBD(ex, "creatCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -139,9 +139,8 @@ public class ClientDAO implements ClientDAOInterface {
             stmt.executeUpdate();
             return obj.getIdClient();
 
-        } catch (SQLException ex) {
-
-            MsgErro.MessagemErroBD(ex, "updateCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -154,9 +153,8 @@ public class ClientDAO implements ClientDAOInterface {
             stmt.executeUpdate();
             return id;
 
-        } catch (SQLException ex) {
-
-            MsgErro.MessagemErroBD(ex, "deleteCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }

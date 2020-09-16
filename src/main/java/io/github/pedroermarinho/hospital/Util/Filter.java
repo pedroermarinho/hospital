@@ -5,12 +5,11 @@
  */
 package io.github.pedroermarinho.hospital.Util;
 
-import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Reception.ReceptionClientModel;
-import io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase.DataBaseModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
 
 
@@ -30,11 +29,11 @@ public class Filter {
 //    }
 
 
-    public static ObservableList<ClientModel> findClientsData(LocalDate date){
+    public static ObservableList<ClientModel> findClientsData(LocalDate date) {
         final ObservableList<ClientModel> result = FXCollections.observableArrayList();
-        for (ReceptionClientModel reception : ReceptionClientModel.findData(date)){
+        for (ReceptionClientModel reception : ReceptionClientModel.findData(date)) {
             ClientModel client = ClientModel.find(reception.getIdClient());
-            if(client.getIdClient()!=0){
+            if (client.getIdClient() != 0) {
                 result.add(client);
             }
         }

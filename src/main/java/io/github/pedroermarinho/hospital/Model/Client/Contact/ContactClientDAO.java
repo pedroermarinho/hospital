@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Client.Contact;
 
+import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -39,8 +40,8 @@ public class ContactClientDAO implements ContactClientDAOInterface {
             }
 
             return obj;
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -64,8 +65,8 @@ public class ContactClientDAO implements ContactClientDAOInterface {
             }
             return result;
 
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteList");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
 
         }
@@ -83,8 +84,8 @@ public class ContactClientDAO implements ContactClientDAOInterface {
             stmt.executeUpdate();
             return obj.getIdClient();
 
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -103,9 +104,8 @@ public class ContactClientDAO implements ContactClientDAOInterface {
 
             stmt.executeUpdate();
             return obj.getIdClient();
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
-
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -120,8 +120,8 @@ public class ContactClientDAO implements ContactClientDAOInterface {
             stmt.executeUpdate();
 
             return id;
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }

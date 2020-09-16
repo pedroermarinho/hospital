@@ -5,10 +5,11 @@
  */
 package io.github.pedroermarinho.hospital.Controller.Register;
 
+import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
-import io.github.pedroermarinho.hospital.Util.MsgErro;
+import io.github.pedroermarinho.hospital.Util.ExceptionCustom;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -103,13 +104,13 @@ public class AddressClientController implements Initializable {
 
     @FXML
     void OnCancelar() {
-        LimparCampo();
-        On_Off_Button(true);
+        limparCampo();
+        onOffButton(true);
     }
 
     @FXML
     void OnDetalhes() {
-        On_Off_Button(true);
+        onOffButton(true);
         cliente = registrosView.getSelectionModel().getSelectedItem();
         modificaoAddress = AddressClientModel.find(cliente.getIdClient());
         if (modificaoAddress != null) {
@@ -127,7 +128,7 @@ public class AddressClientController implements Initializable {
 
     @FXML
     void OnEditar() {
-        On_Off_Button(false);
+        onOffButton(false);
         cliente = registrosView.getSelectionModel().getSelectedItem();
 
         modificaoAddress = AddressClientModel.find(cliente.getIdClient());
@@ -144,11 +145,13 @@ public class AddressClientController implements Initializable {
     }
 
     @FXML
-    void OnSalvar() {
+    void onSalvar() {
         if (modificaoAddress == null) {
             modificaoAddress = new AddressClientModel();
         }
-        if (isInputValid()) {
+        try {
+            isInputValid();
+
 
             modificaoAddress.setPais(paisField.getText());
             modificaoAddress.setEstado(estadoField.getText());
@@ -161,14 +164,16 @@ public class AddressClientController implements Initializable {
             modificaoAddress.setIdClient(cliente.getIdClient());
 
             modificaoAddress.save();
-            LimparCampo();
+            limparCampo();
             data.getAddressClientData();
-            On_Off_Button(true);
-        }
+            onOffButton(true);
 
+        } catch (ExceptionCustom exceptionCustom) {
+            ChamadasDeTela.errorScreen(exceptionCustom);
+        }
     }
 
-    private void LimparCampo() {
+    private void limparCampo() {
         casaField.setText("");
 
         observacaoField.setText("");
@@ -183,7 +188,7 @@ public class AddressClientController implements Initializable {
     }
 
 
-    private void On_Off_Button(boolean es) {
+    private void onOffButton(boolean es) {
         modificaoAddress = null;
         casaField.setDisable(es);
 
@@ -198,29 +203,16 @@ public class AddressClientController implements Initializable {
         BtnCancelar.setDisable(es);
     }
 
-    private boolean isInputValid() {
-        String errorMessage = "";
-
-
-
-        if(!isValidPaisField()){
-            errorMessage += "País inválido!\n";
+    private void isInputValid() throws ExceptionCustom {
+        if (!isValidPaisField()) {
+            throw new ExceptionCustom("País inválido!");
         }
-        if (!isValidEstadoField()){
-            errorMessage += "Estado inválido!\n";
+        if (!isValidEstadoField()) {
+            throw new ExceptionCustom("Estado inválido!");
         }
 
-        if (!isValidCidadeField()){
-            errorMessage += "Cidade inválido!\n";
-        }
-
-        if (errorMessage.length() == 0) {
-            return true;
-        } else {
-            // Mostra a mensagem de erro.
-            MsgErro.MessagemErroFormulario(errorMessage);
-
-            return false;
+        if (!isValidCidadeField()) {
+            throw new ExceptionCustom("Cidade inválido!");
         }
     }
 
@@ -301,7 +293,7 @@ public class AddressClientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        On_Off_Button(true);
+        onOffButton(true);
         registrosView.setItems(data.getClientData());
         bntDetalhes.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());
         btnEditar.disableProperty().bind(registrosView.getSelectionModel().selectedItemProperty().isNull());

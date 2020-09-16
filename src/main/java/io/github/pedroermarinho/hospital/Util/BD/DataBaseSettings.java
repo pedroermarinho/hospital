@@ -17,9 +17,8 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.IGNORE_RESULT;
  */
 public class DataBaseSettings {
 
-    private final AppDirs appDirs = AppDirsFactory.getInstance();
-
     private static volatile DataBaseSettings instanceDataBaseSettings;
+    private final AppDirs appDirs = AppDirsFactory.getInstance();
     private Connection connection;
 
     public static DataBaseSettings instance() {

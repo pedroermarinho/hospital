@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Client.Reception;
 
+import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -13,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +26,7 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
 
     @Override
     public ReceptionClientModel get(int id) {
-       final ReceptionClientModel obj = new ReceptionClientModel();
+        final ReceptionClientModel obj = new ReceptionClientModel();
 
         try {
 
@@ -43,8 +43,8 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             }
 
             return obj;
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -54,7 +54,7 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
         ArrayList<ReceptionClientModel> result = new ArrayList<>();
 
         try {
-            final var dateSql= java.sql.Date.valueOf(date.toString());
+            final var dateSql = java.sql.Date.valueOf(date.toString());
 
             stmt = db.getConnection().prepareStatement("SELECT * FROM `reception_client` WHERE modification_date = '" + dateSql.toString() + "'");
             ResultSet rs = stmt.executeQuery();
@@ -70,8 +70,8 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             }
 
             return result;
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -116,8 +116,8 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
 
             return stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -140,8 +140,8 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
 
             return stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -155,8 +155,8 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
 
             return stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }

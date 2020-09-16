@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.Client.Address;
 
+import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
 
@@ -43,9 +44,8 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             }
 
             return obj;
-        } catch (SQLException ex) {
-            db.close();
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteID");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -74,9 +74,8 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             }
             return result;
 
-        } catch (SQLException ex) {
-
-            MsgErro.MessagemErroBD(ex, "getEnderecoClienteList");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
 
         }
@@ -85,7 +84,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
     @Override
     public Integer create(AddressClientModel obj) {
         try {
-            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
+            stmt = db.getConnection().prepareStatement("INSERT INTO address_client ( `id_client`, `pais`, `estado`, `cidade`, `rua`, `bairro`, `numero_casa`, `complemento`) VALUES(?,?,?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
 
 
             stmt.setInt(1, obj.getIdClient());
@@ -97,16 +96,16 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             stmt.setString(7, obj.getNumeroCasa());
             stmt.setString(8, obj.getComplemento());
 
-             stmt.executeUpdate();
+            stmt.executeUpdate();
             final ResultSet rs = stmt.getGeneratedKeys();
             Integer resultID = null;
             if (rs.next()) {
-                resultID= rs.getInt(1);
+                resultID = rs.getInt(1);
             }
             return resultID;
 
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "creatEnderecoCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -135,12 +134,12 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             stmt.setString(8, obj.getComplemento());
             stmt.setInt(9, obj.getIdAddressClient());
 
-             stmt.executeUpdate();
+            stmt.executeUpdate();
 
-            return  obj.getIdAddressClient();
+            return obj.getIdAddressClient();
 
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "updateEnderecoCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -152,12 +151,12 @@ public class AddressClientDAO implements AddressClientDAOInterface {
 
             stmt.setInt(1, id);
 
-           stmt.executeUpdate();
+            stmt.executeUpdate();
 
             return id;
 
-        } catch (SQLException ex) {
-            MsgErro.MessagemErroBD(ex, "deleteEnderecoCliente");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }

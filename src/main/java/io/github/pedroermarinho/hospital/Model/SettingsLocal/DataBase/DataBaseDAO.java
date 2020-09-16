@@ -5,6 +5,7 @@
  */
 package io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase;
 
+import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseSettings;
 
 import java.sql.PreparedStatement;
@@ -39,8 +40,8 @@ public class DataBaseDAO implements DataBaseDAOInterface {
                     + " );");
 
             stmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
         }
 
     }
@@ -62,13 +63,11 @@ public class DataBaseDAO implements DataBaseDAOInterface {
                 obj.setDataBase(rs.getString("DataBases"));//1
                 obj.setPrefix(rs.getString("Prefixs"));//1
                 obj.setPorts(rs.getInt("Ports"));//1
-//                
-
             }
 
             return obj;
-        } catch (SQLException ex) {
-            MessagemErroBD(ex, "getDados_dbID");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -91,13 +90,13 @@ public class DataBaseDAO implements DataBaseDAOInterface {
                 obj.setDataBase(rs.getString("DataBases"));
                 obj.setPrefix(rs.getString("Prefixs"));
                 obj.setPorts(rs.getInt("Ports"));
-//                
+
                 result.add(obj);
             }
             return result;
 
-        } catch (SQLException ex) {
-            MessagemErroBD(ex, "getDados_dbList");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
 
         }
@@ -108,7 +107,6 @@ public class DataBaseDAO implements DataBaseDAOInterface {
         try {
             stmt = db.getConnection().prepareStatement("INSERT INTO `dados_db` ( Hosts, Users, Passwords, DataBases, Prefixs, Ports )VALUES(?,?,?,?,?,?);");
 
-//            stmt.setInt(1,2);
             stmt.setString(1, obj.getHost());
             stmt.setString(2, obj.getUser());
             stmt.setString(3, obj.getPassword());
@@ -119,8 +117,8 @@ public class DataBaseDAO implements DataBaseDAOInterface {
 
             return  stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            MessagemErroBD(ex, "creatDados_db");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -148,8 +146,8 @@ public class DataBaseDAO implements DataBaseDAOInterface {
 
            return stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            MessagemErroBD(ex, "updateDados_db");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }
@@ -163,8 +161,8 @@ public class DataBaseDAO implements DataBaseDAOInterface {
 
             return stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            MessagemErroBD(ex, "deleteDados_db");
+        } catch (SQLException e) {
+            ChamadasDeTela.errorScreen(e);
             return null;
         }
     }

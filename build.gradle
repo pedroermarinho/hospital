@@ -11,6 +11,8 @@ targetCompatibility = 11
 group 'io.github.pedroermarinho.hospital'
 version '1.0.0'
 
+compileJava {options.encoding = "UTF-8"}
+
 repositories {
     mavenCentral()
 }
@@ -28,10 +30,11 @@ dependencies {
     implementation (group: 'org.jfxtras', name: 'jmetro', version: '11.6.12') {
         exclude group: 'org.openjfx'
     }
-    // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
-    implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.20'
     // https://mvnrepository.com/artifact/net.harawata/appdirs
     implementation group: 'net.harawata', name: 'appdirs', version: '1.2.0'
+    // https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.2'
+
 
 }
 

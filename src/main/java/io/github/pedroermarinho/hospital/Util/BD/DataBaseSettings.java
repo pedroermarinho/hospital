@@ -1,16 +1,12 @@
 package io.github.pedroermarinho.hospital.Util.BD;
 
 import io.github.pedroermarinho.hospital.Util.MsgErro;
-import net.harawata.appdirs.AppDirs;
-import net.harawata.appdirs.AppDirsFactory;
+import io.github.pedroermarinho.hospital.Util.PathSettings;
 
-import java.io.File;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static io.github.pedroermarinho.hospital.Util.MsgErro.IGNORE_RESULT;
 
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
@@ -18,7 +14,6 @@ import static io.github.pedroermarinho.hospital.Util.MsgErro.IGNORE_RESULT;
 public class DataBaseSettings {
 
     private static volatile DataBaseSettings instanceDataBaseSettings;
-    private final AppDirs appDirs = AppDirsFactory.getInstance();
     private Connection connection;
 
     public static DataBaseSettings instance() {
@@ -33,12 +28,9 @@ public class DataBaseSettings {
     }
 
     public Connection open() {
-        final String path = appDirs.getUserDataDir("hospital", null, "pedroermarinho");
-        IGNORE_RESULT(new File(path).mkdirs());
-        final String pathDataBase = Paths.get(path, "settings.db").toString();
         try {
             if (connection == null) {
-                connection = DriverManager.getConnection("jdbc:sqlite:" + pathDataBase);
+                connection = DriverManager.getConnection("jdbc:sqlite:" + PathSettings.pathDataBase("settings.db"));
             }
             return connection;
         } catch (SQLException ex) {

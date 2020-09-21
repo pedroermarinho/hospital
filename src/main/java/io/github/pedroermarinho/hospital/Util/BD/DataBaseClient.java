@@ -2,8 +2,8 @@ package io.github.pedroermarinho.hospital.Util.BD;
 
 import io.github.pedroermarinho.hospital.Model.SettingsLocal.DataBase.DataBaseModel;
 import io.github.pedroermarinho.hospital.Util.MsgErro;
-import net.harawata.appdirs.AppDirs;
-import net.harawata.appdirs.AppDirsFactory;
+import io.github.pedroermarinho.hospital.Util.PathSettings;
+
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -11,14 +11,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static io.github.pedroermarinho.hospital.Util.MsgErro.IGNORE_RESULT;
-
 /**
  * @author Pedro Marinho  < pedro.marinho238@gmail.com >
  */
 public final class DataBaseClient {
     private static volatile DataBaseClient instanceDataBaseClient;
-    private final AppDirs appDirs = AppDirsFactory.getInstance();
+
     private Connection connection;
 
     public static DataBaseClient instance() {
@@ -39,10 +37,7 @@ public final class DataBaseClient {
             try {
                 if (connection == null) {
                     if (dataBaseModel.getPrefix().equals("jdbc:sqlite:")) {
-                        final String path = appDirs.getUserDataDir("hospital", null, "pedroermarinho");
-                        IGNORE_RESULT(new File(path).mkdirs());
-                        final String pathDataBase = Paths.get(path, dataBaseModel.getDataBase() + ".db").toString();
-                        connection = DriverManager.getConnection(dataBaseModel.getPrefix() + pathDataBase);
+                        connection = DriverManager.getConnection(dataBaseModel.getPrefix() + PathSettings.pathDataBase(dataBaseModel.getDataBase()));
                     } else {
                         connection = DriverManager.getConnection(url, dataBaseModel.getUser(), dataBaseModel.getPassword());
                     }

@@ -5,12 +5,11 @@
  */
 package io.github.pedroermarinho.hospital.Util;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -24,24 +23,73 @@ public class PDF {
     }
 
     public static void createPDF(ClientModel clientModel) throws IOException {
+// criação do documento
+        Document document = new Document();
+        try {
 
-        try (PDDocument doc = new PDDocument()) {
+            PdfWriter.getInstance(document, new FileOutputStream(clientModel.getNome()+"-"+clientModel.getCartaoSUS()+".pdf"));
+            document.open();
 
-            PDPage page = new PDPage();
-            doc.addPage(page);
-            try (PDPageContentStream contents = new PDPageContentStream(doc, page)) {
-
-                contents.beginText();
-                contents.setFont(PDType1Font.TIMES_ROMAN, 12);
-
-                contents.newLineAtOffset(20, 700);
-                contents.setLeading(14.5f);
-                contents.showText("FICHA DE ATENDIMENTO");
-                contents.endText();
+            PdfPTable table = new PdfPTable(new float[]{
+                    1f
+            });
 
 
-            }
-            doc.save(clientModel.getCartaoSUS() + ".pdf");
+            PdfPCell pacienteCell = new PdfPCell(new Phrase("PACIENTE:"+clientModel.getNome()));
+            table.addCell(pacienteCell);
+
+            PdfPCell sexoCell = new PdfPCell(new Phrase("SEXO:"+clientModel.getSexo()));
+            table.addCell(sexoCell);
+
+            PdfPCell dataNascimentoCell = new PdfPCell(new Phrase("DATA NASCIEMNTO:"+clientModel.getSexo()));
+            table.addCell(dataNascimentoCell);
+
+            PdfPCell idadeCell = new PdfPCell(new Phrase("IDADE:"+clientModel.getSexo()));
+            table.addCell(idadeCell);
+
+            PdfPCell identidadeCell = new PdfPCell(new Phrase("IDENTIDADE:"+clientModel.getSexo()));
+            table.addCell(identidadeCell);
+
+            PdfPCell cpfCell = new PdfPCell(new Phrase("CPF:"+clientModel.getSexo()));
+            table.addCell(cpfCell);
+
+            PdfPCell maeCell = new PdfPCell(new Phrase("MÃE:"+clientModel.getSexo()));
+            table.addCell(maeCell);
+
+            PdfPCell enderecoCell = new PdfPCell(new Phrase("ENDEREÇO:"+clientModel.getSexo()));
+            table.addCell(enderecoCell);
+
+            PdfPCell bairroCell = new PdfPCell(new Phrase("BAIRRO:"+clientModel.getSexo()));
+            table.addCell(bairroCell);
+
+            PdfPCell cidadeCell = new PdfPCell(new Phrase("CIDADE:"+clientModel.getSexo()));
+            table.addCell(cidadeCell);
+
+            PdfPCell estadoCell = new PdfPCell(new Phrase("ESTADO:"+clientModel.getSexo()));
+            table.addCell(estadoCell);
+
+            PdfPCell cartaoSUSCell = new PdfPCell(new Phrase("CARTÃO SUS:"+clientModel.getSexo()));
+            table.addCell(cartaoSUSCell);
+
+            PdfPCell foneCell = new PdfPCell(new Phrase("FONE:"+clientModel.getSexo()));
+            table.addCell(foneCell);
+
+            PdfPCell recpcaoCell = new PdfPCell(new Phrase("RESPONSÁVEL PELO PREENCHIMENTO (RECEPÇÃO):"+clientModel.getSexo()));
+            table.addCell(recpcaoCell);
+
+            PdfPCell especialidadeCell = new PdfPCell(new Phrase("ESPECIALIDADE/ATENDIMENTO:"+clientModel.getSexo()));
+            table.addCell(especialidadeCell);
+
+
+
+
+            document.add(table);
+
+            // adicionando um parágrafo no documento
+            document.add(new Paragraph("Gerando PDF - Java"));
+        } catch (DocumentException | IOException de) {
+            System.err.println(de.getMessage());
         }
+        document.close();
     }
 }

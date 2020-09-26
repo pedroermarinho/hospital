@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Hospital"
-#define MyAppVersion "2.0"
+#define MyAppVersion "1.0"
 #define MyAppPublisher "PedroERMarinho"
 #define MyAppURL "pedroermarinho.github.com"
 #define MyAppExeName "hospital.exe"

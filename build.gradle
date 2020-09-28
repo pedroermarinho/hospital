@@ -34,6 +34,11 @@ dependencies {
     implementation group: 'net.harawata', name: 'appdirs', version: '1.2.0'
     // https://mvnrepository.com/artifact/com.itextpdf/itextpdf
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.2'
+    // https://mvnrepository.com/artifact/com.itextpdf/html2pdf
+    compile group: 'com.itextpdf', name: 'html2pdf', version: '3.0.1'
+// https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '2.8.0'
+
 
 
 }

@@ -86,7 +86,6 @@ public class AddressClientController implements Initializable {
         }
         for (ClientModel itens : data.getClientData()) {
 
-            //itens.getID().contains(Integer.valueOf( PesquisaField.getText())
             if (ID != null) {
                 if (itens.getIdClient() == ID) {
                     itensEncontrados.add(itens);

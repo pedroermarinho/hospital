@@ -5,20 +5,24 @@
  */
 package io.github.pedroermarinho.hospital.Controller;
 
+import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Dados;
 import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Contact.ContactClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Reception.ReceptionClientModel;
-import io.github.pedroermarinho.hospital.Util.Filter;
 import io.github.pedroermarinho.hospital.Util.PDF;
+import io.github.pedroermarinho.hospital.Util.Filter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -109,8 +113,7 @@ public class InformacaoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        btnGerarPDF.setDisable(true);
+        btnGerarPDF.disableProperty().bind(RegistroClientesView.getSelectionModel().selectedItemProperty().isNull());
         RegistroClientesView.setItems(Filter.findClientsData(LocalDate.now()));
         IDClienteColumn.setCellValueFactory(new PropertyValueFactory<>("cartaoSUS"));
         NomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -127,8 +130,12 @@ public class InformacaoController implements Initializable {
 
     @FXML
     void onGerarPDF() {
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Salvar em");
+        File file = directoryChooser.showDialog(ChamadasDeTela.primeriaCena);
         try {
-            PDF.createPDF(RegistroClientesView.getSelectionModel().getSelectedItem());
+            PDF.createPDF(file,RegistroClientesView.getSelectionModel().getSelectedItem());
         } catch (IOException e) {
             e.printStackTrace();
         }

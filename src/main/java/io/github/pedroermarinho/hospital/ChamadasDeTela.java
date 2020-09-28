@@ -35,7 +35,7 @@ public class ChamadasDeTela {
     /**
      *
      */
-    protected static Stage primeriaCena;
+    public static Stage primeriaCena;
 
     /**
      *

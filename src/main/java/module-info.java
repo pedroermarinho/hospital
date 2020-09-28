@@ -11,6 +11,8 @@ module hospital
     requires net.harawata.appdirs;
     requires sqlite.jdbc;
     requires itextpdf;
+    requires html2pdf;
+    requires org.apache.commons.io;
 
     opens io.github.pedroermarinho.hospital to javafx.fxml, javafx.controls;
     opens io.github.pedroermarinho.hospital.Controller.Settings to javafx.fxml;

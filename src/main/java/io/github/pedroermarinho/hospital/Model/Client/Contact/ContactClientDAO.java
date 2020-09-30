@@ -25,7 +25,7 @@ public class ContactClientDAO implements ContactClientDAOInterface {
 
     @Override
     public ContactClientModel get(int id) {
-        ContactClientModel obj = new ContactClientModel();
+        ContactClientModel obj = null;
 
         try {
 
@@ -33,6 +33,7 @@ public class ContactClientDAO implements ContactClientDAOInterface {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                obj = new ContactClientModel();
                 obj.setIdContactClient(rs.getInt("id_contact_client"));
                 obj.setIdClient(rs.getInt("id_client"));
                 obj.setEmail(rs.getString("email"));

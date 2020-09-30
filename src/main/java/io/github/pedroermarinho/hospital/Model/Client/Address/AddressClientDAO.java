@@ -26,7 +26,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
 
     @Override
     public AddressClientModel get(int id) {
-        AddressClientModel obj = new AddressClientModel();
+        AddressClientModel obj = null;
 
         try {
 
@@ -34,6 +34,7 @@ public class AddressClientDAO implements AddressClientDAOInterface {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                obj = new AddressClientModel();
                 obj.setIdAddressClient(rs.getInt("id_address_client"));
                 obj.setIdClient(rs.getInt("id_client"));
                 obj.setCidade(rs.getString("cidade"));

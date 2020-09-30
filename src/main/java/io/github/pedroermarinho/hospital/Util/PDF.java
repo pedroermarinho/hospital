@@ -6,29 +6,25 @@
 package io.github.pedroermarinho.hospital.Util;
 
 import com.itextpdf.html2pdf.HtmlConverter;
-import com.itextpdf.text.*;
 import io.github.pedroermarinho.hospital.Model.Client.Address.AddressClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Client.ClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Contact.ContactClientModel;
 import io.github.pedroermarinho.hospital.Model.Client.Reception.ReceptionClientModel;
-import javafx.stage.FileChooser;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Scanner;
+import java.time.Period;
+import java.util.Objects;
 
 /**
  * @author Pedro Marinho < pedro.marinho238@gmail.com >
  */
 public class PDF {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
 
-
-        ClientModel clientModel = new ClientModel();
-        createPDF(new File(""), clientModel);
+        System.out.println(getIdade("sdf-09-09"));
 
 
     }
@@ -109,49 +105,49 @@ public class PDF {
                     "  <td width=472 colspan=5 valign=top style='width:353.9pt;border:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:1.0cm'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>PACIENTE:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + clientModel.getNome() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" +dataString(clientModel.getNome()) + "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=161 colspan=3 valign=top style='width:120.6pt;border:solid windowtext 1.0pt;\n" +
                     "  border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:1.0cm'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>DATA NASCIMENTO:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + clientModel.getDataNascimento() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(clientModel.getDataNascimento()) + "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=93 valign=top style='width:69.6pt;border:solid windowtext 1.0pt;\n" +
                     "  border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:1.0cm'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>IDADE:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + clientModel.getNome() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" +getIdade(clientModel.getDataNascimento()) + "</span></p>\n" +
                     "  </td>\n" +
                     " </tr>\n" +
                     " <tr style='height:25.95pt'>\n" +
                     "  <td width=604 colspan=7 valign=top style='width:453.2pt;border:solid windowtext 1.0pt;\n" +
                     "  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:25.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>MÃE:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + clientModel.getMae() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(clientModel.getMae() )+ "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=121 colspan=2 valign=top style='width:90.9pt;border-top:none;\n" +
                     "  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:25.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>SEXO</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + clientModel.getSexo() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(clientModel.getSexo()) + "</span></p>\n" +
                     "  </td>\n" +
                     " </tr>\n" +
                     " <tr style='height:25.95pt'>\n" +
                     "  <td width=160 valign=top style='width:120.1pt;border:solid windowtext 1.0pt;\n" +
                     "  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:25.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>IDENTIDADE:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + clientModel.getIdentidade() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" +dataString( clientModel.getIdentidade() )+ "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=228 colspan=3 valign=top style='width:171.15pt;border-top:none;\n" +
                     "  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:25.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>C.P.F.:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + clientModel.getCpf() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(clientModel.getCpf()) + "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=337 colspan=5 valign=top style='width:252.85pt;border-top:none;\n" +
                     "  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:25.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>CARTÃO SUS:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + clientModel.getCartaoSUS() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(clientModel.getCartaoSUS()) + "</span></p>\n" +
                     "  </td>\n" +
                     " </tr>\n";
 
@@ -162,25 +158,25 @@ public class PDF {
                     "  <td width=302 colspan=2 valign=top style='width:226.4pt;border:solid windowtext 1.0pt;\n" +
                     "  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>ENDEREÇO:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + addressClientModel.getRua() +","+addressClientModel.getNumeroCasa() +"</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(addressClientModel.getRua()) +","+dataString(addressClientModel.getNumeroCasa() )+"</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=180 colspan=4 valign=top style='width:134.75pt;border-top:none;\n" +
                     "  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:23.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>BAIRRO:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + addressClientModel.getBairro() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(addressClientModel.getBairro()) + "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=123 valign=top style='width:92.05pt;border-top:none;border-left:\n" +
                     "  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:23.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>CIDADE:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + addressClientModel.getCidade() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(addressClientModel.getCidade() )+ "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=121 colspan=2 valign=top style='width:90.9pt;border-top:none;\n" +
                     "  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:23.95pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>ESTADO:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + addressClientModel.getEstado() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(addressClientModel.getEstado()) + "</span></p>\n" +
                     "  </td>\n" +
                     " </tr>\n";
 
@@ -193,13 +189,13 @@ public class PDF {
                     "  <td width=388 colspan=4 valign=top style='width:291.25pt;border:solid windowtext 1.0pt;\n" +
                     "  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:24.65pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>E-MAIL:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + contactClientModel.getEmail() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(contactClientModel.getEmail()) + "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=337 colspan=5 valign=top style='width:252.85pt;border-top:none;\n" +
                     "  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:24.65pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>FONE:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + contactClientModel.getTelefone() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(contactClientModel.getTelefone()) + "</span></p>\n" +
                     "  </td>\n" +
                     " </tr>\n";
 
@@ -211,27 +207,27 @@ public class PDF {
                     "  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:28.6pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>RESPONSÁVEL PELO\n" +
                     "  PREECHIMENTO (RECEPÇÃO):</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + receptionClientModel.getRecepcao() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(receptionClientModel.getRecepcao()) + "</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=254 colspan=4 valign=top style='width:190.2pt;border-top:none;\n" +
                     "  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:28.6pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>ESPECIALIDADE/ATENDIMENTO:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + receptionClientModel.getEspecialidade() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(receptionClientModel.getEspecialidade()) + "</span></p>\n" +
                     "  </td>\n" +
                     " </tr>\n" +
                     " <tr style='height:28.6pt'>\n" +
                     "  <td width=160 valign=top style='width:120.1pt;border:solid windowtext 1.0pt;\n" +
                     "  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:28.6pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>DATA ATENDIMENTO:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + receptionClientModel.getModificationDate() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(receptionClientModel.getModificationDate()) + "</span></p>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=155 colspan=2 valign=top style='width:116.55pt;border-top:none;\n" +
                     "  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\n" +
                     "  padding:0cm 5.4pt 0cm 5.4pt;height:28.6pt'>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>HORA ATENDIMENTO:</span></p>\n" +
-                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + receptionClientModel.getModificationDate() + "</span></p>\n" +
+                    "  <p class=MsoNormal><span style='font-size:9.0pt'>" + dataString(receptionClientModel.getModificationDate()) + "</span></p>\n" +
                     "  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>\n" +
                     "  </td>\n" +
                     "  <td width=410 colspan=6 valign=top style='width:307.45pt;border-top:none;\n" +
@@ -285,6 +281,21 @@ public class PDF {
         System.out.println("PDF Created!");
 
     }
+    private static String dataString(String data){
+        return Objects.requireNonNullElse(data, "");
+    }
+    private static String getIdade(String dataNascimento){
+        try {
+            LocalDate start = LocalDate.parse(dataNascimento);
+            LocalDate end = LocalDate.now();
+
+            Period period = Period.between(start, end);
+            return String.valueOf(period.getYears());
+        }catch (java.time.format.DateTimeParseException e){
+            return "";
+        }
+    }
+
 
 
 }

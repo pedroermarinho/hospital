@@ -26,7 +26,7 @@ public class ClientDAO implements ClientDAOInterface {
 
     @Override
     public ClientModel get(int id) {
-        ClientModel obj = new ClientModel();
+        ClientModel obj = null;
 
         try {
 
@@ -34,6 +34,7 @@ public class ClientDAO implements ClientDAOInterface {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                obj = new ClientModel();
                 obj.setIdClient(rs.getInt("id_client"));//1
                 obj.setCpf(rs.getString("cpf"));//2
                 obj.setCartaoSUS(rs.getString("cartao_sus"));//7

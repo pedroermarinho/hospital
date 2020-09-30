@@ -26,7 +26,7 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
 
     @Override
     public ReceptionClientModel get(int id) {
-        final ReceptionClientModel obj = new ReceptionClientModel();
+         ReceptionClientModel obj = null;
 
         try {
 
@@ -34,6 +34,7 @@ public class ReceptionClientDAO implements ReceptionClientDAOInterface {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                obj = new ReceptionClientModel();
                 obj.setIdReceptionClient(rs.getInt("id_reception_client"));
                 obj.setIdClient(rs.getInt("id_client"));
                 obj.setEspecialidade(rs.getString("especialidade"));

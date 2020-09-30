@@ -1,7 +1,5 @@
 package io.github.pedroermarinho.hospital.Controller;
 
-import io.github.pedroermarinho.hospital.MainApp;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;

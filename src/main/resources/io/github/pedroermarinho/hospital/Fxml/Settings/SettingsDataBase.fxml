@@ -3,13 +3,10 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="500.0" prefWidth="900.0"
             styleClass="background-black-1d" xmlns="http://javafx.com/javafx/11.0.1"
             fx:controller="io.github.pedroermarinho.hospital.Controller.Settings.SettingsDataBaseController">
-    <stylesheets>
-        <URL value="@../../Styles/Styles.css"/>
-    </stylesheets>
+
     <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
@@ -23,11 +20,9 @@
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
-                    <children>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
-                               maxWidth="1.7976931348623157E308" styleClass="label-black-titulo"
-                               text="Banco de Dado" textAlignment="CENTER"/>
-                    </children>
+                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
+                           maxWidth="1.7976931348623157E308" styleClass="label-black-titulo"
+                           text="Banco de Dado" textAlignment="CENTER"/>
                 </GridPane>
                 <Separator prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                            AnchorPane.rightAnchor="0.0"/>

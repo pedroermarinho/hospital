@@ -2,25 +2,20 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="475.0" prefWidth="412.0"
             styleClass="background-black-1d" xmlns="http://javafx.com/javafx/11.0.1"
             fx:controller="io.github.pedroermarinho.hospital.Controller.Settings.RegisterDataBaseController">
-    <stylesheets>
-        <URL value="@../../Styles/Styles.css"/>
-    </stylesheets>
+
     <BorderPane layoutX="107.0" layoutY="89.0" prefHeight="200.0" prefWidth="420.0" AnchorPane.bottomAnchor="0.0"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <center>
             <VBox alignment="CENTER" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0"
                   BorderPane.alignment="CENTER">
                 <HBox alignment="CENTER" prefHeight="30.0" prefWidth="300.0" spacing="10.0">
-                    <children>
-                        <ToggleButton fx:id="bntOffline" mnemonicParsing="false" onAction="#OnOffline"
-                                      prefWidth="200.0" styleClass="button-azul" text="Offline"/>
-                        <ToggleButton fx:id="bntOnline" mnemonicParsing="false" onAction="#OnOnline"
-                                      prefWidth="200.0" styleClass="button-azul" text="Online"/>
-                    </children>
+                    <ToggleButton fx:id="bntOffline" mnemonicParsing="false" onAction="#OnOffline"
+                                  prefWidth="200.0" styleClass="button-azul" text="Offline"/>
+                    <ToggleButton fx:id="bntOnline" mnemonicParsing="false" onAction="#OnOnline"
+                                  prefWidth="200.0" styleClass="button-azul" text="Online"/>
                 </HBox>
                 <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
                     <TextField fx:id="HostField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0"

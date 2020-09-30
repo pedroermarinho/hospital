@@ -18,15 +18,7 @@ import java.time.LocalDate;
  */
 public class Filter {
 
-//    public static AddressClientModel clientForAddress(int idClient) {
-//        List<AddressClientModel> addresses = AddressClientModel.all();
-//        for (AddressClientModel address : addresses) {
-//            if (address.getIdClient() == idClient) {
-//                return  address;
-//            }
-//        }
-//        return null;
-//    }
+
 
 
     public static ObservableList<ClientModel> findClientsData(LocalDate date) {

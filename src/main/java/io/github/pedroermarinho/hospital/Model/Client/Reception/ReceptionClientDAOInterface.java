@@ -7,7 +7,7 @@ import java.util.List;
 public interface ReceptionClientDAOInterface {
     ReceptionClientModel get(int id);
 
-    public List<ReceptionClientModel> getAllData(LocalDate date);
+    List<ReceptionClientModel> getAllData(LocalDate date);
 
     List<ReceptionClientModel> getAll();
 

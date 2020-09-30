@@ -7,7 +7,6 @@ package io.github.pedroermarinho.hospital.Model.Client.Contact;
 
 import io.github.pedroermarinho.hospital.ChamadasDeTela;
 import io.github.pedroermarinho.hospital.Util.BD.DataBaseClient;
-import io.github.pedroermarinho.hospital.Util.MsgErro;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

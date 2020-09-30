@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +24,6 @@ import java.util.ResourceBundle;
  */
 public class MenuTopController implements Initializable {
 
-    private Stage primeira_cena;
     private MainApp mainApp;
     private boolean on_off;
     @FXML
@@ -49,8 +47,8 @@ public class MenuTopController implements Initializable {
     @FXML
     private Button btnInformacoes;
 
-    @FXML
-    private Button btnAgenda;
+//    @FXML
+//    private Button btnAgenda;
 
 
 
@@ -78,7 +76,6 @@ public class MenuTopController implements Initializable {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        this.primeira_cena = this.mainApp.getTelas().getPrimeriaCena();
 
     }
 
@@ -97,12 +94,7 @@ public class MenuTopController implements Initializable {
 
     }
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

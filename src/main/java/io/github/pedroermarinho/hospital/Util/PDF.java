@@ -22,12 +22,7 @@ import java.util.Objects;
  */
 public class PDF {
 
-    public static void main(String[] args)  {
 
-        System.out.println(getIdade("sdf-09-09"));
-
-
-    }
 
     public static void createPDF(File file, ClientModel clientModel) throws IOException {
 

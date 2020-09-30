@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8"
@@ -17,10 +16,8 @@
                 <rowConstraints>
                     <RowConstraints/>
                 </rowConstraints>
-                <children>
-                    <Label fx:id="texto" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="400.0"
-                           prefWidth="604.0"/>
-                </children>
+                <Label fx:id="texto" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="400.0"
+                       prefWidth="604.0"/>
             </GridPane>
         </center>
         <bottom>
